@@ -1,46 +1,40 @@
 ---
 name: regdata-credit-risk
-description: "Assess credit risk and monitor insolvency proceedings across European registries - Poland (KRZ debtor registry, MSiG court gazette, eKRS financial statements), Austria (Ediktsdatei insolvency publications), Spain (BORME corporate acts). Provides early warning indicators, financial ratio analysis, and insolvency proceeding interpretation. Use when user mentions credit risk, insolvency check, bankruptcy, debtor registry, financial statements, court gazette, restructuring, liquidation, credit assessment, or company solvency."
+description: "Extract insolvency proceedings from Poland's KRZ debtor registry, court gazette announcements from MSiG (Monitor Sadowy i Gospodarczy), financial statements from eKRS, Austrian insolvency publications from Ediktsdatei, and corporate acts from Spain's BORME. Covers specific government registries that publish bankruptcy, restructuring, and financial data in PL, AT, and ES. Use when user mentions KRZ, MSiG, eKRS, Ediktsdatei, BORME, Polish debtor registry, Polish court gazette, Polish financial statements, Austrian insolvency publications, or Spanish corporate gazette."
 metadata:
   version: 1.0.0
   author: regdata
   tags:
-    - credit-risk
+    - krz
+    - msig
+    - ekrs
+    - ediktsdatei
+    - borme
     - insolvency
-    - bankruptcy
-    - financial-analysis
-    - debtor-registry
-    - court-gazette
-    - restructuring
+    - government-registry
     - poland
     - austria
     - spain
-    - europe
     - apify
     - upadlosc
     - rejestr-dluznikow
-    - Insolvenzpruefung
-    - insolvencia
   triggers:
-    - "credit risk assessment"
-    - "is this company bankrupt"
-    - "insolvency check"
-    - "debtor registry lookup"
-    - "bankruptcy proceedings"
-    - "financial statements Poland"
-    - "court gazette search"
-    - "company solvency check"
-    - "restructuring proceedings"
-    - "liquidation notice"
-    - "check KRZ registry"
-    - "Monitor Sadowy search"
-    - "BORME corporate acts"
-    - "Austrian insolvency"
-    - "Ediktsdatei search"
-    - "upadlosc firmy"
+    - "check KRZ debtor registry"
+    - "search Monitor Sadowy i Gospodarczy"
+    - "MSiG court gazette lookup"
+    - "eKRS financial statements"
+    - "Polish financial statements extract"
+    - "Ediktsdatei insolvency search"
+    - "Austrian insolvency publications"
+    - "BORME corporate acts scrape"
+    - "Spanish corporate gazette"
+    - "KRZ insolvency proceedings"
+    - "Polish bankruptcy registry"
+    - "upadlosc firmy KRZ"
     - "rejestr dluznikow"
-    - "sprawozdanie finansowe"
-    - "Konkursverfahren"
+    - "sprawozdanie finansowe eKRS"
+    - "Monitor Sadowy szukaj"
+    - "Konkursverfahren Ediktsdatei"
     - "actos mercantiles BORME"
 ---
 

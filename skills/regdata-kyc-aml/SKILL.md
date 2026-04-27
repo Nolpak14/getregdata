@@ -1,45 +1,38 @@
 ---
 name: regdata-kyc-aml
-description: "Run KYC/AML compliance checks against European government registries - Poland (CRBR beneficial owners, KNF financial licenses, KRS board members), France (Societe.com directors), Austria (WKO business directory), Spain (company directory). Provides EU 6AMLD compliance frameworks, UBO verification workflows, and entity risk scoring. Use when user mentions KYC, AML, beneficial owner, UBO, entity verification, compliance check, due diligence on European companies, verify a company, check company ownership, or anti-money laundering."
+description: "Extract beneficial ownership data from Poland's CRBR registry, financial license status from KNF, non-anonymized board members from KRS, company profiles from France's Societe.com, Austrian WKO directory, and Spain's Registro Mercantil. Useful for KYC/AML verification workflows involving companies registered in Poland, Austria, Spain, or France. Use when user mentions CRBR, KNF registry, KRS board members, Polish beneficial owners, or needs to verify a company registered in these specific European countries against their official government registries."
 metadata:
   version: 1.0.0
   author: regdata
   tags:
-    - kyc
-    - aml
-    - compliance
+    - crbr
+    - knf
+    - krs
     - beneficial-owners
-    - due-diligence
-    - poland
-    - europe
     - government-registry
-    - entity-verification
+    - poland
+    - austria
+    - spain
+    - france
     - apify
     - weryfikacja-kontrahenta
     - beneficjent-rzeczywisty
-    - geldwaeschebekaempfung
-    - verificacion-empresa
-    - verification-entreprise
   triggers:
-    - "KYC check"
-    - "AML compliance"
-    - "beneficial owner lookup"
-    - "verify a Polish company"
-    - "check if company is licensed"
-    - "entity verification"
-    - "UBO check"
-    - "who owns this company"
-    - "due diligence European company"
+    - "CRBR beneficial owner lookup"
     - "check KNF registry"
-    - "CRBR lookup"
-    - "company ownership check"
-    - "anti-money laundering"
-    - "sprawdz firme"
-    - "weryfikacja kontrahenta"
-    - "beneficjent rzeczywisty"
-    - "Firma ueberpruefen"
-    - "verificar empresa"
-    - "verifier societe"
+    - "KRS board members extract"
+    - "Polish beneficial owners"
+    - "verify company in Polish CRBR"
+    - "KNF license check"
+    - "extract KRS board data"
+    - "who owns this Polish company"
+    - "Societe.com company lookup"
+    - "WKO directory search"
+    - "Spain Registro Mercantil lookup"
+    - "sprawdz firme w CRBR"
+    - "weryfikacja kontrahenta KRS"
+    - "beneficjent rzeczywisty CRBR"
+    - "KNF rejestr podmiotow"
 ---
 
 # regdata-kyc-aml

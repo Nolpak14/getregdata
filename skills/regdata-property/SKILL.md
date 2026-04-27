@@ -1,37 +1,31 @@
 ---
 name: regdata-property
-description: "Property due diligence using Polish government registries - EKW land registry (ownership, mortgages, easements across 25M entries), KRS board members (corporate property holders), CRBR beneficial owners (ultimate owners behind corporate entities). Provides land registry interpretation guides, ownership chain verification, and red flags analysis. Use when user mentions property due diligence, land registry, ksiegi wieczyste, EKW, property ownership, mortgage check, real estate verification, or property title search."
+description: "Extract data from Poland's EKW electronic land registry (Elektroniczne Ksiegi Wieczyste) - ownership records, mortgages, easements, and restrictions across 25 million property entries in 352 court departments. Cross-references with KRS board members and CRBR beneficial owners for corporate property holders. Use when user mentions EKW, ksiegi wieczyste, Polish land registry, Polish property lookup, or needs to extract ownership/mortgage data from the Polish electronic land registry system."
 metadata:
   version: 1.0.0
   author: regdata
   tags:
-    - property
-    - real-estate
-    - land-registry
-    - due-diligence
-    - mortgage
-    - ownership
-    - poland
     - ekw
     - ksiegi-wieczyste
+    - polish-land-registry
+    - government-registry
+    - poland
     - apify
     - nieruchomosci
     - hipoteka
   triggers:
-    - "property due diligence"
-    - "land registry check"
-    - "ksiegi wieczyste"
-    - "EKW lookup"
-    - "property ownership verification"
-    - "mortgage check Poland"
-    - "real estate due diligence"
-    - "property title search"
-    - "who owns this property"
-    - "check property encumbrances"
+    - "EKW land registry extract"
+    - "ksiegi wieczyste lookup"
+    - "Polish land registry search"
+    - "EKW property data"
+    - "extract Polish property ownership"
+    - "Polish mortgage registry check"
+    - "EKW scraper"
+    - "who owns this Polish property"
     - "sprawdz ksiege wieczysta"
-    - "hipoteka sprawdzenie"
-    - "wlasnosc nieruchomosci"
-    - "Grundbuch Polen"
+    - "hipoteka EKW"
+    - "wlasnosc nieruchomosci EKW"
+    - "elektroniczne ksiegi wieczyste"
 ---
 
 # Property Due Diligence - Polish Government Registries

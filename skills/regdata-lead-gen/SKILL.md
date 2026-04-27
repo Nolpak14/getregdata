@@ -1,46 +1,42 @@
 ---
 name: regdata-lead-gen
-description: "B2B lead generation and prospecting using European government registries - KRS board members (non-anonymized Polish company directors), WKO directory (620K+ Austrian businesses with contacts), Spain company directory (NIF, officers, CNAE codes), Societe.com (French directors and company data), BORME (new Spanish incorporations and officer changes). Provides prospect list building workflows, decision-maker identification, and market research frameworks. Use when user mentions B2B prospecting, lead generation, find decision makers, company directors, officer contacts, market research Europe, business directory search, or prospect list building."
+description: "Extract company directors and contact data from European government registries - KRS non-anonymized board members (Poland, full names from PDF extracts), WKO business directory (620K+ Austrian companies with phone/email/website), Spain Registro Mercantil company directory (NIF, officers, CNAE codes), Societe.com (French company directors and financials), and BORME new incorporations (daily Spanish corporate gazette). Use when user needs to extract officer names from Polish KRS, search Austrian WKO directory, scrape Spanish company registry, pull French company directors from Societe.com, or monitor BORME for new incorporations."
 metadata:
   version: 1.0.0
   author: regdata
   tags:
-    - lead-generation
-    - b2b-prospecting
-    - decision-makers
-    - company-directors
-    - market-research
-    - business-directory
-    - sales
+    - krs-board-members
+    - wko-directory
+    - registro-mercantil
+    - societe-com
+    - borme
+    - government-registry
     - poland
     - austria
     - spain
     - france
-    - europe
     - apify
     - szukam-kontaktow
     - Firmenverzeichnis
     - directorio-empresas
     - dirigeants
   triggers:
-    - "find decision makers"
-    - "B2B prospecting Europe"
-    - "build prospect list"
-    - "company directors lookup"
-    - "Polish company board members"
-    - "Austrian business contacts"
-    - "Spanish company directory"
-    - "French company directors"
-    - "market research Europe"
-    - "lead generation from registries"
-    - "new company incorporations"
-    - "officer appointments"
-    - "find company management"
-    - "szukam kontaktow do zarzadu"
-    - "baza firm"
-    - "oesterreichische Firmen suchen"
-    - "directorio empresas espanolas"
-    - "dirigeants entreprise francaise"
+    - "extract KRS board members"
+    - "Polish company directors KRS"
+    - "WKO Austrian business directory"
+    - "search WKO directory"
+    - "Spain company registry scrape"
+    - "Spanish Registro Mercantil extract"
+    - "Societe.com company data"
+    - "French company directors extract"
+    - "BORME new incorporations"
+    - "BORME daily corporate acts"
+    - "Polish KRS non-anonymized names"
+    - "Austrian business contacts WKO"
+    - "szukam kontaktow KRS zarzad"
+    - "oesterreichische Firmen WKO"
+    - "directorio empresas registro mercantil"
+    - "dirigeants Societe.com"
 ---
 
 # B2B Lead Generation from European Government Registries

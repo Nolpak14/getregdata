@@ -1,37 +1,31 @@
 ---
 name: regdata-compliance
-description: "Audit contracts and verify environmental compliance using Polish government registries - UOKiK abusive clauses registry (7,500+ court-ruled prohibited contract clauses) and BDO waste registry (674,000+ waste management entities). Provides contract audit methodology, clause category analysis, and ESG compliance frameworks. Use when user mentions abusive clauses, UOKiK, prohibited contract terms, consumer protection, BDO registry, waste management compliance, ESG audit, environmental due diligence, or contract review against Polish law."
+description: "Extract data from Poland's UOKiK abusive clauses registry (7,500+ court-ruled prohibited contract clauses, rejestr klauzul niedozwolonych) and BDO waste management registry (674,000+ registered waste entities, Baza danych o odpadach). Two specific Polish government registries - UOKiK for checking contract clauses against court rulings, BDO for verifying waste management registrations. Use when user mentions UOKiK, rejestr klauzul niedozwolonych, Polish abusive clauses, BDO rejestr, Polish waste registry, or needs to search these specific registries."
 metadata:
   version: 1.0.0
   author: regdata
   tags:
-    - compliance
-    - consumer-protection
-    - esg
-    - contract-audit
-    - abusive-clauses
-    - waste-management
     - uokik
     - bdo
+    - klauzule-niedozwolone
+    - government-registry
     - poland
     - apify
-    - klauzule-niedozwolone
     - gospodarka-odpadami
   triggers:
-    - "abusive clauses check"
     - "UOKiK registry search"
-    - "prohibited contract clauses"
-    - "contract compliance audit"
-    - "consumer protection Poland"
-    - "BDO registry check"
-    - "waste management verification"
-    - "ESG compliance Poland"
-    - "environmental due diligence"
-    - "contract review Polish law"
-    - "klauzule niedozwolone"
-    - "rejestr UOKiK"
-    - "rejestr BDO"
-    - "gospodarka odpadami"
+    - "UOKiK abusive clauses"
+    - "Polish prohibited clauses registry"
+    - "rejestr klauzul niedozwolonych"
+    - "BDO waste registry lookup"
+    - "BDO rejestr search"
+    - "Polish waste management registry"
+    - "check UOKiK clause database"
+    - "verify BDO registration"
+    - "klauzule niedozwolone UOKiK"
+    - "rejestr UOKiK szukaj"
+    - "rejestr BDO sprawdz"
+    - "gospodarka odpadami BDO"
 ---
 
 # Consumer Protection & ESG Compliance - Polish Government Registries
