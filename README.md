@@ -1,38 +1,80 @@
-# getregdata - European Government Registry Skills
+# getregdata - European Government Registry APIs
 
-Claude Code skills for extracting and analyzing data from 14 official government registries across Poland, Spain, Austria, and France. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable data extraction.
-
-## Install
+14 pay-per-use actors covering official business registries across Poland, Spain, Austria, and France. No subscriptions, no minimum commitment. Structured JSON output.
 
 ```bash
+# Install Claude Code skills
 npx skills add Nolpak14/getregdata -g -y
 ```
 
-## Skills
+---
 
-| Skill | Use Case | Actors Used |
-|---|---|---|
-| `regdata` | Router - identifies your need and recommends the right skill | All 14 |
-| `regdata-kyc-aml` | KYC/AML compliance, entity verification, beneficial owners | CRBR, KNF, KRS Board, Societe.com, WKO, Spain Dir |
-| `regdata-credit-risk` | Insolvency monitoring, credit risk assessment, financial analysis | KRZ, MSiG, Ediktsdatei, eKRS, BORME |
-| `regdata-property` | Property due diligence, ownership verification, mortgages | EKW, KRS Board, CRBR |
-| `regdata-compliance` | Consumer protection audits, ESG/environmental compliance | UOKiK, BDO |
-| `regdata-lead-gen` | B2B prospecting, decision-maker discovery, market research | KRS Board, WKO, Spain Dir, Societe.com, BORME |
+## Why this exists
+
+European government registries are public but have no APIs. Poland's KRS returns `"L******"` instead of real board member names in its official JSON endpoint. Spain's BORME sits behind an F5/Volterra WAF that blocks all datacenter IPs. Austria's Ediktsdatei insolvency register requires an IWG government license and digital identity to access programmatically. France's company data lives across three separate official sources that must be joined manually.
+
+These actors handle all of that so you don't have to.
+
+---
 
 ## Quick Start
 
-1. Install the skills (see above)
-2. In Claude Code, describe what you need:
-   - "Run a KYC check on a Polish company with NIP 5213103635"
-   - "Check if this Austrian company is insolvent"
-   - "Find decision makers at Spanish companies in Barcelona"
-   - "Verify property ownership in Polish land registry"
-3. The skill provides analysis frameworks and compliance checklists
-4. When you're ready to extract live data, you'll need an [Apify account](https://console.apify.com/sign-up?ref=getregdata) (free $5 credits included)
+**Python**
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("YOUR_APIFY_TOKEN")
+
+# Check beneficial owners for a Polish company (CRBR)
+run = client.actor("regdata/crbr-beneficial-owners-scraper").call(
+    run_input={"searchQueries": [{"nip": "5252002340"}]}
+)
+items = client.dataset(run["defaultDatasetId"]).list_items().items
+for item in items:
+    for owner in item.get("beneficialOwners", []):
+        print(f"{item['company']['name']}: {owner['fullName']} ({owner['ownershipPercentage']})")
+```
+
+**JavaScript**
+```javascript
+import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: 'YOUR_APIFY_TOKEN' });
+
+// Check if an Austrian company is insolvent (Ediktsdatei)
+const run = await client.actor('regdata/austria-ediktsdatei-scraper').call({
+    searchQuery: 'Alpenbau GmbH',
+    maxResults: 10
+});
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(`Found ${items.length} insolvency records`);
+items.forEach(item => console.log(`${item.debtorName} - ${item.proceedingType}`));
+```
+
+Get your API token: [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - new accounts include $5 free credits.
+
+More examples: [examples/python/](examples/python/) | [examples/javascript/](examples/javascript/)
+
+---
+
+## Claude Code Skills
+
+Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 14 actors:
+
+| Skill | Use Case |
+|---|---|
+| `regdata` | Router - identifies your need and recommends the right skill |
+| `regdata-kyc-aml` | KYC/AML compliance, entity verification, beneficial owners |
+| `regdata-credit-risk` | Insolvency monitoring, credit risk, financial analysis |
+| `regdata-property` | Property due diligence, ownership verification, mortgages |
+| `regdata-compliance` | Consumer protection audits, ESG/environmental compliance |
+| `regdata-lead-gen` | B2B prospecting, decision-maker discovery, market research |
+
+Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the skill handles the rest.
+
+---
 
 ## Actor Catalog
-
-All actors are pay-per-use with no subscriptions or minimum commitments.
 
 ### Poland (9 actors)
 
@@ -40,7 +82,7 @@ All actors are pay-per-use with no subscriptions or minimum commitments.
 |---|---|---|---|
 | [KNF Registry Scraper](https://apify.com/regdata/knf-registry-scraper) | KNF | 75,000+ payment institutions, e-money issuers, lending companies | $0.003 |
 | [MSiG Court Gazette Scraper](https://apify.com/regdata/msig-scraper) | MSiG | Bankruptcy declarations, restructuring, liquidation notices (2001-present) | $0.004 |
-| [KRS Board Members Scraper](https://apify.com/regdata/krs-fullnames-scraper) | KRS | Full, non-anonymized board member names from PDF extracts | $0.008 |
+| [KRS Board Members Scraper](https://apify.com/regdata/krs-fullnames-scraper) | KRS | Full, non-anonymized board member names (bypasses the official JSON censorship) | $0.008 |
 | [KRZ Debtor Registry Scraper](https://apify.com/regdata/krz-debtor-scraper) | KRZ | Bankruptcy, restructuring, enforcement proceedings | $0.006 |
 | [eKRS Financial Scraper](https://apify.com/regdata/ekrs-financial-scraper) | eKRS | Official financial statements - balance sheets, P&L, assets | $0.008 |
 | [EKW Land Registry Scraper](https://apify.com/regdata/ekw-ksiegi-wieczyste-scraper) | EKW | Property ownership, mortgages, easements across 25M entries | $0.01 |
@@ -66,19 +108,39 @@ All actors are pay-per-use with no subscriptions or minimum commitments.
 
 | Actor | Registry | What You Get | Cost/Result |
 |---|---|---|---|
-| [Societe.com Company Scraper](https://apify.com/regdata/societe-com-scraper) | Societe.com | SIREN, directors, financials, shareholders, subsidiaries | $0.005 |
+| [Societe.com Company Scraper](https://apify.com/regdata/societe-com-scraper) | Societe.com | SIREN, directors, financials, shareholders, subsidiaries, director networks | $0.005 |
+
+---
+
+## Pricing
+
+| Plan | Credits included | Typical coverage |
+|---|---|---|
+| Free | $5/month | 600-1,600 checks depending on actor |
+| Starter ($49/mo) | $49 platform credits | ~6,000-16,000 checks |
+| Scale ($499/mo) | $499 platform credits | ~60,000+ checks |
+
+All actors are pay-per-result. No per-actor subscription. Unused credits roll over.
+
+---
 
 ## Authentication
 
-To extract live registry data, set your Apify API token:
-
 ```bash
+# Set token in environment
 export APIFY_TOKEN=apify_api_xxxxx
+
+# Or pass directly
+client = ApifyClient("apify_api_xxxxx")
 ```
 
 Get your token: [Apify Console > Settings > Integrations](https://console.apify.com/sign-up?ref=getregdata)
 
-New accounts include $5 free credits - enough for 100-1,600 registry checks depending on the actor.
+---
+
+## All actors
+
+[apify.com/regdata](https://apify.com/regdata)
 
 ## License
 
