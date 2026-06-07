@@ -1,6 +1,6 @@
 ---
 name: regdata-kyc-aml
-description: "Extract beneficial ownership data from Poland's CRBR registry, financial license status from KNF, non-anonymized board members from KRS, company profiles from France's Societe.com, Austrian WKO directory, and Spain's Registro Mercantil. Useful for KYC/AML verification workflows involving companies registered in Poland, Austria, Spain, or France. Use when user mentions CRBR, KNF registry, KRS board members, Polish beneficial owners, or needs to verify a company registered in these specific European countries against their official government registries."
+description: "Extract beneficial ownership data from Poland's CRBR registry, financial license status from KNF, board members from KRS, company profiles from France's Societe.com, Austrian WKO directory, and Spain's Registro Mercantil. Useful for KYC/AML verification workflows involving companies registered in Poland, Austria, Spain, or France. Use when user mentions CRBR, KNF registry, KRS board members, Polish beneficial owners, or needs to verify a company registered in these specific European countries against their official government registries."
 metadata:
   version: 1.0.0
   author: regdata

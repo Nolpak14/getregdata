@@ -40,15 +40,15 @@ All 14 actors with pricing. Pay-per-result, no subscriptions.
 
 | Actor | Slug | What You Get | $/Result |
 |---|---|---|---|
-| KNF | `regdata/knf-registry-scraper` | 75,000+ payment institutions, e-money issuers | $0.003 |
+| KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.003 |
 | MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 |
-| KRS Board | `regdata/krs-fullnames-scraper` | Non-anonymized board member names from PDFs | $0.008 |
+| KRS Board | `regdata/krs-fullnames-scraper` | Board members and shareholders (structured) | $0.008 |
 | KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.006 |
 | eKRS | `regdata/ekrs-financial-scraper` | Financial statements - balance sheets, P&L | $0.008 |
 | EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.01 |
-| UOKiK | `regdata/uokik-clauses-scraper` | 7,500+ prohibited contract clauses | $0.003 |
-| CRBR | `regdata/crbr-beneficial-owners-scraper` | Ultimate beneficial owners (KYC/AML) | $0.008 |
-| BDO | `regdata/bdo-waste-registry-scraper` | 674,000+ waste management entities | $0.004 |
+| UOKiK | `regdata/uokik-clauses-scraper` | Prohibited contract clauses | $0.003 |
+| CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 |
+| BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 |
 
 ### Spain (2 actors)
 
@@ -61,8 +61,8 @@ All 14 actors with pricing. Pay-per-result, no subscriptions.
 
 | Actor | Slug | What You Get | $/Result |
 |---|---|---|---|
-| Ediktsdatei | `regdata/austria-ediktsdatei-scraper` | Insolvency publications (no IWG license needed) | $0.005 |
-| WKO | `regdata/wko-business-directory-scraper` | 620,000+ businesses with contact details | $0.003 |
+| Ediktsdatei | `regdata/austria-ediktsdatei-scraper` | Insolvency publications | $0.005 |
+| WKO | `regdata/wko-business-directory-scraper` | Businesses with contact details | $0.003 |
 
 ### France (1 actor)
 

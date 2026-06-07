@@ -1,6 +1,6 @@
 ---
 name: regdata-compliance
-description: "Extract data from Poland's UOKiK abusive clauses registry (7,500+ court-ruled prohibited contract clauses, rejestr klauzul niedozwolonych) and BDO waste management registry (674,000+ registered waste entities, Baza danych o odpadach). Two specific Polish government registries - UOKiK for checking contract clauses against court rulings, BDO for verifying waste management registrations. Use when user mentions UOKiK, rejestr klauzul niedozwolonych, Polish abusive clauses, BDO rejestr, Polish waste registry, or needs to search these specific registries."
+description: "Extract data from Poland's UOKiK abusive clauses registry (court-ruled prohibited contract clauses, rejestr klauzul niedozwolonych) and BDO waste management registry (registered waste entities, Baza danych o odpadach). Two specific Polish government registries - UOKiK for checking contract clauses against court rulings, BDO for verifying waste management registrations. Use when user mentions UOKiK, rejestr klauzul niedozwolonych, Polish abusive clauses, BDO rejestr, Polish waste registry, or needs to search these specific registries."
 metadata:
   version: 1.0.0
   author: regdata

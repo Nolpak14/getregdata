@@ -1,6 +1,6 @@
 ---
 name: regdata-lead-gen
-description: "Extract company directors and contact data from European government registries - KRS non-anonymized board members (Poland, full names from PDF extracts), WKO business directory (620K+ Austrian companies with phone/email/website), Spain Registro Mercantil company directory (NIF, officers, CNAE codes), Societe.com (French company directors and financials), and BORME new incorporations (daily Spanish corporate gazette). Use when user needs to extract officer names from Polish KRS, search Austrian WKO directory, scrape Spanish company registry, pull French company directors from Societe.com, or monitor BORME for new incorporations."
+description: "Extract company directors and contact data from European government registries - KRS board members (Poland, from public PDF extracts), WKO business directory (Austrian companies with phone/email/website), Spain Registro Mercantil company directory (NIF, officers, CNAE codes), Societe.com (French company directors and financials), and BORME new incorporations (daily Spanish corporate gazette). Use when user needs to extract officer names from Polish KRS, search Austrian WKO directory, scrape Spanish company registry, pull French company directors from Societe.com, or monitor BORME for new incorporations."
 metadata:
   version: 1.0.0
   author: regdata

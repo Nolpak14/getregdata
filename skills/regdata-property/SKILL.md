@@ -1,6 +1,6 @@
 ---
 name: regdata-property
-description: "Extract data from Poland's EKW electronic land registry (Elektroniczne Ksiegi Wieczyste) - ownership records, mortgages, easements, and restrictions across 25 million property entries in 352 court departments. Cross-references with KRS board members and CRBR beneficial owners for corporate property holders. Use when user mentions EKW, ksiegi wieczyste, Polish land registry, Polish property lookup, or needs to extract ownership/mortgage data from the Polish electronic land registry system."
+description: "Extract data from Poland's EKW electronic land registry (Elektroniczne Ksiegi Wieczyste) - ownership records, mortgages, easements, and restrictions across all 352 court departments. Cross-references with KRS board members and CRBR beneficial owners for corporate property holders. Use when user mentions EKW, ksiegi wieczyste, Polish land registry, Polish property lookup, or needs to extract ownership/mortgage data from the Polish electronic land registry system."
 metadata:
   version: 1.0.0
   author: regdata
