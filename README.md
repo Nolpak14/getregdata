@@ -1,6 +1,6 @@
 # getregdata - European Regulatory Research Skills for AI Agents
 
-Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over European public business data. Each skill turns official public business registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
+Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 24 actors across 9 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
 
 ## Install
 
@@ -78,7 +78,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 14 actors:
+Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 24 actors:
 
 | Skill | Use Case |
 |---|---|
@@ -95,39 +95,81 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 
 ## Actor Catalog
 
-### Poland (9 actors)
+24 actors across 9 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
 
-| Actor | Registry | What You Get | Cost/Result |
-|---|---|---|---|
-| [KNF Registry Scraper](https://apify.com/regdata/knf-registry-scraper) | KNF | Licensed payment, e-money and lending institutions | $0.003 |
-| [MSiG Court Gazette Scraper](https://apify.com/regdata/msig-scraper) | MSiG | Bankruptcy, restructuring and liquidation notices | $0.004 |
-| [KRS Board Members Scraper](https://apify.com/regdata/krs-fullnames-scraper) | KRS | Board members and shareholders (structured, GDPR-compliant) | $0.008 |
-| [KRZ Debtor Registry Scraper](https://apify.com/regdata/krz-debtor-scraper) | KRZ | Bankruptcy, restructuring, enforcement proceedings | $0.006 |
-| [eKRS Financial Scraper](https://apify.com/regdata/ekrs-financial-scraper) | eKRS | Financial statements - balance sheets, P&L, assets | $0.008 |
-| [EKW Land Registry Scraper](https://apify.com/regdata/ekw-ksiegi-wieczyste-scraper) | EKW | Property ownership, mortgages and easements | $0.01 |
-| [UOKiK Clauses Scraper](https://apify.com/regdata/uokik-clauses-scraper) | UOKiK | Court-ruled prohibited contract clauses | $0.003 |
-| [CRBR Beneficial Owners Scraper](https://apify.com/regdata/crbr-beneficial-owners-scraper) | CRBR | Beneficial owners (UBO) for KYC/AML | $0.008 |
-| [BDO Waste Registry Scraper](https://apify.com/regdata/bdo-waste-registry-scraper) | BDO | Waste-management entity registration verification | $0.004 |
+### Poland (12 actors)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [KRS Financial Statements Scraper](https://apify.com/regdata/poland-krs-financial-scraper) | eKRS | Financial statements - balance sheets, P&L, assets |
+| [EKW Land Registry Scraper](https://apify.com/regdata/ekw-ksiegi-wieczyste-scraper) | EKW | Property ownership, mortgages and easements |
+| [CRBR Beneficial Owners Scraper](https://apify.com/regdata/crbr-beneficial-owners-scraper) | CRBR | Beneficial owners (UBO) for KYC/AML |
+| [KRZ Debtor Registry Scraper](https://apify.com/regdata/krz-debtor-scraper) | KRZ | Bankruptcy, restructuring, enforcement proceedings |
+| [KRS Board Members Scraper](https://apify.com/regdata/krs-fullnames-scraper) | KRS | Board members and shareholders (structured, GDPR-compliant) |
+| [KNF Registry Scraper](https://apify.com/regdata/knf-registry-scraper) | KNF | Licensed payment, e-money and lending institutions |
+| [MSiG Court Gazette Scraper](https://apify.com/regdata/msig-scraper) | MSiG | Bankruptcy, restructuring and liquidation notices |
+| [UOKiK Clauses Scraper](https://apify.com/regdata/uokik-clauses-scraper) | UOKiK | Court-ruled prohibited contract clauses |
+| [BDO Waste Registry Scraper](https://apify.com/regdata/bdo-waste-registry-scraper) | BDO | Waste-management entity registration verification |
+| [REGON Company Scraper](https://apify.com/regdata/polish-regon-scraper) | GUS REGON | Official company master data - no API key needed |
+| [Premises Prospector](https://apify.com/regdata/polish-premises-prospector) | GUS REGON | Site-level / local-unit (jednostki lokalne) records for prospecting |
+| [Parliamentary PEP Scraper](https://apify.com/regdata/poland-parliamentary-pep-scraper) | Sejm | Politically-exposed persons (PEP) for KYC/AML screening |
 
 ### Spain (2 actors)
 
-| Actor | Registry | What You Get | Cost/Result |
-|---|---|---|---|
-| [BORME Corporate Acts Scraper](https://apify.com/regdata/borme-corporate-acts-scraper) | BORME | Incorporations, officer appointments, capital changes, dissolutions | $0.003 |
-| [Spain Company Directory Scraper](https://apify.com/regdata/spain-company-directory-scraper) | Registro Mercantil | NIF, officers, CNAE codes, legal form, IRUS, EUID | $0.005 |
+| Actor | Registry | What You Get |
+|---|---|---|
+| [BORME Corporate Acts Scraper](https://apify.com/regdata/borme-corporate-acts-scraper) | BORME | Incorporations, officer appointments, capital changes, dissolutions |
+| [Spain Company Directory Scraper](https://apify.com/regdata/spain-company-directory-scraper) | Registro Mercantil | NIF, officers, CNAE codes, legal form, IRUS, EUID |
 
 ### Austria (2 actors)
 
-| Actor | Registry | What You Get | Cost/Result |
-|---|---|---|---|
-| [Ediktsdatei Insolvency Scraper](https://apify.com/regdata/austria-ediktsdatei-scraper) | Ediktsdatei | Austrian insolvency publications | $0.005 |
-| [WKO Business Directory Scraper](https://apify.com/regdata/wko-business-directory-scraper) | WKO | Austrian businesses with contact details and trade licenses | $0.003 |
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Ediktsdatei Insolvency Scraper](https://apify.com/regdata/austria-ediktsdatei-scraper) | Ediktsdatei | Austrian insolvency and court publications |
+| [WKO Business Directory Scraper](https://apify.com/regdata/wko-business-directory-scraper) | WKO | Austrian businesses with contact details and trade licenses |
+
+### Germany (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Handelsregister Scraper](https://apify.com/regdata/germany-handelsregister-scraper) | Handelsregister | Company KYB - registered details, officers, capital |
 
 ### France (1 actor)
 
-| Actor | Registry | What You Get | Cost/Result |
-|---|---|---|---|
-| [Societe.com Company Scraper](https://apify.com/regdata/societe-com-scraper) | Societe.com | SIREN, directors, financials, shareholders, subsidiaries, director networks | $0.005 |
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Societe.com Company Scraper](https://apify.com/regdata/societe-com-scraper) | Societe.com | SIREN, directors, financials, shareholders, subsidiaries, director networks |
+
+### Italy (2 actors)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Registro Imprese Scraper](https://apify.com/regdata/italy-registro-imprese-scraper) | Registro Imprese | Full company profile by name or P.IVA (VAT), incl. PEC |
+| [PEC Lookup](https://apify.com/regdata/italy-pec-lookup) | INI-PEC | Certified email (PEC) and SDI code by VAT - bulk lookup |
+
+### Belgium (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [KBO/BCE Company Scraper](https://apify.com/regdata/belgium-kbo-company-scraper) | KBO/BCE | Company data, directors and VAT |
+
+### United States (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [California SoS Business Scraper](https://apify.com/regdata/california-sos-business-scraper) | California SoS | Business entity status and registered agent |
+
+### UAE (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [ADGM Public Register Scraper](https://apify.com/regdata/uae-adgm-public-register-scraper) | ADGM | Abu Dhabi Global Market company data |
+
+### Cross-border (1 actor)
+
+| Actor | Source | What You Get |
+|---|---|---|
+| [Adverse Media Screener](https://apify.com/regdata/adverse-media-screener) | News / web | KYC/AML adverse-media (negative news) check for a name or company |
 
 ---
 
@@ -139,7 +181,7 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 | Starter ($49/mo) | $49 platform credits | ~6,000-16,000 checks |
 | Scale ($499/mo) | $499 platform credits | ~60,000+ checks |
 
-All actors are pay-per-result. No per-actor subscription. Unused credits roll over.
+All actors are pay-per-result (from ~$0.003/result depending on actor and tier). No per-actor subscription. Unused credits roll over. Each actor's Apify Store page shows its current per-result price.
 
 ---
 

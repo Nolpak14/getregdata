@@ -91,14 +91,16 @@ Open an issue with the `question` label.
 
 | Country | Actors | Gaps |
 |---------|--------|------|
-| Poland | 9 | None |
+| Poland | 12 | Deep KRS document fetch |
 | Spain | 2 | Provincial-level registry depth |
 | Austria | 2 | Firmenbuch (commercial register) |
+| Germany | 1 | Bundesanzeiger filings |
 | France | 1 | INPI direct access, BODACC parsing |
-| Germany | expanding | Handelsregister, Bundesanzeiger |
-| Italy | expanding | Registro Imprese, INI-PEC |
+| Italy | 2 | Bilanci (financial statements) |
+| Belgium | 1 | BNB financials |
+| United States | 1 (California) | Other state SoS registers |
+| UAE | 1 (ADGM) | DIFC, mainland |
 | Netherlands | 0 | KVK Handelsregister |
-| Belgium | 0 | BCE/KBO, BNB |
 | Portugal | 0 | RACIUS, Portal da Empresa |
 
-Priority expansion targets: deepening Germany and Italy coverage, then Netherlands (KVK) and Belgium (KBO).
+Plus a cross-border adverse-media screener. Priority expansion targets: more US states, Netherlands (KVK), and deeper financial-statement coverage in Germany and Italy.
