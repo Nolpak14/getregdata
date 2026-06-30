@@ -1,4 +1,4 @@
-# getregdata - European Regulatory Research Skills for AI Agents
+# getregdata - Business Registry Research Skills for AI Agents
 
 Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 24 actors across 9 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
 
