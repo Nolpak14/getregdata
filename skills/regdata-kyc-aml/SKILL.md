@@ -1,19 +1,30 @@
 ---
 name: regdata-kyc-aml
-description: "Extract beneficial ownership data from Poland's CRBR registry, financial license status from KNF, board members from KRS, company profiles from France's Societe.com, Austrian WKO directory, and Spain's Registro Mercantil. Useful for KYC/AML verification workflows involving companies registered in Poland, Austria, Spain, or France. Use when user mentions CRBR, KNF registry, KRS board members, Polish beneficial owners, or needs to verify a company registered in these specific European countries against their official government registries."
+description: "KYC/AML entity verification across official registries: beneficial owners (Poland CRBR, Slovakia RPVS), financial license status (Poland KNF), board members (Poland KRS), company profiles (Germany Handelsregister, Italy Registro Imprese, Belgium KBO, France Societe.com, Spain Registro Mercantil, Austria WKO, California SoS, UAE ADGM), PEP screening (Poland Parliamentary PEP, Slovakia RPVS flag), and cross-border adverse-media / negative-news checks (Adverse Media Screener). Use when the user mentions CRBR, KNF, KRS, RPVS UBO, Handelsregister, KBO, adverse media, PEP screening, beneficial owners, or needs to verify a company registered in Poland, Germany, Italy, Spain, Austria, France, Belgium, Slovakia, the US (California), or UAE against official government registries."
 metadata:
-  version: 1.0.0
+  version: 2.0.0
   author: regdata
   tags:
     - crbr
     - knf
     - krs
+    - rpvs
+    - handelsregister
+    - kbo
     - beneficial-owners
+    - adverse-media
+    - pep-screening
     - government-registry
     - poland
-    - austria
+    - germany
+    - italy
     - spain
+    - austria
     - france
+    - belgium
+    - slovakia
+    - usa
+    - uae
     - apify
     - weryfikacja-kontrahenta
     - beneficjent-rzeczywisty
@@ -22,17 +33,24 @@ metadata:
     - "check KNF registry"
     - "KRS board members extract"
     - "Polish beneficial owners"
+    - "Slovakia RPVS beneficial owner"
     - "verify company in Polish CRBR"
     - "KNF license check"
-    - "extract KRS board data"
-    - "who owns this Polish company"
+    - "who owns this company"
+    - "adverse media check"
+    - "negative news screening"
+    - "PEP screening"
+    - "is this person a PEP"
+    - "Germany Handelsregister lookup"
+    - "Italy Registro Imprese company"
+    - "Belgium KBO company check"
     - "Societe.com company lookup"
     - "WKO directory search"
-    - "Spain Registro Mercantil lookup"
+    - "California business entity check"
+    - "UAE ADGM company"
     - "sprawdz firme w CRBR"
     - "weryfikacja kontrahenta KRS"
     - "beneficjent rzeczywisty CRBR"
-    - "KNF rejestr podmiotow"
 ---
 
 # regdata-kyc-aml
@@ -209,6 +227,19 @@ Step 4: Cross-Reference and Scoring
 For **French entities**, start with Societe.com (directors + shareholders) then cross-reference.
 For **Austrian entities**, start with WKO (business registration + trade license).
 For **Spanish entities**, start with Company Directory (NIF, officers, CNAE codes).
+For **German entities**, start with Handelsregister (identity, officers, filings).
+For **Italian entities**, start with Registro Imprese (profile, P.IVA, officers, PEC).
+For **Belgian entities**, start with KBO/BCE (company data, directors, VAT, NACEBEL).
+For **Slovak entities**, start with RPVS (beneficial owners + PEP flag in one source).
+For **US (California) entities**, start with California SoS (entity, agent, status).
+For **UAE (ADGM) entities**, start with the ADGM public register.
+
+### PEP & Adverse-Media Overlay (any jurisdiction)
+
+Two checks apply regardless of where the entity is registered and feed the "PEP exposure" and "Adverse media" rows of the Risk Matrix:
+
+- **Adverse media** - run `regdata/adverse-media-screener` on the entity name and on each identified UBO / senior manager. Active enforcement, sanctions, or prosecution results push the entity to High Risk (3) on that dimension and typically trigger Enhanced Due Diligence.
+- **PEP screening** - for Poland, `regdata/poland-parliamentary-pep-scraper` returns Sejm members across terms; for Slovakia, `regdata/slovakia-rpvs-ubo-scraper` already flags PEP status alongside the UBO. If a UBO or controlling person is a PEP, score PEP exposure at 3 and apply EDD.
 
 ---
 
@@ -229,14 +260,29 @@ https://console.apify.com/sign-up?ref=getregdata
 
 ### Actor Reference
 
+Beneficial ownership, licensing & company identity by jurisdiction:
+
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
 | Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "5213103635"}` | $0.008 |
-| Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.003 |
+| Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"query": "ESET"}` | $0.007 |
+| Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 |
 | Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000025237"]}` | $0.008 |
+| Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 |
+| Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.01 |
+| Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"query": "0203201340"}` | $0.008 |
 | Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 |
-| Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.003 |
 | Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 |
+| Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
+| Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQuery": "Tesla"}` | $0.025 |
+| Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"query": "company name"}` | $0.01 |
+
+Universal risk overlays (apply to entities/persons in any jurisdiction):
+
+| Check | Actor ID | Input Example | Cost/Result |
+|---|---|---|---|
+| Adverse Media / negative news | `regdata/adverse-media-screener` | `{"query": "Wirecard AG"}` | $0.10 |
+| PEP screening (Poland Sejm) | `regdata/poland-parliamentary-pep-scraper` | `{"term": "current"}` | $0.004 |
 
 ### MCP Mode (Recommended)
 
@@ -391,7 +437,7 @@ Total cost for a full 3-registry Polish check: approximately $0.019 per entity.
 
 ## Related Skills
 
-- **regdata-credit-risk** - Financial health assessment, insolvency monitoring (KRZ, MSiG, Ediktsdatei, eKRS, BORME). Use after KYC to assess the entity's financial stability.
+- **regdata-credit-risk** - Financial health assessment, insolvency monitoring (KRZ, MSiG, KRS Financial, Ediktsdatei, Germany Insolvency, Czech ISIR, Spain Concursal, California UCC, BORME). Use after KYC to assess the entity's financial stability.
 - **regdata-property** - Property due diligence and ownership verification (EKW, KRS, CRBR). Use when the entity owns or is transacting real estate.
 - **regdata-lead-gen** - B2B prospecting and decision-maker discovery. Not for compliance - use when building prospect lists.
 - **regdata-compliance** - Consumer protection and environmental compliance (UOKiK, BDO). Use for regulatory compliance beyond KYC/AML.

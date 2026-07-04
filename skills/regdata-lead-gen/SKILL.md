@@ -1,20 +1,28 @@
 ---
 name: regdata-lead-gen
-description: "Extract company directors and contact data from European government registries - KRS board members (Poland, from public PDF extracts), WKO business directory (Austrian companies with phone/email/website), Spain Registro Mercantil company directory (NIF, officers, CNAE codes), Societe.com (French company directors and financials), and BORME new incorporations (daily Spanish corporate gazette). Use when user needs to extract officer names from Polish KRS, search Austrian WKO directory, scrape Spanish company registry, pull French company directors from Societe.com, or monitor BORME for new incorporations."
+description: "Extract company directors and B2B contact data from official government registries - KRS board members and REGON/premises data (Poland), WKO business directory (Austria, phone/email/website), Spain Registro Mercantil and BORME new incorporations, Societe.com (France directors + financials), Belgium KBO/BCE, Italy Registro Imprese + PEC certified email, and California SoS business entities. Use when user needs to extract officer names, build B2B prospect lists, pull company contacts, or monitor new incorporations across Poland, Austria, Spain, France, Belgium, Italy, or the US (California)."
 metadata:
-  version: 1.0.0
+  version: 2.0.0
   author: regdata
   tags:
     - krs-board-members
+    - regon
     - wko-directory
     - registro-mercantil
     - societe-com
     - borme
+    - belgium-kbo
+    - italy-registro-imprese
+    - california-sos
+    - lead-generation
     - government-registry
     - poland
     - austria
     - spain
     - france
+    - belgium
+    - italy
+    - usa
     - apify
     - szukam-kontaktow
     - Firmenverzeichnis
@@ -315,10 +323,16 @@ If not set:
 | Use Case | Actor | Slug | Cost/Result |
 |---|---|---|---|
 | Board Members (PL) | KRS Board | `regdata/krs-fullnames-scraper` | $0.008 |
-| Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.003 |
+| Business Registry (PL) | REGON | `regdata/polish-regon-scraper` | $0.004 |
+| Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.01 |
+| Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.005 |
 | Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 |
-| New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.003 |
+| New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.005 |
 | Company Data (FR) | Societe.com | `regdata/societe-com-scraper` | $0.005 |
+| Company + Directors (BE) | Belgium KBO | `regdata/belgium-kbo-company-scraper` | $0.008 |
+| Company + PEC (IT) | Italy Registro | `regdata/italy-registro-imprese-scraper` | $0.01 |
+| Certified email (IT) | Italy PEC | `regdata/italy-pec-lookup` | $0.008 |
+| Business Entity (US-CA) | California SoS | `regdata/california-sos-business-scraper` | $0.025 |
 
 ### Input Examples
 

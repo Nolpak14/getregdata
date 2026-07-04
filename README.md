@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 24 actors across 9 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
+Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 29 actors across 11 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
 
 ## Install
 
@@ -78,7 +78,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 24 actors:
+Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 29 actors:
 
 | Skill | Use Case |
 |---|---|
@@ -95,7 +95,7 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 
 ## Actor Catalog
 
-24 actors across 9 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
+29 actors across 11 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
 
 ### Poland (12 actors)
 
@@ -114,12 +114,13 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 | [Premises Prospector](https://apify.com/regdata/polish-premises-prospector) | GUS REGON | Site-level / local-unit (jednostki lokalne) records for prospecting |
 | [Parliamentary PEP Scraper](https://apify.com/regdata/poland-parliamentary-pep-scraper) | Sejm | Politically-exposed persons (PEP) for KYC/AML screening |
 
-### Spain (2 actors)
+### Spain (3 actors)
 
 | Actor | Registry | What You Get |
 |---|---|---|
 | [BORME Corporate Acts Scraper](https://apify.com/regdata/borme-corporate-acts-scraper) | BORME | Incorporations, officer appointments, capital changes, dissolutions |
 | [Spain Company Directory Scraper](https://apify.com/regdata/spain-company-directory-scraper) | Registro Mercantil | NIF, officers, CNAE codes, legal form, IRUS, EUID |
+| [Registro Publico Concursal Scraper](https://apify.com/regdata/spain-concursal-scraper) | Registro Publico Concursal | Insolvency parties and their roles (debtor, administrator, disqualified) |
 
 ### Austria (2 actors)
 
@@ -128,11 +129,12 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 | [Ediktsdatei Insolvency Scraper](https://apify.com/regdata/austria-ediktsdatei-scraper) | Ediktsdatei | Austrian insolvency and court publications |
 | [WKO Business Directory Scraper](https://apify.com/regdata/wko-business-directory-scraper) | WKO | Austrian businesses with contact details and trade licenses |
 
-### Germany (1 actor)
+### Germany (2 actors)
 
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Handelsregister Scraper](https://apify.com/regdata/germany-handelsregister-scraper) | Handelsregister | Company KYB - registered details, officers, capital |
+| [Insolvency Register Search](https://apify.com/regdata/germany-insolvency-scraper) | Insolvenzbekanntmachungen | German insolvency announcements by company and date |
 
 ### France (1 actor)
 
@@ -153,11 +155,24 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the 
 |---|---|---|
 | [KBO/BCE Company Scraper](https://apify.com/regdata/belgium-kbo-company-scraper) | KBO/BCE | Company data, directors and VAT |
 
-### United States (1 actor)
+### Czechia (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [ISIR Insolvency Register Search](https://apify.com/regdata/czech-isir-insolvency-scraper) | ISIR | Czech insolvency register - debtor, case, court |
+
+### Slovakia (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [RPVS Beneficial Owners Scraper](https://apify.com/regdata/slovakia-rpvs-ubo-scraper) | RPVS | Beneficial owners (UBO) with PEP flag - "the CRBR of Slovakia" |
+
+### United States (2 actors)
 
 | Actor | Registry | What You Get |
 |---|---|---|
 | [California SoS Business Scraper](https://apify.com/regdata/california-sos-business-scraper) | California SoS | Business entity status and registered agent |
+| [California UCC Lien Search](https://apify.com/regdata/california-ucc-lien-scraper) | California UCC | UCC liens - debtors and secured parties |
 
 ### UAE (1 actor)
 

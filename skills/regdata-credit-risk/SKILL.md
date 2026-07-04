@@ -1,20 +1,28 @@
 ---
 name: regdata-credit-risk
-description: "Extract insolvency proceedings from Poland's KRZ debtor registry, court gazette announcements from MSiG (Monitor Sadowy i Gospodarczy), financial statements from eKRS, Austrian insolvency publications from Ediktsdatei, and corporate acts from Spain's BORME. Covers specific government registries that publish bankruptcy, restructuring, and financial data in PL, AT, and ES. Use when user mentions KRZ, MSiG, eKRS, Ediktsdatei, BORME, Polish debtor registry, Polish court gazette, Polish financial statements, Austrian insolvency publications, or Spanish corporate gazette."
+description: "Insolvency monitoring and credit-risk assessment across official registries: Poland's KRZ debtor registry, MSiG court gazette, and KRS financial statements; Austria's Ediktsdatei; Germany's Insolvenzbekanntmachungen; Czechia's ISIR; Spain's BORME corporate acts and Registro Publico Concursal; and California UCC liens. Covers bankruptcy, restructuring, insolvency, financial-statement and secured-lien data across PL, AT, DE, CZ, ES, and US (California). Use when the user mentions KRZ, MSiG, KRS financials, Ediktsdatei, German insolvency, ISIR, BORME, Spanish concursal, UCC liens, debtor registry, court gazette, or company financial health / insolvency screening."
 metadata:
-  version: 1.0.0
+  version: 2.0.0
   author: regdata
   tags:
     - krz
     - msig
-    - ekrs
+    - krs-financial
     - ediktsdatei
+    - germany-insolvency
+    - czech-isir
+    - spain-concursal
+    - california-ucc
     - borme
     - insolvency
+    - credit-risk
     - government-registry
     - poland
     - austria
+    - germany
+    - czechia
     - spain
+    - usa
     - apify
     - upadlosc
     - rejestr-dluznikow
@@ -22,18 +30,19 @@ metadata:
     - "check KRZ debtor registry"
     - "search Monitor Sadowy i Gospodarczy"
     - "MSiG court gazette lookup"
-    - "eKRS financial statements"
     - "Polish financial statements extract"
     - "Ediktsdatei insolvency search"
-    - "Austrian insolvency publications"
+    - "German insolvency announcement"
+    - "Insolvenzbekanntmachungen search"
+    - "Czech ISIR insolvency"
+    - "Spanish concursal insolvency"
+    - "California UCC lien search"
     - "BORME corporate acts scrape"
-    - "Spanish corporate gazette"
     - "KRZ insolvency proceedings"
     - "Polish bankruptcy registry"
+    - "company credit risk check"
     - "upadlosc firmy KRZ"
     - "rejestr dluznikow"
-    - "sprawozdanie finansowe eKRS"
-    - "Monitor Sadowy szukaj"
     - "Konkursverfahren Ediktsdatei"
     - "actos mercantiles BORME"
 ---
@@ -178,13 +187,17 @@ Sign up at [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - n
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| Insolvency Proceedings (PL) | `regdata/krz-debtor-scraper` | `{"searchMode": "entity", "entityName": "Company Name"}` | $0.006 |
+| Insolvency Proceedings (PL) | `regdata/krz-debtor-scraper` | `{"searchMode": "entity", "entityName": "Company Name"}` | $0.025 |
 | Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 |
-| Financial Statements (PL) | `regdata/ekrs-financial-scraper` | `{"nip": "1234567890"}` | $0.008 |
+| Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 |
 | Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 |
-| Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.003 |
+| Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"searchQuery": "Company Name", "dateFrom": "2025-01-01"}` | $0.04 |
+| Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"query": "Company Name"}` | $0.005 |
+| Concursal / Insolvency (ES) | `regdata/spain-concursal-scraper` | `{"query": "Company Name"}` | $0.05 |
+| Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.005 |
+| UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"debtorName": "Company Name"}` | $0.05 |
 
-**Total cost for a full Polish company assessment** (KRZ + MSiG + eKRS): approximately $0.018 per company.
+**Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.089 per company.
 
 ### MCP Mode (Recommended)
 
@@ -228,7 +241,7 @@ curl -X POST "https://api.apify.com/v2/acts/regdata~msig-scraper/runs?token=$API
 
 ```bash
 # Pull financial statements from eKRS
-curl -X POST "https://api.apify.com/v2/acts/regdata~ekrs-financial-scraper/runs?token=$APIFY_TOKEN" \
+curl -X POST "https://api.apify.com/v2/acts/regdata~poland-krs-financial-scraper/runs?token=$APIFY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"nip": "1234567890"}'
 ```

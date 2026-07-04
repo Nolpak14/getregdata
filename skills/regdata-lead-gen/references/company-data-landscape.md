@@ -30,7 +30,7 @@ A practical guide to what official registry data is publicly available in each c
 
 ### Access Method
 - **KRS Board Members**: `regdata/krs-fullnames-scraper` - downloads PDF extracts and parses full names
-- **eKRS Financials**: `regdata/ekrs-financial-scraper` - extracts balance sheet and P&L data
+- **KRS Financials**: `regdata/poland-krs-financial-scraper` - extracts balance sheet and P&L data
 - **CRBR**: `regdata/crbr-beneficial-owners-scraper` - queries by NIP or KRS number
 - Manual: https://ekrs.ms.gov.pl (free, but API anonymizes names)
 
