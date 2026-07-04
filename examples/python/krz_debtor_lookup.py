@@ -6,43 +6,38 @@ KRZ (National Debtor Registry) covers bankruptcy, restructuring, and enforcement
 proceedings for Polish companies and individuals. Updated daily by courts.
 
 Used for: credit risk screening, debt collection prep, due diligence
-Cost: $0.006 per result + $0.025 actor start fee
-Free tier: $5 credits = ~800 checks
+Cost: ~$0.025 per result on the free tier (lower on paid plans)
+Free tier: $5 credits = ~200 results
+
+Note: KRZ runs ONE search per run (searchMode + entityName or identifier) - there is
+no multi-query batch field. Loop over the entities you want to check. Searching by
+name can match similarly-named entities; pass a NIP/KRS via `identifier` for a precise hit.
 """
 
 from apify_client import ApifyClient
 
-APIFY_TOKEN = "YOUR_APIFY_TOKEN"
+APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://console.apify.com/sign-up?ref=getregdata
 
 client = ApifyClient(APIFY_TOKEN)
 
-# Batch check multiple companies by NIP or name
-companies_to_check = [
-    {"nip": "5252002340"},
-    {"nip": "7792308903"},
-    {"name": "Budimex SA"},  # Name search also supported
-]
+# Check several companies (by name here; use `identifier` with a NIP/KRS for precision)
+companies_to_check = ["Getin", "Budimex"]
 
-run = client.actor("regdata/krz-debtor-scraper").call(
-    run_input={
-        "searchQueries": companies_to_check,
-        "maxResults": 50,  # Per query
-    }
-)
+all_hits = []
+for name in companies_to_check:
+    run = client.actor("regdata/krz-debtor-scraper").call(
+        run_input={
+            "searchMode": "entity",   # companies by name/KRS/NIP
+            "entityName": name,        # or use "identifier": "<NIP or KRS>"
+            "maxResults": 50,
+        }
+    )
+    all_hits += client.dataset(run["defaultDatasetId"]).list_items().items
 
-items = client.dataset(run["defaultDatasetId"]).list_items().items
+print(f"Found {len(all_hits)} proceeding record(s)\n")
 
-# Flag companies with active proceedings
-risky = [i for i in items if i.get("proceedings")]
-clean = [i for i in items if not i.get("proceedings")]
-
-print(f"Checked {len(items)} companies")
-print(f"Clean: {len(clean)} | Flagged: {len(risky)}\n")
-
-for item in risky:
-    print(f"FLAGGED: {item.get('debtorName')} (NIP: {item.get('nip')})")
-    for p in item.get("proceedings", []):
-        print(f"  Type: {p.get('type')}")
-        print(f"  Court: {p.get('court')}")
-        print(f"  Filed: {p.get('filingDate')}")
-        print(f"  Status: {p.get('status')}")
+for item in all_hits:
+    who = item.get("entityName") or f"{item.get('firstName', '')} {item.get('lastName', '')}".strip()
+    print(f"FLAGGED: {who} (NIP: {item.get('nip')}, KRS: {item.get('krs')})")
+    print(f"  Proceeding: {item.get('proceedingType')} - {item.get('proceedingStatus')}")
+    print(f"  Court: {item.get('court')} | Case: {item.get('caseSignature')}")

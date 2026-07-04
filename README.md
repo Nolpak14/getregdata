@@ -58,12 +58,14 @@ client = ApifyClient("YOUR_APIFY_TOKEN")
 
 # Check beneficial owners for a Polish company (CRBR)
 run = client.actor("regdata/crbr-beneficial-owners-scraper").call(
-    run_input={"searchQueries": [{"nip": "5252002340"}]}
+    run_input={"nip": "6770065406"}   # Comarch S.A.; batch via "queries": [{"nip": ...}]
 )
 items = client.dataset(run["defaultDatasetId"]).list_items().items
 for item in items:
     for owner in item.get("beneficialOwners", []):
-        print(f"{item['company']['name']}: {owner['fullName']} ({owner['ownershipPercentage']})")
+        name = f"{owner.get('firstName','')} {owner.get('lastName','')}".strip()
+        control = (owner.get("entitlements") or [{}])[0].get("natureOfControl", "")
+        print(f"{item.get('name')}: {name} - {control}")
 ```
 
 **JavaScript**
@@ -84,7 +86,7 @@ items.forEach(item => console.log(`${item.debtorName} - ${item.proceedingType}`)
 
 Get your API token: [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - new accounts include $5 free credits.
 
-One prompt in your agent - *"Run a KYC check on NIP 5213103635"* - and the `regdata-kyc-aml` skill resolves the company's beneficial owners, scores the ownership, and flags anything for enhanced due diligence.
+One prompt in your agent - *"Run a KYC check on NIP 6770065406"* - and the `regdata-kyc-aml` skill resolves the company's beneficial owners, scores the ownership, and flags anything for enhanced due diligence.
 
 More examples: [examples/python/](examples/python/) | [examples/javascript/](examples/javascript/)
 
@@ -103,7 +105,7 @@ Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact wit
 | `regdata-compliance` | Consumer protection audits, ESG/environmental compliance |
 | `regdata-lead-gen` | B2B prospecting, decision-maker discovery, market research |
 
-Then in Claude Code: *"Run a KYC check on Polish company NIP 5213103635"* - the skill handles the rest.
+Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* - the skill handles the rest.
 
 ---
 

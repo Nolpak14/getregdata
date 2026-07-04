@@ -264,10 +264,10 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "5213103635"}` | $0.008 |
+| Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "6770065406"}` | $0.008 |
 | Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"query": "ESET"}` | $0.007 |
 | Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 |
-| Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000025237"]}` | $0.008 |
+| Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000057567"]}` | $0.008 |
 | Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 |
 | Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.01 |
 | Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"query": "0203201340"}` | $0.008 |
@@ -304,7 +304,7 @@ For each actor, the pattern is the same:
 ```bash
 curl -X POST "https://api.apify.com/v2/acts/regdata~crbr-beneficial-owners-scraper/runs?token=$APIFY_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"nip": "5213103635"}'
+  -d '{"nip": "6770065406"}'
 ```
 
 **Poll for completion (replace RUN_ID):**
@@ -326,7 +326,7 @@ For quick single-entity checks, use the synchronous endpoint which waits for com
 ```bash
 curl -X POST "https://api.apify.com/v2/acts/regdata~crbr-beneficial-owners-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"nip": "5213103635"}'
+  -d '{"nip": "6770065406"}'
 ```
 
 This returns results directly without polling - ideal for one-off checks.
@@ -408,10 +408,10 @@ Here is a complete KYC check for a Polish sp. z o.o. (limited liability company)
 
 ```
 User: "I need to verify a Polish company before onboarding them as a supplier.
-       NIP: 5213103635, KRS: 0000025237"
+       NIP: 6770065406, KRS: 0000057567"
 
 Step 1 - CRBR check:
-  Run: regdata/crbr-beneficial-owners-scraper with {"nip": "5213103635"}
+  Run: regdata/crbr-beneficial-owners-scraper with {"nip": "6770065406"}
   Result: Identify all beneficial owners, ownership percentages, control types
   Analysis: Are UBOs clearly identified? Any complex structures?
 
@@ -421,7 +421,7 @@ Step 2 - KNF check (if entity is in financial services):
   Analysis: Does the license match the stated activity?
 
 Step 3 - KRS Board check:
-  Run: regdata/krs-fullnames-scraper with {"krsNumbers": ["0000025237"]}
+  Run: regdata/krs-fullnames-scraper with {"krsNumbers": ["0000057567"]}
   Result: Full board member names (non-anonymized)
   Analysis: Cross-reference against CRBR UBOs. Any red flags?
 

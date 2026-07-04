@@ -16,33 +16,36 @@ APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://console.apify.com/sign-up?ref=getreg
 
 client = ApifyClient(APIFY_TOKEN)
 
-# Search by NIP (Polish tax ID) or KRS number
+# Single query: use the top-level "nip", "krs", or "companyName" field.
+# Batch: use "queries" - a list of {"nip"|"krs"|"name"|"pesel"} objects.
 run = client.actor("regdata/crbr-beneficial-owners-scraper").call(
     run_input={
-        "searchQueries": [
-            {"nip": "5252002340"},   # Single NIP lookup
-            {"nip": "5213103635"},
-            {"krs": "0000016702"},   # Or by KRS number
+        "queries": [
+            {"nip": "6770065406"},   # Comarch S.A.
+            {"krs": "0000006865"},   # Or by KRS number (CD Projekt S.A.)
         ],
-        "proxyConfiguration": {"useApifyProxy": False},  # No proxy needed for CRBR
     }
 )
 
 items = client.dataset(run["defaultDatasetId"]).list_items().items
 
 for item in items:
-    company = item.get("company", {})
-    owners = item.get("beneficialOwners", [])
+    # Entities with no CRBR filing come back with found=false + a message.
+    if item.get("found") is False or item.get("message"):
+        print(f"\n{item.get('searchInput')}: no CRBR entry")
+        continue
 
-    print(f"\n{company.get('name')} (NIP: {company.get('nip')})")
-    print(f"  Status: {company.get('declarationStatus')}")
+    owners = item.get("beneficialOwners", [])
+    print(f"\n{item.get('name')} (NIP: {item.get('nip')}, KRS: {item.get('krs')})")
 
     if not owners:
-        print("  No beneficial owners found (may not be registered)")
+        print("  No beneficial owners registered")
         continue
 
     for owner in owners:
-        print(f"  Owner: {owner['fullName']}")
-        print(f"    Citizenship: {owner.get('citizenship')}")
-        print(f"    Ownership: {owner.get('ownershipPercentage')}")
-        print(f"    Control type: {owner.get('controlNature')}")
+        full_name = " ".join(
+            p for p in (owner.get("firstName"), owner.get("secondName"), owner.get("lastName")) if p
+        )
+        controls = "; ".join(e.get("natureOfControl", "") for e in owner.get("entitlements", []))
+        print(f"  UBO: {full_name} ({owner.get('citizenship')})")
+        print(f"    Control: {controls}")
