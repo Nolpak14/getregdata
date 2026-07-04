@@ -1,5 +1,11 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
+[![Skills](https://img.shields.io/badge/skills-6-blue)](#claude-code-skills)
+[![Actors](https://img.shields.io/badge/actors-29-green)](#actor-catalog)
+[![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
+[![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+[![Install](https://img.shields.io/badge/install-npx%20skills%20add-black)](#install)
+
 Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 29 actors across 11 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
 
 ## Install
@@ -71,6 +77,8 @@ items.forEach(item => console.log(`${item.debtorName} - ${item.proceedingType}`)
 ```
 
 Get your API token: [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - new accounts include $5 free credits.
+
+One prompt in your agent - *"Run a KYC check on NIP 5213103635"* - and the `regdata-kyc-aml` skill resolves the company's beneficial owners, scores the ownership, and flags anything for enhanced due diligence.
 
 More examples: [examples/python/](examples/python/) | [examples/javascript/](examples/javascript/)
 
