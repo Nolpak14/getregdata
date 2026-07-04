@@ -10,10 +10,16 @@ Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, cre
 
 ## Install
 
+**As Claude Code / agent skills:**
 ```bash
-# Install Claude Code skills
 npx skills add Nolpak14/getregdata -g -y
 ```
+
+**As an MCP server** (Claude Desktop, Cursor, Cline, Windsurf, ChatGPT - all 29 registries as tools):
+```json
+{ "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
+```
+See [`mcp/`](mcp/) for the server, tool list, and per-client config.
 
 ---
 

@@ -1,0 +1,51 @@
+{
+  "name": "getregdata-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for 29 official business-registry actors (KYC/AML, credit-risk, due-diligence, B2B data) across 11 jurisdictions - Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, US (California) and UAE - plus cross-border adverse-media screening.",
+  "type": "module",
+  "bin": {
+    "getregdata-mcp": "index.js"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "actors.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "smoke": "node smoke-test.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "kyc",
+    "aml",
+    "kyb",
+    "adverse-media",
+    "beneficial-owners",
+    "business-registry",
+    "credit-risk",
+    "due-diligence",
+    "compliance",
+    "regtech",
+    "apify",
+    "handelsregister",
+    "crbr",
+    "registro-imprese"
+  ],
+  "homepage": "https://github.com/Nolpak14/getregdata",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nolpak14/getregdata.git",
+    "directory": "mcp"
+  },
+  "license": "MIT",
+  "author": "regdata",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}
