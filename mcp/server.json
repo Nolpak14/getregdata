@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.nolpak14/getregdata",
+  "name": "io.github.Nolpak14/getregdata",
   "description": "Official business-registry data - KYC/AML, UBO, credit-risk, adverse media across 11 jurisdictions.",
   "repository": {
     "url": "https://github.com/Nolpak14/getregdata",
     "source": "github"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "getregdata-mcp",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "transport": {
         "type": "stdio"
       },

@@ -1,7 +1,7 @@
 {
   "name": "getregdata-mcp",
-  "version": "1.0.1",
-  "mcpName": "io.github.nolpak14/getregdata",
+  "version": "1.0.2",
+  "mcpName": "io.github.Nolpak14/getregdata",
   "description": "MCP server for 29 official business-registry actors (KYC/AML, credit-risk, due-diligence, B2B data) across 11 jurisdictions - Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, US (California) and UAE - plus cross-border adverse-media screening.",
   "type": "module",
   "bin": {
