@@ -53,7 +53,7 @@ export const ACTORS = [
     "slug": "czech-isir-insolvency-scraper",
     "tool": "regdata_czech_isir_insolvency",
     "title": "Czech ISIR Insolvency Register Search",
-    "description": "Search the Czech insolvency register (ISIR) by company or debtor name, IÈO or city. Get debtor name, IÈO, case reference, court, proceeding status and the commercial-register cross-link. No API key."
+    "description": "Search the Czech insolvency register (ISIR) by company or debtor name, IÄŒO or city. Get debtor name, IÄŒO, case reference, court, proceeding status and the commercial-register cross-link. No API key."
   },
   {
     "slug": "ekw-ksiegi-wieczyste-scraper",
@@ -65,7 +65,7 @@ export const ACTORS = [
     "slug": "germany-handelsregister-scraper",
     "tool": "regdata_germany_handelsregister",
     "title": "Germany Handelsregister Scraper",
-    "description": "Search the German Commercial Register (Handelsregister) by company name or register number. Extract company data, officers / managing directors (Geschäftsführer) with dates of birth, capital, legal form, seat, business purpose. No official API - structured JSON for KYC, KYB & due diligence."
+    "description": "Search the German Commercial Register (Handelsregister) by company name or register number. Extract company data, officers / managing directors (GeschÃ¤ftsfÃ¼hrer) with dates of birth, capital, legal form, seat, business purpose. No official API - structured JSON for KYC, KYB & due diligence."
   },
   {
     "slug": "germany-insolvency-scraper",
@@ -95,7 +95,7 @@ export const ACTORS = [
     "slug": "krs-fullnames-scraper",
     "tool": "regdata_krs_fullnames",
     "title": "Poland KRS Board Members & Shareholders Scraper",
-    "description": "Extract full non-anonymized board member & shareholder names from Polish KRS (National Court Register). The official API censors names to \"L******\" — this actor downloads the public PDF extract with complete names, roles, and company metadata."
+    "description": "Extract full non-anonymized board member & shareholder names from Polish KRS (National Court Register). The official API censors names to \"L******\" - this actor downloads the public PDF extract with complete names, roles, and company metadata."
   },
   {
     "slug": "krz-debtor-scraper",
@@ -107,7 +107,7 @@ export const ACTORS = [
     "slug": "msig-scraper",
     "tool": "regdata_msig",
     "title": "Poland MSiG Court Gazette Scraper",
-    "description": "Search Polish Court & Economic Gazette (Monitor S¹dowy i Gospodarczy) for bankruptcy declarations, liquidation notices, restructuring proceedings, creditor calls. Full-text search across archive from 2001. Structured JSON output."
+    "description": "Search Polish Court & Economic Gazette (Monitor SÄ…dowy i Gospodarczy) for bankruptcy declarations, liquidation notices, restructuring proceedings, creditor calls. Full-text search across archive from 2001. Structured JSON output."
   },
   {
     "slug": "poland-krs-financial-scraper",
@@ -137,7 +137,7 @@ export const ACTORS = [
     "slug": "slovakia-rpvs-ubo-scraper",
     "tool": "regdata_slovakia_rpvs_ubo",
     "title": "Slovakia RPVS Beneficial Owners (UBO) Scraper",
-    "description": "Search Slovakia's public beneficial-ownership register (RPVS) by IÈO or company name. Returns beneficial owners with a public-official (PEP) flag, plus the authorised person. No API key."
+    "description": "Search Slovakia's public beneficial-ownership register (RPVS) by IÄŒO or company name. Returns beneficial owners with a public-official (PEP) flag, plus the authorised person. No API key."
   },
   {
     "slug": "societe-com-scraper",
@@ -154,8 +154,8 @@ export const ACTORS = [
   {
     "slug": "spain-concursal-scraper",
     "tool": "regdata_spain_concursal",
-    "title": "Spain Registro Público Concursal Search",
-    "description": "Search Spain's official public insolvency register (Registro Público Concursal) by debtor name or NIF. Returns each matching party with its role - debtor, disqualified, or insolvency administrator. No API key."
+    "title": "Spain Registro PÃºblico Concursal Search",
+    "description": "Search Spain's official public insolvency register (Registro PÃºblico Concursal) by debtor name or NIF. Returns each matching party with its role - debtor, disqualified, or insolvency administrator. No API key."
   },
   {
     "slug": "uae-adgm-public-register-scraper",
@@ -167,7 +167,7 @@ export const ACTORS = [
     "slug": "uokik-clauses-scraper",
     "tool": "regdata_uokik_clauses",
     "title": "Poland UOKiK Abusive Clauses Registry Scraper",
-    "description": "Rejestr klauzul niedozwolonych UOKiK - 7,500+ zakazanych postanowieñ umownych. Search court-banned contract clauses by defendant, industry, legal category. No API exists. Legal compliance, consumer protection. JSON."
+    "description": "Rejestr klauzul niedozwolonych UOKiK - 7,500+ zakazanych postanowieÅ„ umownych. Search court-banned contract clauses by defendant, industry, legal category. No API exists. Legal compliance, consumer protection. JSON."
   },
   {
     "slug": "wko-business-directory-scraper",
