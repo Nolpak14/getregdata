@@ -122,12 +122,16 @@ Score each dimension 1-3. Total score determines the CDD level.
 | **Regulatory status** | Licensed by national regulator (e.g., KNF) | No license required for activity | License required but not found |
 | **Industry** | Manufacturing, tech, retail | Professional services, real estate | Crypto, gambling, cash-intensive, arms |
 | **PEP exposure** | No PEPs in ownership/management | PEP in management but not ownership | PEP is UBO or controls entity |
-| **Adverse media** | None found | Minor/historical issues | Active enforcement, sanctions, prosecution |
+| **Adverse media** | None found (screen completed) | Minor/historical issues | Active enforcement, sanctions, prosecution |
+
+**Adverse media - the fourth state:** if the screen did **not complete**, the entity is **UNSCORED** on this dimension, not Low Risk (1). An incomplete screen is not "none found". See "Incomplete Screens" below - do not close the matrix until the screen is re-run and completes.
 
 **Scoring thresholds:**
 - 7-10: Standard CDD sufficient
 - 11-15: Enhanced Due Diligence recommended
 - 16-21: Enhanced Due Diligence required - consider whether to proceed
+
+A total score is only valid when every dimension has been scored. If any dimension is UNSCORED, the file stays open.
 
 ### Registry Selection by Entity Type and Country
 
@@ -241,6 +245,23 @@ Two checks apply regardless of where the entity is registered and feed the "PEP 
 - **Adverse media** - run `regdata/adverse-media-screener` on the entity name and on each identified UBO / senior manager. Active enforcement, sanctions, or prosecution results push the entity to High Risk (3) on that dimension and typically trigger Enhanced Due Diligence.
 - **PEP screening** - for Poland, `regdata/poland-parliamentary-pep-scraper` returns Sejm members across terms; for Slovakia, `regdata/slovakia-rpvs-ubo-scraper` already flags PEP status alongside the UBO. If a UBO or controlling person is a PEP, score PEP exposure at 3 and apply EDD.
 
+#### Incomplete Screens - do not score them as clean
+
+The adverse-media screener runs a set of searches per entity and tells you how many of them actually ran. A screen that could not be completed is **not** evidence of a clean entity, and must never be recorded as "None found".
+
+| Field | Meaning |
+|---|---|
+| `screeningStatus` | `'complete'` - every planned search ran. `'partial'` - some searches did not run; the result set is not exhaustive |
+| `searchesRun` / `searchesTotal` | How many of the planned searches actually executed. `searchesRun < searchesTotal` means coverage gaps |
+| `overallRisk` | The screen's own verdict. **`'unknown'`** means the screen could not reach a verdict - treat as UNSCORED, not as low risk |
+
+**Entities that could not be screened at all are not returned as rows.** They are written to a `NOT_SCREENED` key-value record on the run. So a 10-entity batch that comes back with 8 rows means **2 entities were never screened** - read the `NOT_SCREENED` record and re-run them. Do not let a missing row read as a clean row.
+
+How to handle each state:
+
+- `screeningStatus: 'complete'` and no hits -> Low Risk (1) on the adverse-media dimension. A real all-clear.
+- `screeningStatus: 'partial'`, or `overallRisk: 'unknown'`, or the entity appears in `NOT_SCREENED` -> **UNSCORED**. Re-run. Record the gap in the compliance file, and do not sign off the CDD on the strength of an incomplete screen.
+
 ---
 
 ## Data Extraction - Live Registry Checks
@@ -276,6 +297,8 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 | Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
 | Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQuery": "Tesla"}` | $0.025 |
 | Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"query": "company name"}` | $0.01 |
+
+**California SoS - the 500-match ceiling:** the California registry returns **at most 500 matches** for a search term. A result list that hits the ceiling is reported as **INCOMPLETE** - the entity you want may exist and simply not be in the 500 rows you got back. Do not conclude "not registered in California" from a ceilinged list; narrow the search term (full registered name, or search by entity number) and re-run.
 
 Universal risk overlays (apply to entities/persons in any jurisdiction):
 

@@ -6,8 +6,8 @@
  * classification, and trade licenses. Official Chamber of Commerce data.
  * No proxy required - works on Apify free tier.
  *
- * Cost: $0.003/result + $0.025 start fee
- * Free tier: $5 = ~1,600 business records
+ * Cost: $0.005/result + $0.005 start fee
+ * Free tier: $5 = ~1,000 business records
  */
 
 import { ApifyClient } from 'apify-client';

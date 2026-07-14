@@ -17,7 +17,7 @@ export const ACTORS = [
     "slug": "bdo-waste-registry-scraper",
     "tool": "regdata_bdo_waste_registry",
     "title": "Poland BDO Waste Registry Scraper",
-    "description": "Rejestr BDO - baza danych o odpadach. Search 674,000+ waste management entities. Company permits, waste codes, provinces. No API exists. ESG compliance, environmental due diligence. Gospodarka odpadami."
+    "description": "Rejestr BDO - baza danych o odpadach. Search 674,000+ waste management entities by name or NIP. Returns BDO registry number, company name, NIP, and address (province, district, commune, city, street, postcode). Answers \"is this company in the BDO register, and what is its BDO number?\" - registration status, waste codes and permits are behind a BDO login and are not part of the public register. No API exists. ESG compliance, environmental due diligence. Gospodarka odpadami."
   },
   {
     "slug": "belgium-kbo-company-scraper",
@@ -35,13 +35,13 @@ export const ACTORS = [
     "slug": "california-sos-business-scraper",
     "tool": "regdata_california_sos_business",
     "title": "California SoS Business Scraper - Agent & Status",
-    "description": "Scrape the California Secretary of State business registry (bizfileOnline): entity name, number, status, standing, type, formation date and registered agent. Search by name or entity number. No API key needed."
+    "description": "Scrape the California Secretary of State business registry (bizfileOnline): entity name, number, status, standing, type, formation date and registered agent. Search by name or entity number. The registry returns at most 500 matches for a term - a list that hits that ceiling is reported as INCOMPLETE, so a missing entity is not proof it is unregistered; narrow the term and re-run. No API key needed."
   },
   {
     "slug": "california-ucc-lien-scraper",
     "tool": "regdata_california_ucc_lien",
     "title": "California UCC Lien Search - Debtors & Secured Parties",
-    "description": "Search the California Secretary of State UCC filing index (bizfileOnline) by debtor or secured-party name. Get filing number, UCC type, status, filing & lapse dates, debtors and secured parties. No API key needed."
+    "description": "Search the California Secretary of State UCC filing index (bizfileOnline) by debtor or secured-party name. Get filing number, UCC type, status, filing & lapse dates, debtors and secured parties. The registry rejects a term matching more than 1,000 filings as \"too broad\" - that refusal is reported as such and is NOT \"no liens\"; narrow the debtor name and re-run. No API key needed."
   },
   {
     "slug": "crbr-beneficial-owners-scraper",
@@ -53,7 +53,7 @@ export const ACTORS = [
     "slug": "czech-isir-insolvency-scraper",
     "tool": "regdata_czech_isir_insolvency",
     "title": "Czech ISIR Insolvency Register Search",
-    "description": "Search the Czech insolvency register (ISIR) by company or debtor name, IČO or city. Get debtor name, IČO, case reference, court, proceeding status and the commercial-register cross-link. No API key."
+    "description": "Search the Czech insolvency register (ISIR) by company or debtor name, IČO or city. Get debtor name, IČO, case reference, court, proceeding status and the commercial-register cross-link. The register serves at most 400 rows per search and REFUSES a broader query outright - a refusal is reported as such and is NOT \"no records\". includeEnded defaults to true, which pulls in closed proceedings and makes a common surname more likely to be refused; set it false or add the IČO/city and re-run. No API key."
   },
   {
     "slug": "ekw-ksiegi-wieczyste-scraper",
@@ -71,7 +71,7 @@ export const ACTORS = [
     "slug": "germany-insolvency-scraper",
     "tool": "regdata_germany_insolvency",
     "title": "Germany Insolvency Register Search (Insolvenzbekanntmachungen)",
-    "description": "Search Germany's official insolvency register (Insolvenzbekanntmachungen) by company or debtor name. Get court, case number, publication date, seat and the Handelsregister reference. No API key."
+    "description": "Search Germany's official insolvency register (Insolvenzbekanntmachungen) by company or debtor name. Get court, case number, publication date, seat and the Handelsregister reference. When a term matches too many announcements the register declines to enumerate them - that \"too many matches\" state is reported as such and is NOT \"no insolvencies\"; narrow the query and re-run. No API key."
   },
   {
     "slug": "italy-pec-lookup",
@@ -101,7 +101,7 @@ export const ACTORS = [
     "slug": "krz-debtor-scraper",
     "tool": "regdata_krz_debtor",
     "title": "Poland KRZ National Debtor Registry Scraper",
-    "description": "Automate bankruptcy and restructuring checks against the official public debtor registry. Nine search modes cover companies, persons, sole traders, case signatures, proceedings, shareholders, and assets. Build a credit-risk watchlist or insolvency workflow. Pay-per-result."
+    "description": "Automate bankruptcy and restructuring checks against the official public debtor registry. Nine search modes cover companies, persons, sole traders, case signatures, proceedings, shareholders, and assets. The bankruptcyEstate mode returns the trustee's filed estate inventory (spis masy upadlosci) for a company's proceedings - real estate, movables, cash, property rights and receivables, each with the trustee's own valuation, quantity and status. Pass entityName and/or identifier (proceedings are resolved for you) or a proceedingId; estateInventoryPublished:false means the register reports zero assets for that proceeding - a verified zero, not a failed lookup. For distressed-asset sourcing and creditor recovery-prospect assessment. Build a credit-risk watchlist or insolvency workflow. Pay-per-result."
   },
   {
     "slug": "msig-scraper",

@@ -1,6 +1,14 @@
 # BDO Waste Registry - Codes, Tables, and ESG Mapping
 
-Reference guide for interpreting BDO registration data, waste activity tables, and mapping results to environmental reporting frameworks.
+> **BACKGROUND LEGAL REFERENCE ONLY - THIS IS NOT ACTOR OUTPUT.**
+>
+> The BDO actor scrapes the **public** BDO search, which exposes only: registry number, company name, NIP, NIP EU and address (country / province / district / commune / city / street / postcode).
+>
+> **Table registrations (dzialy rejestru), waste codes, registration status and permits are behind a BDO login. The actor cannot return them and this document does not describe data you will receive.** Everything below - the 11 tables, the EWC code list, the status meanings - is here so you understand what the Polish waste regime requires and what to ask a contractor for. It is not a field guide to the actor's dataset.
+>
+> The check the public register supports is: **"Is this company in the BDO register, and what is its BDO number?"** Anything table-level or code-level must be evidenced by documents the contractor gives you (their BDO registration confirmation, their waste permit), not by the actor.
+
+Reference guide to the Polish BDO waste regime: registration tables, waste codes, and how registration evidence maps to environmental reporting frameworks.
 
 ## Registration Tables (Dzialy Rejestru)
 
@@ -113,7 +121,8 @@ BDO registration is province-specific. Use these values in the `province` parame
 ### Practical ESG Workflow
 
 1. **Identify** all entities in your waste chain (generators, transporters, treatment facilities)
-2. **Verify** each entity's BDO registration using the actor
-3. **Map** their table registrations to the waste activities they perform for you
-4. **Document** findings in your ESG report with BDO registration numbers as evidence
-5. **Monitor** periodically - re-run BDO checks quarterly or when renewing contracts
+2. **Verify with the actor** that each entity is present in the public BDO register, and capture its BDO registry number, legal name, NIP and province. Presence = registered; absence for an entity whose activity requires registration = a hard compliance finding
+3. **Request from the contractor** the documents the public register does not expose: their BDO registration confirmation (which shows table registrations and status) and their waste permit. Check the registry number on those documents against the one the actor returned - a mismatch is a red flag
+4. **Map** the table registrations from those contractor documents to the waste activities they perform for you
+5. **Document** findings in your ESG report with BDO registration numbers as evidence of registration, and state explicitly which facts came from the public register and which came from contractor-supplied documents
+6. **Monitor** periodically - re-run the BDO presence check quarterly or when renewing contracts, and re-request the contractor's registration confirmation on the same cycle (the public register will not tell you if their registration was suspended)

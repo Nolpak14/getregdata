@@ -197,7 +197,45 @@ Sign up at [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - n
 | Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.005 |
 | UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"debtorName": "Company Name"}` | $0.05 |
 
+**KRZ billing note:** KRZ is billed on two events - **$0.025 per search session** plus **$0.006 per result** returned.
+
 **Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.089 per company.
+
+### KRZ Search Modes - Beyond the Entity Check
+
+The KRZ actor is not only a yes/no insolvency check. Two modes matter for credit risk:
+
+**`entity` - is there a proceeding?**
+```json
+{"searchMode": "entity", "entityName": "ABC Sp. z o.o."}
+```
+The screening check. Returns the proceedings on file for the company.
+
+**`bankruptcyEstate` - what is actually left to recover?**
+```json
+{"searchMode": "bankruptcyEstate", "entityName": "Idea Bank S.A."}
+```
+Returns the **trustee's filed estate inventory** (spis masy upadlosci) for the company's bankruptcy proceedings - every asset class, with the trustee's own valuations. This is the recovery-prospect data. If you are an unsecured creditor asking "will I see anything back", this is the mode that answers it.
+
+Input: pass `entityName` and/or `identifier` (the actor resolves the proceedings for you), or pass a `proceedingId` (UUID) directly. The `estateType` input is **deprecated and ignored**.
+
+Fields returned per asset:
+
+| Field | Meaning |
+|---|---|
+| `assetCategory` | `nieruchomosc` (real estate), `ruchomosc` (movables), `srodekPieniezny` (cash), `prawoMajatkowe` (property rights), `naleznosc` (receivables) |
+| `assetName` | The trustee's description of the asset |
+| `assetType` | Sub-type within the category |
+| `quantity` / `remaining` | Units listed, and units still in the estate |
+| `estimatedValue` / `currency` | The trustee's valuation |
+| `status` | Where the asset stands in the liquidation |
+| `proceedingId` / `caseSignature` | Which proceeding the asset belongs to |
+
+**`estateInventoryPublished: false`** means the register itself reports **zero assets** for that proceeding. That is a verified zero, not a failed lookup - the trustee has published nothing to recover against. Treat it as a hard finding: recovery prospects are nil.
+
+**Real example (Idea Bank S.A.):** the estate inventory lists a Bank Pekao account holding 32,049,607.69 PLN, 4,619,000 PLN of FaktorOne S.A. shares, Noble Funds TFI shares - and, further down the list, Lenovo laptops and office software licences.
+
+**Use it for:** recovery-prospect assessment when a debtor has already gone under, and distressed-asset sourcing (screening what is up for grabs across open estates).
 
 ### MCP Mode (Recommended)
 
@@ -315,6 +353,34 @@ Ediktsdatei entries are structured by proceeding type:
 
 Each entry includes the case number (Aktenzeichen), the responsible court (Gericht), and the appointed administrator (Masseverwalter/Insolvenzverwalter). The administrator's contact details are useful for filing claims.
 
+### An Empty Result Is Only Good News If The Register Answered
+
+This is the rule that governs every registry below. **Zero rows is not automatically an all-clear.** Each of these registers has a state in which it refuses or truncates a search rather than answering it, and each actor reports that state loudly instead of quietly returning nothing. Read the run status message before you write "clean" in a credit file.
+
+### Germany Insolvency (Insolvenzbekanntmachungen)
+
+The German register will not enumerate an unbounded result set. If a search term matches too many announcements, the register responds **"too many matches"** - and the actor reports it as exactly that.
+
+- **"Too many matches" is not "no insolvencies."** It means the register declined to answer. Narrow the query (add the legal form, the seat, or a tighter `dateFrom`) and re-run.
+- A genuine zero-result search - the register answered and had nothing - is the only result you may record as clean.
+
+### Czech ISIR
+
+- ISIR serves **at most 400 rows per search**. A query broader than that is **refused**, not silently truncated - and a refusal is not "no records".
+- **`includeEnded` defaults to `true`**, which pulls in closed proceedings as well as live ones. That inflates the result count and makes a **common surname far more likely to be refused**. If a person search is refused, set `includeEnded: false` and/or add the ICO or city, then re-run.
+- Only a search that actually returned (0 to 400 rows) is evidence of anything.
+
+### Spain Registro Publico Concursal
+
+- Matches are returned per party with a role - debtor, disqualified person (inhabilitado), or insolvency administrator. A hit where your counterparty is the **administrator** is not distress at that company - read the role before scoring.
+- A run that could not complete the search reports the failure; it does not return an empty set. Re-run rather than recording clean.
+
+### California UCC Liens
+
+- The UCC index **rejects any search term matching more than 1,000 filings** as "too broad". **This is not "no liens"** - it is a refusal to search. It is the single most dangerous false-negative in this skill: a large debtor with many filings is exactly the case that trips it.
+- On a "too broad" refusal, narrow the `debtorName` (use the full registered entity name, not a trading fragment) and re-run.
+- Only a completed search that returned zero filings supports the statement "no UCC liens on file".
+
 ## Presenting Results
 
 Structure the final assessment as:
@@ -327,11 +393,28 @@ Structure the final assessment as:
 **Score:** [X/Y points]
 
 ### Registry Findings
-- KRZ: [Active proceedings / No records / N/A]
-- MSiG: [Announcements found / Clean / N/A]
-- eKRS: [Financial summary or "No statements available"]
-- BORME: [Relevant acts / Clean / N/A]
-- Ediktsdatei: [Active proceedings / Clean / N/A]
+
+Every registry line takes one of these states. Never collapse the last two into "clean":
+
+- **Active proceedings / Records found** - the register answered and found something
+- **No records** - the register answered and found nothing. This is a real all-clear
+- **INCOMPLETE** - the register answered but truncated or capped the result set. What you have is a partial view
+- **NOT SCREENED** - the register did not answer (refused the query as too broad, timed out, or was unavailable). **Re-run; do NOT treat as clean**
+
+```
+- KRZ: [Active proceedings / No records / NOT SCREENED - re-run, do NOT treat as clean]
+- MSiG: [Announcements found / Clean / NOT SCREENED]
+- eKRS: [Financial summary / No statements available / NOT SCREENED]
+- BORME: [Relevant acts / Clean / NOT SCREENED]
+- Ediktsdatei: [Active proceedings / Clean / NOT SCREENED]
+- Germany Insolvency: [Announcements found / Clean / NOT SCREENED - "too many matches", narrow and re-run]
+- Czech ISIR: [Records found / Clean / NOT SCREENED - query refused (>400 rows), narrow and re-run]
+- Spain Concursal: [Records found / Clean / NOT SCREENED]
+- California UCC: [Liens found / No liens / NOT SCREENED - term too broad (>1,000 filings), narrow and re-run]
+- California SoS: [Entity found / Not found / INCOMPLETE - result list ceilinged at 500 matches]
+```
+
+A NOT SCREENED registry must be visible in the summary and must hold the overall risk level open. An assessment delivered with an unresolved NOT SCREENED line is a provisional assessment - say so.
 
 ### Financial Ratios (if available)
 | Ratio | Value | Status |
