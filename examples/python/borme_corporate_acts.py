@@ -6,10 +6,11 @@ BORME (Boletin Oficial del Registro Mercantil) publishes 500+ corporate acts
 daily: incorporations, officer appointments/dismissals, capital changes,
 dissolutions. Required for Spanish corporate monitoring and due diligence.
 
-Note: Requires Apify residential proxy (paid plan). Spain's BORME sits behind
-an F5/Volterra WAF that blocks datacenter IPs.
+Note: No proxy or API key needed. The actor is plain HTTP against boe.es plus
+PDF parsing - it downloads the official BORME PDFs directly, no browser and no
+WAF to clear.
 
-Cost: $0.003 per act + $0.025 actor start fee
+Cost: $0.005 per act + $0.005 actor start fee
 """
 
 from apify_client import ApifyClient
@@ -29,10 +30,6 @@ run = client.actor("regdata/borme-corporate-acts-scraper").call(
         "endDate": end_date.strftime("%Y-%m-%d"),
         "documentType": "Todos",  # All act types
         "companyName": "",        # Leave empty for all companies
-        "proxy": {
-            "useApifyProxy": True,
-            "apifyProxyGroups": ["RESIDENTIAL"],
-        },
     }
 )
 

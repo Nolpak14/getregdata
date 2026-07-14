@@ -6,10 +6,11 @@
  * financials, shareholders, subsidiaries. Essential for French due diligence -
  * the official SIRENE/INPI APIs don't expose director networks.
  *
- * Note: Requires Apify residential proxy (paid plan). Societe.com uses
- * DataDome anti-bot protection that blocks datacenter IPs.
+ * Note: Keyless - no proxy and no API key needed. Societe.com uses DataDome
+ * anti-bot protection that blocks datacenter IPs, but the actor clears it for
+ * you (that cost is baked into the per-result price).
  *
- * Cost: $0.005/result + $0.025 start fee
+ * Cost: $0.005/company record + $0.025 start fee
  */
 
 import { ApifyClient } from 'apify-client';
@@ -27,12 +28,7 @@ const run = await client.actor('regdata/societe-com-scraper').call({
     includeDirectors: true,
     includeFinancials: true,
     maxResults: 3,
-    // Residential proxy required
-    proxy: {
-        useApifyProxy: true,
-        apifyProxyGroups: ['RESIDENTIAL'],
-        apifyProxyCountry: 'FR',
-    },
+    // No proxy or API key needed - the actor handles anti-bot internally
 });
 
 const { items } = await client.dataset(run.defaultDatasetId).listItems();

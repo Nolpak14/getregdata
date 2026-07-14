@@ -187,9 +187,9 @@ Sign up at [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - n
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| Insolvency Proceedings (PL) | `regdata/krz-debtor-scraper` | `{"searchMode": "entity", "entityName": "Company Name"}` | $0.025 |
+| Insolvency Proceedings (PL) | `regdata/krz-debtor-scraper` | `{"searchMode": "entity", "entityName": "Company Name"}` | $0.006 + $0.025/search session |
 | Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 |
-| Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 |
+| Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 (+ $0.08/MB over 1 MB) |
 | Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 |
 | Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"searchQuery": "Company Name", "dateFrom": "2025-01-01"}` | $0.04 |
 | Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"query": "Company Name"}` | $0.005 |
@@ -199,7 +199,7 @@ Sign up at [Apify Console](https://console.apify.com/sign-up?ref=getregdata) - n
 
 **KRZ billing note:** KRZ is billed on two events - **$0.025 per search session** plus **$0.006 per result** returned.
 
-**Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.089 per company.
+**Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.095 per company - $0.025 KRZ search session + $0.006 KRZ result + $0.004 MSiG + $0.06 KRS financial statement.
 
 ### KRZ Search Modes - Beyond the Entity Check
 

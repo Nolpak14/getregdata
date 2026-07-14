@@ -6,8 +6,9 @@ KRZ (National Debtor Registry) covers bankruptcy, restructuring, and enforcement
 proceedings for Polish companies and individuals. Updated daily by courts.
 
 Used for: credit risk screening, debt collection prep, due diligence
-Cost: ~$0.025 per result on the free tier (lower on paid plans)
-Free tier: $5 credits = ~200 results
+Cost: $0.006 per result PLUS $0.025 per search session on the free tier (two
+      billed events; lower on paid plans). One run = one search session.
+Free tier: $5 credits = roughly 150 searches
 
 Note: KRZ runs ONE search per run (searchMode + entityName or identifier) - there is
 no multi-query batch field. Loop over the entities you want to check. Searching by

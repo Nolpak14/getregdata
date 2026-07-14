@@ -454,7 +454,7 @@ Step 4 - Score and decide:
   Decision: Proceed / Enhanced Review / Reject
 ```
 
-Total cost for a full 3-registry Polish check: approximately $0.019 per entity.
+Total cost for a full 3-registry Polish check (CRBR + KNF + KRS Board): approximately $0.020 per entity.
 
 ---
 

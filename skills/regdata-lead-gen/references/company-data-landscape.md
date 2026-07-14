@@ -162,7 +162,7 @@ A practical guide to what official registry data is publicly available in each c
 - Corporate group mapping (shareholders + subsidiaries) reveals holding structures useful for enterprise sales.
 
 ### Limitations
-- Requires residential proxy for scraping. Societe.com has anti-bot protections that block datacenter IPs.
+- No user proxy or API key needed. Societe.com has anti-bot protections that block datacenter IPs, but the actor clears them internally (that cost is already in the per-result price).
 - No phone or email in the data. Contact details must be sourced separately.
 - Financial confidentiality: Some smaller companies exercise their right to keep revenue figures private.
 - Data freshness depends on Societe.com's own aggregation cycle - there can be a lag of weeks to months vs. primary sources.

@@ -230,11 +230,7 @@ Search by company name, SIREN number, or director name:
   "searchQuery": "fintech",
   "includeFinancials": true,
   "includeDirectors": true,
-  "maxResults": 100,
-  "proxyConfiguration": {
-    "useApifyProxy": true,
-    "apifyProxyGroups": ["RESIDENTIAL"]
-  }
+  "maxResults": 100
 }
 ```
 
@@ -244,11 +240,7 @@ Or search by director name to find all companies a person is connected to:
 {
   "managerName": "Dupont Jean",
   "includeDirectors": true,
-  "maxResults": 20,
-  "proxyConfiguration": {
-    "useApifyProxy": true,
-    "apifyProxyGroups": ["RESIDENTIAL"]
-  }
+  "maxResults": 20
 }
 ```
 
@@ -269,7 +261,7 @@ Or search by director name to find all companies a person is connected to:
 - Use director names for LinkedIn outreach
 - Personalization hook: Reference their financial trajectory or recent director appointments
 
-**Important**: Societe.com requires residential proxy (`RESIDENTIAL` proxy group). This is included in the input schema and handled automatically.
+**Important**: Societe.com is keyless - no proxy and no API key are needed. The actor clears the anti-bot layer itself, and there is no `proxyConfiguration` field in its input schema.
 
 ---
 
@@ -324,7 +316,7 @@ If not set:
 |---|---|---|---|
 | Board Members (PL) | KRS Board | `regdata/krs-fullnames-scraper` | $0.008 |
 | Business Registry (PL) | REGON | `regdata/polish-regon-scraper` | $0.004 |
-| Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.01 |
+| Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.005/company + $0.01/premise |
 | Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.005 |
 | Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 |
 | New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.005 |
@@ -379,11 +371,7 @@ If not set:
   "searchQuery": "fintech",
   "includeFinancials": true,
   "includeDirectors": true,
-  "maxResults": 50,
-  "proxyConfiguration": {
-    "useApifyProxy": true,
-    "apifyProxyGroups": ["RESIDENTIAL"]
-  }
+  "maxResults": 50
 }
 ```
 
@@ -411,9 +399,11 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN&fo
 
 ### Proxy Notes
 
-- **WKO and KRS Board**: Work fine with datacenter proxies or no proxy
-- **Spain Company Directory**: Has WAF protection with auto-fallback. The actor tries no proxy first, then datacenter, then residential. Usually works without configuration.
-- **Societe.com**: Requires residential proxy. Always include `"proxyConfiguration": {"useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"]}` in the input.
+None of these actors need a proxy or an API key from you. Where a source is protected, the actor handles the unblocking internally and the cost is already in the per-result price. Do not pass a `proxyConfiguration` - it is not in their input schemas.
+
+- **WKO and KRS Board**: Plain HTTP, no proxy, no key.
+- **Spain Company Directory**: The F5/Volterra WAF and the rotation CAPTCHA are solved by the actor. You configure nothing.
+- **Societe.com**: Keyless, no proxy needed - the anti-bot layer is cleared by the actor.
 - **BORME**: Downloads PDFs directly from boe.es - no proxy needed.
 
 ---

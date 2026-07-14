@@ -41,8 +41,8 @@ All 29 actors. Pay-per-result, no subscriptions. Price = the per-record rate on 
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 |
-| KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.025 |
-| KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 |
+| KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.006 + $0.025/search session |
+| KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 (+ $0.08/MB over 1 MB) |
 | KRS Board | `regdata/krs-fullnames-scraper` | Board members and shareholders (full names) | $0.008 |
 | KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.004 |
 | MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 |
@@ -50,7 +50,7 @@ All 29 actors. Pay-per-result, no subscriptions. Price = the per-record rate on 
 | BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 |
 | EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.01 |
 | REGON | `regdata/polish-regon-scraper` | GUS business registry - identity, PKD, status (no API key) | $0.004 |
-| Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.01 |
+| Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.005/company + $0.01/premise |
 | PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 |
 
 ### Germany (2 actors)
