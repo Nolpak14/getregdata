@@ -13,8 +13,10 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import { createRequire } from "node:module";
 import { ACTORS } from "./actors.js";
 
+const pkg = createRequire(import.meta.url)("./package.json");
 const APIFY_BASE = "https://api.apify.com/v2";
 const token = () => process.env.APIFY_TOKEN || process.env.APIFY_API_TOKEN || "";
 
@@ -64,25 +66,35 @@ const bySlug = Object.fromEntries(ACTORS.map((a) => [a.slug, a]));
 const byTool = Object.fromEntries(ACTORS.map((a) => [a.tool, a]));
 
 // One tool per actor + two helpers (catalog, describe).
+const MAX_ITEMS_PROP = {
+  type: "integer",
+  description: "Optional cap on billed dataset items returned.",
+};
+
 function buildToolList() {
-  const actorTools = ACTORS.map((a) => ({
-    name: a.tool,
-    description:
-      `${a.title}. ${a.description} ` +
-      `Pass the registry's search input as a flat object (e.g. name, tax ID, or registration number); ` +
-      `call regdata_describe with slug "${a.slug}" first if unsure of the exact fields.`,
-    inputSchema: {
-      type: "object",
-      description: `Input for regdata/${a.slug}. Freeform - matches the actor's Apify input schema.`,
-      properties: {
-        maxItems: {
-          type: "integer",
-          description: "Optional cap on billed dataset items returned.",
-        },
-      },
-      additionalProperties: true,
-    },
-  }));
+  const actorTools = ACTORS.map((a) => {
+    // Deployed input schema baked in by scripts/gen-manifest.mjs; freeform fallback.
+    const schema = a.inputSchema
+      ? {
+          ...a.inputSchema,
+          properties: { ...a.inputSchema.properties, maxItems: MAX_ITEMS_PROP },
+        }
+      : {
+          type: "object",
+          description: `Input for regdata/${a.slug}. Freeform - matches the actor's Apify input schema.`,
+          properties: { maxItems: MAX_ITEMS_PROP },
+          additionalProperties: true,
+        };
+    const hint = a.inputSchema
+      ? `Advanced fields beyond this schema are also accepted (regdata_describe lists them).`
+      : `Pass the registry's search input as a flat object (e.g. name, tax ID, or registration number); ` +
+        `call regdata_describe with slug "${a.slug}" first if unsure of the exact fields.`;
+    return {
+      name: a.tool,
+      description: `${a.title}. ${a.description} ${hint}`,
+      inputSchema: schema,
+    };
+  });
 
   return [
     {
@@ -109,7 +121,7 @@ function buildToolList() {
 }
 
 const server = new Server(
-  { name: "getregdata", version: "1.0.0" },
+  { name: "getregdata", version: pkg.version },
   { capabilities: { tools: {} } }
 );
 

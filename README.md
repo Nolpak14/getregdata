@@ -15,10 +15,17 @@ Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, cre
 npx skills add Nolpak14/getregdata -g -y
 ```
 
-**As an MCP server** (Claude Desktop, Cursor, Cline, Windsurf, ChatGPT - all 29 registries as tools):
+**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 29 registries as tools, with full input schemas):
 ```json
 { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
 ```
+
+**As a hosted MCP server - no install** (claude.ai web, ChatGPT developer mode, Gemini, any remote MCP client): connect Apify's hosted MCP endpoint with OAuth, preloaded with regdata registry tools:
+```
+https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
+```
+Swap in any of the [29 regdata actors](https://apify.com/regdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
+
 See [`mcp/`](mcp/) for the server, tool list, and per-client config.
 
 ---

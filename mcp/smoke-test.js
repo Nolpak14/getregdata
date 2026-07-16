@@ -16,6 +16,15 @@ console.log(`tools: ${tools.length} (${actorTools.length} actor tools + helpers)
 if (actorTools.length !== 29) throw new Error(`expected 29 actor tools, got ${actorTools.length}`);
 for (const h of expectHelpers) if (!names.includes(h)) throw new Error(`missing helper ${h}`);
 
+// Every actor tool must expose a real input schema (fields beyond maxItems).
+const thin = tools.filter(
+  (t) =>
+    actorTools.includes(t.name) &&
+    Object.keys(t.inputSchema?.properties ?? {}).filter((k) => k !== "maxItems").length === 0
+);
+if (thin.length) throw new Error(`actor tools with empty input schema: ${thin.map((t) => t.name).join(", ")}`);
+console.log("input schemas OK - all actor tools expose real fields");
+
 const cat = await client.callTool({ name: "regdata_catalog", arguments: {} });
 const list = JSON.parse(cat.content[0].text);
 if (list.length !== 29) throw new Error(`catalog returned ${list.length}, expected 29`);

@@ -1,7 +1,7 @@
 # getregdata MCP server
 
 An [MCP](https://modelcontextprotocol.io) server that gives any MCP-capable agent
-(Claude Desktop, Claude Code, Cursor, Cline, Windsurf, ChatGPT desktop, ...) direct
+(Claude Desktop, Claude Code, Cursor, Cline, Windsurf, ...) direct
 access to **29 official business-registry actors** for KYC/AML, credit-risk,
 due-diligence and B2B data across **11 jurisdictions**: Poland, Germany, Italy,
 Spain, Austria, France, Belgium, Czechia, Slovakia, the US (California) and the UAE -
@@ -39,6 +39,21 @@ Add to your MCP config (`claude_desktop_config.json`, or `.mcp.json` for Claude 
 
 Same block in the client's MCP settings (`mcp.json` / MCP servers panel). The server
 speaks stdio, so `npx -y getregdata-mcp` with `APIFY_TOKEN` in `env` is all you need.
+
+### Hosted clients - claude.ai web, ChatGPT developer mode, Gemini (no install)
+
+This npm server is stdio-only. For hosted agents that need a remote HTTPS endpoint,
+connect **Apify's hosted MCP server** with OAuth instead - the regdata actors are
+first-class tools there:
+
+```
+https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
+```
+
+Swap in any of the [29 regdata actors](https://apify.com/regdata), or connect plain
+`https://mcp.apify.com` and let the agent discover them via `search-actors`
+("Poland beneficial owners", "Germany insolvency", ...). OAuth signs you into your
+own Apify account, so billing and the free credit work exactly like the local server.
 
 ## Usage
 
