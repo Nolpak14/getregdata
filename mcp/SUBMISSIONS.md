@@ -8,7 +8,7 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 - **Name:** getregdata
 - **Tagline (≤60):** Official business-registry data for KYC/AML & due diligence
-- **Short (≤160):** 29 official business-registry actors as MCP tools + agent skills - KYC/AML, beneficial owners, credit-risk, adverse media across 11 jurisdictions (EU, US, UAE).
+- **Short (≤160):** 25+ official business-registry actors as MCP tools + agent skills - KYC/AML, beneficial owners, credit-risk, adverse media across 11 jurisdictions (EU, US, UAE).
 - **Categories/tags:** kyc, aml, kyb, compliance, regtech, beneficial-owners, adverse-media, credit-risk, due-diligence, business-registry, apify
 - **Repo:** https://github.com/Nolpak14/getregdata
 - **npm:** https://www.npmjs.com/package/getregdata-mcp
@@ -32,7 +32,7 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 Bullet for the awesome-* PRs:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 29 official business-registry actors (KYC/AML, beneficial owners, credit-risk, adverse media) across 11 jurisdictions via Apify. `npx -y getregdata-mcp`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - 25+ official business-registry actors (KYC/AML, beneficial owners, credit-risk, adverse media) across 11 jurisdictions via Apify. `npx -y getregdata-mcp`.
 ```
 
 ## Skills directories (submit the skills)
@@ -44,7 +44,7 @@ Bullet for the awesome-* PRs:
 
 Bullet:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 6 skills for KYC/AML, credit-risk, property, compliance and lead-gen over 29 official business registries. `npx skills add Nolpak14/getregdata`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - 6 skills for KYC/AML, credit-risk, property, compliance and lead-gen over 25+ official business registries. `npx skills add Nolpak14/getregdata`.
 ```
 
 ## Repo hygiene that boosts auto-indexing
@@ -60,7 +60,7 @@ cd mcp
 npm login              # your npm account
 npm publish --access public
 # verify:
-npx -y getregdata-mcp   # should print "getregdata MCP server ready - 29 registry tools..."
+npx -y getregdata-mcp   # should print "getregdata MCP server ready - N registry tools..."
 ```
 
 Bump `version` in `package.json` when the actor fleet changes (regenerate `actors.js`

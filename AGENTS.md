@@ -1,6 +1,6 @@
 # AGENTS.md - how AI agents use getregdata
 
-getregdata turns 29 official public business registries (11 jurisdictions: PL, DE, ES, IT, AT, FR, BE, CZ, SK, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
+getregdata turns 25+ official public business registries (11 jurisdictions: PL, DE, ES, IT, AT, FR, BE, CZ, SK, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
 
 ## Fastest paths
 
@@ -13,7 +13,7 @@ getregdata turns 29 official public business registries (11 jurisdictions: PL, D
 
 ## Tool conventions
 
-- MCP tools are named `regdata_<registry>` (e.g. `regdata_crbr_beneficial_owners`, `regdata_germany_insolvency`). Call `regdata_catalog` to list all 29; `regdata_describe` returns an actor's live input schema.
+- MCP tools are named `regdata_<registry>` (e.g. `regdata_crbr_beneficial_owners`, `regdata_germany_insolvency`). Call `regdata_catalog` to list them all; `regdata_describe` returns an actor's live input schema.
 - Inputs are flat objects keyed by official identifiers: `nip`/`krs` (Poland), register number (Germany), NIF (Spain), Partita IVA (Italy), ICO (Czechia), enterprise/VAT number (Belgium).
 - Registry refusals are NOT empty results: several registries reject over-broad queries ("too many matches"). Tools report that state explicitly - narrow the query and re-run instead of concluding "no records".
 

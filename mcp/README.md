@@ -2,7 +2,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server that gives any MCP-capable agent
 (Claude Desktop, Claude Code, Cursor, Cline, Windsurf, ...) direct
-access to **29 official business-registry actors** for KYC/AML, credit-risk,
+access to **25+ official business-registry actors** for KYC/AML, credit-risk,
 due-diligence and B2B data across **11 jurisdictions**: Poland, Germany, Italy,
 Spain, Austria, France, Belgium, Czechia, Slovakia, the US (California) and the UAE -
 plus a cross-border adverse-media screener.
@@ -50,7 +50,7 @@ first-class tools there:
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
 
-Swap in any of the [29 regdata actors](https://apify.com/regdata), or connect plain
+Swap in any of the [25+ regdata actors](https://apify.com/regdata), or connect plain
 `https://mcp.apify.com` and let the agent discover them via `search-actors`
 ("Poland beneficial owners", "Germany insolvency", ...). OAuth signs you into your
 own Apify account, so billing and the free credit work exactly like the local server.
@@ -83,7 +83,7 @@ your token, the Apify platform, and the official registry source.
 
 ```bash
 npm install
-npm run smoke          # verify 31 tools load
+npm run smoke          # verify all tools load with real input schemas
 APIFY_TOKEN=xxx npm start
 ```
 

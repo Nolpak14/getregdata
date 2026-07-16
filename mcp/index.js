@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// getregdata MCP server - exposes 29 official business-registry actors as MCP tools.
+// getregdata MCP server - exposes the regdata official business-registry actors as MCP tools.
 // KYC/AML, credit-risk, due-diligence and B2B data across 11 jurisdictions.
 //
 // Auth: set APIFY_TOKEN in the environment (get one free at
@@ -100,7 +100,7 @@ function buildToolList() {
     {
       name: "regdata_catalog",
       description:
-        "List all 29 getregdata business-registry actors (KYC/AML, credit-risk, due-diligence, B2B) across 11 jurisdictions, with their tool name and what each returns. Call this first to discover which registry tool to use.",
+        `List all ${ACTORS.length} getregdata business-registry actors (KYC/AML, credit-risk, due-diligence, B2B) across 11 jurisdictions, with their tool name and what each returns. Call this first to discover which registry tool to use.`,
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
     },
     {

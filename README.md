@@ -1,12 +1,12 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
 [![Skills](https://img.shields.io/badge/skills-6-blue)](#claude-code-skills)
-[![Actors](https://img.shields.io/badge/actors-29-green)](#actor-catalog)
+[![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 [![Install](https://img.shields.io/badge/install-npx%20skills%20add-black)](#install)
 
-Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 29 actors across 11 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
+Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 25+ actors across 11 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://console.apify.com/sign-up?ref=getregdata) actors for reliable, scalable access.
 
 ## Install
 
@@ -15,7 +15,7 @@ Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, cre
 npx skills add Nolpak14/getregdata -g -y
 ```
 
-**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 29 registries as tools, with full input schemas):
+**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 25+ registries as tools, with full input schemas):
 ```json
 { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
 ```
@@ -24,7 +24,7 @@ npx skills add Nolpak14/getregdata -g -y
 ```
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
-Swap in any of the [29 regdata actors](https://apify.com/regdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
+Swap in any of the [25+ regdata actors](https://apify.com/regdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
 
 See [`mcp/`](mcp/) for the server, tool list, and per-client config.
 
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 29 actors:
+Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors:
 
 | Skill | Use Case |
 |---|---|
@@ -118,7 +118,7 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* - the 
 
 ## Actor Catalog
 
-29 actors across 11 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
+25+ actors across 11 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
 
 ### Poland (12 actors)
 

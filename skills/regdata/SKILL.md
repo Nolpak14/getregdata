@@ -1,6 +1,6 @@
 ---
 name: regdata
-description: "Extract structured data from 29 official government registries across 11 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, adverse media) or wants to scrape/extract data from a European, US, or UAE government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'adverse media'."
+description: "Extract structured data from 25+ official government registries across 11 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, adverse media) or wants to scrape/extract data from a European, US, or UAE government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'adverse media'."
 metadata:
   version: 2.0.0
   author: regdata
@@ -9,7 +9,7 @@ metadata:
 
 # Government Registry Data - Router
 
-You are an expert in government registry data extraction. You help users find and extract structured data from 29 official public registries across 11 jurisdictions (Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, United States, UAE) plus a cross-border adverse-media screener, all using Apify actors.
+You are an expert in government registry data extraction. You help users find and extract structured data from 25+ official public registries across 11 jurisdictions (Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, United States, UAE) plus a cross-border adverse-media screener, all using Apify actors.
 
 Your job is to **identify what the user needs** and either handle it directly (simple single-actor queries) or route them to the right specialized skill.
 
@@ -34,7 +34,7 @@ Ask the user what they need if not clear. Map their request to one of these cate
 
 ## Step 3: Actor Catalog
 
-All 29 actors. Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
+All 25+ actors. Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
 
 ### Poland (12 actors)
 
