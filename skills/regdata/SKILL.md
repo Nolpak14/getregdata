@@ -1,10 +1,10 @@
 ---
 name: regdata
-description: "Extract structured data from 25+ official government registries across 11 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, adverse media) or wants to scrape/extract data from a European, US, or UAE government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'adverse media'."
+description: "Extract structured data from 25+ official government registries across 11 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, adverse media) or wants to scrape/extract data from a European, US, or UAE government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
 metadata:
   version: 2.0.0
   author: regdata
-  tags: [government-registry, web-scraping, compliance, kyc, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, usa, uae, apify, b2b-data]
+  tags: [government-registry, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, usa, uae, apify, b2b-data]
 ---
 
 # Government Registry Data - Router
@@ -24,6 +24,8 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Property due diligence, land registry, mortgages | `/regdata-property` | "Who owns this property?", "Check land registry", "Verify mortgage" |
 | Consumer protection, ESG, environmental compliance | `/regdata-compliance` | "Check for prohibited clauses", "Waste registry lookup", "ESG audit" |
 | B2B prospecting, decision-makers, market research | `/regdata-lead-gen` | "Find directors at companies in Barcelona", "B2B leads", "Company contacts" |
+| Free lookup - UK, US (SEC), Norway, France, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/gleif-lei-lookup` | "Look up a UK company", "SEC filings for Tesla", "Norwegian company", "French company by SIREN", "Find the LEI for X" |
+| Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
 ## Step 2: Route or Handle
@@ -216,3 +218,16 @@ For complex workflows, multi-source verification, or compliance checklists, rout
 - **`/regdata-property`** - Property due diligence, ownership verification, mortgage checks. Uses: EKW, KRS Board, CRBR.
 - **`/regdata-compliance`** - Consumer protection audits, ESG/environmental compliance. Uses: UOKiK, BDO.
 - **`/regdata-lead-gen`** - B2B prospecting, decision-maker discovery, market research. Uses: KRS Board, REGON, Premises, WKO, Spain Dir, Belgium KBO, Italy Registro Imprese, Italy PEC, Societe.com, BORME, California SoS.
+
+## Free Registry Skills (no Apify token)
+
+These skills query official public APIs directly - no Apify token, no per-result cost. Use them as the free front door: resolve or verify an entity for free, then route to the paid actors above when you need a jurisdiction with no free API, or depth the free source does not provide (beneficial owners, financials, insolvency, court filings).
+
+- **`/companies-house-uk`** - UK company profile, officers, PSC (beneficial owners), filings via the official Companies House API. Free API key.
+- **`/sec-edgar-us`** - US SEC-registered issuers: filings, submissions, XBRL financials via EDGAR. No key (User-Agent required).
+- **`/norway-company-registry`** - Norwegian companies, roles/board, bankruptcy flag via Brønnøysundregistrene (data.brreg.no). No key.
+- **`/france-company-lookup`** - French companies by name/SIREN/director, identity + dirigeants via the free api.gouv.fr search API. No key.
+- **`/gleif-lei-lookup`** - global entity resolution: name to LEI, local registry ID, and parent/child corporate structure. No key. The cross-border spine - resolve here, then pull the deep national record.
+- **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
+
+**The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.

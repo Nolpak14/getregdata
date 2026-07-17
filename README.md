@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-6-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-12-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,18 +101,33 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors:
+Twelve skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+
+**Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
 | Skill | Use Case |
 |---|---|
 | `regdata` | Router - identifies your need and recommends the right skill |
-| `regdata-kyc-aml` | KYC/AML compliance, entity verification, beneficial owners |
+| `regdata-kyc-aml` | KYC/AML/KYB compliance, entity verification, beneficial owners |
 | `regdata-credit-risk` | Insolvency monitoring, credit risk, financial analysis |
 | `regdata-property` | Property due diligence, ownership verification, mortgages |
 | `regdata-compliance` | Consumer protection audits, ESG/environmental compliance |
 | `regdata-lead-gen` | B2B prospecting, decision-maker discovery, market research |
 
-Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* - the skill handles the rest.
+**Free registry skills** (query official public APIs directly - no Apify token, no per-result cost):
+
+| Skill | Source | What You Get (free) |
+|---|---|---|
+| `companies-house-uk` | UK Companies House API | Company profile, officers, PSC (beneficial owners), filings |
+| `sec-edgar-us` | US SEC EDGAR | Filings, submissions, XBRL financials for SEC-registered issuers |
+| `norway-company-registry` | Brønnøysundregistrene (data.brreg.no) | Norwegian companies, roles/board, bankruptcy flag |
+| `france-company-lookup` | api.gouv.fr (INSEE/INPI) | French companies by name/SIREN/director, identity + dirigeants |
+| `gleif-lei-lookup` | GLEIF API | Global LEI, local registry ID, parent/child corporate structure |
+| `sanctions-pep-screening` | OFAC / EU / UK / UN lists | Sanctions and PEP screening for a name or entity |
+
+The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
+
+Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* or *"Look up UK company 00445790"* - the skill handles the rest.
 
 ---
 
