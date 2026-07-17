@@ -24,10 +24,11 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Property due diligence, land registry, mortgages | `/regdata-property` | "Who owns this property?", "Check land registry", "Verify mortgage" |
 | Consumer protection, ESG, environmental compliance | `/regdata-compliance` | "Check for prohibited clauses", "Waste registry lookup", "ESG audit" |
 | B2B prospecting, decision-makers, market research | `/regdata-lead-gen` | "Find directors at companies in Barcelona", "B2B leads", "Company contacts" |
-| Free company lookup - UK, US (SEC), Norway, France, Switzerland, Denmark, Finland, Ireland, Latvia, Israel, Brazil, South Korea, Australia, Japan, Singapore, New Zealand, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/switzerland-zefix`, `/denmark-cvr`, `/finland-company-registry`, `/ireland-cro`, `/latvia-company-registry`, `/israel-companies-registry`, `/brazil-cnpj`, `/south-korea-dart`, `/australia-abn-lookup`, `/japan-company-registry`, `/singapore-acra`, `/new-zealand-nzbn`, `/gleif-lei-lookup` | "Look up a UK company", "Brazilian CNPJ", "Korean company financials", "Latvian beneficial owners", "Singapore UEN", "Find the LEI for X" |
+| Free company lookup - UK, US (SEC), Norway, France, Switzerland, Denmark, Finland, Ireland, Greece, Croatia, Latvia, Lithuania, Israel, Brazil, South Korea, Australia, Japan, Singapore, New Zealand, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/switzerland-zefix`, `/denmark-cvr`, `/finland-company-registry`, `/ireland-cro`, `/greece-gemi`, `/croatia-sudreg`, `/latvia-company-registry`, `/lithuania-company-registry`, `/israel-companies-registry`, `/brazil-cnpj`, `/south-korea-dart`, `/australia-abn-lookup`, `/japan-company-registry`, `/singapore-acra`, `/new-zealand-nzbn`, `/gleif-lei-lookup` | "Look up a UK company", "Brazilian CNPJ", "Greek company by AFM", "Lithuanian company", "Latvian beneficial owners", "Find the LEI for X" |
 | Free EU VAT / EORI validation (first step of a KYB check) | `/vies-vat-validation` | "Validate this VAT number", "Is this EU VAT valid?", "VIES check", "validate an EORI" |
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | US federal debarment / exclusions screening | `/sam-gov-exclusions` | "Is this vendor debarred?", "SAM.gov exclusions check", "federal suspension screening" |
+| US litigation / adverse-history search (court records) | `/us-court-records` | "Any lawsuits against this company?", "US court records", "litigation search" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
 ## Step 2: Route or Handle
@@ -236,7 +237,10 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/japan-company-registry`** - Japanese companies by name/corporate number via gBizINFO. Free (self-registered token).
 - **`/new-zealand-nzbn`** - New Zealand entities by NZBN/name via the NZBN API. Free (self-serve key).
 - **`/ireland-cro`** - Irish companies, status, filings via the CRO Open Services API. Free (manual-approved key + CC-BY bulk).
+- **`/greece-gemi`** - Greek companies by name/GEMI number/AFM via the GEMI OpenData API. Free (key; test key works now).
+- **`/croatia-sudreg`** - Croatian companies by OIB/MBS via the official court-register OPEN API. Free (OAuth via free registration).
 - **`/latvia-company-registry`** - Latvian companies, officers, and open beneficial owners (UBO) via data.gov.lv. No key (CC0).
+- **`/lithuania-company-registry`** - Lithuanian companies by name/code via the keyless Registru centras Spinta API. No key (CC-BY). Completes the Baltic trio.
 - **`/israel-companies-registry`** - Israeli companies by name/number via data.gov.il. No key.
 - **`/brazil-cnpj`** - Brazilian companies by CNPJ, incl. the QSA partner list, via BrasilAPI. No key.
 - **`/south-korea-dart`** - Korean listed-company profiles and financials via DART. Free (self-serve key).
@@ -244,6 +248,7 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/gleif-lei-lookup`** - global entity resolution: name to LEI, local registry ID, and parent/child corporate structure. No key. The cross-border spine - resolve here, then pull the deep national record.
 - **`/vies-vat-validation`** - validate any EU VAT (and EORI) number (free, keyless) and get a consultation number. The cheapest first step of a KYB check.
 - **`/sam-gov-exclusions`** - screen a name against US federal debarment / exclusions (SAM.gov). Free (self-serve key + role). Complements sanctions screening.
+- **`/us-court-records`** - search US litigation / court records (CourtListener) for adverse history on a company or person. Free token (125/day free tier). A DD lane alongside sanctions + debarment.
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.

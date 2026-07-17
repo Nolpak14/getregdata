@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-26-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-30-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Twenty-six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Thirty skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -129,7 +129,10 @@ Twenty-six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) inter
 | `japan-company-registry` | gBizINFO | Japanese companies by name/corporate number, plus subsidies/procurement |
 | `new-zealand-nzbn` | NZBN API | New Zealand entities by NZBN/name, roles, industry |
 | `ireland-cro` | CRO Open Services | Irish companies, status, filings (free key + CC-BY bulk) |
+| `greece-gemi` | GEMI OpenData API | Greek companies by name/GEMI number/AFM |
+| `croatia-sudreg` | Sudski registar OPEN API | Croatian companies by OIB/MBS (OAuth, free registration) |
 | `latvia-company-registry` | data.gov.lv | Latvian companies, officers, and open beneficial owners (UBO) |
+| `lithuania-company-registry` | Registru centras (Spinta) | Lithuanian companies by name/code, mgmt, financials |
 | `israel-companies-registry` | data.gov.il | Israeli companies by name/number, status, purpose |
 | `brazil-cnpj` | BrasilAPI (Receita Federal) | Brazilian companies by CNPJ, incl. QSA partner list |
 | `south-korea-dart` | DART (FSS) | Korean listed-company profiles and financial statements |
@@ -138,6 +141,7 @@ Twenty-six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) inter
 | `vies-vat-validation` | EU VIES + EOS | Validate any EU VAT (and EORI) number + consultation number |
 | `sanctions-pep-screening` | OFAC / EU / UK / UN lists | Sanctions and PEP screening for a name or entity |
 | `sam-gov-exclusions` | SAM.gov | US federal debarment / exclusions screening |
+| `us-court-records` | CourtListener | US litigation / court-record search (adverse-history DD) |
 
 The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
 
