@@ -29,8 +29,8 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | US federal debarment / exclusions screening | `/sam-gov-exclusions` | "Is this vendor debarred?", "SAM.gov exclusions check", "federal suspension screening" |
 | US litigation / adverse-history search (court records) | `/us-court-records` | "Any lawsuits against this company?", "US court records", "litigation search" |
-| Free company lookup - Mexico or Vietnam | `/mexico-denue`, `/vietnam-business` | "Mexican company / DENUE", "Vietnam company by tax code", "Vietnamese MST lookup" |
-| EU public-procurement / contract-award search (DD + lead-gen) | `/eu-ted-procurement` | "Which EU contracts did this company win?", "EU tenders", "TED procurement search" |
+| Free company lookup - Romania, Greece, Croatia, Lithuania, Latvia, Mexico, Vietnam, Thailand, Hong Kong | `/romania-company-registry`, `/greece-gemi`, `/croatia-sudreg`, `/lithuania-company-registry`, `/latvia-company-registry`, `/mexico-denue`, `/vietnam-business`, `/thailand-dbd`, `/hong-kong-companies` | "Romanian company by CUI", "Thai company by ID", "Hong Kong company / BRN", "Mexican company", "Vietnam tax code" |
+| EU or US public-procurement / contract-award search (DD + lead-gen) | `/eu-ted-procurement`, `/us-federal-awards` | "Which EU contracts did this company win?", "US federal contracts", "USAspending", "government awards" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
 ## Step 2: Route or Handle
@@ -253,7 +253,11 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/us-court-records`** - search US litigation / court records (CourtListener) for adverse history on a company or person. Free token (125/day free tier). A DD lane alongside sanctions + debarment.
 - **`/mexico-denue`** - Mexican businesses by name/activity/location via INEGI DENUE. Free token. A directory (razon social, activity, contact), not a legal register.
 - **`/vietnam-business`** - Vietnamese companies by tax code (MST) via a free keyless API (third-party GDT aggregator - thin identity/status).
+- **`/romania-company-registry`** - Romanian companies by CUI via the keyless ANAF API (identity, registration number, CAEN, VAT, active/inactive) + CC-BY bulk. No key.
+- **`/thailand-dbd`** - Thai companies by 13-digit juristic ID via the keyless DBD OpenAPI. No key.
+- **`/hong-kong-companies`** - Hong Kong live local companies by name/BRN (name, address, type, incorporation date) via the data.gov.hk API. No key.
 - **`/eu-ted-procurement`** - search EU public tenders and contract awards (TED) to see which EU contracts a company has won. No key. A DD + lead-gen lane.
+- **`/us-federal-awards`** - search US federal contracts/grants (USAspending) a company has received. No key. A DD + lead-gen lane, pairs with eu-ted-procurement.
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.

@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-33-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-37-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Thirty-three skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Thirty-seven skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -144,7 +144,11 @@ Thirty-three skills that let Claude Code (and Copilot, Cline, Cursor, Codex) int
 | `us-court-records` | CourtListener | US litigation / court-record search (adverse-history DD) |
 | `mexico-denue` | INEGI DENUE | Mexican businesses by name/activity/location (directory) |
 | `vietnam-business` | VietQR (GDT data) | Vietnamese companies by tax code (MST) |
+| `romania-company-registry` | ANAF + ONRC | Romanian companies by CUI (identity, reg number, CAEN, VAT) |
+| `thailand-dbd` | DBD OpenAPI | Thai companies by 13-digit juristic ID |
+| `hong-kong-companies` | data.gov.hk | Hong Kong live local companies by name/BRN (name, address, type) |
 | `eu-ted-procurement` | EU TED | EU public tenders + contract awards (who won EU contracts) |
+| `us-federal-awards` | USAspending | US federal contracts/grants a company has received |
 
 The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
 
