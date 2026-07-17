@@ -12,7 +12,7 @@ Free tier: $5 credits = ~600 UBO checks
 
 from apify_client import ApifyClient
 
-APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://console.apify.com/sign-up?ref=getregdata
+APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://apify.com/regdata?fpr=getregdata
 
 client = ApifyClient(APIFY_TOKEN)
 

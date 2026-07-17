@@ -3,7 +3,7 @@
 // KYC/AML, credit-risk, due-diligence and B2B data across 11 jurisdictions.
 //
 // Auth: set APIFY_TOKEN in the environment (get one free at
-// https://console.apify.com/sign-up?ref=getregdata - includes $5 credits).
+// https://apify.com/regdata?fpr=getregdata - includes $5 credits).
 //
 // Run: npx getregdata-mcp   (or: node index.js)
 
@@ -25,7 +25,7 @@ function requireToken() {
   if (!t) {
     throw new Error(
       "APIFY_TOKEN is not set. Get a free token (with $5 credits) at " +
-        "https://console.apify.com/sign-up?ref=getregdata and set APIFY_TOKEN in your MCP client config."
+        "https://apify.com/regdata?fpr=getregdata and set APIFY_TOKEN in your MCP client config."
     );
   }
   return t;

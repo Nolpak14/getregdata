@@ -130,7 +130,7 @@ The DINUM API delivers *identity + directors* - who, where, and what NAF - then 
 | Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Free tool = top-of-funnel identity lookup; the Societe.com actor = the paid deep dossier. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://console.apify.com/sign-up?ref=getregdata.
+Free tool = top-of-funnel identity lookup; the Societe.com actor = the paid deep dossier. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
 
 ## Related skills
 

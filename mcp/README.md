@@ -17,7 +17,7 @@ Each registry is exposed as its own tool (e.g. `regdata_crbr_beneficial_owners`,
 ## Setup
 
 You need an Apify API token (free, includes $5 credits):
-[console.apify.com/sign-up?ref=getregdata](https://console.apify.com/sign-up?ref=getregdata).
+[apify.com/regdata](https://apify.com/regdata?fpr=getregdata).
 
 ### Claude Desktop / Claude Code
 
@@ -50,7 +50,7 @@ first-class tools there:
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
 
-Swap in any of the [25+ regdata actors](https://apify.com/regdata), or connect plain
+Swap in any of the [25+ regdata actors](https://apify.com/regdata?fpr=getregdata), or connect plain
 `https://mcp.apify.com` and let the agent discover them via `search-actors`
 ("Poland beneficial owners", "Germany insolvency", ...). OAuth signs you into your
 own Apify account, so billing and the free credit work exactly like the local server.
@@ -71,7 +71,7 @@ If the agent is unsure of a registry's exact input fields, it calls
 
 Pay-per-result on Apify, no subscription - from ~$0.003/result depending on actor
 and plan tier. The $5 monthly free credit covers hundreds to ~1,600 lookups. Each
-actor's current price is on its Store page at [apify.com/regdata](https://apify.com/regdata).
+actor's current price is on its Store page at [apify.com/regdata](https://apify.com/regdata?fpr=getregdata).
 
 ## How it works
 

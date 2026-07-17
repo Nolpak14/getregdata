@@ -24,7 +24,8 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Property due diligence, land registry, mortgages | `/regdata-property` | "Who owns this property?", "Check land registry", "Verify mortgage" |
 | Consumer protection, ESG, environmental compliance | `/regdata-compliance` | "Check for prohibited clauses", "Waste registry lookup", "ESG audit" |
 | B2B prospecting, decision-makers, market research | `/regdata-lead-gen` | "Find directors at companies in Barcelona", "B2B leads", "Company contacts" |
-| Free lookup - UK, US (SEC), Norway, France, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/gleif-lei-lookup` | "Look up a UK company", "SEC filings for Tesla", "Norwegian company", "French company by SIREN", "Find the LEI for X" |
+| Free company lookup - UK, US (SEC), Norway, France, Switzerland, Denmark, Finland, Australia, Japan, New Zealand, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/switzerland-zefix`, `/denmark-cvr`, `/finland-company-registry`, `/australia-abn-lookup`, `/japan-company-registry`, `/new-zealand-nzbn`, `/gleif-lei-lookup` | "Look up a UK company", "SEC filings for Tesla", "Swiss company by UID", "Danish CVR", "Australian ABN", "Japanese company", "Find the LEI for X" |
+| Free EU VAT validation (first step of a KYB check) | `/vies-vat-validation` | "Validate this VAT number", "Is this EU VAT valid?", "VIES check" |
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
@@ -140,7 +141,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set, tell the user:
-- Sign up: https://console.apify.com/sign-up?ref=getregdata (free $5 credits included)
+- Sign up: https://apify.com/regdata?fpr=getregdata (free $5 credits included)
 - Set token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### Option A: MCP Mode (Preferred)
@@ -227,7 +228,14 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/sec-edgar-us`** - US SEC-registered issuers: filings, submissions, XBRL financials via EDGAR. No key (User-Agent required).
 - **`/norway-company-registry`** - Norwegian companies, roles/board, bankruptcy flag via Brønnøysundregistrene (data.brreg.no). No key.
 - **`/france-company-lookup`** - French companies by name/SIREN/director, identity + dirigeants via the free api.gouv.fr search API. No key.
+- **`/switzerland-zefix`** - Swiss companies, UID/CHE number, status, SHAB publications via Zefix. Free (email-approved credential).
+- **`/denmark-cvr`** - Danish companies, CVR number, industry, management via the official CVR distribution. Free (registration + terms).
+- **`/finland-company-registry`** - Finnish companies by name/Y-tunnus via PRH open data. No key (CC BY).
+- **`/australia-abn-lookup`** - Australian entities by ABN/ACN/name via the official ABN Lookup. Free (registered GUID).
+- **`/japan-company-registry`** - Japanese companies by name/corporate number via gBizINFO. Free (self-registered token).
+- **`/new-zealand-nzbn`** - New Zealand entities by NZBN/name via the NZBN API. Free (self-serve key).
 - **`/gleif-lei-lookup`** - global entity resolution: name to LEI, local registry ID, and parent/child corporate structure. No key. The cross-border spine - resolve here, then pull the deep national record.
+- **`/vies-vat-validation`** - validate any EU VAT number (free, keyless) and get a consultation number. The cheapest first step of a KYB check.
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.

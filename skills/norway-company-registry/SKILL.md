@@ -134,7 +134,7 @@ Norway (like the UK) is an outlier: a genuinely free, official, structured API w
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Brreg's konkurs flag is a basic bankruptcy boolean; for detailed insolvency proceedings elsewhere use the **`regdata-credit-risk`** actors. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://console.apify.com/sign-up?ref=getregdata.
+Brreg's konkurs flag is a basic bankruptcy boolean; for detailed insolvency proceedings elsewhere use the **`regdata-credit-risk`** actors. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
 
 ## Related skills
 

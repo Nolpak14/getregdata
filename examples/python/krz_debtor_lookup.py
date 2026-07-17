@@ -17,7 +17,7 @@ name can match similarly-named entities; pass a NIP/KRS via `identifier` for a p
 
 from apify_client import ApifyClient
 
-APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://console.apify.com/sign-up?ref=getregdata
+APIFY_TOKEN = "YOUR_APIFY_TOKEN"  # https://apify.com/regdata?fpr=getregdata
 
 client = ApifyClient(APIFY_TOKEN)
 

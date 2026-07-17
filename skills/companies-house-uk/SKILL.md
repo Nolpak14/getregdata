@@ -147,7 +147,7 @@ The UK is the outlier: a fully free, official, structured REST API. **No equival
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 | Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://console.apify.com/sign-up?ref=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
 
 ## Related skills
 

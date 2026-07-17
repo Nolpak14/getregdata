@@ -307,7 +307,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set:
-- Sign up at https://console.apify.com/sign-up?ref=getregdata ($5 free credits included)
+- Sign up at https://apify.com/regdata?fpr=getregdata ($5 free credits included)
 - Set your token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### Actor Catalog for Lead Generation
