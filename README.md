@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-30-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-33-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Thirty skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Thirty-three skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -142,6 +142,9 @@ Thirty skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact 
 | `sanctions-pep-screening` | OFAC / EU / UK / UN lists | Sanctions and PEP screening for a name or entity |
 | `sam-gov-exclusions` | SAM.gov | US federal debarment / exclusions screening |
 | `us-court-records` | CourtListener | US litigation / court-record search (adverse-history DD) |
+| `mexico-denue` | INEGI DENUE | Mexican businesses by name/activity/location (directory) |
+| `vietnam-business` | VietQR (GDT data) | Vietnamese companies by tax code (MST) |
+| `eu-ted-procurement` | EU TED | EU public tenders + contract awards (who won EU contracts) |
 
 The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
 

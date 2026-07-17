@@ -141,6 +141,24 @@ separately:
   bulk data is CC-BY-NC, so commercial PEP screening on OpenSanctions data needs a
   paid licence regardless of self-hosting. Do not treat it as free for business use.
 
+## Debarment - a related but separate lane
+
+Debarment (exclusion from public contracts) is distinct from sanctions. Two useful sources:
+
+- **US federal** - use the `sam-gov-exclusions` skill (free SAM.gov API) for the US
+  System for Award Management exclusions list.
+- **World Bank / MDB debarment** - the World Bank publishes its "Listing of Ineligible
+  Firms and Individuals" as a free, searchable public page
+  (`worldbank.org/en/projects-operations/procurement/debarred-firms`, refreshed ~every
+  3 hours). Under the 2010 Mutual Enforcement Agreement, cross-debarment also covers the
+  ADB, AfDB, EBRD and IDB (each runs its own list). Note: the old keyless Socrata API is
+  retired, and the OpenSanctions `worldbank_debarred` mirror is CC-BY-NC (non-commercial)
+  - so for commercial use read the official public page, not the NC feed. Fields: name,
+  country, ineligibility from/to dates, grounds (fraud/corruption/collusion/coercion),
+  and sanction type (debarment / cross-debarment / conditional non-debarment).
+
+Screen procurement-exposed counterparties against both alongside the sanctions lists above.
+
 ## Cross-sell - turn ownership data into a compliance check
 
 This skill is most valuable wired onto the registry actors: extract the beneficial
