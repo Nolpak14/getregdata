@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-19-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-26-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Nineteen skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Twenty-six skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -128,9 +128,16 @@ Nineteen skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interac
 | `australia-abn-lookup` | ABN Lookup (ABR) | Australian entities by ABN/ACN/name, status, GST |
 | `japan-company-registry` | gBizINFO | Japanese companies by name/corporate number, plus subsidies/procurement |
 | `new-zealand-nzbn` | NZBN API | New Zealand entities by NZBN/name, roles, industry |
+| `ireland-cro` | CRO Open Services | Irish companies, status, filings (free key + CC-BY bulk) |
+| `latvia-company-registry` | data.gov.lv | Latvian companies, officers, and open beneficial owners (UBO) |
+| `israel-companies-registry` | data.gov.il | Israeli companies by name/number, status, purpose |
+| `brazil-cnpj` | BrasilAPI (Receita Federal) | Brazilian companies by CNPJ, incl. QSA partner list |
+| `south-korea-dart` | DART (FSS) | Korean listed-company profiles and financial statements |
+| `singapore-acra` | data.gov.sg | Singapore entities by name/UEN (identity) |
 | `gleif-lei-lookup` | GLEIF API | Global LEI, local registry ID, parent/child corporate structure |
-| `vies-vat-validation` | EU VIES | Validate any EU VAT number + consultation number (audit proof) |
+| `vies-vat-validation` | EU VIES + EOS | Validate any EU VAT (and EORI) number + consultation number |
 | `sanctions-pep-screening` | OFAC / EU / UK / UN lists | Sanctions and PEP screening for a name or entity |
+| `sam-gov-exclusions` | SAM.gov | US federal debarment / exclusions screening |
 
 The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
 

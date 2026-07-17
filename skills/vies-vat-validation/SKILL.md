@@ -1,6 +1,6 @@
 ---
 name: vies-vat-validation
-description: "Validate any EU VAT number for free via the official EU VIES service - confirm a counterparty's VAT registration, get the registered name and address (where the member state shares it), and obtain a consultation number as audit proof. Use as the first step of a KYB / KYC / AML check: validate the VAT, then pull the full registry record. Trigger on: 'validate VAT number', 'check EU VAT', 'VIES', 'is this VAT valid', 'VAT number lookup', 'verify a VAT registration', 'EU VAT check'. VIES is keyless and free; for the full company record it routes to the free national skills and the paid regdata registry actors."
+description: "Validate any EU VAT number for free via the official EU VIES service - confirm a counterparty's VAT registration, get the registered name and address (where the member state shares it), and obtain a consultation number as audit proof. Use as the first step of a KYB / KYC / AML check: validate the VAT, then pull the full registry record. Also validates EU EORI (customs/trade) numbers via the official EOS service. Trigger on: 'validate VAT number', 'check EU VAT', 'VIES', 'is this VAT valid', 'VAT number lookup', 'verify a VAT registration', 'EU VAT check', 'validate EORI number', 'EORI check'. VIES is keyless and free; for the full company record it routes to the free national skills and the paid regdata registry actors."
 metadata:
   version: 1.0.0
   author: regdata
@@ -8,6 +8,8 @@ metadata:
     - vies
     - vat
     - vat-validation
+    - eori
+    - customs
     - eu
     - kyb
     - know-your-business
@@ -24,6 +26,8 @@ metadata:
     - "EU VAT validation"
     - "get a VAT consultation number"
     - "is this company VAT-registered"
+    - "validate an EORI number"
+    - "EORI customs number check"
 ---
 
 # vies-vat-validation
@@ -109,6 +113,25 @@ VIES tells you the VAT is real and which country the entity is in. Use the `coun
 | Northern Ireland / UK | free `companies-house-uk` |
 
 For a full compliance workflow (risk scoring, PEP and adverse-media overlays) route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com/regdata?fpr=getregdata.
+
+## Bonus: EORI validation (the other EU trade ID)
+
+VAT and EORI are the two EU trade identifiers, so this skill also validates EORI numbers (the ID every business needs to move goods across the EU customs border). The official EU EOS service is a free, keyless SOAP endpoint:
+
+- WSDL: `https://ec.europa.eu/taxation_customs/dds2/eos/validation/services/validation?wsdl`
+- Operation: `validateEORI` (namespace `http://eori.ws.eos.dds.s/`), up to 10 EORIs per request, max 100 req/s.
+- Returns per EORI: `status` + `statusDescr` (valid/invalid), and `name`/`address` **only where the operator consented to publication**.
+
+```bash
+# minimal SOAP call (one EORI)
+curl -s "https://ec.europa.eu/taxation_customs/dds2/eos/validation/services/validation" \
+  -H "Content-Type: text/xml" \
+  -d '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eor="http://eori.ws.eos.dds.s/">
+        <soapenv:Body><eor:validateEORI><eor:eori>IE2025292W</eor:eori></eor:validateEORI></soapenv:Body>
+      </soapenv:Envelope>'
+```
+
+**Gotchas:** unlike VAT, a valid EORI usually returns **no** name/address (publication is opt-in, and most operators opt out) - so EORI confirms existence, rarely identity. GB (UK) EORIs are not in this EU service post-Brexit (HMRC has a separate checker). EORI demand is much lower than VAT - it only matters for cross-border goods traders.
 
 ## Related skills
 

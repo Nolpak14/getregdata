@@ -271,6 +271,15 @@ How to handle each state:
 
 ---
 
+### Optional: IBAN sanity-check (payment details)
+
+When you also hold the counterparty's payout IBAN, a cheap extra check is worth running:
+
+- **Structure + checksum offline (no API needed).** IBAN validity is a pure algorithm (ISO 13616 structure + ISO 7064 mod-97). Move the first 4 chars to the end, convert letters to numbers, and confirm the number mod 97 == 1. A failed checksum means a malformed or mistyped IBAN.
+- **Bank/BIC enrichment (optional API).** `https://openiban.com/validate/{IBAN}?getBIC=true&validateBankCode=true` (free, keyless) returns the bank name and BIC - but only for DACH + Benelux (DE, AT, CH, BE, NL, LU, LI); other countries return checksum-valid with no bank data. Community-run, no SLA - use for enrichment, not as the system of record.
+
+This confirms the IBAN is well-formed and, where covered, which bank it routes to - a useful cross-check against the entity's registered country. It does not confirm account ownership.
+
 ## Data Extraction - Live Registry Checks
 
 The compliance framework above helps you structure the analysis. To actually pull live data from government registries, use the Apify actors below.
