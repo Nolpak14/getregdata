@@ -29,7 +29,9 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | US federal debarment / exclusions screening | `/sam-gov-exclusions` | "Is this vendor debarred?", "SAM.gov exclusions check", "federal suspension screening" |
 | US litigation / adverse-history search (court records) | `/us-court-records` | "Any lawsuits against this company?", "US court records", "litigation search" |
-| Free company lookup - Romania, Greece, Croatia, Lithuania, Latvia, Mexico, Vietnam, Thailand, Hong Kong | `/romania-company-registry`, `/greece-gemi`, `/croatia-sudreg`, `/lithuania-company-registry`, `/latvia-company-registry`, `/mexico-denue`, `/vietnam-business`, `/thailand-dbd`, `/hong-kong-companies` | "Romanian company by CUI", "Thai company by ID", "Hong Kong company / BRN", "Mexican company", "Vietnam tax code" |
+| Free company lookup - Romania, Greece, Croatia, Lithuania, Latvia, Mexico, Peru, Vietnam, Thailand, Hong Kong | `/romania-company-registry`, `/greece-gemi`, `/croatia-sudreg`, `/lithuania-company-registry`, `/latvia-company-registry`, `/mexico-denue`, `/peru-ruc`, `/vietnam-business`, `/thailand-dbd`, `/hong-kong-companies` | "Romanian company by CUI", "Peru RUC", "Thai company by ID", "Hong Kong company / BRN", "Mexican company" |
+| Offshore-structure / enhanced-DD red-flag check (leak data - not proof) | `/icij-offshore-leaks` | "Is this company in the Panama Papers?", "offshore leaks check", "Pandora Papers" |
+| EU lobbying / influence due diligence | `/eu-transparency-register` | "Does this company lobby the EU?", "EU transparency register", "lobbying spend" |
 | EU or US public-procurement / contract-award search (DD + lead-gen) | `/eu-ted-procurement`, `/us-federal-awards` | "Which EU contracts did this company win?", "US federal contracts", "USAspending", "government awards" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
@@ -258,6 +260,9 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/hong-kong-companies`** - Hong Kong live local companies by name/BRN (name, address, type, incorporation date) via the data.gov.hk API. No key.
 - **`/eu-ted-procurement`** - search EU public tenders and contract awards (TED) to see which EU contracts a company has won. No key. A DD + lead-gen lane.
 - **`/us-federal-awards`** - search US federal contracts/grants (USAspending) a company has received. No key. A DD + lead-gen lane, pairs with eu-ted-procurement.
+- **`/peru-ruc`** - Peruvian companies by RUC via a free-tier aggregator over SUNAT (name, status, address). Free token; 3rd-party provenance.
+- **`/icij-offshore-leaks`** - check whether a person/company appears in the ICIJ Offshore Leaks (Panama/Pandora Papers). No key. An enhanced-DD red flag - NOT proof of wrongdoing.
+- **`/eu-transparency-register`** - does a company lobby the EU, on which files, how much. No key (bulk dump). A lobbying/influence DD lane.
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.
