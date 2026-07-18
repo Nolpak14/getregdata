@@ -1,6 +1,6 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-40-blue)](#claude-code-skills)
+[![Skills](https://img.shields.io/badge/skills-44-blue)](#claude-code-skills)
 [![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Forty skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Forty-four skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -152,6 +152,10 @@ Forty skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact w
 | `peru-ruc` | apis.net.pe (SUNAT data) | Peruvian companies by RUC (name, status, address) |
 | `icij-offshore-leaks` | ICIJ | Offshore Leaks / Panama-Pandora Papers red-flag check (not proof) |
 | `eu-transparency-register` | EU Transparency Register | Does a company lobby the EU (influence/ESG DD) |
+| `eu-financial-transparency` | EU FTS | Which EU grants/direct funding an org has received |
+| `world-bank-contracts` | World Bank | World Bank-financed contract awards + projects a company won |
+| `costa-rica-hacienda` | CR Hacienda | Costa Rican companies by cedula juridica (name, tax status, activity) |
+| `dominican-republic-rnc` | DGII | Dominican companies by RNC/name (national taxpayer registry) |
 
 The free skills are the front door - they answer the easy lookups for free and drive adoption; the paid actors are the upsell for jurisdictions with no free API (Poland, Germany, Spain, Italy, ...) and for depth the free sources do not provide (beneficial owners, financials, insolvency, court filings).
 

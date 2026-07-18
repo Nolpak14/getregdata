@@ -29,10 +29,11 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
 | US federal debarment / exclusions screening | `/sam-gov-exclusions` | "Is this vendor debarred?", "SAM.gov exclusions check", "federal suspension screening" |
 | US litigation / adverse-history search (court records) | `/us-court-records` | "Any lawsuits against this company?", "US court records", "litigation search" |
-| Free company lookup - Romania, Greece, Croatia, Lithuania, Latvia, Mexico, Peru, Vietnam, Thailand, Hong Kong | `/romania-company-registry`, `/greece-gemi`, `/croatia-sudreg`, `/lithuania-company-registry`, `/latvia-company-registry`, `/mexico-denue`, `/peru-ruc`, `/vietnam-business`, `/thailand-dbd`, `/hong-kong-companies` | "Romanian company by CUI", "Peru RUC", "Thai company by ID", "Hong Kong company / BRN", "Mexican company" |
+| Free company lookup - Romania, Greece, Croatia, Lithuania, Latvia, Mexico, Peru, Costa Rica, Dominican Republic, Vietnam, Thailand, Hong Kong | `/romania-company-registry`, `/greece-gemi`, `/croatia-sudreg`, `/lithuania-company-registry`, `/latvia-company-registry`, `/mexico-denue`, `/peru-ruc`, `/costa-rica-hacienda`, `/dominican-republic-rnc`, `/vietnam-business`, `/thailand-dbd`, `/hong-kong-companies` | "Romanian company by CUI", "Costa Rica cedula juridica", "Dominican RNC", "Peru RUC", "Thai company by ID", "Hong Kong BRN" |
 | Offshore-structure / enhanced-DD red-flag check (leak data - not proof) | `/icij-offshore-leaks` | "Is this company in the Panama Papers?", "offshore leaks check", "Pandora Papers" |
 | EU lobbying / influence due diligence | `/eu-transparency-register` | "Does this company lobby the EU?", "EU transparency register", "lobbying spend" |
-| EU or US public-procurement / contract-award search (DD + lead-gen) | `/eu-ted-procurement`, `/us-federal-awards` | "Which EU contracts did this company win?", "US federal contracts", "USAspending", "government awards" |
+| EU, US or World Bank public-procurement / contract-award search (DD + lead-gen) | `/eu-ted-procurement`, `/us-federal-awards`, `/world-bank-contracts` | "Which EU/US/World Bank contracts did this company win?", "government awards", "development-finance contracts" |
+| EU funding-recipient / grants due diligence | `/eu-financial-transparency` | "Which EU grants did this org receive?", "EU funding recipients", "FTS" |
 | Simple single-actor query (user names a specific actor) | Handle directly | "Scrape KNF registry for X", "Run CRBR lookup for NIP Y" |
 
 ## Step 2: Route or Handle
@@ -263,6 +264,10 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/peru-ruc`** - Peruvian companies by RUC via a free-tier aggregator over SUNAT (name, status, address). Free token; 3rd-party provenance.
 - **`/icij-offshore-leaks`** - check whether a person/company appears in the ICIJ Offshore Leaks (Panama/Pandora Papers). No key. An enhanced-DD red flag - NOT proof of wrongdoing.
 - **`/eu-transparency-register`** - does a company lobby the EU, on which files, how much. No key (bulk dump). A lobbying/influence DD lane.
+- **`/eu-financial-transparency`** - which EU grants / direct funding an org has received (FTS). No key (annual bulk). A funding-recipient DD + lead-gen lane.
+- **`/world-bank-contracts`** - which World Bank-financed contracts a company has won, plus projects. No key. The third global procurement lane.
+- **`/costa-rica-hacienda`** - Costa Rican companies by cedula juridica (name, tax status, activities) via the keyless Hacienda API. No key.
+- **`/dominican-republic-rnc`** - Dominican companies by RNC/name via the free DGII national taxpayer registry (bulk). No key.
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.
