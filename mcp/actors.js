@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 29 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 34 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-07-16. Do not edit inputSchema by hand.
+// Generated 2026-07-20. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "adverse-media-screener",
@@ -336,7 +336,10 @@ export const ACTORS = [
           "default": 50
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "searchQueries"
+      ]
     }
   },
   {
@@ -375,7 +378,10 @@ export const ACTORS = [
           "default": 50
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "searchQueries"
+      ]
     }
   },
   {
@@ -1463,7 +1469,10 @@ export const ACTORS = [
           "default": 350
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "searchQueries"
+      ]
     }
   },
   {
@@ -1579,6 +1588,279 @@ export const ACTORS = [
           "title": "Max Results",
           "description": "Maximum number of company records to return. The actor pages through the directory until it reaches this limit or runs out of matches. Default: 100.",
           "default": 100
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "cyprus-drcor-company-scraper",
+    "tool": "regdata_cyprus_drcor",
+    "title": "Cyprus DRCOR Company Registry Scraper",
+    "description": "Look up Cyprus companies in the official DRCOR register by name or HE number. Returns company identity and status, directors and secretary, and registered office. A verified \"not found in the register\" is a real answer, not an error.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "title": "Company name",
+          "description": "Company or organisation name to search for. Matching is controlled by the Search type below. Example: 'HELLENIC BANK', 'EUROBANK'. | Όνομα εταιρείας ή οργανισμού."
+        },
+        "registrationNumbers": {
+          "type": "array",
+          "title": "Registration numbers",
+          "description": "One or more Cyprus registration numbers, each looked up separately. Accepts any format: 'HE 6771', 'HE6771' or just '6771'. A bare number matches that number across EVERY organisation type (a limited company HE, a business name EE, an overseas company AE...), so include the letter prefix when you want just one type. | Αριθμοί εγγραφής, π.χ. 'ΗΕ 6771'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchType": {
+          "type": "string",
+          "title": "Search type",
+          "description": "How the company name is matched. 'Starts with' is the register's default and the most reliable. 'Sounds like' uses the register's own phonetic index, which is narrow - it will not behave like a general fuzzy search.",
+          "enum": [
+            "startsWith",
+            "endsWith",
+            "soundsLike"
+          ],
+          "default": "startsWith"
+        },
+        "maxResults": {
+          "type": "integer",
+          "title": "Max results",
+          "description": "Maximum organisation records to export. A company that has traded under several names is listed once per former name in the register; those are merged into a single record here, with the former names kept on it, so you are never charged twice for the same company.",
+          "default": 100
+        },
+        "language": {
+          "type": "string",
+          "title": "Result language",
+          "description": "Language for labels and values the register translates - organisation type, status and officer positions. Company names and addresses are returned exactly as the register holds them, which for older Cypriot files is Greek regardless of this setting.",
+          "enum": [
+            "en",
+            "el",
+            "tr"
+          ],
+          "default": "en"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "ireland-cro-company-scraper",
+    "tool": "regdata_ireland_cro",
+    "title": "Ireland CRO Company Registry Scraper",
+    "description": "Look up Irish companies in the official CRO register by name or CRO number. Returns identity, type, status, incorporation date, registered address and email. Directors/shareholders are paid CRO documents and not included. A verified \"not found\" is a real answer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyNames": {
+          "type": "array",
+          "title": "Company names",
+          "description": "One or more company names to search, each looked up separately (min 2 characters). Partial names work. A broad name can hit the register's 50-result ceiling.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "companyNumbers": {
+          "type": "array",
+          "title": "Company numbers",
+          "description": "One or more Irish CRO registration numbers, each looked up separately. Digits only, e.g. '104547'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxResultsPerQuery": {
+          "type": "integer",
+          "title": "Max results per query",
+          "description": "Maximum company records to export per query. The register returns at most 50 matches per search, so 50 is the ceiling. Fetching the full record for each match happens in the same run.",
+          "default": 50
+        },
+        "statusFilter": {
+          "type": "array",
+          "title": "Status filter",
+          "description": "Keep only companies whose status contains one of these words, e.g. 'Normal', 'Dissolved', 'Liquidation'. Leave empty to export every match - a Dissolved or Liquidation counterparty is usually the finding you most want to see.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "portugal-corporate-acts-scraper",
+    "tool": "regdata_portugal_corporate_acts",
+    "title": "Portugal Corporate Acts Scraper",
+    "description": "Search the official Portuguese Ministry of Justice register of published corporate acts by NIF or entity name. Returns each published act (incorporation, changes, appointments, dissolution) with date, entity, municipality and type. This is an act/event register, not a company profile. \"No acts found\" is a real answer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "nifs": {
+          "type": "array",
+          "title": "NIFs / NIPCs",
+          "description": "One or more Portuguese tax numbers (NIF/NIPC, 9 digits), each looked up separately. The NIF is the preferred, most precise criterion. Example: '500123456'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "entityNames": {
+          "type": "array",
+          "title": "Entity names",
+          "description": "One or more entity names to search, each looked up separately (minimum 2 characters). Name search is broader than a NIF and more likely to hit the register's 200-result ceiling.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publicationType": {
+          "type": "string",
+          "title": "Publication type",
+          "description": "Which class of publication to search. 'All' covers everything. 'Commercial' is company (Registo Comercial) and foundation acts. 'Associations' and 'Solidarity' cover the non-profit registers.",
+          "enum": [
+            "all",
+            "commercial",
+            "other",
+            "associations",
+            "solidarity"
+          ],
+          "default": "all"
+        },
+        "district": {
+          "type": "string",
+          "title": "District (optional)",
+          "description": "Restrict to a Portuguese district by name, e.g. 'Lisboa', 'Porto', 'Faro'. Leave empty for all districts. A district narrows a broad name search below the 200-result ceiling."
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Date from (optional)",
+          "description": "Only acts published on or after this date. Accepts YYYY-MM-DD. Use a date range to narrow a broad search or to monitor recent activity."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Date to (optional)",
+          "description": "Only acts published on or before this date. Accepts YYYY-MM-DD."
+        },
+        "maxResultsPerQuery": {
+          "type": "integer",
+          "title": "Max results per query",
+          "description": "Maximum acts to export per query. The register returns at most 200 per search (20 per page, paged automatically), so 200 is the ceiling. To reach acts beyond it, narrow by date range, district or publication type.",
+          "default": 200
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "nigeria-cac-company-scraper",
+    "tool": "regdata_nigeria_cac",
+    "title": "Nigeria CAC Company Registry Scraper",
+    "description": "Search the official Nigerian CAC register by entity name or RC/BN/IT number. Returns registered name, registration number, classification, nature of business and status for companies, business names and incorporated trustees. A verified \"not found in the register\" is a real answer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyNames": {
+          "type": "array",
+          "title": "Entity names",
+          "description": "One or more entity names to search, each looked up separately. Matching is the register's own name-similarity search, so partial names work: 'DANGOTE' returns every entity whose name contains it. Broad terms hit the register's 50-result ceiling - see Max results per query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registrationNumbers": {
+          "type": "array",
+          "title": "Registration numbers",
+          "description": "One or more registration numbers, each looked up separately. Accepts any format: 'RC 71242', 'RC-71242' or just '71242'. Include the prefix to restrict the classification - RC = company, BN = business name, IT = incorporated trustees. A bare number matches those digits across ALL THREE classifications, which is deliberate: the same digits genuinely exist as different entities (RC 71242 and IT 71242 are unrelated organisations).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxResultsPerQuery": {
+          "type": "integer",
+          "title": "Max results per query",
+          "description": "Maximum records to export per query. The register itself returns at most 50 matches and provides no pagination, so 50 is the ceiling here too - a broader term cannot be paged through. To reach matches beyond the ceiling, narrow the name or search by registration number.",
+          "default": 50
+        },
+        "nameMatchMode": {
+          "type": "string",
+          "title": "Name match strictness",
+          "description": "How closely an entity name must answer a name query. The register's search matches on single common words, so a search for a company that does NOT exist still returns a full page of unrelated entities - 'NOTAREALFIRM LIMITED' returns 49 results purely because they contain 'LIMITED'. 'Relevant' (default) drops rows that share nothing but boilerplate with your query. 'Strict' keeps only rows containing every identifying word. 'All' returns the register's raw output, including the noise. Registration-number lookups are exact and are never affected by this.",
+          "enum": [
+            "relevant",
+            "strict",
+            "all"
+          ],
+          "default": "relevant"
+        },
+        "statusFilter": {
+          "type": "array",
+          "title": "Status filter",
+          "description": "Keep only entities in these registry statuses. Leave empty to export every match, which is the safer default for screening - an INACTIVE or DISSOLVED counterparty is usually the finding you most want to see, not one to filter away.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "colombia-rues-company-scraper",
+    "tool": "regdata_colombia_rues",
+    "title": "Colombia RUES Company Registry Scraper",
+    "description": "Search the official Colombian RUES register by company name, NIT or matricula. Returns company and non-profit (RM and ESAL) identity, chamber of commerce, legal form and registration status. A verified \"not found in the register\" is a real answer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyNames": {
+          "type": "array",
+          "title": "Company / entity names",
+          "description": "One or more names to search, each looked up separately. Matching is the register's own name search (minimum 2 characters). Broad terms hit the register's 500-result ceiling - see Max results per query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nits": {
+          "type": "array",
+          "title": "NITs",
+          "description": "One or more Colombian NITs, each looked up separately. Accepts any format: '890.903.938-8', '890903938-8' or '890903938'. The verification (check) digit is optional and is not used for matching. A NIT lookup returns the entity and its registered branches across chambers of commerce.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matriculas": {
+          "type": "array",
+          "title": "Matrículas",
+          "description": "One or more matrícula (mercantile registration) numbers, each looked up separately.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "register": {
+          "type": "string",
+          "title": "Register",
+          "description": "Which register to search. 'Registro Mercantil' covers companies and business establishments. 'ESAL' covers non-profit entities - foundations, associations and NGOs. A single run searches one register; run twice to cover both.",
+          "enum": [
+            "RM",
+            "ESAL"
+          ],
+          "default": "RM"
+        },
+        "maxResultsPerQuery": {
+          "type": "integer",
+          "title": "Max results per query",
+          "description": "Maximum records to export per query. The register itself returns at most 500 matches and provides no pagination, so 500 is the ceiling here too. To reach matches beyond it, narrow the name or search by NIT or matrícula.",
+          "default": 500
+        },
+        "statusFilter": {
+          "type": "array",
+          "title": "Status filter",
+          "description": "Keep only entities in these registry statuses. Leave empty to export every match, which is the safer default for screening - a CANCELADA (cancelled) counterparty is usually the finding you most want to see, not one to filter away.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": true
