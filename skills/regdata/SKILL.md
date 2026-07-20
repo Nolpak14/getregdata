@@ -1,15 +1,15 @@
 ---
 name: regdata
-description: "Extract structured data from 25+ official government registries across 11 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, adverse media) or wants to scrape/extract data from a European, US, or UAE government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
+description: "Extract structured data from 30+ official government registries across 16 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), Cyprus (DRCOR), Ireland (CRO), Portugal (corporate acts), Nigeria (CAC), Colombia (RUES), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, DRCOR, CRO, RUES, CAC, adverse media) or wants to scrape/extract data from a European, US, UAE, African or Latin American government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
   author: regdata
-  tags: [government-registry, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, usa, uae, apify, b2b-data]
+  tags: [government-registry, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, cyprus, ireland, portugal, nigeria, colombia, usa, uae, apify, b2b-data]
 ---
 
 # Government Registry Data - Router
 
-You are an expert in government registry data extraction. You help users find and extract structured data from 25+ official public registries across 11 jurisdictions (Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, United States, UAE) plus a cross-border adverse-media screener, all using Apify actors.
+You are an expert in government registry data extraction. You help users find and extract structured data from 30+ official public registries across 16 jurisdictions (Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, United States, UAE) plus a cross-border adverse-media screener, all using Apify actors.
 
 Your job is to **identify what the user needs** and either handle it directly (simple single-actor queries) or route them to the right specialized skill.
 
@@ -44,7 +44,7 @@ Ask the user what they need if not clear. Map their request to one of these cate
 
 ## Step 3: Actor Catalog
 
-All 25+ actors. Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
+All 34 actors. Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
 
 ### Poland (12 actors)
 
@@ -128,6 +128,36 @@ All 25+ actors. Pay-per-result, no subscriptions. Price = the per-record rate on
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | ADGM | `regdata/uae-adgm-public-register-scraper` | Abu Dhabi Global Market company data | $0.01 |
+
+### Cyprus (1 actor)
+
+| Actor | Slug | What You Get | ~$/Result |
+|---|---|---|---|
+| DRCOR | `regdata/cyprus-drcor-company-scraper` | Company identity & status, directors & secretary, registered office | $0.007 |
+
+### Ireland (1 actor)
+
+| Actor | Slug | What You Get | ~$/Search |
+|---|---|---|---|
+| CRO | `regdata/ireland-cro-company-scraper` | Company identity, status, incorporation date, registered address & email | $0.04 |
+
+### Portugal (1 actor)
+
+| Actor | Slug | What You Get | ~$/Search |
+|---|---|---|---|
+| Corporate Acts | `regdata/portugal-corporate-acts-scraper` | Published corporate acts - incorporations, changes, appointments, dissolutions | $0.03 |
+
+### Nigeria (1 actor)
+
+| Actor | Slug | What You Get | ~$/Search |
+|---|---|---|---|
+| CAC | `regdata/nigeria-cac-company-scraper` | Company / business-name / trustees identity, classification, status | $0.015 |
+
+### Colombia (1 actor)
+
+| Actor | Slug | What You Get | ~$/Search |
+|---|---|---|---|
+| RUES | `regdata/colombia-rues-company-scraper` | Company & non-profit identity, chamber of commerce, legal form, status | $0.02 |
 
 ### Cross-border (1 actor)
 
@@ -215,6 +245,11 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN"
 | California SoS | NuGzVdad29QqRfk51 |
 | California UCC | 6H30iAyeKzzTcjQcE |
 | UAE ADGM | 6JPSd2hLMQiFhOvRl |
+| Cyprus DRCOR | f4pzZz8ZrznzV1fZV |
+| Ireland CRO | kxRMzFdJiJci4M536 |
+| Portugal Corporate Acts | mIVRyOguI0GMKbBve |
+| Nigeria CAC | 29lCbscvJPlRYcfki |
+| Colombia RUES | Buct2foSyqVLUwiV8 |
 | Adverse Media | fg6bpYFhD9PG5B0Df |
 
 ## Specialized Skills Reference
