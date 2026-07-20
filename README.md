@@ -1,12 +1,12 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
 [![Skills](https://img.shields.io/badge/skills-44-blue)](#claude-code-skills)
-[![Actors](https://img.shields.io/badge/actors-25%2B-green)](#actor-catalog)
-[![Jurisdictions](https://img.shields.io/badge/jurisdictions-11-orange)](#actor-catalog)
+[![Actors](https://img.shields.io/badge/actors-30%2B-green)](#actor-catalog)
+[![Jurisdictions](https://img.shields.io/badge/jurisdictions-16-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 [![Install](https://img.shields.io/badge/install-npx%20skills%20add-black)](#install)
 
-Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 25+ actors across 11 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://apify.com/regdata?fpr=getregdata) actors for reliable, scalable access.
+Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 30+ actors across 16 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://apify.com/regdata?fpr=getregdata) actors for reliable, scalable access.
 
 ## Install
 
@@ -15,7 +15,7 @@ Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, cre
 npx skills add Nolpak14/getregdata -g -y
 ```
 
-**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 25+ registries as tools, with full input schemas):
+**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 30+ registries as tools, with full input schemas):
 ```json
 { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
 ```
@@ -24,7 +24,7 @@ npx skills add Nolpak14/getregdata -g -y
 ```
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
-Swap in any of the [25+ regdata actors](https://apify.com/regdata?fpr=getregdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
+Swap in any of the [30+ regdata actors](https://apify.com/regdata?fpr=getregdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
 
 See [`mcp/`](mcp/) for the server, tool list, and per-client config.
 
@@ -101,7 +101,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Forty-four skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 25+ actors - plus free public-API lookups that need no Apify token.
+Forty-four skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 30+ actors - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -165,7 +165,7 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* or *"L
 
 ## Actor Catalog
 
-25+ actors across 11 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
+30+ actors across 16 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
 
 ### Poland (12 actors)
 
@@ -249,6 +249,36 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* or *"L
 | Actor | Registry | What You Get |
 |---|---|---|
 | [ADGM Public Register Scraper](https://apify.com/regdata/uae-adgm-public-register-scraper?fpr=getregdata) | ADGM | Abu Dhabi Global Market company data |
+
+### Cyprus (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Cyprus DRCOR Company Scraper](https://apify.com/regdata/cyprus-drcor-company-scraper?fpr=getregdata) | DRCOR | Company identity and status, directors & secretary, registered office |
+
+### Ireland (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Ireland CRO Company Scraper](https://apify.com/regdata/ireland-cro-company-scraper?fpr=getregdata) | CRO (CORE) | Company identity, status, incorporation date, registered address and email |
+
+### Portugal (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Portugal Corporate Acts Scraper](https://apify.com/regdata/portugal-corporate-acts-scraper?fpr=getregdata) | Publicações MJ | Published corporate acts - incorporations, changes, appointments, dissolutions |
+
+### Nigeria (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Nigeria CAC Company Scraper](https://apify.com/regdata/nigeria-cac-company-scraper?fpr=getregdata) | CAC | Company / business-name / trustees identity, classification, status |
+
+### Colombia (1 actor)
+
+| Actor | Registry | What You Get |
+|---|---|---|
+| [Colombia RUES Company Scraper](https://apify.com/regdata/colombia-rues-company-scraper?fpr=getregdata) | RUES | Company & non-profit identity, chamber of commerce, legal form, status |
 
 ### Cross-border (1 actor)
 
