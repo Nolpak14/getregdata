@@ -55,6 +55,16 @@ const RULES = [
   },
   { label: "jurisdictions", expect: JURISDICTIONS, re: /(\d+)\+?\s+jurisdictions\b/gi },
   { label: "skills", expect: SKILL_COUNT, re: /(\d+)\+?\s+skills\b/gi },
+  // shields.io badges encode "+" as %2B, so a plain "30+" grep misses them.
+  // Directory crawlers (Glama at least) read these badges, so they are a
+  // public-facing claim, not decoration.
+  { label: "actors badge", expect: ACTOR_COUNT, re: /badge\/actors-(\d+)(?:%2B|\+)?-/gi },
+  { label: "skills badge", expect: SKILL_COUNT, re: /badge\/skills-(\d+)(?:%2B|\+)?-/gi },
+  {
+    label: "jurisdictions badge",
+    expect: JURISDICTIONS,
+    re: /badge\/jurisdictions-(\d+)(?:%2B|\+)?-/gi,
+  },
 ];
 
 // Per-country section headings like "### Poland (12 actors)" are a different

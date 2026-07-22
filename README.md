@@ -1,7 +1,7 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
 [![Skills](https://img.shields.io/badge/skills-44-blue)](#claude-code-skills)
-[![Actors](https://img.shields.io/badge/actors-30%2B-green)](#actor-catalog)
+[![Actors](https://img.shields.io/badge/actors-34-green)](#actor-catalog)
 [![Jurisdictions](https://img.shields.io/badge/jurisdictions-16-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 [![Install](https://img.shields.io/badge/install-npx%20skills%20add-black)](#install)
