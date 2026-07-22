@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // getregdata MCP server - exposes the regdata official business-registry actors as MCP tools.
-// KYC/AML, credit-risk, due-diligence and B2B data across 11 jurisdictions.
+// KYC/AML, credit-risk, due-diligence and B2B data across 16 jurisdictions.
 //
 // Auth: set APIFY_TOKEN in the environment (get one free at
 // https://apify.com/regdata?fpr=getregdata - includes $5 credits).
@@ -18,6 +18,9 @@ import { ACTORS } from "./actors.js";
 
 const pkg = createRequire(import.meta.url)("./package.json");
 const APIFY_BASE = "https://api.apify.com/v2";
+// Jurisdictions covered by the actor fleet. Not derivable from actors.js (no
+// country field), so it is asserted here and checked by scripts/check-counts.mjs.
+const JURISDICTIONS = 16;
 const token = () => process.env.APIFY_TOKEN || process.env.APIFY_API_TOKEN || "";
 
 function requireToken() {
@@ -100,7 +103,7 @@ function buildToolList() {
     {
       name: "regdata_catalog",
       description:
-        `List all ${ACTORS.length} getregdata business-registry actors (KYC/AML, credit-risk, due-diligence, B2B) across 11 jurisdictions, with their tool name and what each returns. Call this first to discover which registry tool to use.`,
+        `List all ${ACTORS.length} getregdata business-registry actors (KYC/AML, credit-risk, due-diligence, B2B) across ${JURISDICTIONS} jurisdictions, with their tool name and what each returns. Call this first to discover which registry tool to use.`,
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
     },
     {

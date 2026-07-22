@@ -1,6 +1,6 @@
 # AGENTS.md - how AI agents use getregdata
 
-getregdata turns 25+ official public business registries (11 jurisdictions: PL, DE, ES, IT, AT, FR, BE, CZ, SK, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
+getregdata turns 34 official public business registries (16 jurisdictions: PL, DE, ES, IT, AT, FR, BE, CZ, SK, CY, IE, PT, NG, CO, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
 
 ## Fastest paths
 

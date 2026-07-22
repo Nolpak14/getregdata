@@ -103,7 +103,7 @@ Every article ends with the install command and a cross-sell CTA to the paid act
 |---|---|---|---|
 | 1 | Look up any UK company from Claude, for free (Companies House + PSC) | `companies-house-uk` | "No free API for PL/DE/ES/FR? Use the regdata actors" |
 | 2 | Resolve any company to its global LEI (and its parent) with one skill | `gleif-lei-lookup` | "Then pull beneficial owners with CRBR/RPVS" |
-| 3 | Free Norwegian company + bankruptcy checks in your agent (brreg) | `norway-company-registry` | "Cross-border? The regdata suite covers 11 jurisdictions" |
+| 3 | Free Norwegian company + bankruptcy checks in your agent (brreg) | `norway-company-registry` | "Cross-border? The regdata suite covers 16 jurisdictions" |
 | 4 | Search every French company by SIREN or director, free (api.gouv.fr) | `france-company-lookup` | "Financials + shareholders: Societe.com actor" |
 | 5 | Pull SEC filings and XBRL financials from Claude (EDGAR, no key) | `sec-edgar-us` | "Private US companies: California SoS actor" |
 | 6 | Free sanctions screening against OFAC/EU/UK/UN lists in your agent | `sanctions-pep-screening` | "Screen the UBOs you extracted from registries" |

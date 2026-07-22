@@ -6,9 +6,14 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 ## Canonical listing copy (reuse everywhere)
 
+> Before pasting this anywhere, run `node scripts/check-counts.mjs` from the repo
+> root. The counts below are the single most common thing to go stale - listings
+> submitted with old numbers undersell the fleet and only get corrected on the
+> directory's next crawl (or never).
+
 - **Name:** getregdata
 - **Tagline (≤60):** Official business-registry data for KYC/AML & due diligence
-- **Short (≤160):** 25+ official business-registry actors as MCP tools + agent skills - KYC/AML, beneficial owners, credit-risk, adverse media across 11 jurisdictions (EU, US, UAE).
+- **Short (≤160):** 34 official business-registry actors as MCP tools + 44 agent skills - KYC/AML, beneficial owners, credit-risk, adverse media across 16 jurisdictions.
 - **Categories/tags:** kyc, aml, kyb, compliance, regtech, beneficial-owners, adverse-media, credit-risk, due-diligence, business-registry, apify
 - **Repo:** https://github.com/Nolpak14/getregdata
 - **npm:** https://www.npmjs.com/package/getregdata-mcp
@@ -32,7 +37,7 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 Bullet for the awesome-* PRs:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 25+ official business-registry actors (KYC/AML, beneficial owners, credit-risk, adverse media) across 11 jurisdictions via Apify. `npx -y getregdata-mcp`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - 34 official business-registry actors (KYC/AML, beneficial owners, credit-risk, adverse media) across 16 jurisdictions in Europe, the US, UAE, Africa and LatAm via Apify. `npx -y getregdata-mcp`.
 ```
 
 ## Skills directories (submit the skills)
@@ -44,7 +49,7 @@ Bullet for the awesome-* PRs:
 
 Bullet:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 6 skills for KYC/AML, credit-risk, property, compliance and lead-gen over 25+ official business registries. `npx skills add Nolpak14/getregdata`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - 44 skills for KYC/AML, credit-risk, property, compliance and lead-gen over 34 official business registries in 16 jurisdictions. `npx skills add Nolpak14/getregdata`.
 ```
 
 ## Repo hygiene that boosts auto-indexing
@@ -65,3 +70,23 @@ npx -y getregdata-mcp   # should print "getregdata MCP server ready - N registry
 
 Bump `version` in `package.json` when the actor fleet changes (regenerate `actors.js`
 from the live Apify account first).
+
+## Checklist when the fleet grows
+
+Adding an actor touches more than `actors.js`. In order:
+
+1. Regenerate `mcp/actors.js` from the live Apify account.
+2. Bump `JURISDICTIONS` in `mcp/index.js` if the actor opens a new country.
+3. Add the per-country section to `README.md` and `skills/regdata/SKILL.md`.
+4. `node scripts/check-counts.mjs` - must print OK before you go further.
+5. Update the **GitHub repo description**. This is the string GitHub search,
+   social cards and most directory crawlers surface, and it is the one place
+   `check-counts.mjs` cannot reach:
+   ```bash
+   gh repo edit Nolpak14/getregdata --description '...'
+   ```
+6. Bump `mcp/package.json` version and `npm publish` - npmjs.com shows the
+   `description` field, so it stays stale until a republish.
+7. Refresh the copy in this file, then re-submit to the directories above.
+   Glama re-crawls the repo on its own; its API is read-only, with no
+   refresh endpoint to force it.
