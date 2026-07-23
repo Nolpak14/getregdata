@@ -21,7 +21,7 @@ run through the list once the npm package is published (see "Publish" at the bot
 - **Install command:** `npx -y getregdata-mcp`
 - **Config block:**
   ```json
-  { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
+  { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" }, "timeout": 600000 } } }
   ```
 
 ## MCP directories (submit the server)

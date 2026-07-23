@@ -13,11 +13,27 @@ every beneficial owner, returned as a single verdict. The per-registry tools are
 depth behind that answer, and the way to run the same jobs elsewhere.
 
 Each registry is exposed as its own tool (e.g. `regdata_crbr_beneficial_owners`,
-`regdata_germany_handelsregister`, `regdata_adverse_media`), plus two helpers:
+`regdata_germany_handelsregister`, `regdata_adverse_media`), plus three helpers:
 
 - `regdata_catalog` - list every registry tool and what it returns.
 - `regdata_describe` - fetch a specific actor's live input schema so the agent
   builds a correct call.
+- `regdata_run_result` - collect a check that was still running when its tool call
+  returned.
+
+## Long checks return a handle, not a failure
+
+Most calls return dataset items directly. If a run is still going after ~45 seconds,
+the tool returns `{status, runId, datasetId, note}` instead. That run is still going
+and is **already billed**, so call `regdata_run_result` with the `runId` to collect it -
+re-running the check to "retry" charges the user twice.
+
+This matters most for the Poland KYB composite: 20-30 seconds typically, up to ~2.5
+minutes for a company with many beneficial owners. Set `"timeout": 600000` on the
+server in your MCP config so the common case still returns inline.
+
+Treat a `runId` as a secret: Apify resolves run and dataset IDs without checking
+ownership, so anyone holding the ID can read that check's result.
 
 ## Setup
 
@@ -34,7 +50,8 @@ Add to your MCP config (`claude_desktop_config.json`, or `.mcp.json` for Claude 
     "getregdata": {
       "command": "npx",
       "args": ["-y", "getregdata-mcp"],
-      "env": { "APIFY_TOKEN": "apify_api_xxxxx" }
+      "env": { "APIFY_TOKEN": "apify_api_xxxxx" },
+      "timeout": 600000
     }
   }
 }

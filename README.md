@@ -19,7 +19,7 @@ npx skills add Nolpak14/getregdata -g -y
 
 **As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - every registry as a tool, with full input schemas):
 ```json
-{ "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
+{ "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" }, "timeout": 600000 } } }
 ```
 
 **As a hosted MCP server - no install** (claude.ai web, ChatGPT developer mode, Gemini, any remote MCP client): connect Apify's hosted MCP endpoint with OAuth, preloaded with regdata registry tools:

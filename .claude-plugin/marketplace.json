@@ -15,7 +15,17 @@
       "strict": false,
       "description": "Compliance and research workflows over official business registries - KYC/AML and KYB, credit-risk and insolvency, property, compliance audits and B2B lead-gen. Includes the getregdata MCP server: one tool per registry, plus a one-call Poland KYB verdict.",
       "category": "compliance",
-      "tags": ["kyc", "aml", "kyb", "compliance", "regtech", "beneficial-owners", "credit-risk", "adverse-media", "mcp"],
+      "tags": [
+        "kyc",
+        "aml",
+        "kyb",
+        "compliance",
+        "regtech",
+        "beneficial-owners",
+        "credit-risk",
+        "adverse-media",
+        "mcp"
+      ],
       "skills": [
         "./skills/regdata",
         "./skills/regdata-kyc-aml",
@@ -27,10 +37,14 @@
       "mcpServers": {
         "getregdata": {
           "command": "npx",
-          "args": ["-y", "getregdata-mcp"],
+          "args": [
+            "-y",
+            "getregdata-mcp"
+          ],
           "env": {
             "APIFY_TOKEN": "${APIFY_TOKEN}"
-          }
+          },
+          "timeout": 600000
         }
       }
     },
@@ -40,7 +54,13 @@
       "strict": false,
       "description": "Free company lookups straight from official public APIs across 28 jurisdictions plus global LEI resolution - no Apify token and no per-result cost. Resolve and verify a company by name or national identifier.",
       "category": "data",
-      "tags": ["company-data", "kyb", "business-registry", "free-api", "lei"],
+      "tags": [
+        "company-data",
+        "kyb",
+        "business-registry",
+        "free-api",
+        "lei"
+      ],
       "skills": [
         "./skills/companies-house-uk",
         "./skills/sec-edgar-us",
@@ -78,7 +98,14 @@
       "strict": false,
       "description": "Enhanced due-diligence screening from official sources - sanctions and PEP lists, US federal debarment, US litigation, offshore-leaks red flags, EU VAT/EORI validation and EU lobbying disclosure. All free public APIs.",
       "category": "compliance",
-      "tags": ["due-diligence", "sanctions", "pep", "screening", "aml", "edd"],
+      "tags": [
+        "due-diligence",
+        "sanctions",
+        "pep",
+        "screening",
+        "aml",
+        "edd"
+      ],
       "skills": [
         "./skills/sanctions-pep-screening",
         "./skills/sam-gov-exclusions",
@@ -94,7 +121,13 @@
       "strict": false,
       "description": "Public funding and procurement research - EU tenders (TED), US federal awards, World Bank contracts and EU grant recipients. Doubles as a due-diligence signal and a B2B lead source. All free public APIs.",
       "category": "data",
-      "tags": ["procurement", "tenders", "grants", "lead-generation", "due-diligence"],
+      "tags": [
+        "procurement",
+        "tenders",
+        "grants",
+        "lead-generation",
+        "due-diligence"
+      ],
       "skills": [
         "./skills/eu-ted-procurement",
         "./skills/us-federal-awards",

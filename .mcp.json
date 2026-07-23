@@ -2,10 +2,14 @@
   "mcpServers": {
     "getregdata": {
       "command": "npx",
-      "args": ["-y", "getregdata-mcp"],
+      "args": [
+        "-y",
+        "getregdata-mcp"
+      ],
       "env": {
         "APIFY_TOKEN": "apify_api_xxxxx"
-      }
+      },
+      "timeout": 600000
     }
   }
 }

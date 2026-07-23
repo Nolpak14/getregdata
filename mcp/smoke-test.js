@@ -10,7 +10,7 @@ await client.connect(transport);
 
 const { tools } = await client.listTools();
 const names = tools.map((t) => t.name);
-const expectHelpers = ["regdata_catalog", "regdata_describe"];
+const expectHelpers = ["regdata_catalog", "regdata_describe", "regdata_run_result"];
 const actorTools = names.filter((n) => n.startsWith("regdata_") && !expectHelpers.includes(n));
 
 console.log(`tools: ${tools.length} (${actorTools.length} actor tools + helpers)`);

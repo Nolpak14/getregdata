@@ -1,6 +1,6 @@
 {
   "name": "getregdata-mcp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "mcpName": "io.github.Nolpak14/getregdata",
   "description": "MCP server for official business-registry data - KYC/AML, beneficial owners, credit-risk, adverse media. One-call Poland KYB verdict, plus per-registry tools for Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US (California) and the UAE.",
   "type": "module",

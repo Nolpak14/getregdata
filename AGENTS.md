@@ -29,6 +29,9 @@ register, needs one source in depth, or asks about another country.
 - MCP tools are named `regdata_<registry>` (e.g. `regdata_crbr_beneficial_owners`, `regdata_germany_insolvency`). Call `regdata_catalog` to list them all; `regdata_describe` returns an actor's live input schema.
 - Inputs are flat objects keyed by official identifiers: `nip`/`krs` (Poland), register number (Germany), NIF (Spain), Partita IVA (Italy), ICO (Czechia), enterprise/VAT number (Belgium).
 - Registry refusals are NOT empty results: several registries reject over-broad queries ("too many matches"). Tools report that state explicitly - narrow the query and re-run instead of concluding "no records".
+- **A long check returns a handle, not a failure.** Most calls return dataset items directly. If the run is still going after ~45s, the tool returns `{status, runId, datasetId, note}` instead. That run is still going and is **already billed** - call `regdata_run_result` with the `runId` to collect it. Do NOT re-run the check to "retry": that charges the user twice. The Poland KYB composite is the one most likely to do this (20-30s typical, up to ~2.5 min when a company has many beneficial owners).
+- Set a generous per-server client timeout (`"timeout": 600000` in your MCP config) so the common case returns inline.
+- Treat a `runId` as a secret. Apify resolves run and dataset IDs without checking ownership, so anyone holding the ID can read that check's result.
 
 ## Auth and billing
 
