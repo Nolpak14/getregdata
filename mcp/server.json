@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Nolpak14/getregdata",
-  "description": "Official business-registry data - KYC/AML, UBO, credit-risk, adverse media across 16 jurisdictions.",
+  "description": "Official business-registry data for agents - one-call Poland KYB verdict (identity + UBO + insolvency), plus per-registry KYC/AML, credit-risk and adverse-media tools.",
   "repository": {
     "url": "https://github.com/Nolpak14/getregdata",
     "source": "github"
   },
-  "version": "1.0.7",
+  "version": "1.1.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "getregdata-mcp",
-      "version": "1.0.7",
+      "version": "1.1.0",
       "transport": {
         "type": "stdio"
       },

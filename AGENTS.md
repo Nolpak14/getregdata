@@ -1,6 +1,19 @@
 # AGENTS.md - how AI agents use getregdata
 
-getregdata turns 34 official public business registries (16 jurisdictions: PL, DE, ES, IT, AT, FR, BE, CZ, SK, CY, IE, PT, NG, CO, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
+getregdata turns official public business registries (PL, DE, ES, IT, AT, FR, BE, CZ, SK, CY, IE, PT, NG, CO, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
+
+## Start here for Poland
+
+`regdata_poland_kyb_check` (actor `regdata/poland-kyb-check`) takes a NIP or KRS and returns
+one complete KYB verdict - official identity, beneficial owners, and insolvency proceedings
+screened against the company **and every beneficial owner** - as `clear`, `findings`,
+`not_found` or `partial`, with machine-readable risk flags and the underlying registry entries.
+
+Prefer it over chaining `regdata_polish_regon` + `regdata_crbr_beneficial_owners` +
+`regdata_krz_debtor` yourself: fewer calls, one normalized answer, and a fixed $0.25 per check.
+A `partial` verdict means a source could not be reached - it does **not** mean the company is
+clean, and it is not billed. Use the single-registry tools when the user names a specific
+register, needs one source in depth, or asks about another country.
 
 ## Fastest paths
 

@@ -2,11 +2,15 @@
 
 An [MCP](https://modelcontextprotocol.io) server that gives any MCP-capable agent
 (Claude Desktop, Claude Code, Cursor, Cline, Windsurf, ...) direct
-access to **34 official business-registry actors** for KYC/AML, credit-risk,
-due-diligence and B2B data across **16 jurisdictions**: Poland, Germany, Italy,
-Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal,
-Nigeria, Colombia, the US (California) and the UAE - plus a cross-border
-adverse-media screener.
+access to **official business-registry actors** for KYC/AML, credit-risk,
+due-diligence and B2B data across Poland, Germany, Italy, Spain, Austria, France,
+Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US
+(California) and the UAE - plus a cross-border adverse-media screener.
+
+For a Polish company, **`regdata_poland_kyb_check` answers the whole question in one
+call** - identity, beneficial owners, and insolvency screened against the company and
+every beneficial owner, returned as a single verdict. The per-registry tools are the
+depth behind that answer, and the way to run the same jobs elsewhere.
 
 Each registry is exposed as its own tool (e.g. `regdata_crbr_beneficial_owners`,
 `regdata_germany_handelsregister`, `regdata_adverse_media`), plus two helpers:
@@ -51,7 +55,7 @@ first-class tools there:
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
 
-Swap in any of the [34 regdata actors](https://apify.com/regdata?fpr=getregdata), or connect plain
+Swap in any [regdata actor](https://apify.com/regdata?fpr=getregdata), or connect plain
 `https://mcp.apify.com` and let the agent discover them via `search-actors`
 ("Poland beneficial owners", "Germany insolvency", ...). OAuth signs you into your
 own Apify account, so billing and the free credit work exactly like the local server.
@@ -60,6 +64,7 @@ own Apify account, so billing and the free credit work exactly like the local se
 
 Once connected, just ask your agent in natural language:
 
+- *"Run a KYB check on Polish NIP 6770065406."* -> `regdata_poland_kyb_check` (one verdict)
 - *"Screen Wirecard for adverse media."* -> `regdata_adverse_media`
 - *"Who are the beneficial owners of Polish NIP 5260250995?"* -> `regdata_crbr_beneficial_owners`
 - *"Is this German company in the Handelsregister?"* -> `regdata_germany_handelsregister`

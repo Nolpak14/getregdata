@@ -6,14 +6,15 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 ## Canonical listing copy (reuse everywhere)
 
-> Before pasting this anywhere, run `node scripts/check-counts.mjs` from the repo
-> root. The counts below are the single most common thing to go stale - listings
-> submitted with old numbers undersell the fleet and only get corrected on the
-> directory's next crawl (or never).
+> **This copy carries no counts, on purpose.** Directory listings are pasted by hand
+> and re-crawled on someone else's schedule, so any number written here is stale the
+> next time an actor ships - and every past attempt (exact numbers, then "30+" hedges)
+> went stale anyway. Describe capability and regions; never write a fleet size into
+> copy a human has to maintain. `node scripts/check-counts.mjs` enforces this.
 
 - **Name:** getregdata
 - **Tagline (≤60):** Official business-registry data for KYC/AML & due diligence
-- **Short (≤160):** 34 official business-registry actors as MCP tools + 44 agent skills - KYC/AML, beneficial owners, credit-risk, adverse media across 16 jurisdictions.
+- **Short (≤160):** Official business registries as MCP tools + agent skills - one-call Poland KYB verdict, beneficial owners, credit-risk and adverse media across Europe, the US, UAE, Africa and LatAm.
 - **Categories/tags:** kyc, aml, kyb, compliance, regtech, beneficial-owners, adverse-media, credit-risk, due-diligence, business-registry, apify
 - **Repo:** https://github.com/Nolpak14/getregdata
 - **npm:** https://www.npmjs.com/package/getregdata-mcp
@@ -37,7 +38,7 @@ run through the list once the npm package is published (see "Publish" at the bot
 
 Bullet for the awesome-* PRs:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 34 official business-registry actors (KYC/AML, beneficial owners, credit-risk, adverse media) across 16 jurisdictions in Europe, the US, UAE, Africa and LatAm via Apify. `npx -y getregdata-mcp`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - official business registries as agent tools (KYC/AML, beneficial owners, credit-risk, adverse media) across Europe, the US, UAE, Africa and LatAm via Apify; one call returns a complete Poland KYB verdict. `npx -y getregdata-mcp`.
 ```
 
 ## Skills directories (submit the skills)
@@ -49,7 +50,7 @@ Bullet for the awesome-* PRs:
 
 Bullet:
 ```
-- [getregdata](https://github.com/Nolpak14/getregdata) - 44 skills for KYC/AML, credit-risk, property, compliance and lead-gen over 34 official business registries in 16 jurisdictions. `npx skills add Nolpak14/getregdata`.
+- [getregdata](https://github.com/Nolpak14/getregdata) - skills for KYC/AML, credit-risk, property, compliance and lead-gen over official business registries across Europe, the US, UAE, Africa and LatAm, plus free public-API company lookups. `npx skills add Nolpak14/getregdata`.
 ```
 
 ## Repo hygiene that boosts auto-indexing
@@ -73,20 +74,40 @@ from the live Apify account first).
 
 ## Checklist when the fleet grows
 
-Adding an actor touches more than `actors.js`. In order:
+The expensive part used to be chasing a number through a dozen files. It is not any
+more - **no public copy states a fleet size unless it is derived at runtime**, so
+adding an actor should touch code and data, never marketing prose. If you find
+yourself editing a sentence to change a number, stop: delete the number instead.
 
-1. Regenerate `mcp/actors.js` from the live Apify account.
-2. Bump `JURISDICTIONS` in `mcp/index.js` if the actor opens a new country.
-3. Add the per-country section to `README.md` and `skills/regdata/SKILL.md`.
-4. `node scripts/check-counts.mjs` - must print OK before you go further.
-5. Update the **GitHub repo description**. This is the string GitHub search,
-   social cards and most directory crawlers surface, and it is the one place
-   `check-counts.mjs` cannot reach:
+1. Regenerate `mcp/actors.js` from the live Apify account
+   (`APIFY_TOKEN=... node scripts/gen-manifest.mjs`).
+2. Bump `JURISDICTIONS` in `mcp/index.js` if the actor opens a new country. This is
+   the one hardcoded number left, deliberately: it is read at runtime by the catalog
+   tool description, so it lives in exactly one place.
+3. Add the actor to the per-country tables in `README.md` and
+   `skills/regdata/SKILL.md` - the tables are the content; do **not** add a count.
+4. `node scripts/check-counts.mjs` - must print OK. It fails on any hardcoded fleet
+   count, and on the retired Apify Console sign-up referral link (the old
+   `?ref=` form, which earns no commission - always link
+   `https://apify.com/regdata?fpr=getregdata` instead).
+5. On the **site** (`getregdata-site`): add the entry to `src/data/registries.ts`,
+   run `APIFY_TOKEN=... node scripts/sync-pricing.mjs` (it also fails if a
+   `published:` flag disagrees with the live store), then `npm run build`.
+   `/llms.txt`, `/llms-full.txt`, `/pricing.md` and `/.well-known/getregdata.json`
+   are generated - never hand-edit them.
+   Verify with `node scripts/check-counts.mjs --site ../getregdata-site`.
+6. In `apify-actors`: add the actor to `FLEET` in `scripts/gen-cross-sell.mjs`
+   (it exits 1 if a local actor is missing from the map), then
+   `node scripts/gen-cross-sell.mjs --write` and redeploy the READMEs.
+7. Update the **GitHub repo description** - GitHub search, social cards and most
+   directory crawlers surface this string, and no repo-side check can reach it.
+   Keep it count-free for the same reason as everything else:
    ```bash
    gh repo edit Nolpak14/getregdata --description '...'
    ```
-6. Bump `mcp/package.json` version and `npm publish` - npmjs.com shows the
-   `description` field, so it stays stale until a republish.
-7. Refresh the copy in this file, then re-submit to the directories above.
-   Glama re-crawls the repo on its own; its API is read-only, with no
-   refresh endpoint to force it.
+8. Bump `mcp/package.json` version and `npm publish` - npmjs.com renders the
+   *published* package's description, so GitHub alone never reaches `npx` users.
+   Then `mcp-publisher publish` from `mcp/` to resync the Official MCP Registry.
+9. The copy at the top of this file is count-free, so it does not need refreshing.
+   Re-submit only if a directory listing is otherwise wrong. Glama re-crawls on its
+   own; its API is read-only, with no refresh endpoint to force it.

@@ -1,17 +1,19 @@
 ---
 name: regdata
-description: "Extract structured data from 34 official government registries across 16 jurisdictions - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), Cyprus (DRCOR), Ireland (CRO), Portugal (corporate acts), Nigeria (CAC), Colombia (RUES), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, DRCOR, CRO, RUES, CAC, adverse media) or wants to scrape/extract data from a European, US, UAE, African or Latin American government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
+description: "Extract structured data from official government registries - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), Cyprus (DRCOR), Ireland (CRO), Portugal (corporate acts), Nigeria (CAC), Colombia (RUES), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. For an overall risk picture of a POLISH company, prefer the one-call Poland KYB Risk Check (poland-kyb-check): a NIP or KRS returns identity, beneficial owners and insolvency screened against the company and every owner as a single verdict. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, DRCOR, CRO, RUES, CAC, adverse media) or wants to scrape/extract data from a European, US, UAE, African or Latin American government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
 metadata:
-  version: 2.1.0
+  version: 2.2.0
   author: regdata
   tags: [government-registry, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, cyprus, ireland, portugal, nigeria, colombia, usa, uae, apify, b2b-data]
 ---
 
 # Government Registry Data - Router
 
-You are an expert in government registry data extraction. You help users find and extract structured data from 34 official public registries across 16 jurisdictions (Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, United States, UAE) plus a cross-border adverse-media screener, all using Apify actors.
+You are an expert in government registry data extraction. You help users find and extract structured data from official public registries across Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the United States (California) and the UAE, plus a cross-border adverse-media screener, all using Apify actors.
 
 Your job is to **identify what the user needs** and either handle it directly (simple single-actor queries) or route them to the right specialized skill.
+
+**Poland shortcut - check this before routing.** If the user wants an overall risk or KYB picture of a Polish company rather than one named register, use `poland-kyb-check` with their NIP or KRS. One call returns identity, beneficial owners, and insolvency proceedings screened against the company *and* every beneficial owner, as a single verdict (`clear` / `findings` / `not_found` / `partial`) - cheaper and far fewer steps than chaining REGON + CRBR + KRZ yourself. A `partial` verdict means a source could not be reached; it does **not** mean the company is clean, and it is not billed. Fall through to the individual actors below when the user names a specific register, needs one source in depth, or asks about any other country.
 
 ## Step 1: Identify Intent
 
@@ -44,12 +46,12 @@ Ask the user what they need if not clear. Map their request to one of these cate
 
 ## Step 3: Actor Catalog
 
-All 34 actors. Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
+Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (drops on paid tiers); every actor includes a free allowance so you can test before paying. Check the live Store page for current pricing.
 
-### Poland (12 actors)
-
+### Poland
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
+| **KYB Check (start here)** | `regdata/poland-kyb-check` | **One call from a NIP or KRS: identity + beneficial owners + insolvency screened against the company and every owner, as one verdict.** Incomplete checks are not billed. | $0.25/check |
 | CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 |
 | KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.006 + $0.025/search session |
 | KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 (+ $0.08/MB over 1 MB) |
@@ -63,104 +65,88 @@ All 34 actors. Pay-per-result, no subscriptions. Price = the per-record rate on 
 | Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.005/company + $0.01/premise |
 | PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 |
 
-### Germany (2 actors)
-
+### Germany
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Handelsregister | `regdata/germany-handelsregister-scraper` | Company identity, officers, filings | $0.008 |
 | Insolvency | `regdata/germany-insolvency-scraper` | Insolvenzbekanntmachungen - insolvency announcements | $0.04 |
 
-### Italy (2 actors)
-
+### Italy
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Registro Imprese | `regdata/italy-registro-imprese-scraper` | Company profile, P.IVA, officers, PEC | $0.01 |
 | PEC Lookup | `regdata/italy-pec-lookup` | Certified email + SDI code by VAT | $0.008 |
 
-### Spain (3 actors)
-
+### Spain
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | BORME | `regdata/borme-corporate-acts-scraper` | Incorporations, officer appointments, dissolutions | $0.005 |
 | Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 |
 | Concursal | `regdata/spain-concursal-scraper` | Registro Publico Concursal - insolvency parties/roles | $0.05 |
 
-### Austria (2 actors)
-
+### Austria
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Ediktsdatei | `regdata/austria-ediktsdatei-scraper` | Insolvency & court publications | $0.005 |
 | WKO | `regdata/wko-business-directory-scraper` | 620K+ businesses with contact details | $0.005 |
 
-### France (1 actor)
-
+### France
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Societe.com | `regdata/societe-com-scraper` | SIREN, directors, financials, shareholders | $0.005 |
 
-### Belgium (1 actor)
-
+### Belgium
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | KBO/BCE | `regdata/belgium-kbo-company-scraper` | Company data, directors, VAT, NACEBEL codes | $0.008 |
 
-### Czechia (1 actor)
-
+### Czechia
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | ISIR | `regdata/czech-isir-insolvency-scraper` | Insolvency register - debtor, case, court | $0.005 |
 
-### Slovakia (1 actor)
-
+### Slovakia
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | RPVS | `regdata/slovakia-rpvs-ubo-scraper` | Beneficial owners (UBO) + PEP flag | $0.007 |
 
-### United States (2 actors)
-
+### United States
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | California SoS | `regdata/california-sos-business-scraper` | Business entity, agent, status | $0.025 |
 | California UCC | `regdata/california-ucc-lien-scraper` | UCC liens - debtors & secured parties | $0.05 |
 
-### UAE (1 actor)
-
+### UAE
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | ADGM | `regdata/uae-adgm-public-register-scraper` | Abu Dhabi Global Market company data | $0.01 |
 
-### Cyprus (1 actor)
-
+### Cyprus
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | DRCOR | `regdata/cyprus-drcor-company-scraper` | Company identity & status, directors & secretary, registered office | $0.007 |
 
-### Ireland (1 actor)
-
+### Ireland
 | Actor | Slug | What You Get | ~$/Search |
 |---|---|---|---|
 | CRO | `regdata/ireland-cro-company-scraper` | Company identity, status, incorporation date, registered address & email | $0.04 |
 
-### Portugal (1 actor)
-
+### Portugal
 | Actor | Slug | What You Get | ~$/Search |
 |---|---|---|---|
 | Corporate Acts | `regdata/portugal-corporate-acts-scraper` | Published corporate acts - incorporations, changes, appointments, dissolutions | $0.03 |
 
-### Nigeria (1 actor)
-
+### Nigeria
 | Actor | Slug | What You Get | ~$/Search |
 |---|---|---|---|
 | CAC | `regdata/nigeria-cac-company-scraper` | Company / business-name / trustees identity, classification, status | $0.015 |
 
-### Colombia (1 actor)
-
+### Colombia
 | Actor | Slug | What You Get | ~$/Search |
 |---|---|---|---|
 | RUES | `regdata/colombia-rues-company-scraper` | Company & non-profit identity, chamber of commerce, legal form, status | $0.02 |
 
-### Cross-border (1 actor)
-
+### Cross-border
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Adverse Media | `regdata/adverse-media-screener` | KYC/AML negative-news / adverse-media check | $0.10 |

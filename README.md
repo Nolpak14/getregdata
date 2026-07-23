@@ -1,12 +1,14 @@
 # getregdata - Business Registry Research Skills for AI Agents
 
-[![Skills](https://img.shields.io/badge/skills-44-blue)](#claude-code-skills)
-[![Actors](https://img.shields.io/badge/actors-34-green)](#actor-catalog)
-[![Jurisdictions](https://img.shields.io/badge/jurisdictions-16-orange)](#actor-catalog)
+[![Skills](https://img.shields.io/badge/agent%20skills-free-blue)](#claude-code-skills)
+[![Actors](https://img.shields.io/badge/registry%20actors-pay%20per%20result-green)](#actor-catalog)
+[![Coverage](https://img.shields.io/badge/coverage-EU%20%7C%20US%20%7C%20UAE%20%7C%20Africa%20%7C%20LatAm-orange)](#actor-catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 [![Install](https://img.shields.io/badge/install-npx%20skills%20add-black)](#install)
 
-Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. 34 actors across 16 jurisdictions - Poland, Spain, Austria, Germany, France, Italy, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US (California) and the UAE - plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://apify.com/regdata?fpr=getregdata) actors for reliable, scalable access.
+Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. Official registries across Europe, the United States, the UAE, Africa and Latin America, plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://apify.com/regdata?fpr=getregdata) actors for reliable, scalable access.
+
+**Checking a Polish company? Start with [Poland KYB Risk Check](https://apify.com/regdata/poland-kyb-check?fpr=getregdata).** One NIP or KRS in, one verdict out - identity, beneficial owners and insolvency screened against the company *and* every beneficial owner. Everything below is the depth behind that answer, and the way to run the same jobs elsewhere.
 
 ## Install
 
@@ -15,7 +17,7 @@ Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, cre
 npx skills add Nolpak14/getregdata -g -y
 ```
 
-**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - all 34 registries as tools, with full input schemas):
+**As a local MCP server** (Claude Desktop, Claude Code, Cursor, Cline, Windsurf - every registry as a tool, with full input schemas):
 ```json
 { "mcpServers": { "getregdata": { "command": "npx", "args": ["-y", "getregdata-mcp"], "env": { "APIFY_TOKEN": "apify_api_xxxxx" } } } }
 ```
@@ -24,7 +26,7 @@ npx skills add Nolpak14/getregdata -g -y
 ```
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
-Swap in any of the [34 regdata actors](https://apify.com/regdata?fpr=getregdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
+Swap in any [regdata actor](https://apify.com/regdata?fpr=getregdata) - or use plain `https://mcp.apify.com` and let the agent discover them with `search-actors`. Billing goes to your own Apify account either way.
 
 See [`mcp/`](mcp/) for the server, tool list, and per-client config.
 
@@ -101,7 +103,7 @@ More examples: [examples/python/](examples/python/) | [examples/javascript/](exa
 
 ## Claude Code Skills
 
-Forty-four skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with all 34 actors - plus free public-API lookups that need no Apify token.
+Skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with every actor - plus free public-API lookups that need no Apify token.
 
 **Workflow skills** (the compliance/research frameworks, backed by the paid actors):
 
@@ -165,12 +167,13 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* or *"L
 
 ## Actor Catalog
 
-34 actors across 16 jurisdictions. Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
+Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pricing) below.
 
-### Poland (12 actors)
+### Poland
 
 | Actor | Registry | What You Get |
 |---|---|---|
+| **[Poland KYB Risk Check](https://apify.com/regdata/poland-kyb-check?fpr=getregdata)** | REGON + CRBR + KRZ | **Start here.** One NIP or KRS returns identity, beneficial owners and insolvency screened against the company *and* every owner, as a single verdict. Incomplete checks are not billed. |
 | [KRS Financial Statements Scraper](https://apify.com/regdata/poland-krs-financial-scraper?fpr=getregdata) | eKRS | Financial statements - balance sheets, P&L, assets |
 | [EKW Land Registry Scraper](https://apify.com/regdata/ekw-ksiegi-wieczyste-scraper?fpr=getregdata) | EKW | Property ownership, mortgages and easements |
 | [CRBR Beneficial Owners Scraper](https://apify.com/regdata/crbr-beneficial-owners-scraper?fpr=getregdata) | CRBR | Beneficial owners (UBO) for KYC/AML |
@@ -184,104 +187,88 @@ Then in Claude Code: *"Run a KYC check on Polish company NIP 6770065406"* or *"L
 | [Premises Prospector](https://apify.com/regdata/polish-premises-prospector?fpr=getregdata) | GUS REGON | Site-level / local-unit (jednostki lokalne) records for prospecting |
 | [Parliamentary PEP Scraper](https://apify.com/regdata/poland-parliamentary-pep-scraper?fpr=getregdata) | Sejm | Politically-exposed persons (PEP) for KYC/AML screening |
 
-### Spain (3 actors)
-
+### Spain
 | Actor | Registry | What You Get |
 |---|---|---|
 | [BORME Corporate Acts Scraper](https://apify.com/regdata/borme-corporate-acts-scraper?fpr=getregdata) | BORME | Incorporations, officer appointments, capital changes, dissolutions |
 | [Spain Company Directory Scraper](https://apify.com/regdata/spain-company-directory-scraper?fpr=getregdata) | Registro Mercantil | NIF, officers, CNAE codes, legal form, IRUS, EUID |
 | [Registro Publico Concursal Scraper](https://apify.com/regdata/spain-concursal-scraper?fpr=getregdata) | Registro Publico Concursal | Insolvency parties and their roles (debtor, administrator, disqualified) |
 
-### Austria (2 actors)
-
+### Austria
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Ediktsdatei Insolvency Scraper](https://apify.com/regdata/austria-ediktsdatei-scraper?fpr=getregdata) | Ediktsdatei | Austrian insolvency and court publications |
 | [WKO Business Directory Scraper](https://apify.com/regdata/wko-business-directory-scraper?fpr=getregdata) | WKO | Austrian businesses with contact details and trade licenses |
 
-### Germany (2 actors)
-
+### Germany
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Handelsregister Scraper](https://apify.com/regdata/germany-handelsregister-scraper?fpr=getregdata) | Handelsregister | Company KYB - registered details, officers, capital |
 | [Insolvency Register Search](https://apify.com/regdata/germany-insolvency-scraper?fpr=getregdata) | Insolvenzbekanntmachungen | German insolvency announcements by company and date |
 
-### France (1 actor)
-
+### France
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Societe.com Company Scraper](https://apify.com/regdata/societe-com-scraper?fpr=getregdata) | Societe.com | SIREN, directors, financials, shareholders, subsidiaries, director networks |
 
-### Italy (2 actors)
-
+### Italy
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Registro Imprese Scraper](https://apify.com/regdata/italy-registro-imprese-scraper?fpr=getregdata) | Registro Imprese | Full company profile by name or P.IVA (VAT), incl. PEC |
 | [PEC Lookup](https://apify.com/regdata/italy-pec-lookup?fpr=getregdata) | INI-PEC | Certified email (PEC) and SDI code by VAT - bulk lookup |
 
-### Belgium (1 actor)
-
+### Belgium
 | Actor | Registry | What You Get |
 |---|---|---|
 | [KBO/BCE Company Scraper](https://apify.com/regdata/belgium-kbo-company-scraper?fpr=getregdata) | KBO/BCE | Company data, directors and VAT |
 
-### Czechia (1 actor)
-
+### Czechia
 | Actor | Registry | What You Get |
 |---|---|---|
 | [ISIR Insolvency Register Search](https://apify.com/regdata/czech-isir-insolvency-scraper?fpr=getregdata) | ISIR | Czech insolvency register - debtor, case, court |
 
-### Slovakia (1 actor)
-
+### Slovakia
 | Actor | Registry | What You Get |
 |---|---|---|
 | [RPVS Beneficial Owners Scraper](https://apify.com/regdata/slovakia-rpvs-ubo-scraper?fpr=getregdata) | RPVS | Beneficial owners (UBO) with PEP flag - "the CRBR of Slovakia" |
 
-### United States (2 actors)
-
+### United States
 | Actor | Registry | What You Get |
 |---|---|---|
 | [California SoS Business Scraper](https://apify.com/regdata/california-sos-business-scraper?fpr=getregdata) | California SoS | Business entity status and registered agent |
 | [California UCC Lien Search](https://apify.com/regdata/california-ucc-lien-scraper?fpr=getregdata) | California UCC | UCC liens - debtors and secured parties |
 
-### UAE (1 actor)
-
+### UAE
 | Actor | Registry | What You Get |
 |---|---|---|
 | [ADGM Public Register Scraper](https://apify.com/regdata/uae-adgm-public-register-scraper?fpr=getregdata) | ADGM | Abu Dhabi Global Market company data |
 
-### Cyprus (1 actor)
-
+### Cyprus
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Cyprus DRCOR Company Scraper](https://apify.com/regdata/cyprus-drcor-company-scraper?fpr=getregdata) | DRCOR | Company identity and status, directors & secretary, registered office |
 
-### Ireland (1 actor)
-
+### Ireland
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Ireland CRO Company Scraper](https://apify.com/regdata/ireland-cro-company-scraper?fpr=getregdata) | CRO (CORE) | Company identity, status, incorporation date, registered address and email |
 
-### Portugal (1 actor)
-
+### Portugal
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Portugal Corporate Acts Scraper](https://apify.com/regdata/portugal-corporate-acts-scraper?fpr=getregdata) | Publicações MJ | Published corporate acts - incorporations, changes, appointments, dissolutions |
 
-### Nigeria (1 actor)
-
+### Nigeria
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Nigeria CAC Company Scraper](https://apify.com/regdata/nigeria-cac-company-scraper?fpr=getregdata) | CAC | Company / business-name / trustees identity, classification, status |
 
-### Colombia (1 actor)
-
+### Colombia
 | Actor | Registry | What You Get |
 |---|---|---|
 | [Colombia RUES Company Scraper](https://apify.com/regdata/colombia-rues-company-scraper?fpr=getregdata) | RUES | Company & non-profit identity, chamber of commerce, legal form, status |
 
-### Cross-border (1 actor)
-
+### Cross-border
 | Actor | Source | What You Get |
 |---|---|---|
 | [Adverse Media Screener](https://apify.com/regdata/adverse-media-screener?fpr=getregdata) | News / web | KYC/AML adverse-media (negative news) check for a name or company |

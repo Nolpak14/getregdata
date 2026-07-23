@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // getregdata MCP server - exposes the regdata official business-registry actors as MCP tools.
-// KYC/AML, credit-risk, due-diligence and B2B data across 16 jurisdictions.
+// KYC/AML, credit-risk, due-diligence and B2B data across Europe, the US, UAE,
+// Africa and LatAm. Fleet size is derived from actors.js - never hardcode it here
+// (see scripts/check-counts.mjs for why).
 //
 // Auth: set APIFY_TOKEN in the environment (get one free at
 // https://apify.com/regdata?fpr=getregdata - includes $5 credits).
@@ -103,7 +105,9 @@ function buildToolList() {
     {
       name: "regdata_catalog",
       description:
-        `List all ${ACTORS.length} getregdata business-registry actors (KYC/AML, credit-risk, due-diligence, B2B) across ${JURISDICTIONS} jurisdictions, with their tool name and what each returns. Call this first to discover which registry tool to use.`,
+        `List the getregdata business-registry tools (KYC/AML, credit-risk, due-diligence, B2B) across ${JURISDICTIONS} jurisdictions, with each tool name and what it returns. ` +
+        `For a Polish company, prefer regdata_poland_kyb_check: one call takes a NIP or KRS and returns a complete KYB verdict (identity + beneficial owners + insolvency screened against the company and every owner), instead of chaining several registry tools yourself. ` +
+        `Use this catalog to find the right single-registry tool for other jurisdictions, or when you need one specific source in depth.`,
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
     },
     {

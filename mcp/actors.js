@@ -1,7 +1,33 @@
-// Auto-generated from the live Apify fleet (deployed builds). 34 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 35 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-07-20. Do not edit inputSchema by hand.
+// Generated 2026-07-23. Do not edit inputSchema by hand.
 export const ACTORS = [
+  {
+    "slug": "poland-kyb-check",
+    "tool": "regdata_poland_kyb_check",
+    "title": "Poland KYB Risk Check - one call, one verdict",
+    "description": "Run a COMPLETE Polish KYB check from a single NIP or KRS - start here for Poland instead of chaining the individual registry tools. Resolves official company identity, pulls beneficial owners from the national UBO register, and screens the national debtor register for insolvency, restructuring and enforcement proceedings against the company AND every beneficial owner by exact identifier. Returns one normalized verdict - clear, findings, not_found or partial - plus machine-readable risk flags and the underlying registry entries (case signature, classification, court, dates, source). A \"partial\" verdict means a source could not be reached, not that the company is clean, and is not billed. Poland only; use the per-registry tools for other jurisdictions or for deeper single-source detail.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "identifiers": {
+          "type": "array",
+          "title": "Company identifiers (NIP or KRS)",
+          "description": "The Polish companies to check, by NIP (10 digits) or KRS (10 digits, leading zeros). Each identifier returns one complete KYB check: identity, beneficial owners, and insolvency proceedings against the company and every beneficial owner."
+        },
+        "krzConcurrency": {
+          "type": "integer",
+          "title": "Beneficial-owner screening concurrency",
+          "description": "How many beneficial owners to screen against the insolvency register in parallel. Higher is faster; lower is gentler on the registry. Leave at the default unless a check is timing out.",
+          "default": 4
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "identifiers"
+      ]
+    }
+  },
   {
     "slug": "adverse-media-screener",
     "tool": "regdata_adverse_media",
@@ -1553,12 +1579,12 @@ export const ACTORS = [
         "searchQuery": {
           "type": "string",
           "title": "Search Query",
-          "description": "Keyword search for company name or service (e.g., 'Software', 'Gastronomie', 'Steuerberater')"
+          "description": "Keyword search for company name or service (e.g., 'Software', 'Gastronomie', 'Steuerberater'). Supply this OR bundesland at minimum - 'branche' is an accepted synonym, so filling either one is enough."
         },
         "branche": {
           "type": "string",
           "title": "Industry / Branche",
-          "description": "Industry or trade classification to search for (e.g., 'IT-Dienstleistung', 'Gastronomie', 'Tischlerei', 'Elektrotechnik'). This is used as the primary search term on firmen.wko.at."
+          "description": "Industry or trade classification to search for (e.g., 'IT-Dienstleistung', 'Gastronomie', 'Tischlerei', 'Elektrotechnik'). Synonym of searchQuery and used as the primary search term on firmen.wko.at - set either one, not both."
         },
         "bundesland": {
           "type": "string",
@@ -1581,7 +1607,7 @@ export const ACTORS = [
         "bezirk": {
           "type": "string",
           "title": "Bezirk (District)",
-          "description": "District within the selected Bundesland (e.g., 'Innere Stadt', 'Linz-Land', 'Hallein'). Only works when Bundesland is also set."
+          "description": "Optional district filter, e.g. 'Linz-Land', 'Hallein', 'Moedling'. For Vienna use a district name or its number ('Innere Stadt', 'Landstrasse', or '3'). Needs a searchQuery alongside it - a district on its own returns nothing. Replaces the Bundesland filter rather than adding to it."
         },
         "maxResults": {
           "type": "integer",
