@@ -22,7 +22,7 @@ Each registry is exposed as its own tool (e.g. `regdata_crbr_beneficial_owners`,
 ## Setup
 
 You need an Apify API token (free, includes $5 credits):
-[apify.com/regdata](https://apify.com/regdata?fpr=getregdata).
+[apify.com](https://apify.com?fpr=getregdata).
 
 ### Claude Desktop / Claude Code
 

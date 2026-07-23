@@ -130,7 +130,7 @@ The World Bank data tells you a company won a development-financed contract and 
 | U.S. public filer + financials | USA | free `sec-edgar-us` |
 | Global LEI + parent/child structure | Cross-border | free `gleif-lei-lookup` |
 
-For the EU and U.S. sides of a company's government exposure, route to **`eu-ted-procurement`** (above-threshold EU public tenders and awards) and **`us-federal-awards`** (U.S. federal contracts and grants) - together these three are the global public-procurement lanes. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the development-finance supplier lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For the EU and U.S. sides of a company's government exposure, route to **`eu-ted-procurement`** (above-threshold EU public tenders and awards) and **`us-federal-awards`** (U.S. federal contracts and grants) - together these three are the global public-procurement lanes. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the development-finance supplier lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

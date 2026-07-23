@@ -129,7 +129,7 @@ This skill is one lane of an enhanced due-diligence screen. Pair it with the san
 | Extract board members (PL) | `regdata/krs-fullnames-scraper` |
 | Extract PSC / officers (UK, free) | `companies-house-uk` |
 
-For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

@@ -123,7 +123,7 @@ Thailand (like the UK and Japan) is an outlier: a free, official, keyless open-d
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Resolve the Thai juristic person number here, then map it to a global LEI with **`gleif-lei-lookup`** for cross-border structure. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Resolve the Thai juristic person number here, then map it to a global LEI with **`gleif-lei-lookup`** for cross-border structure. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

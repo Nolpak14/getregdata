@@ -167,7 +167,7 @@ exists, paid actor otherwise:
 For the full compliance workflow - risk scoring, sanctions + PEP overlays,
 cross-registry validation - route to **`regdata-kyc-aml`**. To turn the
 grant-recipient lane into a qualified outreach list, route to **`regdata-lead-gen`**.
-Paid actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

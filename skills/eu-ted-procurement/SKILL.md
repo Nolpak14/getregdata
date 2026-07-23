@@ -136,7 +136,7 @@ TED tells you a company won a public contract and which country the buyer + winn
 | Company + officers | Italy | `regdata/italy-registro-imprese-scraper` |
 | U.S. public filer + financials | USA | free `sec-edgar-us` |
 
-To resolve the winner to its global LEI and corporate structure across borders, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-buyer lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+To resolve the winner to its global LEI and corporate structure across borders, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-buyer lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

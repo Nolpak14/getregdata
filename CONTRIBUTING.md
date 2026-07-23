@@ -6,7 +6,7 @@ Thanks for your interest in extending the European Regulatory Research Skills su
 
 1. **Research the registry landscape** - Does the country have an official public business registry? Is it accessible programmatically, or does it require a scraper? Are there competing APIs?
 
-2. **Create the Apify Actor** - Build and deploy the scraper on [Apify](https://apify.com/regdata?fpr=getregdata). Follow the portfolio conventions: structured JSON output, clear pay-per-result pricing, comprehensive README.
+2. **Create the Apify Actor** - Build and deploy the scraper on [Apify](https://apify.com?fpr=getregdata). Follow the portfolio conventions: structured JSON output, clear pay-per-result pricing, comprehensive README.
 
 3. **Add to the Actor Catalog** - In `README.md`, add a row under the relevant country with the actor name, registry, what you get, and cost per result.
 

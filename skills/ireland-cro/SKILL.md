@@ -141,7 +141,7 @@ Ireland (like the UK and Norway) offers a genuinely free, official company API -
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Ireland is in the EU: for its VAT number use **`vies-vat-validation`** (free EU VIES check), and for its global identity use **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Ireland is in the EU: for its VAT number use **`vies-vat-validation`** (free EU VIES check), and for its global identity use **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

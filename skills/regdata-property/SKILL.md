@@ -172,7 +172,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set, tell the user:
-- Sign up at https://apify.com/regdata?fpr=getregdata (free $5 credits included)
+- Sign up at https://apify.com?fpr=getregdata (free $5 credits included)
 - Set token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### IMPORTANT: What Happens When a KW Cannot Be Read

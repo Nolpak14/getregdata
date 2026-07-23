@@ -176,7 +176,7 @@ owners and directors, then screen every one of them here.
 
 For the full workflow - risk scoring, adverse-media overlay, cross-registry
 validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify
-token: https://apify.com/regdata?fpr=getregdata.
+token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

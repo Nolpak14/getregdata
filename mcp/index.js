@@ -5,7 +5,7 @@
 // (see scripts/check-counts.mjs for why).
 //
 // Auth: set APIFY_TOKEN in the environment (get one free at
-// https://apify.com/regdata?fpr=getregdata - includes $5 credits).
+// https://apify.com?fpr=getregdata - includes $5 credits).
 //
 // Run: npx getregdata-mcp   (or: node index.js)
 
@@ -30,7 +30,7 @@ function requireToken() {
   if (!t) {
     throw new Error(
       "APIFY_TOKEN is not set. Get a free token (with $5 credits) at " +
-        "https://apify.com/regdata?fpr=getregdata and set APIFY_TOKEN in your MCP client config."
+        "https://apify.com?fpr=getregdata and set APIFY_TOKEN in your MCP client config."
     );
   }
   return t;

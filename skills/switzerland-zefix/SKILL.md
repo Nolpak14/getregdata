@@ -150,7 +150,7 @@ Switzerland (like the UK and Norway) is an outlier: a free, official, structured
 | Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
 | Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
 
-To turn a Swiss UID into a global identity, resolve it to an LEI with **`gleif-lei-lookup`**, and screen the entity and its people with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those paid actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+To turn a Swiss UID into a global identity, resolve it to an LEI with **`gleif-lei-lookup`**, and screen the entity and its people with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those paid actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

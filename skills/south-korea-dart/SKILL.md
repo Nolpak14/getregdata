@@ -145,7 +145,7 @@ DART covers **listed and reporting Korean filers only** - KOSPI, KOSDAQ, KONEX, 
 | Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**; for financial-distress and insolvency monitoring once the entity is identified, route to **`regdata-credit-risk`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**; for financial-distress and insolvency monitoring once the entity is identified, route to **`regdata-credit-risk`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

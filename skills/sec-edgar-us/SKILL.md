@@ -131,7 +131,7 @@ EDGAR covers **SEC-registered issuers only** - U.S. public companies and large f
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
 
-To resolve a public company to its global LEI and corporate structure, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+To resolve a public company to its global LEI and corporate structure, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

@@ -112,7 +112,7 @@ VIES tells you the VAT is real and which country the entity is in. Use the `coun
 | France | `regdata/societe-com-scraper` (or the free `france-company-lookup` for identity) |
 | Northern Ireland / UK | free `companies-house-uk` |
 
-For a full compliance workflow (risk scoring, PEP and adverse-media overlays) route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP and adverse-media overlays) route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Bonus: EORI validation (the other EU trade ID)
 

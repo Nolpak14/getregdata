@@ -139,7 +139,7 @@ This skill is one lane of an AML screen. Pair it with the sanctions and PEP lane
 | Extract PSC / officers (UK, free) | `companies-house-uk` |
 | One-call composite KYB (PL) | `regdata/poland-kyb-check` |
 
-For the full workflow - risk scoring, adverse-media overlay, cross-registry validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For the full workflow - risk scoring, adverse-media overlay, cross-registry validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

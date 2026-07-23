@@ -140,7 +140,7 @@ Croatia (like the UK, Denmark and Norway) is an outlier: an official, structured
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-There is no Croatian regdata actor - the free sudski registar OPEN API above is the whole toolkit for Croatia. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+There is no Croatian regdata actor - the free sudski registar OPEN API above is the whole toolkit for Croatia. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

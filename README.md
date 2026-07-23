@@ -93,7 +93,7 @@ console.log(`Found ${items.length} insolvency records`);
 items.forEach(item => console.log(`${item.debtorName} - ${item.proceedingType}`));
 ```
 
-Get your API token: [Apify Console](https://apify.com/regdata?fpr=getregdata) - new accounts include $5 free credits.
+Get your API token: [Apify Console](https://apify.com?fpr=getregdata) - new accounts include $5 free credits.
 
 One prompt in your agent - *"Run a KYC check on NIP 6770065406"* - and the `regdata-kyc-aml` skill resolves the company's beneficial owners, scores the ownership, and flags anything for enhanced due diligence.
 
@@ -297,7 +297,7 @@ export APIFY_TOKEN=apify_api_xxxxx
 client = ApifyClient("apify_api_xxxxx")
 ```
 
-Get your token: [Apify Console > Settings > Integrations](https://apify.com/regdata?fpr=getregdata)
+Get your token: [Apify Console > Settings > Integrations](https://apify.com?fpr=getregdata)
 
 ---
 

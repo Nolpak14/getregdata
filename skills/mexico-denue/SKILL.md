@@ -145,7 +145,7 @@ DENUE is a free, official, structured API - so there is **no anti-bot scraping m
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Resolve the Mexican establishment here, map it to a global LEI with **`gleif-lei-lookup`** for any cross-border structure, and for a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn a DENUE activity + state sweep into an outreach list, hand off to **`regdata-lead-gen`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Resolve the Mexican establishment here, map it to a global LEI with **`gleif-lei-lookup`** for any cross-border structure, and for a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn a DENUE activity + state sweep into an outreach list, hand off to **`regdata-lead-gen`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

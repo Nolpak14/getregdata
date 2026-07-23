@@ -152,7 +152,7 @@ Japan (like the UK and Norway) is an outlier: a free, official, structured open-
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-Resolve the Japanese corporate number here, then map it to a global LEI with **`gleif-lei-lookup`** for cross-border structure, and screen the representative with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Resolve the Japanese corporate number here, then map it to a global LEI with **`gleif-lei-lookup`** for cross-border structure, and screen the representative with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

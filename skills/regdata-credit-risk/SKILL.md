@@ -181,7 +181,7 @@ To run live registry checks, you need an Apify API token:
 export APIFY_TOKEN=apify_api_xxxxx
 ```
 
-Sign up at [Apify Console](https://apify.com/regdata?fpr=getregdata) - new accounts include $5 free credits, enough for 600-1,200 credit risk checks depending on depth.
+Sign up at [Apify Console](https://apify.com?fpr=getregdata) - new accounts include $5 free credits, enough for 600-1,200 credit risk checks depending on depth.
 
 ### Actor Reference
 

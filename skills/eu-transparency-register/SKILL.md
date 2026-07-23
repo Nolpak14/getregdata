@@ -160,7 +160,7 @@ For the full compliance workflow - risk scoring, sanctions + PEP overlays,
 cross-registry validation - route to **`regdata-kyc-aml`**. To pair the lobbying
 signal with public-money exposure (does this organisation also win EU public
 contracts) route to **`eu-ted-procurement`**. Paid actors need a free Apify token:
-https://apify.com/regdata?fpr=getregdata.
+https://apify.com?fpr=getregdata.
 
 ## Related skills
 

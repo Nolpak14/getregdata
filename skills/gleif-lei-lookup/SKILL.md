@@ -112,7 +112,7 @@ GLEIF resolves *identity and structure*, then stops. Everything below the legal-
 | Insolvency / bankruptcy status | Poland / Germany / Czechia | `regdata/krz-debtor-scraper`, `regdata/germany-insolvency-scraper`, `regdata/czech-isir-insolvency-scraper` |
 | Full profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 
-For UK and Norway the local record is itself free - route to **`companies-house-uk`** and **`norway-company-registry`**. For a full compliance workflow, route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com/regdata?fpr=getregdata.
+For UK and Norway the local record is itself free - route to **`companies-house-uk`** and **`norway-company-registry`**. For a full compliance workflow, route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

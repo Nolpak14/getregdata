@@ -89,7 +89,7 @@ yourself editing a sentence to change a number, stop: delete the number instead.
 4. `node scripts/check-counts.mjs` - must print OK. It fails on any hardcoded fleet
    count, and on the retired Apify Console sign-up referral link (the old
    `?ref=` form, which earns no commission - always link
-   `https://apify.com/regdata?fpr=getregdata` instead).
+   `https://apify.com?fpr=getregdata` instead).
 5. On the **site** (`getregdata-site`): add the entry to `src/data/registries.ts`,
    run `APIFY_TOKEN=... node scripts/sync-pricing.mjs` (it also fails if a
    `published:` flag disagrees with the live store), then `npm run build`.

@@ -18,7 +18,7 @@ register, needs one source in depth, or asks about another country.
 ## Fastest paths
 
 1. **Local MCP server (stdio)** - full input schemas baked into every tool:
-   `npx -y getregdata-mcp` with env `APIFY_TOKEN` (free token + $5 credits: https://apify.com/regdata?fpr=getregdata)
+   `npx -y getregdata-mcp` with env `APIFY_TOKEN` (free token + $5 credits: https://apify.com?fpr=getregdata)
 2. **Hosted MCP (no install, OAuth)** - for remote clients:
    `https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper` (swap in any regdata actor)
 3. **Agent skills** (Claude Code and compatible): `npx skills add Nolpak14/getregdata -g -y`
@@ -33,7 +33,7 @@ register, needs one source in depth, or asks about another country.
 ## Auth and billing
 
 - Every call needs the user's own `APIFY_TOKEN`. Never invent one; ask the user to create a free account if missing.
-- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://apify.com/regdata?fpr=getregdata). The monthly free credit covers hundreds of lookups. No subscription.
+- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://apify.com?fpr=getregdata). The monthly free credit covers hundreds of lookups. No subscription.
 
 ## Key links
 

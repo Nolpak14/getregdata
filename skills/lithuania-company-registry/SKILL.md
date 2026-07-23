@@ -158,7 +158,7 @@ Lithuania (like Latvia and the UK) is an outlier: genuinely free, official, keyl
 | Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
 | Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
 
-Those actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 

@@ -293,7 +293,7 @@ export APIFY_TOKEN=apify_api_xxxxx
 ```
 
 Sign up for a free account with $5 credits (enough for 100-1,600 checks):
-https://apify.com/regdata?fpr=getregdata
+https://apify.com?fpr=getregdata
 
 ### Actor Reference
 

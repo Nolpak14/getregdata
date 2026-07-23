@@ -135,7 +135,7 @@ USAspending tells you a company received federal money and its UEI/DUNS - it doe
 | Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
 | Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
 
-To screen a federal recipient for **debarment or suspension**, pair this with **`sam-gov-exclusions`** - a company on the SAM.gov exclusions list should not be receiving new federal awards. For the EU side of a company's government exposure, route to **`eu-ted-procurement`** (EU public tenders and contract awards). For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-contractor lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com/regdata?fpr=getregdata.
+To screen a federal recipient for **debarment or suspension**, pair this with **`sam-gov-exclusions`** - a company on the SAM.gov exclusions list should not be receiving new federal awards. For the EU side of a company's government exposure, route to **`eu-ted-procurement`** (EU public tenders and contract awards). For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-contractor lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
 
 ## Related skills
 
