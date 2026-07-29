@@ -126,7 +126,7 @@ Skills that let Claude Code (and Copilot, Cline, Cursor, Codex) interact with ev
 | `france-company-lookup` | api.gouv.fr (INSEE/INPI) | French companies by name/SIREN/director, identity + dirigeants |
 | `switzerland-zefix` | Zefix (Swiss federal index) | Swiss companies, UID/CHE number, status, SHAB publications |
 | `denmark-cvr` | CVR (Erhvervsstyrelsen) | Danish companies, CVR number, industry, management |
-| `finland-company-registry` | PRH open data | Finnish companies by name/Y-tunnus, forms, NACE, addresses |
+| `finland-company-registry` | PRH open data (YTJ + XBRL + notices) | Finnish companies by name/Y-tunnus, forms, NACE, addresses, liquidation flag, digital financial statements, registered notifications |
 | `australia-abn-lookup` | ABN Lookup (ABR) | Australian entities by ABN/ACN/name, status, GST |
 | `japan-company-registry` | gBizINFO | Japanese companies by name/corporate number, plus subsidies/procurement |
 | `new-zealand-nzbn` | NZBN API | New Zealand entities by NZBN/name, roles, industry |

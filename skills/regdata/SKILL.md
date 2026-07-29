@@ -258,7 +258,7 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/france-company-lookup`** - French companies by name/SIREN/director, identity + dirigeants via the free api.gouv.fr search API. No key.
 - **`/switzerland-zefix`** - Swiss companies, UID/CHE number, status, SHAB publications via Zefix. Free (email-approved credential).
 - **`/denmark-cvr`** - Danish companies, CVR number, industry, management via the official CVR distribution. Free (registration + terms).
-- **`/finland-company-registry`** - Finnish companies by name/Y-tunnus via PRH open data. No key (CC BY).
+- **`/finland-company-registry`** - Finnish companies by name/Y-tunnus via PRH open data, plus digital financial statements (XBRL) and registered notifications. No key (CC BY). No beneficial owners, officers, emails or phone numbers - Finnish UBO data is purpose-bound under the AML Act and chargeable.
 - **`/australia-abn-lookup`** - Australian entities by ABN/ACN/name via the official ABN Lookup. Free (registered GUID).
 - **`/japan-company-registry`** - Japanese companies by name/corporate number via gBizINFO. Free (self-registered token).
 - **`/new-zealand-nzbn`** - New Zealand entities by NZBN/name via the NZBN API. Free (self-serve key).
