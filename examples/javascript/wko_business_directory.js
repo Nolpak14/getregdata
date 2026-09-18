@@ -1,6 +1,6 @@
 /**
  * WKO Business Directory Scraper - Austrian Chamber of Commerce
- * Actor: https://apify.com/regdata/wko-business-directory-scraper
+ * Actor: https://apify.com/regdata/wko-business-directory-scraper?fpr=getregdata
  *
  * 620,000+ Austrian businesses with phone, email, website, industry
  * classification, and trade licenses. Official Chamber of Commerce data.

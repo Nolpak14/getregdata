@@ -131,7 +131,7 @@ async function describeActor(slug) {
   const schema =
     data?.defaultRunOptions?.inputSchema ||
     data?.exampleRunInput ||
-    "See https://apify.com/regdata/" + slug + " for the input schema.";
+    "See https://apify.com/regdata/" + slug + "?fpr=getregdata for the input schema.";
   return { slug, title: data?.title, description: data?.description, schema };
 }
 

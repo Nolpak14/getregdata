@@ -1,6 +1,6 @@
 """
 CRBR Beneficial Owners Scraper - UBO check for Polish companies
-Actor: https://apify.com/regdata/crbr-beneficial-owners-scraper
+Actor: https://apify.com/regdata/crbr-beneficial-owners-scraper?fpr=getregdata
 
 CRBR (Central Register of Beneficial Owners) is Poland's mandatory UBO register.
 Every Polish company must register its natural-person beneficial owners (>25% ownership

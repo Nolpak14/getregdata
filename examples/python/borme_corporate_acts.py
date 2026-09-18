@@ -1,6 +1,6 @@
 """
 BORME Corporate Acts Scraper - Spain's official corporate registry gazette
-Actor: https://apify.com/regdata/borme-corporate-acts-scraper
+Actor: https://apify.com/regdata/borme-corporate-acts-scraper?fpr=getregdata
 
 BORME (Boletin Oficial del Registro Mercantil) publishes 500+ corporate acts
 daily: incorporations, officer appointments/dismissals, capital changes,

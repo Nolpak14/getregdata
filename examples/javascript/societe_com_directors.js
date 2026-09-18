@@ -1,6 +1,6 @@
 /**
  * Societe.com Company Scraper - French director network mapping
- * Actor: https://apify.com/regdata/societe-com-scraper
+ * Actor: https://apify.com/regdata/societe-com-scraper?fpr=getregdata
  *
  * Gets SIREN, directors with roles and cross-company positions, simplified
  * financials, shareholders, subsidiaries. Essential for French due diligence -

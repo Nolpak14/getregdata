@@ -1,6 +1,6 @@
 """
 KRZ Debtor Registry Scraper - Polish insolvency and enforcement check
-Actor: https://apify.com/regdata/krz-debtor-scraper
+Actor: https://apify.com/regdata/krz-debtor-scraper?fpr=getregdata
 
 KRZ (National Debtor Registry) covers bankruptcy, restructuring, and enforcement
 proceedings for Polish companies and individuals. Updated daily by courts.
