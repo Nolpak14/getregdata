@@ -1,0 +1,11 @@
+﻿field,type,description,example,fill_rate
+company_name,string,Full legal name of the company as published,NUEVA EMPRESA EJEMPLO SL,100%
+province,string,Province of the Registro Mercantil that registered the company,MADRID,100%
+publication_date,date (YYYY-MM-DD),Date of the BORME issue in which the incorporation was published,2026-09-17,100%
+start_of_operations,date (YYYY-MM-DD),"Date the company began operating, as stated in the incorporation",2026-08-19,100%
+corporate_purpose,string (Spanish),Corporate purpose (objeto social) as published; truncated to 400 characters in the sample,Reparacion y mantenimiento de vehiculos,100%
+registered_address,string,"Registered office as published (street, number, municipality)",C/ EJEMPLO 1 (MADRID),~100%
+share_capital_eur,decimal,"Share capital at incorporation, in euros",3000.00,~100%
+registry_reference,string,"Registry reference of the entry (seccion, hoja, inscripcion) for locating it in the register","S 8, H M 123456, I/A 1",100%
+borme_entry_number,string,Entry number of the announcement within that day's BORME,412345,100%
+source_url,url,Link to the official BORME PDF the record was published in,https://www.boe.es/borme/dias/...,100%

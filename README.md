@@ -60,6 +60,7 @@ Each skill ships the analysis framework and checklists; you supply the trigger
 Rather not run it yourself? Some of these - new companies, insolvency notices, liens and
 auctions - are also available as a [managed feed](https://getregdata.com/managed-feeds/):
 we run it every night and send you the new records as a file each morning.
+A one-day sample of the Spanish new-companies file is in [`samples/`](samples/spain-new-companies/).
 
 ## Quick Start
 
