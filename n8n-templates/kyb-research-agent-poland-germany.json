@@ -1,0 +1,247 @@
+{
+  "name": "Research Polish and German companies with an AI agent and Apify registry tools",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Research Polish and German companies with an AI agent\n\nFor compliance, credit and onboarding teams who want to ask \"check this Polish company\" in chat and get an answer built on official registers.\n\n### How it works\n1. Ask in the n8n chat, e.g. \"Run a KYB check on NIP 6770065406\" or \"Find the register number of Zalando SE\".\n2. The AI agent picks one of three Apify tools:\n   - **Poland KYB check** - identity (REGON), beneficial owners (CRBR) and insolvency (KRZ) for the company and each owner, with one verdict\n   - **KRZ debtor register search** - insolvency and restructuring proceedings by name, NIP or KRS\n   - **Handelsregister lookup** - German register court, number, legal form and status\n3. The agent answers with the register it used and does not repeat personal ID numbers.\n\n### Setup\n1. Add an **Apify API** credential to the three tool nodes ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Add an **OpenAI** credential to **OpenAI chat model**, or swap in another chat model.\n3. Open the chat and ask.\n\n### Cost\nEvery tool call is a paid Apify run on your account, billed per check or per result - see [Poland KYB check](https://apify.com/regdata/poland-kyb-check?fpr=getregdata), [KRZ](https://apify.com/regdata/krz-debtor-scraper?fpr=getregdata) and [Handelsregister](https://apify.com/regdata/germany-handelsregister-scraper?fpr=getregdata). Each tool has a maximum cost per run. Model tokens are billed by your LLM provider.\n\n### Customization tips\n- Add more registry tools: duplicate a tool node, change the actor and its input.\n- Edit the system message in **KYB agent** to match your own risk policy.",
+        "width": 560,
+        "height": 820
+      },
+      "id": "8083345e-9084-4baa-b7e7-8c061a2c8185",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        -380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Agent\nChat, model and memory. The system message sets the rules.",
+        "width": 560,
+        "height": 720,
+        "color": 7
+      },
+      "id": "a1bca4a7-88ef-4b7b-9348-cf9b4eaabc3f",
+      "name": "Section: agent",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Registry tools\nEach tool runs one Apify actor.",
+        "width": 560,
+        "height": 720,
+        "color": 7
+      },
+      "id": "9c1d1404-18d7-45c3-b405-37317667222d",
+      "name": "Section: tools",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -380
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1bcf7fce-e26a-437c-a557-e8a8c6d0f922",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        40,
+        -240
+      ],
+      "webhookId": "1bc7b7bf-8bed-46ae-b806-dba1e8c71012"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a KYB (know your business) research assistant. You answer questions about companies using official business registers only, through your tools.\n\nTools:\n- poland_kyb_check: full check of a Polish company by NIP or KRS (identity, beneficial owners, insolvency of the company and of each beneficial owner). Use it when the user asks to \"check\", \"verify\" or \"KYB\" a Polish company and gives or can give a 10-digit NIP or KRS.\n- krz_debtor_search: Polish insolvency and restructuring proceedings. Use it when the user only has a company name, or asks specifically about insolvency or bankruptcy.\n- handelsregister_lookup: German companies - register court, register number, legal form, status, seat. Needs a company name; a register number like \"HRB 6684\" is optional.\n\nRules:\n- Every tool call is a paid registry search. Do not call the same tool twice with the same input, and ask for the NIP/KRS or exact name when the request is too vague.\n- Report what the register says, name the register (REGON, CRBR, KRZ, Handelsregister) and the date of the check. Do not guess or add facts that are not in the tool result.\n- If a tool reports that a check could not be completed, say so plainly - never present it as \"no findings\".\n- Do not repeat personal identification numbers (for example PESEL) or dates of birth. Name beneficial owners and officers only when the user asks for them.\n- Answer in the user's language."
+        }
+      },
+      "id": "ae2c5576-5e18-4e08-b121-39cdb322437c",
+      "name": "KYB agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        300,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "id": "ccbd4ee3-386f-4988-99b3-d3143eebac1a",
+      "name": "OpenAI chat model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "00ecbf81-029f-4a69-92e2-b76f51f3fa7e",
+      "name": "Chat memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        380,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "Actors",
+        "operation": "Run actor and get dataset",
+        "actorId": "regdata~poland-kyb-check",
+        "customBody": "={{ JSON.stringify({ identifiers: [ $fromAI('identifier', 'Polish NIP (10 digits) or KRS number (10 digits with leading zeros) of the company to check', 'string') ] }) }}",
+        "memory": 4096,
+        "maxTotalChargeUsd": 1,
+        "descriptionType": "manual",
+        "toolDescription": "poland_kyb_check: full KYB check of ONE Polish company by NIP or KRS. Returns official identity (REGON), beneficial owners (CRBR), insolvency proceedings (KRZ) for the company and each owner, risk flags and a verdict."
+      },
+      "id": "b4edc6a0-5efb-4486-a7f4-44c39e06ed8f",
+      "name": "Poland KYB check",
+      "type": "@apify/n8n-nodes-apify.apifyTool",
+      "typeVersion": 1,
+      "position": [
+        640,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "Actors",
+        "operation": "Run actor and get dataset",
+        "actorId": "regdata~krz-debtor-scraper",
+        "customBody": "={{ JSON.stringify({ searchMode: 'entity', entityName: $fromAI('companyName', 'Company name to search (partial match). Leave empty when an identifier is given.', 'string', ''), identifier: $fromAI('identifier', 'NIP, KRS or REGON of the company, digits only. Leave empty when searching by name.', 'string', ''), maxResults: 10 }) }}",
+        "memory": 1024,
+        "maxTotalChargeUsd": 0.5,
+        "descriptionType": "manual",
+        "toolDescription": "krz_debtor_search: search the Polish National Debtor Register (KRZ) for insolvency, bankruptcy and restructuring proceedings of a company, by company name or by NIP/KRS/REGON. Returns case number, proceeding type, status and court."
+      },
+      "id": "4e909212-4803-4b9c-bc3d-c3db87f28208",
+      "name": "KRZ debtor registry search",
+      "type": "@apify/n8n-nodes-apify.apifyTool",
+      "typeVersion": 1,
+      "position": [
+        820,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "Actors",
+        "operation": "Run actor and get dataset",
+        "actorId": "regdata~germany-handelsregister-scraper",
+        "customBody": "={{ JSON.stringify({ searchQuery: $fromAI('companyName', 'German company name or keywords, e.g. Zalando SE', 'string'), registerNumber: $fromAI('registerNumber', 'Optional register number such as HRB 6684. Empty if unknown.', 'string', '') || undefined, maxResults: 3 }) }}",
+        "memory": 512,
+        "maxTotalChargeUsd": 0.25,
+        "descriptionType": "manual",
+        "toolDescription": "handelsregister_lookup: look up a German company in the official Handelsregister by name (and optional register number). Returns register court, register number, legal form, status, seat, address and capital."
+      },
+      "id": "9c396e02-722e-4bda-b677-0b8db6959206",
+      "name": "Handelsregister lookup",
+      "type": "@apify/n8n-nodes-apify.apifyTool",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI chat model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Poland KYB check": {
+      "ai_tool": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KRZ debtor registry search": {
+      "ai_tool": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Handelsregister lookup": {
+      "ai_tool": [
+        [
+          {
+            "node": "KYB agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
