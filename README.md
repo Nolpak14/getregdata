@@ -57,6 +57,9 @@ These skills are designed to be wired into recurring processes, not one-off look
 Each skill ships the analysis framework and checklists; you supply the trigger
 (a cron, an inbound lead, an onboarding event) and the agent runs the workflow.
 
+Prefer n8n? Four importable workflows - an insolvency watchlist, a daily new-companies
+sheet, a supplier check form and a KYB research agent - are in [`n8n-templates/`](n8n-templates/).
+
 Rather not run it yourself? Some of these - new companies, insolvency notices, liens and
 auctions - are also available as a [managed feed](https://getregdata.com/managed-feeds/):
 we run it every night and send you the new records as a file each morning.
