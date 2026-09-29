@@ -4,23 +4,23 @@
     {
       "parameters": {
         "content": "## Check German suppliers in the Handelsregister from a form\n\nFor procurement, vendor onboarding, finance and compliance teams that onboard German companies.\n\n### How it works\n1. A colleague enters a company name, and optionally a register number such as `HRB 6684`, in an n8n form.\n2. The Apify Handelsregister actor looks the company up in the official German commercial register.\n3. The best match (exact name first) is picked: register court, register number, legal form, status (current or deleted), seat, address, capital and EUID. Officer names are not copied.\n4. The result is shown on the form's confirmation page and appended to Google Sheets. If the register does not answer, the form says so - it is never recorded as \"no match\".\n\n### Setup\n1. Add an **Apify API** credential to **Handelsregister lookup** ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Create a sheet with the header row `checkedAt, query, matchFound, companyName, legalForm, registerCourt, registerNumber, status, seat, address, capital, euid, otherMatches` and select it in **Log result to Google Sheets**.\n3. Activate the workflow and share the form's production URL.\n\n### Cost\nBilled on your Apify account per search plus per company returned - see the [Handelsregister actor page](https://apify.com/regdata/germany-handelsregister-scraper?fpr=getregdata). Up to 5 matches per search; the node stops a run above $0.25.\n\n### Customization tips\n- Start from a sheet instead: swap the form for a Google Sheets Trigger and write back with Update row.\n- Add a German insolvency check: [Germany insolvency notices](https://apify.com/regdata/germany-insolvency-scraper?fpr=getregdata).",
-        "width": 560,
-        "height": 820
+        "width": 680,
+        "height": 1060
       },
       "id": "b8139ff2-9c99-44a6-96b6-0c4af3cf0f1e",
       "name": "About this workflow",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -620,
-        -380
+        -760,
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 1. Form\nCompany name, optional register number, exact or keyword search.",
         "width": 260,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "74e4c166-04d8-441e-8ef5-c83886af7e64",
@@ -29,14 +29,14 @@
       "typeVersion": 1,
       "position": [
         0,
-        -380
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 2. Register lookup\nOfficial Handelsregister search.",
         "width": 460,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "47bba69c-df93-46d6-9c31-0ca227ce074d",
@@ -45,14 +45,14 @@
       "typeVersion": 1,
       "position": [
         300,
-        -380
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 3. Result\nBest match to the sheet and the confirmation page.",
         "width": 700,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "644a23cf-55b3-4ab8-9499-526f48e754f6",
@@ -61,7 +61,7 @@
       "typeVersion": 1,
       "position": [
         800,
-        -380
+        -420
       ]
     },
     {

@@ -3,24 +3,24 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## Log new Spanish companies from BORME to Google Sheets\n\nFor B2B sales teams, accountants, banks, insurers and service providers who sell to newly founded companies in Spain.\n\n### How it works\n1. Every weekday morning the workflow runs the Apify BORME actor for the previous business day (Monday covers Friday).\n2. It keeps new incorporations (Constitución) in the provinces you choose.\n3. Each company becomes one row: name, province, registry number, start of operations, corporate purpose, registered address, share capital and a link to the official BORME PDF. People named in the notice are not copied.\n4. The rows are appended to Google Sheets and you get a short summary e-mail.\n\n### Setup\n1. Add an **Apify API** credential to **BORME: previous business day** ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Create a sheet with the header row `date, province, companyName, registryNumber, actType, startOfOperations, corporatePurpose, address, capital, otherActs, bormeId, sourceUrl` and select it in **Append to Google Sheets**.\n3. Connect Gmail in **Send summary e-mail** (or delete that node).\n4. Set your provinces in **Settings** and activate.\n\n### Cost\nBilled on your Apify account per corporate act returned, plus a small start fee per run - see the [BORME actor page](https://apify.com/regdata/borme-corporate-acts-scraper?fpr=getregdata). The Apify node stops a run above $1.\n\n### Customization tips\n- `provinces`: e.g. `[\"MADRID\", \"BARCELONA\"]`, or `[]` for all of Spain.\n- `actTypes`: `[\"Nombramientos\"]`, `[\"Disolución\"]` or `[\"Ampliación de capital\"]` for other signals.\n- Send the rows to your CRM instead of Sheets.",
-        "width": 560,
-        "height": 820
+        "content": "## Log new Spanish companies from BORME to Google Sheets\n\nFor B2B sales teams, accountants, banks, insurers and service providers who sell to newly founded companies in Spain.\n\n### How it works\n1. Every weekday morning the workflow runs the Apify BORME actor for the previous business day (Monday covers Friday).\n2. It keeps new incorporations (Constitución) in the provinces you choose.\n3. Each company becomes one row: name, province, registry number, start of operations, corporate purpose, registered address, share capital and a link to the official BORME PDF. People named in the notice are not copied.\n4. The rows are appended to Google Sheets and you get a short summary e-mail.\n\n### Setup\n1. Add an **Apify API** credential to **BORME: previous business day** ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Create a sheet with the header row `date, province, companyName, registryNumber, actType, startOfOperations, corporatePurpose, address, capital, otherActs, bormeId, sourceUrl` and select it in **Append to Google Sheets**.\n3. Connect Gmail in **Send summary e-mail** (or delete that node).\n4. Set your provinces in **Settings** and activate.\n\n### Cost\nBilled on your Apify account per corporate act returned, plus a small start fee per run - see the [BORME actor page](https://apify.com/regdata/borme-corporate-acts-scraper?fpr=getregdata). The Apify node stops a run above $1.\n\n### Customization tips\n- `provinces`: e.g. `[\"MADRID\", \"BARCELONA\"]`, or `[]` for all of Spain (300-450 a day: raise the $1 cap to $3).\n- `actTypes`: `[\"Nombramientos\"]`, `[\"Disolución\"]` or `[\"Ampliación de capital\"]` for other signals.\n- Send the rows to your CRM instead of Sheets.",
+        "width": 680,
+        "height": 1100
       },
       "id": "989c1aee-580c-4fda-9b04-a1df14fa342b",
       "name": "About this workflow",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -620,
-        -380
+        -760,
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 1. Fetch\nMonday to Friday. No date set, so the actor reads the most recent business day.",
         "width": 700,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "6744ca27-712e-4351-aafe-602d7b0dd68c",
@@ -29,14 +29,14 @@
       "typeVersion": 1,
       "position": [
         0,
-        -380
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 2. One row per company\nThe incorporation text is split into columns.",
         "width": 300,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "d26710e0-dfe2-4f39-8c1f-25380485ae51",
@@ -45,14 +45,14 @@
       "typeVersion": 1,
       "position": [
         740,
-        -380
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## 3. Deliver\nAppend to the sheet, then one summary e-mail.",
         "width": 720,
-        "height": 520,
+        "height": 560,
         "color": 7
       },
       "id": "2d1dbf58-3030-4875-a052-0551324e98f8",
@@ -61,7 +61,7 @@
       "typeVersion": 1,
       "position": [
         1080,
-        -380
+        -420
       ]
     },
     {
@@ -133,7 +133,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const norm = s => String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();\nconst wanted = ($('Settings').first().json.actTypes || []).map(norm);\nconst pick = (text, label, next) => {\n  const m = String(text || '').match(new RegExp(label + ':\\\\s*(.*?)\\\\.\\\\s*(?:' + next + '):', 'i'));\n  return m ? m[1].trim() : '';\n};\nreturn $input.all().map(({ json: e }) => {\n  const main = e.acts.find(a => wanted.some(w => norm(a.type).includes(w))) || e.acts[0] || {};\n  const d = main.details || '';\n  const capital = (d.match(/Capital:\\s*([\\d.,]+\\s*Euros)/i) || [])[1] || '';\n  return { json: {\n    date: e.date,\n    province: e.province,\n    companyName: e.companyName,\n    registryNumber: e.registryNumber,\n    actType: main.type || '',\n    startOfOperations: ((d.match(/Comienzo de operaciones:\\s*([\\d.]+)/i) || [])[1] || '').replace(/\\.$/, ''),\n    corporatePurpose: pick(d, 'Objeto social', 'Domicilio|Capital'),\n    address: pick(d, 'Domicilio', 'Capital') || (d.match(/Domicilio:\\s*(.*?)\\.?\\s*$/i) || [])[1] || '',\n    capital,\n    otherActs: e.acts.filter(a => a !== main).map(a => a.type).join(', '),\n    bormeId: e.bormeId,\n    sourceUrl: e.sourceUrl,\n  } };\n});"
+        "jsCode": "const norm = s => String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();\nconst wanted = ($('Settings').first().json.actTypes || []).map(norm);\nconst pick = (text, label, next) => {\n  const m = String(text || '').match(new RegExp(label + ':\\\\s*(.*?)\\\\.\\\\s*(?:' + next + '):', 'i'));\n  return m ? m[1].trim() : '';\n};\nreturn $input.all().map(({ json: e }) => {\n  const acts = e.acts || [];\n  const main = acts.find(a => wanted.some(w => norm(a.type).includes(w))) || acts[0] || {};\n  // Drop the PDF page footer that sometimes lands inside a notice\n  const d = String(main.details || '').replace(/\\s*BOLET[IÍ]N OFICIAL DEL REGISTRO MERCANTIL.*?Verificable en https:\\/\\/www\\.boe\\.es\\s*/gi, ' ');\n  const capital = (d.match(/Capital:\\s*([\\d.,]+\\s*Euros)/i) || [])[1] || '';\n  return { json: {\n    date: e.date,\n    province: e.province,\n    companyName: e.companyName,\n    registryNumber: e.registryNumber,\n    actType: main.type || '',\n    startOfOperations: ((d.match(/Comienzo de operaciones:\\s*([\\d.]+)/i) || [])[1] || '').replace(/\\.$/, ''),\n    corporatePurpose: pick(d, 'Objeto social', 'Domicilio|Capital'),\n    address: pick(d, 'Domicilio', 'Capital') || (d.match(/Domicilio:\\s*(.*?)\\.?\\s*$/i) || [])[1] || '',\n    capital,\n    otherActs: acts.filter(a => a !== main).map(a => a.type).join(', '),\n    bormeId: e.bormeId,\n    sourceUrl: e.sourceUrl,\n  } };\n});"
       },
       "id": "2dcfc27b-5136-41ea-bb6f-5e8e5d25cd8e",
       "name": "One row per company",

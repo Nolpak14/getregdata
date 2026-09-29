@@ -4,15 +4,15 @@
     {
       "parameters": {
         "content": "## Monitor Polish counterparties for insolvency\n\nFor credit, procurement and compliance teams who need to know when a Polish customer or supplier enters insolvency, restructuring or liquidation.\n\n### How it works\n1. Every Monday the workflow reads your watchlist (company, NIP, KRS) from Google Sheets.\n2. For each company it searches two official sources through Apify: the **KRZ** National Debtor Register (insolvency, restructuring and enforcement proceedings) and the **MSiG** court gazette (notices from the last 8 days).\n3. n8n remembers what it already reported and lets only new entries through. Each new KRZ proceeding gets one detail lookup: type, case number, status and start date.\n4. You get one e-mail listing only what is new. A check that could not be completed is reported as such, never as \"all clear\".\n\nThe first run reports everything already on record - that is your baseline.\n\n### Setup\n1. Add an **Apify API** credential to the three Apify nodes ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Create a sheet with the columns `company`, `nip`, `krs` and select it in **Read watchlist**.\n3. Connect Gmail in **Send alert e-mail** and set the recipient (or enable **Post to Slack**).\n4. Click **Test with sample companies**, check the output, then activate.\n\n### Cost\nEach search and result is billed on your Apify account - see the [KRZ](https://apify.com/regdata/krz-debtor-scraper?fpr=getregdata) and [MSiG](https://apify.com/regdata/msig-scraper?fpr=getregdata) actor pages for prices. Every Apify node has a maximum cost per run.\n\n### Customization tips\n- Run daily and shorten the MSiG look-back in **MSiG: court gazette notices**.\n- Add a full [Poland KYB check](https://apify.com/regdata/poland-kyb-check?fpr=getregdata) for new customers.",
-        "width": 560,
-        "height": 760
+        "width": 680,
+        "height": 1120
       },
       "id": "48a6570e-0b9d-4fa2-b309-1645ad1b8c12",
       "name": "About this workflow",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -620,
+        -760,
         -420
       ]
     },
@@ -35,7 +35,7 @@
     {
       "parameters": {
         "content": "## 2. Official registers\nOne KRZ and one MSiG search per company.",
-        "width": 300,
+        "width": 320,
         "height": 660,
         "color": 7
       },

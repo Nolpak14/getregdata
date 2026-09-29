@@ -4,23 +4,23 @@
     {
       "parameters": {
         "content": "## Research Polish and German companies with an AI agent\n\nFor compliance, credit and onboarding teams who want to ask \"check this Polish company\" in chat and get an answer built on official registers.\n\n### How it works\n1. Ask in the n8n chat, e.g. \"Run a KYB check on NIP 6770065406\" or \"Find the register number of Zalando SE\".\n2. The AI agent picks one of three Apify tools:\n   - **Poland KYB check** - identity (REGON), beneficial owners (CRBR) and insolvency (KRZ) for the company and each owner, with one verdict\n   - **KRZ debtor register search** - insolvency and restructuring proceedings by name, NIP or KRS\n   - **Handelsregister lookup** - German register court, number, legal form and status\n3. The agent answers with the register it used and does not repeat personal ID numbers.\n\n### Setup\n1. Add an **Apify API** credential to the three tool nodes ([free Apify plan with monthly usage credit](https://apify.com/regdata?fpr=getregdata)). On self-hosted n8n, install the verified community node `@apify/n8n-nodes-apify` first.\n2. Add an **OpenAI** credential to **OpenAI chat model**, or swap in another chat model.\n3. Open the chat and ask.\n\n### Cost\nEvery tool call is a paid Apify run on your account, billed per check or per result - see [Poland KYB check](https://apify.com/regdata/poland-kyb-check?fpr=getregdata), [KRZ](https://apify.com/regdata/krz-debtor-scraper?fpr=getregdata) and [Handelsregister](https://apify.com/regdata/germany-handelsregister-scraper?fpr=getregdata). Each tool has a maximum cost per run. Model tokens are billed by your LLM provider.\n\n### Customization tips\n- Add more registry tools: duplicate a tool node, change the actor and its input.\n- Edit the system message in **KYB agent** to match your own risk policy.",
-        "width": 560,
-        "height": 820
+        "width": 680,
+        "height": 1040
       },
       "id": "8083345e-9084-4baa-b7e7-8c061a2c8185",
       "name": "About this workflow",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -620,
-        -380
+        -760,
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## Agent\nChat, model and memory. The system message sets the rules.",
         "width": 560,
-        "height": 720,
+        "height": 760,
         "color": 7
       },
       "id": "a1bca4a7-88ef-4b7b-9348-cf9b4eaabc3f",
@@ -29,14 +29,14 @@
       "typeVersion": 1,
       "position": [
         0,
-        -380
+        -420
       ]
     },
     {
       "parameters": {
         "content": "## Registry tools\nEach tool runs one Apify actor.",
         "width": 560,
-        "height": 720,
+        "height": 760,
         "color": 7
       },
       "id": "9c1d1404-18d7-45c3-b405-37317667222d",
@@ -45,7 +45,7 @@
       "typeVersion": 1,
       "position": [
         600,
-        -380
+        -420
       ]
     },
     {
