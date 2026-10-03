@@ -139,3 +139,8 @@ Free tool = top-of-funnel identity lookup; the Societe.com actor = the paid deep
 - **`sanctions-pep-screening`** - screen the dirigeants you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for depth beyond identity.
 - **`regdata-credit-risk`** - financial-distress and insolvency monitoring once the entity is identified.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/france-company-lookup/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

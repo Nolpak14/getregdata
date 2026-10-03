@@ -323,3 +323,7 @@ cross-border overlays: the Y-tunnus is the VAT root, so validate the VAT with **
 - **`vies-vat-validation`** - validate the entity's EU VAT number (the Y-tunnus is its Finnish root) before you rely on it.
 - **`sanctions-pep-screening`** - screen the parties you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Finnish jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

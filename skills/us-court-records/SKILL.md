@@ -151,3 +151,7 @@ For the full workflow - risk scoring, adverse-media overlay, cross-source valida
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework; litigation history is one of its adverse-history risk dimensions.
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure, then search each leg.
 - **`companies-house-uk`** - free source for the entity and the people to search.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

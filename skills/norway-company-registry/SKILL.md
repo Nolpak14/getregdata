@@ -145,3 +145,8 @@ Brreg's konkurs flag is a basic bankruptcy boolean; for detailed insolvency proc
 - **`sanctions-pep-screening`** - screen the board members and officers you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Norwegian jurisdictions.
 - **`regdata-credit-risk`** - insolvency and financial-distress monitoring once the entity is identified.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/norway-company-registry/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

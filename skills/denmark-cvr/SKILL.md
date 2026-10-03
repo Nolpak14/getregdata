@@ -166,3 +166,8 @@ There is no Danish regdata actor - the free CVR distribution above is the whole 
 - **`vies-vat-validation`** - confirm the `DK`-prefixed CVR/VAT number is valid and active for EU cross-border trade.
 - **`sanctions-pep-screening`** - screen the participants and management you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Danish jurisdictions.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/denmark-cvr/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

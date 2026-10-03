@@ -156,3 +156,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`vies-vat-validation`** - validate an EU VAT number and its registered name/address as a cross-border identity check.
 - **`sanctions-pep-screening`** - screen the roles you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-NZ jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -292,3 +292,8 @@ These skills query official public APIs directly - no Apify token, no per-result
 - **`/sanctions-pep-screening`** - screen a name or entity against the official OFAC / EU / UK / UN consolidated sanctions lists (free, public). PEP screening via the parliamentary PEP actor and optional aggregators.
 
 **The funnel:** free skills answer the easy lookups and drive adoption; the paid actors are the upsell for the jurisdictions and data depth the free APIs do not cover.
+
+## More on getregdata.com
+
+- Every registry covered, with per-registry pages: https://getregdata.com/registries/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

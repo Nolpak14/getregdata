@@ -155,3 +155,8 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure across borders, then pull the local filing from the right national source.
 - **`sanctions-pep-screening`** - screen the directors and PSCs you found here against sanctions and PEP lists.
 - **`regdata-credit-risk`** - insolvency and financial-distress monitoring once the entity is identified.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/companies-house-uk/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

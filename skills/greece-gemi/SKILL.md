@@ -147,3 +147,7 @@ There is no Greek regdata actor - the free GEMI OpenData API above is the whole 
 - **`vies-vat-validation`** - confirm the `EL`-prefixed AFM/VAT number is valid and active for EU cross-border trade - AFM and VAT pair naturally here.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Greek jurisdictions.
 - **`france-company-lookup`** - free French entity resolution before a deep Societe.com pull.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -142,3 +142,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`sanctions-pep-screening`** - screen the qsa partners and administrators you found here against sanctions and PEP lists.
 - **`norway-company-registry`** - another free, keyless national registry front door (Brønnøysund / Enhetsregisteret).
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Brazilian jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

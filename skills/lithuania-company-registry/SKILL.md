@@ -167,3 +167,7 @@ Those actors need a free Apify token: https://apify.com?fpr=getregdata.
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure across borders, then pull the local record from the right national source (like this one).
 - **`vies-vat-validation`** - validate the Lithuanian (or any EU) VAT/PVM number; JAR does not carry VAT, so VIES is how you confirm the entity's VAT registration alongside the company code.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Lithuanian jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

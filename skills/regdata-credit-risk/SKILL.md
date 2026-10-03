@@ -433,3 +433,8 @@ A NOT SCREENED registry must be visible in the summary and must hold the overall
 
 - **regdata-kyc-aml** - Use alongside credit risk checks when you also need to verify beneficial ownership (CRBR), check for sanctioned entities (KNF), or confirm board composition (KRS Board). Ownership concentration is itself a credit risk factor.
 - **regdata-lead-gen** - If a credit check reveals an unreliable supplier or client, use lead-gen to find alternative companies in the same sector via KRS Board, WKO, Spain Company Directory, or Societe.com.
+
+## More on getregdata.com
+
+- Insolvency and credit-risk use case: https://getregdata.com/use-cases/insolvency-credit-risk/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

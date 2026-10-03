@@ -144,3 +144,7 @@ For a full compliance workflow (risk scoring, PEP and adverse-media overlays, cr
 - **`vies-vat-validation`** - validate the Romanian VAT (country code `RO`) across the EU VIES service as the cheapest first step, then pull the richer identity and registration number here via ANAF.
 - **`companies-house-uk`** - the equivalent free national front door for UK companies.
 - **`sanctions-pep-screening`** - screen the company and its legal representatives against sanctions and PEP lists once identified.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

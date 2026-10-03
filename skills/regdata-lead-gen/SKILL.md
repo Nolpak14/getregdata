@@ -446,3 +446,8 @@ Registry data contains signals that make outreach more relevant than generic col
 
 - **`/regdata-kyc-aml`** - Once you have prospects, verify them: beneficial ownership, sanctions screening, KNF license checks. Especially important for regulated industries.
 - **`/regdata-credit-risk`** - Check prospect financial health before investing sales effort: insolvency status (KRZ, MSiG, Ediktsdatei), financial statements (eKRS), and dissolution notices (BORME).
+
+## More on getregdata.com
+
+- New-company lead feeds: https://getregdata.com/use-cases/lead-feed/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -149,3 +149,7 @@ There is no Croatian regdata actor - the free sudski registar OPEN API above is 
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure across borders, then pull the local record from the right national source (like this one).
 - **`vies-vat-validation`** - confirm the Croatian `HR`-prefixed VAT number is valid and active for EU cross-border trade.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Croatian jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

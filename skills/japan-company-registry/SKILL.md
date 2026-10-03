@@ -164,3 +164,7 @@ Resolve the Japanese corporate number here, then map it to a global LEI with **`
 - **`vies-vat-validation`** - validate EU VAT numbers for a counterparty's European entities.
 - **`sanctions-pep-screening`** - screen the representative you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Japanese jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

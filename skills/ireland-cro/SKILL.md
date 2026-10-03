@@ -150,3 +150,8 @@ Ireland is in the EU: for its VAT number use **`vies-vat-validation`** (free EU 
 - **`vies-vat-validation`** - validate an Irish (EU) VAT number for free against the EU VIES system.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for the directors and jurisdictions the CRO free tier does not cover.
 - **`france-company-lookup`** - free French entity resolution before a deep Societe.com pull.
+
+## More on getregdata.com
+
+- Irish CRO coverage: https://getregdata.com/registries/ireland/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

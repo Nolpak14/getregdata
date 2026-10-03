@@ -155,3 +155,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`vies-vat-validation`** - validate an EU VAT number when the counterparty is European rather than Australian.
 - **`sanctions-pep-screening`** - screen the entities and names you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Australian jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

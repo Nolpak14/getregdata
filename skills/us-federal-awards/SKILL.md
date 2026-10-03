@@ -144,3 +144,7 @@ To screen a federal recipient for **debarment or suspension**, pair this with **
 - **`sec-edgar-us`** - free U.S. public-company filings and financials once a federal recipient turns out to be an SEC filer.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors that resolve the recipient.
 - **`regdata-lead-gen`** - turn the government-contractor / federal-award lane into a qualified outreach list.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

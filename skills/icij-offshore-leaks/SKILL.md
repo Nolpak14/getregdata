@@ -138,3 +138,7 @@ For the full workflow - risk scoring, adverse-media overlay, cross-source valida
 - **`sam-gov-exclusions`** - the US federal debarment lane.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework; offshore exposure is one of its enhanced-DD risk dimensions.
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure, then search each leg here.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

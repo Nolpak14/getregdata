@@ -137,3 +137,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`companies-house-uk`** - free, official UK company data: profile, officers, and PSC beneficial owners.
 - **`singapore-acra`** - the regional neighbour: Singapore ACRA company lookup.
 - **`brazil-cnpj`** - another free, keyless national lookup front door (Receita Federal CNPJ open data).
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

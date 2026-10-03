@@ -182,3 +182,7 @@ Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
   due-diligence dimension alongside sanctions, PEP, and adverse media.
 - **`regdata-lead-gen`** - turn the grant-recipient lane into a qualified outreach
   list of organisations that have already cleared an EU funding process.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -480,3 +480,8 @@ Total cost for a full 3-registry Polish check (CRBR + KNF + KRS Board): approxim
 - **regdata-property** - Property due diligence and ownership verification (EKW, KRS, CRBR). Use when the entity owns or is transacting real estate.
 - **regdata-lead-gen** - B2B prospecting and decision-maker discovery. Not for compliance - use when building prospect lists.
 - **regdata-compliance** - Consumer protection and environmental compliance (UOKiK, BDO). Use for regulatory compliance beyond KYC/AML.
+
+## More on getregdata.com
+
+- KYC / KYB onboarding use case: https://getregdata.com/use-cases/kyc-onboarding/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

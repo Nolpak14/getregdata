@@ -154,3 +154,7 @@ Resolve the Mexican establishment here, map it to a global LEI with **`gleif-lei
 - **`gleif-lei-lookup`** - map a Mexican entity to a global LEI and its parent/child structure across borders.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for register-grade depth.
 - **`regdata-lead-gen`** - turn a DENUE activity + geography sweep into a qualified, contactable B2B outreach list.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

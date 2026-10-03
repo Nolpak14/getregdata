@@ -138,3 +138,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure across borders, then pull the local record from the right national source (like this one).
 - **`sanctions-pep-screening`** - screen the company and any people you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Israeli jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

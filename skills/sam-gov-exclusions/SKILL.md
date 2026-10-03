@@ -147,3 +147,7 @@ For the full workflow - risk scoring, adverse-media overlay, cross-registry vali
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework; sanctions, PEP, and debarment are risk dimensions within it.
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure, then screen each leg.
 - **`companies-house-uk`** / **`sec-edgar-us`** - free sources for the entity and the people to screen.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -120,3 +120,8 @@ For UK and Norway the local record is itself free - route to **`companies-house-
 - **`regdata-kyc-aml`** - full KYC/AML/KYB framework with beneficial-owner, PEP and adverse-media overlays.
 - **`sanctions-pep-screening`** - screen the entity and its parents/children against sanctions lists.
 - **`regdata-credit-risk`** - financial-distress and insolvency monitoring for the resolved entity.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/gleif-lei-lookup/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

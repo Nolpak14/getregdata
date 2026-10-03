@@ -158,3 +158,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`vies-vat-validation`** - validate the Latvian (or any EU) VAT number; Latvia is in the EU, so a VIES check confirms the entity's VAT registration alongside the regcode.
 - **`sanctions-pep-screening`** - screen the officers and beneficial owners you found here against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Latvian jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

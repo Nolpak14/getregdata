@@ -132,3 +132,7 @@ Resolve the Thai juristic person number here, then map it to a global LEI with *
 - **`singapore-acra`** - the neighbouring ASEAN registry (ACRA / BizFile) for Singapore entity verification.
 - **`gleif-lei-lookup`** - map a Thai juristic person number to a global LEI and its parent/child structure across borders.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Thai jurisdictions.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

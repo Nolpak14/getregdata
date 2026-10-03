@@ -140,3 +140,8 @@ To resolve a public company to its global LEI and corporate structure, route to 
 - **`sanctions-pep-screening`** - screen the officers, insiders (Form 4), and beneficial owners you found against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for private and non-US entities.
 - **`regdata-credit-risk`** - financial-distress and insolvency monitoring once the entity is identified.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/sec-edgar-us/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

@@ -145,3 +145,7 @@ To resolve the winner to its global LEI and corporate structure across borders, 
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors that resolve the winner.
 - **`regdata-lead-gen`** - turn the government-buyer / open-tender lane into a qualified outreach list.
 - **`vies-vat-validation`** - validate the winning contractor's EU VAT as the cheapest first verification step before pulling its registry record.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

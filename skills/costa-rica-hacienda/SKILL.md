@@ -136,3 +136,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`peru-ruc`** - free Peruvian company lookup by RUC, another Latin American keyless front door.
 - **`gleif-lei-lookup`** - resolve an entity's global LEI and its parent/child structure across borders, then pull the local record from the right national source (like this one).
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for jurisdictions with no free API.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

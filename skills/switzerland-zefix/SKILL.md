@@ -162,3 +162,8 @@ To turn a Swiss UID into a global identity, resolve it to an LEI with **`gleif-l
 - **`vies-vat-validation`** - validate EU VAT numbers for the cross-border counterparties around a Swiss entity.
 - **`sanctions-pep-screening`** - screen the entity and its officers against sanctions and PEP lists.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for non-Swiss jurisdictions.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/switzerland-zefix/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

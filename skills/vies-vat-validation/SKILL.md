@@ -139,3 +139,8 @@ curl -s "https://ec.europa.eu/taxation_customs/dds2/eos/validation/services/vali
 - **`sanctions-pep-screening`** - screen the entity and its people once the VAT confirms who they are.
 - **`gleif-lei-lookup`** - resolve the entity to its global LEI and corporate structure.
 - **`companies-house-uk`** / **`france-company-lookup`** / **`finland-company-registry`** - free national records for the entity behind a validated VAT.
+
+## More on getregdata.com
+
+- Full guide to this skill: https://getregdata.com/skills/vies-vat-validation/
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

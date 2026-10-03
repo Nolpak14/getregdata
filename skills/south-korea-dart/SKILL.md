@@ -154,3 +154,7 @@ For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cros
 - **`gleif-lei-lookup`** - resolve a Korean company to its global LEI and its parent/child structure across borders before or after the DART pull.
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors for private and non-Korean entities.
 - **`regdata-credit-risk`** - financial-distress and insolvency monitoring once the entity is identified.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

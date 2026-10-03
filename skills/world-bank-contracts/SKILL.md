@@ -139,3 +139,7 @@ For the EU and U.S. sides of a company's government exposure, route to **`eu-ted
 - **`regdata-kyc-aml`** - the full KYC/AML/KYB framework: risk scoring, PEP and adverse-media overlays, and the paid registry actors that resolve the supplier.
 - **`regdata-lead-gen`** - turn the development-finance supplier / project lane into a qualified outreach list.
 - **`gleif-lei-lookup`** - resolve a winning supplier to its global LEI and parent/child structure across borders.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

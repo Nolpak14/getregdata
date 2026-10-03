@@ -174,3 +174,7 @@ https://apify.com?fpr=getregdata.
   reputational dimension alongside sanctions, PEP, and adverse media.
 - **`sanctions-pep-screening`** - screen the organisation and its owners/officers
   against the official sanctions lists, using the same download-and-match pattern.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/

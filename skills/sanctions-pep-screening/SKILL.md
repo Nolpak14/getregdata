@@ -186,3 +186,7 @@ token: https://apify.com?fpr=getregdata.
   **`france-company-lookup`** / **`sec-edgar-us`** - free sources for the entity and
   the people to screen.
 - **`regdata-credit-risk`** - insolvency and financial-distress checks on the same entity.
+
+## More on getregdata.com
+
+- All skills and paid registry coverage: https://getregdata.com/skills/ and https://getregdata.com/registries/
