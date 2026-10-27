@@ -120,7 +120,7 @@ A practical guide to what official registry data is publicly available in each c
 
 ### Limitations
 - No contact info (phone, email, website) in either registry. Spanish registries focus on legal/corporate data.
-- The Registro Mercantil search interface has WAF protection and occasional CAPTCHAs. The actor handles this automatically but it can slow large extractions.
+- Large extractions take longer: plan for minutes, not seconds, on multi-thousand-company runs.
 - BORME acts are text-heavy and sometimes require interpretation. Officer names in BORME are embedded in free-text paragraphs, not structured fields.
 
 ---
@@ -154,7 +154,7 @@ A practical guide to what official registry data is publicly available in each c
 
 ### Access Method
 - **Societe.com**: `regdata/societe-com-scraper` - search by company name, SIREN, or director name. Includes optional financials and director pages.
-- Manual: https://www.societe.com (free access, but no bulk export and aggressive anti-bot measures)
+- Manual: https://www.societe.com (free access, but no bulk export)
 
 ### Unique Advantages
 - Director search by name is unique to Societe.com - find all companies associated with a specific person.
@@ -162,7 +162,7 @@ A practical guide to what official registry data is publicly available in each c
 - Corporate group mapping (shareholders + subsidiaries) reveals holding structures useful for enterprise sales.
 
 ### Limitations
-- No user proxy or API key needed. Societe.com has anti-bot protections that block datacenter IPs, but the actor clears them internally (that cost is already in the per-result price).
+- No user proxy or API key needed; access is already in the per-result price.
 - No phone or email in the data. Contact details must be sourced separately.
 - Financial confidentiality: Some smaller companies exercise their right to keep revenue figures private.
 - Data freshness depends on Societe.com's own aggregation cycle - there can be a lag of weeks to months vs. primary sources.

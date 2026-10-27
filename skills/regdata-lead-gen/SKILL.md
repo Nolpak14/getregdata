@@ -261,7 +261,7 @@ Or search by director name to find all companies a person is connected to:
 - Use director names for LinkedIn outreach
 - Personalization hook: Reference their financial trajectory or recent director appointments
 
-**Important**: Societe.com is keyless - no proxy and no API key are needed. The actor clears the anti-bot layer itself, and there is no `proxyConfiguration` field in its input schema.
+**Important**: Societe.com is keyless - no proxy and no API key are needed. There is no `proxyConfiguration` field in its input schema.
 
 ---
 
@@ -399,11 +399,11 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN&fo
 
 ### Proxy Notes
 
-None of these actors need a proxy or an API key from you. Where a source is protected, the actor handles the unblocking internally and the cost is already in the per-result price. Do not pass a `proxyConfiguration` - it is not in their input schemas.
+None of these actors need a proxy or an API key from you. Access is handled inside each actor and is already in the per-result price. Do not pass a `proxyConfiguration` - it is not in their input schemas.
 
 - **WKO and KRS Board**: Plain HTTP, no proxy, no key.
-- **Spain Company Directory**: The F5/Volterra WAF and the rotation CAPTCHA are solved by the actor. You configure nothing.
-- **Societe.com**: Keyless, no proxy needed - the anti-bot layer is cleared by the actor.
+- **Spain Company Directory**: No proxy, no key. You configure nothing.
+- **Societe.com**: Keyless, no proxy needed.
 - **BORME**: Downloads PDFs directly from boe.es - no proxy needed.
 
 ---
