@@ -1,6 +1,6 @@
 // Auto-generated from the live Apify fleet (deployed builds). 35 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-07-23. Do not edit inputSchema by hand.
+// Generated 2026-10-27. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -14,6 +14,12 @@ export const ACTORS = [
           "type": "array",
           "title": "Company identifiers (NIP or KRS)",
           "description": "The Polish companies to check, by NIP (10 digits) or KRS (10 digits, leading zeros). Each identifier returns one complete KYB check: identity, beneficial owners, and insolvency proceedings against the company and every beneficial owner."
+        },
+        "includeManagement": {
+          "type": "boolean",
+          "title": "Include management board (KRS)",
+          "description": "Also read the current KRS extract and return the sitting management board (or representing partners), representation rule, prokurenci (proxies), supervisory board, shareholders/partners and share capital. Companies without a KRS number are reported as not applicable. The board is billed by the board-members actor it runs, on top of the check.",
+          "default": false
         },
         "krzConcurrency": {
           "type": "integer",
@@ -158,12 +164,12 @@ export const ACTORS = [
         "dateFrom": {
           "type": "string",
           "title": "Published Since (Date From)",
-          "description": "Only return publications from this date onward (YYYY-MM-DD). Default: 30 days ago. | Nur Veroffentlichungen ab diesem Datum (JJJJ-MM-TT)."
+          "description": "Only return edicts published on or after this date (YYYY-MM-DD). Setting it is strongly recommended: it is the only filter the register applies server-side, so it is what keeps a browse-style run short, and it removes the need for the GmbH fallback query - without it a run with no searchQuery returns ONLY debtors whose name contains 'GmbH'. | Nur Veroeffentlichungen ab diesem Datum."
         },
         "dateTo": {
           "type": "string",
           "title": "Published Until (Date To)",
-          "description": "Only return publications up to this date (YYYY-MM-DD). Default: today. | Nur Veroffentlichungen bis zu diesem Datum (JJJJ-MM-TT)."
+          "description": "Only return edicts published up to this date (YYYY-MM-DD). Applied per edict, not by the register, so a narrow window costs one page fetch per candidate. | Nur Veroeffentlichungen bis zu diesem Datum."
         },
         "entryType": {
           "type": "string",
@@ -179,7 +185,7 @@ export const ACTORS = [
         "maxResults": {
           "type": "integer",
           "title": "Max Results",
-          "description": "Maximum number of results to return. Default: 100. Set to 0 for unlimited. | Maximale Anzahl der Ergebnisse.",
+          "description": "Maximum number of matching records to return. Default: 100. Set to 0 for unlimited. This caps matches, not work: dateTo and proceedingType are checked per edict, so reaching the cap can require many more page fetches than the cap itself. | Maximale Anzahl der Ergebnisse.",
           "default": 100
         }
       },
@@ -350,6 +356,17 @@ export const ACTORS = [
     "inputSchema": {
       "type": "object",
       "properties": {
+        "mode": {
+          "type": "string",
+          "title": "What to do",
+          "description": "<b>Search</b> looks up the names or entity numbers you list below. <b>New filings</b> delivers every newly approved California entity since the last run - schedule it daily and each run picks up where the previous one stopped. <b>Add addresses</b> takes the results of an earlier run and completes each record with its principal address, mailing address and the registered agent's address.",
+          "enum": [
+            "search",
+            "newFilings",
+            "addresses"
+          ],
+          "default": "search"
+        },
         "searchQueries": {
           "type": "array",
           "title": "Search queries",
@@ -360,12 +377,60 @@ export const ACTORS = [
           "title": "Max results per query",
           "description": "Maximum number of entities to keep per query (default 50 to avoid surprise charges on broad searches). Set 0 for no limit (all matches, typically up to ~500 per search).",
           "default": 50
+        },
+        "startEntityNumber": {
+          "type": "string",
+          "title": "Start from entity number",
+          "description": "New filings only, first run only: the California entity number to start from, e.g. <code>B20260403469</code>. Later runs continue automatically from the saved position."
+        },
+        "maxNumbersPerRun": {
+          "type": "integer",
+          "title": "Entity numbers to check per run",
+          "description": "Upper bound on how many entity numbers one run checks. California issues roughly 1,500-2,000 per business day; a daily schedule at the default keeps up, and whatever is not reached is picked up next run.",
+          "default": 2500
+        },
+        "includeNameReservations": {
+          "type": "boolean",
+          "title": "Include name reservations",
+          "description": "Name reservations share the number sequence but are not formed businesses. Off by default: they are skipped and not billed.",
+          "default": false
+        },
+        "restartFromStartNumber": {
+          "type": "boolean",
+          "title": "Restart from the start number",
+          "description": "Discard the saved position and start again from \"Start from entity number\". Use it to re-run a range; every record in it is delivered (and billed) again.",
+          "default": false
+        },
+        "stateStoreName": {
+          "type": "string",
+          "title": "Progress store name",
+          "description": "Name of the key-value store in your Apify account that keeps the scan position between runs. Use a different name to run several independent feeds.",
+          "default": "california-new-filings"
+        },
+        "stopAfterConsecutiveMisses": {
+          "type": "integer",
+          "title": "Stop after consecutive unanswered numbers",
+          "description": "How many consecutive entity numbers with no approved filing yet mark the end of what the registry has processed so far. Leave at the default unless a run stops too early.",
+          "default": 300
+        },
+        "reserveForNewNumbers": {
+          "type": "integer",
+          "title": "Look-ups reserved for new entity numbers",
+          "description": "Every run re-checks numbers that had no record yet before it moves on to new ones. This reserves part of the run's budget for new numbers so the scan always moves forward, even when the re-check queue is long. Leave at the default unless a run reports a growing backlog.",
+          "default": 1800
+        },
+        "sourceDatasetId": {
+          "type": "string",
+          "title": "Results to complete (dataset ID)",
+          "description": "The dataset ID of an earlier run of this actor. Every record in it is looked up once and returned with <code>principalAddress</code>, <code>mailingAddress</code>, <code>agentType</code>, <code>agentName</code> and <code>agentAddress</code> added. Commercial registered agents have no address of their own on the entity's record, so <code>agentAddress</code> is empty for those."
+        },
+        "sourceRunId": {
+          "type": "string",
+          "title": "...or the run ID",
+          "description": "Alternative to the dataset ID: the ID of the earlier run whose results should be completed."
         }
       },
-      "additionalProperties": true,
-      "required": [
-        "searchQueries"
-      ]
+      "additionalProperties": true
     }
   },
   {
@@ -512,7 +577,7 @@ export const ACTORS = [
         "kwNumbers": {
           "type": "array",
           "title": "KW Numbers",
-          "description": "List of KW numbers to look up. Format: 'CODE/NUMBER/DIGIT' (e.g., 'WR1K/00094598/3'). The check digit (last part) is optional - it will be auto-calculated if omitted. You can also provide just 'CODE/NUMBER'. Note: users on the Apify Free plan get a preview allowance of 25 KW numbers per 30 days; upgrade to any paid Apify plan to run unlimited batches."
+          "description": "List of KW numbers to look up. Format: 'CODE/NUMBER/DIGIT' (e.g., 'WA4M/00160286/2'). The check digit (last part) is optional - it will be auto-calculated if omitted. You can also provide just 'CODE/NUMBER'. Note: users on the Apify Free plan get a preview allowance of 25 KW numbers per 30 days; upgrade to any paid Apify plan to run unlimited batches."
         },
         "viewType": {
           "type": "string",
@@ -546,8 +611,8 @@ export const ACTORS = [
         "maxConcurrency": {
           "type": "integer",
           "title": "Max parallel lookups",
-          "description": "How many KW numbers to process in parallel (1-5). Higher = faster batches. Default 5.",
-          "default": 5
+          "description": "How many KW numbers to process in parallel. Default 4; values above 4 are accepted but run at 4, so one access slot always stays free for other runs.",
+          "default": 4
         }
       },
       "additionalProperties": true,
@@ -567,7 +632,7 @@ export const ACTORS = [
         "searchQuery": {
           "type": "string",
           "title": "Company name / keyword",
-          "description": "Company name or keyword(s) to search for (Schlagwörter). E.g. \"Zalando SE\" or \"BioNTech\"."
+          "description": "Company name or keyword(s) to search for (Schlagwörter). E.g. \"Zalando SE\" or \"BioNTech\". The register accepts at most 5 keywords - send the company name only, not a website title or description. Legal forms (GmbH, AG, KG, e.V., ...), \"und\", \"mit\" and repeated words do not count; \"der\", \"für\", \"von\" do. Single letters and legal forms alone are ignored: \"K&F\" searches for nothing - add a word from the name (\"K & F Kältetechnik\") or write the letters together (\"KF\")."
         },
         "exactMatch": {
           "type": "boolean",
@@ -578,13 +643,24 @@ export const ACTORS = [
         "registerNumber": {
           "type": "string",
           "title": "Register number (optional)",
-          "description": "Optional commercial register number to narrow the search, e.g. \"215511\" (HRB). Must be combined with a company name/keyword - the portal does not allow number-only searches."
+          "description": "Optional register number to narrow the search. The number on its own (\"215511\") or with its register type (\"HRB 6684\", \"HRB 215511 B\") - both work, and the type is selected for you. Must be combined with a company name/keyword: the portal does not allow number-only searches."
         },
         "maxResults": {
           "type": "integer",
           "title": "Max results",
           "description": "Maximum number of matching companies to return structured data for (from the first results page). 1-30.",
           "default": 10
+        },
+        "onlyNew": {
+          "type": "boolean",
+          "title": "Monitor mode - only new or changed companies",
+          "description": "For scheduled checks of the same company or search. The first run returns every company found and remembers it; every later run of the SAME search returns only companies that are new to it, or whose status, name, seat, share capital or officers changed - each with changeType, changedFields and previousValues. When the register cannot serve a company's structured document on a run, its capital and officers are not compared that time (they are never reported as changed on missing data). A run with nothing new succeeds with an empty dataset and a status message, and is billed like any run. The memory is kept in your own Apify account (a key-value store named regdata-handelsregister-monitor); delete it to start again.",
+          "default": false
+        },
+        "monitorKey": {
+          "type": "string",
+          "title": "Monitor name (optional)",
+          "description": "Just a label for your watchlist history, not a password or API key - it is shown masked. Optional name for this monitor's memory, e.g. 'supplier-acme'. Leave empty and the search itself is the name."
         }
       },
       "additionalProperties": true
@@ -606,7 +682,7 @@ export const ACTORS = [
         "watchlist": {
           "type": "array",
           "title": "Watchlist (bulk / monitoring)",
-          "description": "A list of company names or surnames to check in one run. Ideal for scheduled monitoring - run this Actor daily against your counterparties and get any new insolvency publications. Overrides the single \"name\" field when set."
+          "description": "A list of company names or surnames to check in one run (up to 100). Ideal for scheduled monitoring - run this Actor daily against your counterparties and get any new insolvency publications. Overrides the single \"name\" field when set. For more than 100 names, split them across several runs or scheduled tasks."
         },
         "firstName": {
           "type": "string",
@@ -680,7 +756,7 @@ export const ACTORS = [
         "maxResults": {
           "type": "integer",
           "title": "Max results",
-          "description": "Maximum publications to export across all queries in this run.",
+          "description": "Maximum publications to export across all queries in this run. Each publication returned is billed, so this also caps the per-publication cost.",
           "default": 200
         }
       },
@@ -872,18 +948,45 @@ export const ACTORS = [
         "dateFrom": {
           "type": "string",
           "title": "Date From",
-          "description": "Start date for announcement search (YYYY-MM-DD). Only used in announcements mode."
+          "description": "Start date for announcement search (YYYY-MM-DD). Only used in announcements mode. A date range of up to 366 days is returned in full, even when it holds more than 1000 announcements; the run says so if a single day exceeds what the register will return."
         },
         "dateTo": {
           "type": "string",
           "title": "Date To",
-          "description": "End date for announcement search (YYYY-MM-DD). Only used in announcements mode."
+          "description": "End date for announcement search (YYYY-MM-DD), inclusive. Only used in announcements mode. A malformed date, or a dateFrom after dateTo, stops the run before any search and nothing is charged."
+        },
+        "proceedingType": {
+          "type": "array",
+          "title": "Proceeding type filter (announcements)",
+          "description": "Optional, announcements mode only. Keep only announcements of these proceeding types; leave empty for all. 'appeal' = second-instance rulings on a bankruptcy or restructuring case (e.g. on an arrangement or a repayment plan) - choosing 'restructuring' alone does NOT include appeal rulings on restructuring cases, so add 'appeal' too if you need them. Left-out rows are not exported and not charged.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proceedingKinds": {
+          "type": "array",
+          "title": "Proceeding kind filter (entity search)",
+          "description": "Optional, entity mode only. A company search returns one row per proceeding the register holds for it. Keep only these kinds; leave empty for all. Left-out rows are not exported and not charged.",
+          "items": {
+            "type": "string"
+          }
         },
         "maxResults": {
           "type": "integer",
           "title": "Max Results",
           "description": "Maximum number of results to return. Default: 100. Set to 0 for unlimited.",
           "default": 100
+        },
+        "onlyNew": {
+          "type": "boolean",
+          "title": "Monitor mode - only new or changed",
+          "description": "For scheduled checks of the same company or search. The first run returns everything and remembers it; every later run of the SAME search returns only proceedings that are new to it. Case-signature searches, where the register returns status and type, also report a status or type change (changeType, changedFields, previousValues); company-name searches carry no status, so they report new proceedings only. A run with nothing new succeeds with an empty dataset and a status message, and is billed like any search - 'nothing new' is the answer. The memory is kept in your own Apify account (a key-value store named regdata-krz-monitor); delete it to start again. Not available for proceedingDetails. Dates are not part of the memory, so a rolling announcements window keeps one history.",
+          "default": false
+        },
+        "monitorKey": {
+          "type": "string",
+          "title": "Monitor name (optional)",
+          "description": "Just a label for your watchlist history, not a password or API key - it is shown masked. Optional name for this monitor's memory, e.g. 'client-acme'. Leave empty and the search itself is the name. Use it to keep two separate histories of the same search."
         },
         "disableSessionCache": {
           "type": "boolean",
@@ -931,12 +1034,12 @@ export const ACTORS = [
         "textInBody": {
           "type": "string",
           "title": "Text in Body",
-          "description": "Full-text search in announcement content (max 1000 chars). Use for finding specific terms like 'upadłość', 'likwidacja', etc."
+          "description": "Full-text search inside the announcement body (max 1000 chars). MATCHES LITERALLY, SO POLISH DIACRITICS ARE REQUIRED: \"upadłości\" returns hundreds of notices a month, \"upadlosci\" returns none. Case does not matter and phrases work. Try: upadłości, likwidacji, wierzycieli, syndyk, restrukturyzacji."
         },
         "textInPosition": {
           "type": "string",
           "title": "Text in Position",
-          "description": "Search in announcement header/position text (max 1000 chars)"
+          "description": "Search the announcement header line - the \"Poz. NNNNN. NAME. KRS ... COURT ...\" summary (max 1000 chars). Same literal matching as Text in Body, so Polish diacritics are required. Try: LIKWIDACJI, REJONOWY, GOSPODARCZY."
         },
         "signatureOfCase": {
           "type": "string",
@@ -945,13 +1048,13 @@ export const ACTORS = [
         },
         "dateFrom": {
           "type": "string",
-          "title": "Date From",
-          "description": "Publication date range start (YYYY-MM-DD). Required."
+          "title": "Published from",
+          "description": "Start of the publication date range. Required by the gazette - a search without both dates is rejected. Pick a date, or type a relative one such as \"3 months\"."
         },
         "dateTo": {
           "type": "string",
-          "title": "Date To",
-          "description": "Publication date range end (YYYY-MM-DD). Required."
+          "title": "Published to",
+          "description": "End of the publication date range. Required by the gazette - a search without both dates is rejected. Pick a date, or type a relative one such as \"1 week\"."
         },
         "fetchDetails": {
           "type": "boolean",
@@ -962,8 +1065,19 @@ export const ACTORS = [
         "maxResults": {
           "type": "integer",
           "title": "Max Results",
-          "description": "Maximum number of results to return. Default: 100. Set to 0 for unlimited.",
-          "default": 100
+          "description": "Maximum number of announcements to return. Set to 0 for every match. Starts at 10 so a first run is cheap to try - raise it once the search looks right.",
+          "default": 10
+        },
+        "onlyNew": {
+          "type": "boolean",
+          "title": "Monitor mode - only new notices",
+          "description": "For scheduled checks of the same company or search. The first run returns every matching notice and remembers it; every later run of the SAME search returns only notices published since, each with changeType 'new'. Gazette notices never change once published, so nothing is reported as changed. A run with nothing new succeeds with an empty dataset and a status message. Use a rolling window such as Published from '1 month' and Published to '0 days' - the dates are not part of the memory. Set Max results to 0 so the first run records every match. The memory is kept in your own Apify account (a key-value store named regdata-msig-monitor); delete it to start again.",
+          "default": false
+        },
+        "monitorKey": {
+          "type": "string",
+          "title": "Monitor name (optional)",
+          "description": "Just a label for your watchlist history, not a password or API key - it is shown masked. Optional name for this monitor's memory, e.g. 'client-acme'. Leave empty and the search itself is the name."
         }
       },
       "additionalProperties": true,
@@ -1002,6 +1116,17 @@ export const ACTORS = [
           "title": "Include raw statement file",
           "description": "Include the raw XML/XHTML (iXBRL) statement in the output. Files over 5 MB are linked via the key-value store (rawXmlUrl) instead of inlined.",
           "default": true
+        },
+        "onlyNew": {
+          "type": "boolean",
+          "title": "Monitor mode - only new statements",
+          "description": "For scheduled checks of the same company. The first run returns the latest filed statement and remembers it; every later run returns a row only when a NEWER statement has been filed (changeType 'new'). When nothing new has been filed, nothing is downloaded, the dataset stays empty and the status message says which statement is still the latest - you pay only the run start. The memory is kept in your own Apify account (a key-value store named regdata-krs-financial-monitor); delete it to start again.",
+          "default": false
+        },
+        "monitorKey": {
+          "type": "string",
+          "title": "Monitor name (optional)",
+          "description": "Just a label for your watchlist history, not a password or API key - it is shown masked. Optional name for this monitor's memory. Leave empty and the KRS / NIP number is the name."
         }
       },
       "additionalProperties": true
@@ -1052,7 +1177,7 @@ export const ACTORS = [
         "seedIdentifiers": {
           "type": "array",
           "title": "Seed identifiers (NIP / REGON / KRS)",
-          "description": "List of company identifiers to expand. Auto-detected by shape: 9 or 14 digits = REGON, 10 digits = NIP (override with Seed identifier type). The BIR registry has no geographic search, so you seed the companies to examine here (or via Seed dataset)."
+          "description": "List of company identifiers to expand. Auto-detected by shape: 9 or 14 digits = REGON, 10 digits = NIP (override with Seed identifier type). This actor expands companies you already know into their local units (jednostki lokalne) - it does not discover companies by area, so seed them here (or via Seed dataset)."
         },
         "seedDatasetId": {
           "type": "string",
@@ -1248,7 +1373,7 @@ export const ACTORS = [
         "minIntervalMs": {
           "type": "integer",
           "title": "Min interval between requests (ms)",
-          "description": "Politeness delay between requests. The site allows ~3/s; keep >= 350ms to avoid the conditional CAPTCHA.",
+          "description": "Delay between requests in milliseconds. Keep the default for reliable runs.",
           "default": 350
         }
       },
@@ -1395,8 +1520,8 @@ export const ACTORS = [
         },
         "province": {
           "type": "string",
-          "title": "Province",
-          "description": "Filter results by Spanish province. Matching is case- and accent-insensitive and understands the registry's dual-language names (searching 'Alava' matches 'ARABA/ALAVA'). Companies outside the province are discarded before extraction, so you are never charged for them. Example: 'Madrid', 'Barcelona', 'Valencia', 'Sevilla'"
+          "title": "Province or region",
+          "description": "Limit results to one Spanish province or one autonomous community (region). A province: its name in Spanish or the local language, common older spellings, or the INE code (1-52) - 'Madrid', 'Navarra', 'Bizkaia' or 'Vizcaya', 'A Coruña' or 'La Coruña', 'Illes Balears' or 'Baleares', '31'. A region: its Spanish, local or English name - 'Catalonia' or 'Cataluña', 'Andalucía', 'Basque Country' or 'Euskadi', 'Comunitat Valenciana', 'Galicia'. A region runs one search per province in it, one after another, and returns companies from all of them (pricing is unchanged: as listed in Pricing). A one-province region such as 'Comunidad de Madrid' is the same as that province. For A Coruña and Araba/Álava, combine the filter with a specific company name or activity code - on a very broad search the filter cannot be applied to those two provinces."
         },
         "maxResults": {
           "type": "integer",
@@ -1456,7 +1581,7 @@ export const ACTORS = [
         "maxResults": {
           "type": "integer",
           "title": "Max results",
-          "description": "Maximum party records to export across all queries. The register serves results in pages, and the Actor pages through until it reaches this limit or runs out of matches. Set to 0 to export every match.",
+          "description": "Maximum party records to export across all queries. The register serves results in pages, and the Actor pages through until it reaches this limit or runs out of matches. Set to 0 to export every match. The register returns debtor entries first, so a search truncated by maxResults can contain no disqualified-person or insolvency-administrator rows even when the full result set does. Raise maxResults (or set 0) for broad name searches.",
           "default": 100
         }
       },
@@ -1643,7 +1768,7 @@ export const ACTORS = [
         "searchType": {
           "type": "string",
           "title": "Search type",
-          "description": "How the company name is matched. 'Starts with' is the register's default and the most reliable. 'Sounds like' uses the register's own phonetic index, which is narrow - it will not behave like a general fuzzy search.",
+          "description": "How the company name is matched. The register matches WHOLE WORDS, not the start of a name: 'INVESTMENT' finds every name containing that word, but 'INVEST' finds only names with the word 'INVEST'. 'All these words' (default) needs every word you type; 'Any of these words' needs one of them; 'Sounds like' uses the register's phonetic index. A very common word on its own (INVESTMENT, HOLDINGS, SHIPPING) is refused by the register as too many matches - add a second distinctive word.",
           "enum": [
             "startsWith",
             "endsWith",
@@ -1683,7 +1808,7 @@ export const ACTORS = [
         "companyNames": {
           "type": "array",
           "title": "Company names",
-          "description": "One or more company names to search, each looked up separately (min 2 characters). Partial names work. A broad name can hit the register's 50-result ceiling.",
+          "description": "One or more company names to search, each looked up separately (min 2 characters). Partial names work: every word must appear in the company name, in any order (legal-form words such as 'Ltd' or 'DAC' are optional). Exact and starts-with matches come first, live companies before dissolved ones.",
           "items": {
             "type": "string"
           }
@@ -1691,7 +1816,7 @@ export const ACTORS = [
         "companyNumbers": {
           "type": "array",
           "title": "Company numbers",
-          "description": "One or more Irish CRO registration numbers, each looked up separately. Digits only, e.g. '104547'.",
+          "description": "One or more Irish CRO registration numbers, each looked up separately. Each must contain digits, e.g. '104547' (a prefix such as 'IE' is ignored). Company numbers only - limited partnership (LP...), reserved name (RN...), society (...R) and trade union (...T) numbers are skipped and not charged.",
           "items": {
             "type": "string"
           }
@@ -1699,13 +1824,13 @@ export const ACTORS = [
         "maxResultsPerQuery": {
           "type": "integer",
           "title": "Max results per query",
-          "description": "Maximum company records to export per query. The register returns at most 50 matches per search, so 50 is the ceiling. Fetching the full record for each match happens in the same run.",
+          "description": "Maximum company records to export per query (up to 50). When a name matches more companies, the run says so - narrow the name or search by number.",
           "default": 50
         },
         "statusFilter": {
           "type": "array",
           "title": "Status filter",
-          "description": "Keep only companies whose status contains one of these words, e.g. 'Normal', 'Dissolved', 'Liquidation'. Leave empty to export every match - a Dissolved or Liquidation counterparty is usually the finding you most want to see.",
+          "description": "Keep only companies whose status contains one of these words, e.g. 'Normal', 'Dissolved', 'Strike Off Listed', 'Liquidation'. Leave empty to export every match - a Dissolved or Liquidation counterparty is usually the finding you most want to see.",
           "default": [],
           "items": {
             "type": "string"
