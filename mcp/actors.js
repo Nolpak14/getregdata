@@ -1,4 +1,4 @@
-// Auto-generated from the live Apify fleet (deployed builds). 36 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 37 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
 // Generated 2026-10-31. Do not edit inputSchema by hand.
 export const ACTORS = [
@@ -651,6 +651,54 @@ export const ACTORS = [
       "required": [
         "kwNumbers"
       ]
+    }
+  },
+  {
+    "slug": "france-insolvency-scraper",
+    "tool": "regdata_france_insolvency",
+    "title": "France Insolvency Check (BODACC Procédures collectives)",
+    "description": "Check French companies and sole traders for collective proceedings (liquidation judiciaire, redressement judiciaire, sauvegarde) in BODACC, the official bulletin where French courts publish every insolvency judgment, by SIREN, SIRET or name. One row per judgment, newest first: eventType (bankruptcy_opened = liquidation opened or converted, restructuring_opened = redressement/sauvegarde, plan_confirmed, proceeding_closed, other), the French judgment name, judgment and publication dates, court, SIREN, legal form, seat and the link to the official notice. Coverage from January 2008. Zero rows for a SIREN means BODACC holds no insolvency judgment for it in the searched window - read the run status message: a query BODACC did not answer is reported as NOT checked (unknown, not clear) and is not charged. Name search matches words, so prefer the SIREN; a name query returns the 20 newest judgments by default. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "siren": {
+          "type": "array",
+          "title": "SIREN or SIRET numbers",
+          "description": "French company identifiers to check: SIREN (9 digits) or SIRET (14 digits, reduced to its SIREN). Spaces are fine. The most precise check - use it whenever you have the number."
+        },
+        "name": {
+          "type": "string",
+          "title": "Company or trader name",
+          "description": "A company name or a sole trader's name, matched as a word search on the debtor name in BODACC. Ignored when a watchlist is set."
+        },
+        "watchlist": {
+          "type": "array",
+          "title": "Watchlist (bulk / monitoring)",
+          "description": "Up to 100 entries to check in one run - names, SIRENs and SIRETs can be mixed (a 9- or 14-digit entry is treated as an identifier). Overrides the single name field. Schedule it to re-check your counterparties."
+        },
+        "exactMatch": {
+          "type": "boolean",
+          "title": "Exact name match",
+          "description": "Off (default): every debtor whose name contains the words. On: only debtors whose name equals the query, ignoring case, accents and punctuation. No effect on SIREN checks.",
+          "default": false
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Published from",
+          "description": "Optional start of the publication-date window (YYYY-MM-DD). Leave empty to search the full BODACC history (online from 2008)."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Published to",
+          "description": "Optional end of the publication-date window (YYYY-MM-DD)."
+        },
+        "maxResults": {
+          "type": "integer",
+          "title": "Max judgments per SIREN or name",
+          "description": "The most judgments returned for one SIREN or name, newest first. Leave empty for the defaults: 100 per SIREN, 20 per name (a broad name such as \"Martin\" matches thousands of unrelated debtors)."
+        }
+      },
+      "additionalProperties": true
     }
   },
   {
