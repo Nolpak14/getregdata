@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 35 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 36 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-10-27. Do not edit inputSchema by hand.
+// Generated 2026-10-31. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -567,6 +567,38 @@ export const ACTORS = [
     }
   },
   {
+    "slug": "czech-annual-accounts",
+    "tool": "regdata_czech_annual_accounts",
+    "title": "Czech Annual Accounts - IČO Financial Statements",
+    "description": "Get the filed annual accounts (účetní závěrka) of Czech companies by IČO from the Sbírka listin of the public register: revenue, operating profit, profit before tax, net profit, total/fixed/current assets, cash, equity, share capital, long- and short-term liabilities, with the prior year from the same filing. One row per company, fiscal year and statement type (up to 5 years; group accounts on request). Figures are in whole currency units (CZK, some large companies EUR). _parseQuality: verified = balance sheet adds up; partial = adds up but revenue/profit not filed (common for small companies, which may file the balance sheet only). A row with success:false is NOT a clean bill of health: \"scan - figures not read\" and \"figures not read from this filing\" mean the filing exists but its figures were not read (sourceUrl links the document); not_found = no such company; no_filings = no annual accounts filed. Those rows are not charged. The latest year appears only once the company has filed it, often a year or two late. TIMING: about 5-10 s per company; scanned filings take longer (up to a few minutes). If the run is not finished in time, the tool returns {status, runId, note} - call regdata_run_result with that runId instead of re-running (re-running bills twice). No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "title": "IČO numbers",
+          "description": "Czech company identification numbers (IČO, 8 digits), up to 1,000 per run. Example: 06401643. Each company takes a few seconds; very large lists are best split into runs of up to 300 companies."
+        },
+        "years": {
+          "type": "integer",
+          "title": "Fiscal years per company",
+          "description": "How many of the most recent fiscal years to return for each company (1 to 5). Each year read is one row and one charge.",
+          "default": 1
+        },
+        "includeConsolidated": {
+          "type": "boolean",
+          "title": "Include group (consolidated) accounts",
+          "description": "Also look for the consolidated group accounts next to the company's own accounts. Each group statement read is an extra row and an extra charge. Companies that file group accounts only get them either way. Off by default.",
+          "default": false
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companyIds"
+      ]
+    }
+  },
+  {
     "slug": "ekw-ksiegi-wieczyste-scraper",
     "tool": "regdata_ekw_ksiegi_wieczyste",
     "title": "Poland EKW Land Registry Scraper Ksiegi Wieczyste",
@@ -881,7 +913,7 @@ export const ACTORS = [
         "extractType": {
           "type": "string",
           "title": "Extract Type",
-          "description": "Type of KRS extract to download. 'aktualny' = current state only (faster, smaller). 'pelny' = full history including former board members.",
+          "description": "Type of KRS record to return. 'aktualny' = current state only (faster, smaller). 'pelny' = full history including former board members.",
           "enum": [
             "aktualny",
             "pelny"
