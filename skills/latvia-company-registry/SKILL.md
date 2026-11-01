@@ -52,7 +52,7 @@ Data is licensed **CC0-1.0 (public domain)** - free reuse, no attribution requir
 
 ## Authentication
 
-None. No API key, no registration, no auth. The portal runs a standard **CKAN datastore API** - the same `datastore_search` you would use on any CKAN open-data site. Be polite: default page size is 100 (pass `limit`/`offset` to page), and a single query caps at ~32,000 rows. The portal sits behind Cloudflare, so rapid repeated calls can draw an occasional `403` - back off and retry, do not hammer.
+None. No API key, no registration, no auth. The portal runs a standard **CKAN datastore API** - the same `datastore_search` you would use on any CKAN open-data site. Be polite: default page size is 100 (set `limit`/`offset` to page), and a single query caps at ~32,000 rows. The portal sits behind Cloudflare, so rapid repeated calls can draw an occasional `403` - back off and retry, do not hammer.
 
 ## Before starting
 
@@ -133,7 +133,7 @@ curl "https://data.gov.lv/dati/api/3/action/datastore_search?resource_id=20a9b26
 
 **Fields and values are Latvian.** Names, legal forms and role labels come back in Latvian (Komercregistrs, amatpersona). Keep them verbatim; do not translate the stored values away.
 
-**Pagination and caps.** CKAN default page is 100 records; pass `limit` and `offset` to page. A single `datastore_search` caps at ~32,000 rows - narrow the filter rather than paging past it. The portal is behind Cloudflare, so an occasional `403` on rapid repeat calls means back off, not that the data is gone.
+**Pagination and caps.** CKAN default page is 100 records; set `limit` and `offset` to page. A single `datastore_search` caps at ~32,000 rows - narrow the filter rather than paging past it. The portal is behind Cloudflare, so an occasional `403` on rapid repeat calls means back off, not that the data is gone.
 
 ## Cross-sell - where the free front door leads
 

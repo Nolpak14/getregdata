@@ -111,9 +111,9 @@ curl "https://data.brreg.no/enhetsregisteret/api/enheter/923609016/roller"
 
 ## Output interpretation
 
-**Status flags are booleans, not dates.** `konkurs: true` = bankruptcy proceedings are open. `underAvvikling: true` = voluntary dissolution. `underTvangsavviklingEllerTvangsopplosning: true` = compulsory liquidation. All three false is the pass condition; combine konkurs with underAvvikling for a full "distressed" read. For the *detail* of an insolvency proceeding (case dates, creditors) brreg gives you only the flag - route to the regdata credit-risk actors.
+**Status flags are booleans, not dates.** `konkurs: true` = bankruptcy proceedings are open. `underAvvikling: true` = voluntary dissolution. `underTvangsavviklingEllerTvangsopplosning: true` = compulsory liquidation. All three false is the clean result; combine konkurs with underAvvikling for a full "distressed" read. For the *detail* of an insolvency proceeding (case dates, creditors) brreg gives you only the flag - route to the regdata credit-risk actors.
 
-**Pagination is Spring HATEOAS.** A list response wraps results in `_embedded.enheter[]` (or `_embedded.underenheter[]`), with a `page` object (`size`, `totalElements`, `totalPages`, `number`) and a `_links.next` to walk. Default page size is 20; pass `size=` to widen. The **maximum reachable result set is 10,000 records per query** - narrow the filter rather than paging past it.
+**Pagination is Spring HATEOAS.** A list response wraps results in `_embedded.enheter[]` (or `_embedded.underenheter[]`), with a `page` object (`size`, `totalElements`, `totalPages`, `number`) and a `_links.next` to walk. Default page size is 20; set `size=` to widen. The **maximum reachable result set is 10,000 records per query** - narrow the filter rather than paging past it.
 
 **underenheter are a SEPARATE collection from enheter.** Branches and establishments do not appear inside the main entity record - you must query the `/underenheter` endpoint. A main entity with no `/enheter` hit may still exist as an underenhet, and vice versa.
 
