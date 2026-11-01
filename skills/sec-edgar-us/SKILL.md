@@ -124,14 +124,13 @@ EDGAR covers **SEC-registered issuers only** - U.S. public companies and large f
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Private California company records | USA (California) | `regdata/california-sos-business-scraper` |
-| UCC liens / secured filings | USA (California) | `regdata/california-ucc-lien-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/sec-edgar-us/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/sec-edgar-us/) |
+| UCC liens | US - California | [`regdata/california-ucc-lien-scraper`](https://getregdata.com/go/california-ucc-lien-scraper/sec-edgar-us/) |
+| Lis pendens, liens, deeds (county clerks) | US - TX, OH, MI and more | [`regdata/us-county-recorded-documents`](https://getregdata.com/go/us-county-recorded-documents/sec-edgar-us/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/sec-edgar-us/) |
 
-To resolve a public company to its global LEI and corporate structure, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+To resolve a public company to its global LEI and corporate structure, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/sec-edgar-us/.
 
 ## Related skills
 

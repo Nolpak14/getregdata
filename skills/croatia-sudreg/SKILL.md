@@ -133,14 +133,14 @@ Croatia (like the UK, Denmark and Norway) is an outlier: an official, structured
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/croatia-sudreg/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/croatia-sudreg/) |
+| Business directory (WKO) | Austria | [`regdata/wko-business-directory-scraper`](https://getregdata.com/go/wko-business-directory-scraper/croatia-sudreg/) |
+| Filed annual accounts | Czechia | [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/croatia-sudreg/) |
+| Beneficial owners (RPVS) | Slovakia | [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/croatia-sudreg/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/croatia-sudreg/) |
 
-There is no Croatian regdata actor - the free sudski registar OPEN API above is the whole toolkit for Croatia. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+There is no Croatian regdata actor - the free sudski registar OPEN API above is the whole toolkit for Croatia. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/croatia-sudreg/.
 
 ## Related skills
 

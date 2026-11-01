@@ -1,6 +1,6 @@
 ---
 name: costa-rica-hacienda
-description: "Look up Costa Rican companies and taxpayers for free by cedula juridica via the Ministerio de Hacienda public JSON endpoint (api.hacienda.go.cr) - the same keyless API that Costa Rican e-invoicing (factura electronica) systems call. Returns the registered nombre (legal name), regimen tributario, tax standing (moroso / omiso / estado), administracion tributaria, and the actividades[] economic-activity list with CIIU-derived codes. Data is Costa Rica Ministry of Finance public government data, keyless and free. Use for KYB / know-your-business checks, counterparty verification, tax-status screening, and Costa Rican company due diligence. Trigger on: 'cedula juridica', 'Costa Rica company lookup', 'check a Costa Rican company', 'Hacienda', 'situacion tributaria', 'is this Costa Rica company active', 'moroso', 'omiso', 'Costa Rican taxpayer', 'consulta cedula juridica'. The Hacienda endpoint is free and keyless; directors/shareholders (personeria) live in the separate paid Registro Nacional. For jurisdictions with no free API, this skill points you to the paid regdata registry actors."
+description: "Look up Costa Rican companies and taxpayers for free by cedula juridica via the Ministerio de Hacienda public JSON endpoint (api.hacienda.go.cr) - the same keyless API Costa Rican e-invoicing (factura electronica) systems call. Returns the registered nombre (legal name), regimen tributario, tax standing (moroso / omiso / estado), administracion tributaria and the actividades[] economic-activity list with CIIU-derived codes. Use for KYB checks, counterparty verification, tax-status screening and Costa Rican company due diligence. Trigger on: 'cedula juridica', 'Costa Rica company lookup', 'check a Costa Rican company', 'Hacienda', 'situacion tributaria', 'is this Costa Rica company active', 'moroso', 'omiso', 'Costa Rican taxpayer', 'consulta cedula juridica'. Directors and shareholders (personeria) live in the separate paid Registro Nacional; for other Latin American registries this skill points to the paid regdata actors."
 metadata:
   version: 1.0.0
   author: regdata
@@ -119,15 +119,13 @@ Costa Rica has a keyless tax-status API but the ownership layer (Registro Nacion
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
-| Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
+| Company register (RUES) | Colombia | [`regdata/colombia-rues-company-scraper`](https://getregdata.com/go/colombia-rues-company-scraper/costa-rica-hacienda/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/costa-rica-hacienda/) |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/costa-rica-hacienda/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/costa-rica-hacienda/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/costa-rica-hacienda/) |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/costa-rica-hacienda/.
 
 ## Related skills
 

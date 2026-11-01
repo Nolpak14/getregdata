@@ -141,15 +141,14 @@ Latvia (like the UK and Norway) is an outlier: genuinely free, official, keyless
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
-| Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
+| Filed annual accounts | Estonia | [`regdata/estonia-annual-accounts`](https://getregdata.com/go/estonia-annual-accounts/latvia-company-registry/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/latvia-company-registry/) |
+| Beneficial owners (UBO) | Poland | [`regdata/crbr-beneficial-owners-scraper`](https://getregdata.com/go/crbr-beneficial-owners-scraper/latvia-company-registry/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/latvia-company-registry/) |
+| Filed annual accounts | Norway | [`regdata/norway-annual-accounts`](https://getregdata.com/go/norway-annual-accounts/latvia-company-registry/) |
+| Filed annual reports (årsrapport) | Denmark | [`regdata/denmark-annual-accounts`](https://getregdata.com/go/denmark-annual-accounts/latvia-company-registry/) |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/latvia-company-registry/.
 
 ## Related skills
 

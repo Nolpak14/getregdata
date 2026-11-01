@@ -139,15 +139,15 @@ The UK is the outlier: a fully free, official, structured REST API. **No equival
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
-| Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
+| Company register records | Ireland | [`regdata/ireland-cro-company-scraper`](https://getregdata.com/go/ireland-cro-company-scraper/companies-house-uk/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/companies-house-uk/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/companies-house-uk/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/companies-house-uk/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/companies-house-uk/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/companies-house-uk/) |
+| Filed annual accounts | Czechia | [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/companies-house-uk/) |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/companies-house-uk/.
 
 ## Related skills
 

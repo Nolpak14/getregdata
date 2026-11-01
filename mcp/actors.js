@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 37 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 44 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-10-31. Do not edit inputSchema by hand.
+// Generated 2026-11-01. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -92,22 +92,6 @@ export const ACTORS = [
           "title": "Max hits per entity",
           "description": "Maximum number of adverse hits to return per entity. 1-50.",
           "default": 25
-        },
-        "model": {
-          "type": "string",
-          "title": "Classification model (advanced)",
-          "description": "OpenRouter model id used for classification. Default is a cheap, accurate model.",
-          "default": "deepseek/deepseek-chat"
-        },
-        "serperApiKey": {
-          "type": "string",
-          "title": "Serper API Key (optional override)",
-          "description": "Optional. Search is included; provide your own Serper key only to bill search to your own account."
-        },
-        "openRouterApiKey": {
-          "type": "string",
-          "title": "OpenRouter API Key (optional override)",
-          "description": "Optional. The LLM is included; provide your own OpenRouter key only to bill classification to your own account."
         }
       },
       "additionalProperties": true
@@ -476,6 +460,139 @@ export const ACTORS = [
     }
   },
   {
+    "slug": "illinois-sos-business-search",
+    "tool": "regdata_illinois_sos_business",
+    "title": "Illinois Secretary of State - Business Search and New Filings",
+    "description": "Search the Illinois Secretary of State business register by company name or 8-digit file number, or (mode=newFilings) list LLCs and corporations newly organized in Illinois between two dates within the last 13 months. Returns entity name, file number, type, status, formation and other dates, registered agent, and managers or officers. Name search matches entities whose name contains all the words; onlyActive keeps entities in good standing. For a daily new-business feed, schedule newFilings with onlyNewSinceLastRun so late-indexed filings arrive exactly once. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "What to do",
+          "description": "<b>Search</b> looks up the company names or Illinois file numbers you list. <b>New filings</b> lists the LLCs and corporations organized in Illinois between two dates (the last 13 months) - schedule it daily with \"Only entities not delivered before\" for a feed.",
+          "enum": [
+            "search",
+            "newFilings"
+          ],
+          "default": "search"
+        },
+        "searchQueries": {
+          "type": "array",
+          "title": "Search queries",
+          "description": "Company names or 8-digit Illinois file numbers, one per line. A name matches every entity whose name contains all its words (\"LLC\", \"Inc\" and similar endings are ignored, except that an exact full name is listed first)."
+        },
+        "maxResultsPerQuery": {
+          "type": "integer",
+          "title": "Max results per query",
+          "description": "Most entities kept per query (default 50, so a broad word does not bring thousands of records). 0 = up to 1,000.",
+          "default": 50
+        },
+        "entityFamilies": {
+          "type": "array",
+          "title": "Entity types",
+          "description": "Leave empty for both.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onlyActive": {
+          "type": "boolean",
+          "title": "Only active entities",
+          "description": "Keep only entities in good standing or reinstated.",
+          "default": false
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Organized from",
+          "description": "New filings only. YYYY-MM-DD. Default: 7 days ago. The last 13 months are available."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Organized to",
+          "description": "New filings only. YYYY-MM-DD, inclusive. Default: today."
+        },
+        "onlyNewSinceLastRun": {
+          "type": "boolean",
+          "title": "Only entities not delivered before",
+          "description": "New filings only. Skips entities this feed already delivered, so a daily schedule with a 7-day window catches late-registered filings exactly once.",
+          "default": false
+        },
+        "stateStoreName": {
+          "type": "string",
+          "title": "Feed memory store name",
+          "description": "New filings only. Key-value store in your Apify account that remembers what was delivered. Use a different name for each independent feed.",
+          "default": "illinois-sos-search-state"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "us-county-recorded-documents",
+    "tool": "regdata_us_county_recorded_documents",
+    "title": "US County Clerk Records - lis pendens, liens and deeds (Texas, Ohio, Michigan and more)",
+    "description": "Daily index of documents recorded with US county clerks in selected counties across Texas, Ohio, Michigan, Pennsylvania, Colorado and other states (counties enum in the input): lis pendens, liens, deeds, deeds of trust, releases, affidavits of heirship and sheriff's deeds, with recorded date, document category and grantor and grantee names. Use for pre-foreclosure and probate lead lists, lien monitoring on a named party, and title research. Pick counties and a recorded-date window (at most 31 days per run; the newest day can still be incomplete while the county finishes indexing), optionally document categories or a party name (counties index people as LAST FIRST). onlyNewSinceLastRun makes a scheduled run deliver each document once. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "counties": {
+          "type": "array",
+          "title": "Counties",
+          "description": "The counties to read, from the county clerk's official public records search. Counties are read one after another.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Recorded from",
+          "description": "First recorded date, YYYY-MM-DD. Default: yesterday. At most 31 days per run."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Recorded to",
+          "description": "Last recorded date, YYYY-MM-DD, inclusive. Default: yesterday. Counties publish each day once their indexing is done, so the most recent day can still be incomplete."
+        },
+        "documentCategories": {
+          "type": "array",
+          "title": "Document categories",
+          "description": "Keep only these kinds of documents. Leave empty for every document recorded in the window. Each document gets one category, matched on the county's document type wording.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "partyName": {
+          "type": "string",
+          "title": "Party name (optional)",
+          "description": "Only documents where this name appears as a grantor or grantee, e.g. \"SMITH JOHN\" or a company name. Counties index people as LAST FIRST. Leave empty for every document in the window."
+        },
+        "maxResults": {
+          "type": "integer",
+          "title": "Max results",
+          "description": "Most documents delivered in this run, across all counties. 0 = no limit.",
+          "default": 1000
+        },
+        "onlyNewSinceLastRun": {
+          "type": "boolean",
+          "title": "Only documents not delivered before",
+          "description": "For a scheduled daily feed: skips documents this feed already delivered (remembered for 60 days), so a window that overlaps the previous run still delivers each document once.",
+          "default": false
+        },
+        "stateStoreName": {
+          "type": "string",
+          "title": "Feed memory store name",
+          "description": "Key-value store in your Apify account that remembers delivered documents. Use a different name for each independent feed.",
+          "default": "county-records-feed-state"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "counties"
+      ]
+    }
+  },
+  {
     "slug": "crbr-beneficial-owners-scraper",
     "tool": "regdata_crbr_beneficial_owners",
     "title": "Poland CRBR Beneficial Owners Scraper",
@@ -567,6 +684,104 @@ export const ACTORS = [
     }
   },
   {
+    "slug": "czech-drazby-auction-scraper",
+    "tool": "regdata_czech_auctions",
+    "title": "Czech Public Auctions - Portál dražeb (judicial executors)",
+    "description": "List auctions run by Czech judicial executors from the official Portál dražeb: foreclosed flats, houses, land, vehicles, machinery and whole companies, with appraised value, reserve price and the discount between them, the deposit, auction dates, property address with coordinates and the published appraisal PDF. Filter by list (upcoming, ongoing, finished, pre-emption), start-date window, category, real vs movable property, region and price range; optional detail mode adds bid history, result and objections. mode=auctioneers instead exports the directory of executor offices. An empty 'ongoing' list is normal (auctions run in short windows), not an error. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "What to export",
+          "description": "'Auctions' enumerates auction listings. 'Executor offices' instead exports the directory of all Czech judicial executor offices with their addresses and contact details, and ignores every filter below.",
+          "enum": [
+            "auctions",
+            "auctioneers"
+          ],
+          "default": "auctions"
+        },
+        "listings": {
+          "type": "array",
+          "title": "Auction lists",
+          "description": "Which of the register's lists to read. 'Upcoming' is the main one. 'Ongoing' is empty most of the time because auctions run in short windows - that is a normal result, not an error. 'Finished' and 'Pre-emption' are small rolling windows: the register does NOT keep a historical archive, so they cannot be used to research past sale prices.",
+          "default": [
+            "upcoming"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "startFrom": {
+          "type": "string",
+          "title": "Auction date from",
+          "description": "Earliest auction start date, YYYY-MM-DD. Defaults to today for forward-looking lists. This also drives how the run splits its queries, so a narrower window costs fewer calls."
+        },
+        "startTo": {
+          "type": "string",
+          "title": "Auction date to",
+          "description": "Latest auction start date, YYYY-MM-DD. Defaults to one year ahead. The register typically holds about four months of scheduled auctions."
+        },
+        "categories": {
+          "type": "array",
+          "title": "Categories",
+          "description": "Restrict to these property categories. The register's own category filter is hierarchical and over-broad - asking for 'Byt' also returns its parent 'Nemovitosti' and its sibling 'Nebytový prostor' - so results are filtered again locally to exactly what you picked. Turn off 'Exact category match' below if you want the register's broader interpretation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "itemType": {
+          "type": "string",
+          "title": "Property type",
+          "description": "Keep only real estate, only movable property, or both. Movable lots (vehicles, machinery, goods) usually have no address, so they cannot be placed on a map.",
+          "enum": [
+            "any",
+            "real",
+            "movable"
+          ],
+          "default": "any"
+        },
+        "counties": {
+          "type": "array",
+          "title": "Regions (kraje)",
+          "description": "Keep only auctions whose property lies in these regions, matched on the region name as the register spells it, e.g. 'Praha', 'Jihočeský kraj', 'Moravskoslezský kraj'. Partial matches count. Lots with no published location are excluded when this is set.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minPrice": {
+          "type": "integer",
+          "title": "Minimum reserve price (CZK)",
+          "description": "Lowest reserve (starting) price to include, in CZK. Applied by the register itself."
+        },
+        "maxPrice": {
+          "type": "integer",
+          "title": "Maximum reserve price (CZK)",
+          "description": "Highest reserve (starting) price to include, in CZK. Applied by the register itself."
+        },
+        "maxResults": {
+          "type": "integer",
+          "title": "Max results",
+          "description": "Maximum auction records to export. A lot appearing in more than one selected list is exported once, so you are never charged twice for the same auction.",
+          "default": 1000
+        },
+        "includeDetails": {
+          "type": "boolean",
+          "title": "Include bid history and outcome",
+          "description": "Fetch each auction's detail record to add bid history, result and objections. Costs one extra request per auction, so it roughly doubles a run's duration. Upcoming auctions have no bids yet, so leave this off unless you are reading finished lots.",
+          "default": false
+        },
+        "exactCategories": {
+          "type": "boolean",
+          "title": "Exact category match",
+          "description": "On by default. Keeps only the categories you selected, discarding the parent and sibling categories the register adds on its own. Turn off to receive the register's broader match.",
+          "default": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
     "slug": "czech-annual-accounts",
     "tool": "regdata_czech_annual_accounts",
     "title": "Czech Annual Accounts - IČO Financial Statements",
@@ -590,6 +805,96 @@ export const ACTORS = [
           "title": "Include group (consolidated) accounts",
           "description": "Also look for the consolidated group accounts next to the company's own accounts. Each group statement read is an extra row and an extra charge. Companies that file group accounts only get them either way. Off by default.",
           "default": false
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companyIds"
+      ]
+    }
+  },
+  {
+    "slug": "norway-annual-accounts",
+    "tool": "regdata_norway_annual_accounts",
+    "title": "Norway Annual Accounts - Brønnøysund Financial Statements",
+    "description": "Get the filed annual accounts (årsregnskap) of Norwegian companies by organisation number (organisasjonsnummer, 9 digits) from the Brønnøysund Register of Company Accounts: revenue, operating profit, net profit, total assets, equity and liabilities, checked against the balance sheet. One row per company, fiscal year and statement type (up to 3 years; consolidated group accounts optional, each an extra row and charge). Use it after a free Brreg (Enhetsregisteret) lookup when you need the numbers, not just the identity. If the run is not finished in time, the tool returns {status, runId, note} - call regdata_run_result with that runId instead of re-running (re-running bills twice). No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "title": "Organisation numbers",
+          "description": "Norwegian organisation numbers (organisasjonsnummer), 9 digits, up to 1,000 per run. Example: 923609016."
+        },
+        "years": {
+          "type": "integer",
+          "title": "Fiscal years per company",
+          "description": "How many of the most recent fiscal years to return for each company (1 to 3). Each year is one row and one charge.",
+          "default": 1
+        },
+        "includeConsolidated": {
+          "type": "boolean",
+          "title": "Include group (consolidated) accounts",
+          "description": "Also return the consolidated group accounts when the company files them. Each group statement is an extra row and an extra charge. Off by default.",
+          "default": false
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companyIds"
+      ]
+    }
+  },
+  {
+    "slug": "denmark-annual-accounts",
+    "tool": "regdata_denmark_annual_accounts",
+    "title": "Denmark Annual Accounts - CVR Financial Statements (Årsrapport)",
+    "description": "Get the filed annual reports (årsrapport) of Danish companies by CVR number (8 digits): revenue, gross profit, net profit, total assets, equity, liabilities and employees, with the prior year included, balance-checked. One row per company, fiscal year and statement type (up to 5 years; group accounts optional - companies that file group accounts only, such as listed IFRS groups, return those). Use it after a free CVR identity lookup when you need the financials. If the run is not finished in time, the tool returns {status, runId, note} - call regdata_run_result with that runId instead of re-running (re-running bills twice). No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "title": "CVR numbers",
+          "description": "Danish CVR numbers, 8 digits, up to 1,000 per run. Example: 21766909."
+        },
+        "years": {
+          "type": "integer",
+          "title": "Fiscal years per company",
+          "description": "How many of the most recent fiscal years to return for each company (1 to 5). Each year is one row and one charge.",
+          "default": 1
+        },
+        "includeConsolidated": {
+          "type": "boolean",
+          "title": "Include group (consolidated) accounts",
+          "description": "Also return the consolidated group accounts next to the company's own accounts. Each group statement is an extra row and an extra charge. Companies that file group accounts only (for example listed IFRS companies) get them either way. Off by default.",
+          "default": false
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companyIds"
+      ]
+    }
+  },
+  {
+    "slug": "estonia-annual-accounts",
+    "tool": "regdata_estonia_annual_accounts",
+    "title": "Estonia Annual Accounts - e-Business Register Financials",
+    "description": "Get the filed annual accounts (majandusaasta aruanne) of Estonian companies by registry code (registrikood, 8 digits) from the e-Business Register: revenue, operating profit, net profit, total assets, equity and liabilities, checked against the balance sheet. One row per company and fiscal year (up to 3 years). Use it for Estonian KYB, credit checks and supplier vetting when you need the numbers. If the run is not finished in time, the tool returns {status, runId, note} - call regdata_run_result with that runId instead of re-running (re-running bills twice). No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "title": "Registry codes",
+          "description": "Estonian company registry codes (registrikood), 8 digits, up to 1,000 per run. Example: 10000018."
+        },
+        "years": {
+          "type": "integer",
+          "title": "Fiscal years per company",
+          "description": "How many of the most recent fiscal years to return for each company (1 to 3). Each year is one row and one charge.",
+          "default": 1
         }
       },
       "additionalProperties": true,
@@ -651,6 +956,121 @@ export const ACTORS = [
       "required": [
         "kwNumbers"
       ]
+    }
+  },
+  {
+    "slug": "poland-elicytacje-auction-scraper",
+    "tool": "regdata_poland_tax_auctions",
+    "title": "Poland Tax Office Auctions - eLicytacje KAS",
+    "description": "List sales published by Polish tax offices (KAS) on eLicytacje: cars, flats, houses, land, machinery and company shares, with starting price (cena wywołania), valuation (wartość szacunkowa) and the discount between them, deposit (wadium), location, tax office, and for vehicles make, model, year and VIN; real estate carries the land-registry (księga wieczysta) number, which chains into regdata_ekw_ksiegi_wieczyste. Filter by section, category, title keywords, city or voivodeship, status (upcoming, live, sold - sold rows carry the final price), sale kind and price or valuation range. onlyNewOrChanged=true turns a scheduled run into a monitoring feed of new or changed sales. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "title": "Sections",
+          "description": "Movables (vehicles, machinery, goods), real estate, or property rights (company shares, receivables, securities). Leave empty for all three.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "title": "Categories",
+          "description": "Narrow to these categories. Each category belongs to one section, so there is no need to pick the section as well. Leave empty for everything in the chosen sections.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "string",
+          "title": "Keywords",
+          "description": "Search the announcement titles, e.g. 'Toyota', 'ciągnik', 'działka budowlana'. At least 3 letters or digits; other characters are treated as spaces."
+        },
+        "locations": {
+          "type": "array",
+          "title": "Locations",
+          "description": "City or voivodeship as the portal writes it, e.g. 'Warszawa', 'Kraków', 'mazowieckie', 'lubelskie'. Each entry is searched separately and the results merged. Leave empty for the whole country.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statuses": {
+          "type": "array",
+          "title": "Sale status",
+          "description": "Which sales to include. 'Upcoming' and 'Live' are the ones you can still bid on. 'Sold' carries the final price, which makes it the realised-price history the portal has kept since it opened on 1 July 2026.",
+          "default": [
+            "upcoming",
+            "live"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "saleKinds": {
+          "type": "array",
+          "title": "Sale type",
+          "description": "Auctions, free-hand sales at a fixed price, tenders, or real-estate valuation notices - the notice a tax office publishes before a property auction, so the earliest signal that one is coming. Leave empty for all.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minStartingPrice": {
+          "type": "integer",
+          "title": "Minimum starting price (PLN)",
+          "description": "Lowest starting price (cena wywołania) to include. Applied by the portal itself."
+        },
+        "maxStartingPrice": {
+          "type": "integer",
+          "title": "Maximum starting price (PLN)",
+          "description": "Highest starting price to include. Applied by the portal itself."
+        },
+        "maxResults": {
+          "type": "integer",
+          "title": "Max results",
+          "description": "Maximum announcements to export. An announcement matched by more than one location or category is exported once, so you are never charged twice for it.",
+          "default": 1000
+        },
+        "includeDetails": {
+          "type": "boolean",
+          "title": "Include full details",
+          "description": "Adds the valuation and the discount to it, the deposit and its bank account, the item's address, the category, the tax office and its contact, the item description, vehicle data (make, model, year, VIN, registration, mileage), the land-registry (KW) number and plot data for real estate, photos and the notice PDFs. Two extra requests per announcement, so a run takes longer; the price per record is the same.",
+          "default": false
+        },
+        "onlyNewOrChanged": {
+          "type": "boolean",
+          "title": "Only new or changed since the last run",
+          "description": "Monitoring mode. Exports only announcements that are new, or whose status changed (for example upcoming to sold), since the last run with the same filter. The first run exports everything and sets the baseline. Schedule it daily for an alert feed.",
+          "default": false
+        },
+        "monitorId": {
+          "type": "string",
+          "title": "Monitor name",
+          "description": "Optional. Runs with the same filter share one memory automatically; give a name to keep several independent feeds for the same filter. Letters, digits, '-' and '_'."
+        },
+        "minEstimatedValue": {
+          "type": "integer",
+          "title": "Minimum estimated value (PLN)",
+          "description": "Lowest valuation (wartość szacunkowa) to include. Applied by the portal itself."
+        },
+        "maxEstimatedValue": {
+          "type": "integer",
+          "title": "Maximum estimated value (PLN)",
+          "description": "Highest valuation to include. Applied by the portal itself."
+        },
+        "onlyWithDeposit": {
+          "type": "boolean",
+          "title": "Only sales that require a deposit",
+          "description": "Keep only sales that require a deposit (wadium) before bidding - mostly real estate and higher-value lots.",
+          "default": false
+        },
+        "publishedFrom": {
+          "type": "string",
+          "title": "Published from",
+          "description": "Keep only announcements published on or after this date, YYYY-MM-DD."
+        }
+      },
+      "additionalProperties": true
     }
   },
   {
@@ -1707,73 +2127,6 @@ export const ACTORS = [
     }
   },
   {
-    "slug": "uokik-clauses-scraper",
-    "tool": "regdata_uokik_clauses",
-    "title": "Poland UOKiK Abusive Clauses Registry Scraper",
-    "description": "Rejestr klauzul niedozwolonych UOKiK - 7,500+ zakazanych postanowień umownych. Search court-banned contract clauses by defendant, industry, legal category. No API exists. Legal compliance, consumer protection. JSON.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string",
-          "title": "Category (Zagadnienie)",
-          "description": "Filter by legal category of the clause violation. Leave empty for all categories.",
-          "enum": [
-            "",
-            "5",
-            "4",
-            "3",
-            "23",
-            "22",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "2",
-            "1",
-            "24"
-          ],
-          "default": ""
-        },
-        "defendant": {
-          "type": "string",
-          "title": "Defendant Name (Pozwany)",
-          "description": "Filter by defendant company name (partial match)."
-        },
-        "plaintiff": {
-          "type": "string",
-          "title": "Plaintiff Name (Powód)",
-          "description": "Filter by plaintiff name (partial match)."
-        },
-        "exportAll": {
-          "type": "boolean",
-          "title": "Export All",
-          "description": "Export all clauses from the registry (~7,500 entries). Ignores other filters.",
-          "default": false
-        },
-        "maxResults": {
-          "type": "integer",
-          "title": "Max Results",
-          "description": "Maximum number of results. Default: 100. Set to 0 for unlimited.",
-          "default": 100
-        }
-      },
-      "additionalProperties": true
-    }
-  },
-  {
     "slug": "wko-business-directory-scraper",
     "tool": "regdata_wko_business_directory",
     "title": "Austria WKO Business Directory Scraper",
@@ -2092,6 +2445,138 @@ export const ACTORS = [
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "uokik-decisions-scraper",
+    "tool": "regdata_uokik_decisions",
+    "title": "Poland UOKiK Decisions - competition and consumer protection",
+    "description": "Search decisions of UOKiK, Poland's competition and consumer protection authority (about 22,000 decisions): merger clearances, abuse of dominant position, collective consumer interests, prohibited clauses, product safety and fuel quality, with decision number, date, named parties and practice type; includeDetails adds case signature, whether a fine was imposed, appeal status, industry (PKD) and region. Filter by party name (literal - Polish diacritics matter), practice type, decision number, case signature, industry, region, fine/appeal flags, date range or full text. The register records THAT a fine was imposed, never the amount - do not report one. Use for counterparty due diligence and regulatory-history checks on Polish companies. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "participant": {
+          "type": "string",
+          "title": "Company or person",
+          "description": "Name of a party to the proceedings, e.g. \"Orange\". Matches whole words in the party field, case-insensitive. Polish diacritics matter - the register's search is literal."
+        },
+        "practiceType": {
+          "type": "string",
+          "title": "Type of practice",
+          "description": "The category of proceedings. Roughly: merger control 5,800 decisions, product-safety conformity 4,000, collective consumer interests 4,000, dominant position 1,900.",
+          "enum": [
+            "",
+            "Jakość paliw",
+            "Klauzule niedozwolone",
+            "Kontrola koncentracji",
+            "Nadużywanie pozycji dominującej",
+            "Ochrona zbiorowych interesów konsumentów",
+            "Ogólne bezpieczeństwo produktów",
+            "Porozumienia ograniczające konkurencję",
+            "Pozostałe",
+            "Przewaga kontraktowa",
+            "System oceny zgodności",
+            "Zatory Płatnicze"
+          ],
+          "default": ""
+        },
+        "decisionNumber": {
+          "type": "string",
+          "title": "Decision number",
+          "description": "The decision's own number, e.g. \"DKK-171/2024\"."
+        },
+        "caseSignature": {
+          "type": "string",
+          "title": "Case signature",
+          "description": "The case file signature, e.g. \"DKK-2.430\". Matches a prefix as well as a whole signature."
+        },
+        "industry": {
+          "type": "string",
+          "title": "Industry (PKD)",
+          "description": "Matches the whole PKD path, so \"SEKCJA K\" selects the entire financial sector while \"TELEKOMUNIKACJA\" selects one class. Because the register stores the path but each decision page shows only the leaf class, a match can look unrelated and still be correct - \"BUDOWNICTWO\" returns electrical-installation firms, which sit under Section F."
+        },
+        "region": {
+          "type": "string",
+          "title": "Voivodeship",
+          "description": "Region the decision applies to. A decision can list several.",
+          "enum": [
+            "",
+            "Dolnośląskie",
+            "Kujawsko-Pomorskie",
+            "Łódzkie",
+            "Lubelskie",
+            "Lubuskie",
+            "Małopolskie",
+            "Mazowieckie",
+            "Opolskie",
+            "Podkarpackie",
+            "Podlaskie",
+            "Pomorskie",
+            "Śląskie",
+            "Świętokrzyskie",
+            "Warmińsko-Mazurskie",
+            "Wielkopolskie",
+            "Zachodniopomorskie"
+          ],
+          "default": ""
+        },
+        "fineImposed": {
+          "type": "string",
+          "title": "Fine imposed",
+          "description": "Whether the decision imposed a fine. The register records only THAT a fine was imposed - it never publishes the amount.",
+          "enum": [
+            "",
+            "yes",
+            "no"
+          ],
+          "default": ""
+        },
+        "appealed": {
+          "type": "string",
+          "title": "Appealed",
+          "description": "Whether the decision was appealed.",
+          "enum": [
+            "",
+            "yes",
+            "no"
+          ],
+          "default": ""
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Decided on or after",
+          "description": "ISO date, YYYY-MM-DD. Note that six records in the register carry no decision date at all and are excluded by any date filter."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Decided on or before",
+          "description": "ISO date, YYYY-MM-DD."
+        },
+        "fullText": {
+          "type": "string",
+          "title": "Full-text term",
+          "description": "Free text searched across the whole document index. Broader than it looks - it matches text the decision page does not display, so use the specific fields above when you can."
+        },
+        "maxItems": {
+          "type": "integer",
+          "title": "Maximum decisions",
+          "description": "Stop after this many. Set 0 for every match - the whole register is about 22,000 decisions.",
+          "default": 100
+        },
+        "includeDetails": {
+          "type": "boolean",
+          "title": "Fetch full decision details",
+          "description": "Open each decision to read its case signature, fine flag, appeal status, industry and region. Off returns only what the result list shows: number, date, party and practice type.",
+          "default": true
+        },
+        "includeIncompleteRecords": {
+          "type": "boolean",
+          "title": "Include records that identify nothing",
+          "description": "The register holds six documents with no number, date or party. They are skipped by default and always counted in the run summary.",
+          "default": false
         }
       },
       "additionalProperties": true

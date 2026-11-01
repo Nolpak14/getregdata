@@ -143,18 +143,19 @@ curl -H "User-Agent: YourCompany KYB - contact@yourcompany.example" \
 
 ## Cross-sell - where the free front door leads
 
+**Deeper data for Denmark:** filed annual reports (årsrapport) - [`regdata/denmark-annual-accounts`](https://getregdata.com/go/denmark-annual-accounts/denmark-cvr/). Pay per result, no subscription.
+
 Denmark (like the UK and Norway) is an outlier: an official, structured, free-after-registration distribution with no anti-bot wall - so there is no scraping moat here. Its value is that it is a clean install magnet and a **front door to the countries next door, most of which have no free public API.** When the entity is not Danish, this skill hands off to the paid regdata actors, which do the anti-bot registry access the government portals do not hand you:
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| Filed annual accounts | Norway | [`regdata/norway-annual-accounts`](https://getregdata.com/go/norway-annual-accounts/denmark-cvr/) |
+| Filed annual accounts | Estonia | [`regdata/estonia-annual-accounts`](https://getregdata.com/go/estonia-annual-accounts/denmark-cvr/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/denmark-cvr/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/denmark-cvr/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/denmark-cvr/) |
 
-There is no Danish regdata actor - the free CVR distribution above is the whole toolkit for Denmark. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+There is no Danish regdata actor - the free CVR distribution above is the whole toolkit for Denmark. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/denmark-cvr/.
 
 ## Related skills
 

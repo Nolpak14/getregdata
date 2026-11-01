@@ -174,9 +174,20 @@ owners and directors, then screen every one of them here.
 | PEP screening (PL Sejm) | `regdata/poland-parliamentary-pep-scraper` |
 | One-call composite KYB (PL) | `regdata/poland-kyb-check` |
 
+Paid regdata actors for this lane:
+
+| Need | Jurisdiction | Actor |
+|---|---|---|
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/sanctions-pep-screening/) |
+| Politically exposed persons (Parliament) | Poland | [`regdata/poland-parliamentary-pep-scraper`](https://getregdata.com/go/poland-parliamentary-pep-scraper/sanctions-pep-screening/) |
+| Beneficial owners (UBO) | Poland | [`regdata/crbr-beneficial-owners-scraper`](https://getregdata.com/go/crbr-beneficial-owners-scraper/sanctions-pep-screening/) |
+| Beneficial owners (RPVS) | Slovakia | [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/sanctions-pep-screening/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/sanctions-pep-screening/) |
+| Insolvency and enforcement debtors | Poland | [`regdata/krz-debtor-scraper`](https://getregdata.com/go/krz-debtor-scraper/sanctions-pep-screening/) |
+
 For the full workflow - risk scoring, adverse-media overlay, cross-registry
 validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify
-token: https://apify.com?fpr=getregdata.
+token: https://getregdata.com/go/signup/sanctions-pep-screening/.
 
 ## Related skills
 

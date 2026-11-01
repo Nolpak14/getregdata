@@ -1,6 +1,6 @@
 ---
 name: regdata-credit-risk
-description: "Insolvency monitoring and credit-risk assessment across official registries: Poland's KRZ debtor registry, MSiG court gazette, and KRS financial statements; Austria's Ediktsdatei; Germany's Insolvenzbekanntmachungen; Czechia's ISIR; Spain's BORME corporate acts and Registro Publico Concursal; and California UCC liens. Covers bankruptcy, restructuring, insolvency, financial-statement and secured-lien data across PL, AT, DE, CZ, ES, and US (California). Use when the user mentions KRZ, MSiG, KRS financials, Ediktsdatei, German insolvency, ISIR, BORME, Spanish concursal, UCC liens, debtor registry, court gazette, or company financial health / insolvency screening."
+description: "Insolvency monitoring and credit-risk assessment across official registries: Poland's KRZ debtor registry, MSiG court gazette and KRS financial statements; Germany's Insolvenzbekanntmachungen; France's BODACC collective proceedings; Austria's Ediktsdatei; Czechia's ISIR; Spain's BORME and Registro Publico Concursal; filed annual accounts for Czechia, Norway, Denmark and Estonia; and California UCC liens. Covers bankruptcy, restructuring, insolvency, financial statements and secured liens across PL, DE, FR, AT, CZ, ES, NO, DK, EE and the US. Use when the user mentions KRZ, MSiG, KRS financials, German or French insolvency, BODACC, redressement judiciaire, Ediktsdatei, ISIR, concursal, annual accounts, årsregnskap, årsrapport, účetní závěrka, UCC liens, or company financial health and insolvency screening."
 metadata:
   version: 2.0.0
   author: regdata
@@ -181,7 +181,7 @@ To run live registry checks, you need an Apify API token:
 export APIFY_TOKEN=apify_api_xxxxx
 ```
 
-Sign up at [Apify Console](https://apify.com?fpr=getregdata) - new accounts include $5 free credits, enough for 600-1,200 credit risk checks depending on depth.
+Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/) - new accounts include $5 free credits, enough for 600-1,200 credit risk checks depending on depth.
 
 ### Actor Reference
 
@@ -191,11 +191,17 @@ Sign up at [Apify Console](https://apify.com?fpr=getregdata) - new accounts incl
 | Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 |
 | Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 (+ $0.08/MB over 1 MB) |
 | Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 |
-| Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"searchQuery": "Company Name", "dateFrom": "2025-01-01"}` | $0.04 |
-| Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"query": "Company Name"}` | $0.005 |
-| Concursal / Insolvency (ES) | `regdata/spain-concursal-scraper` | `{"query": "Company Name"}` | $0.05 |
+| Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"name": "Company Name", "dateFrom": "2025-01-01"}` | $0.04 |
+| Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"name": "Company Name"}` | $0.005 |
+| Concursal / Insolvency (ES) | `regdata/spain-concursal-scraper` | `{"name": "Company Name"}` | $0.05 |
 | Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.005 |
-| UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"debtorName": "Company Name"}` | $0.05 |
+| UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"searchQueries": ["Company Name"]}` | $0.05 |
+| Collective Proceedings (FR) | `regdata/france-insolvency-scraper` | `{"siren": ["552032534"]}` | $0.001/row + $0.005/name search |
+| One-call KYB verdict incl. insolvency of every UBO (PL) | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.25/check |
+| Annual Accounts (CZ) | `regdata/czech-annual-accounts` | `{"companyIds": ["06401643"], "years": 3}` | $0.03/statement |
+| Annual Accounts (NO) | `regdata/norway-annual-accounts` | `{"companyIds": ["923609016"], "years": 3}` | $0.02/statement |
+| Annual Accounts (DK) | `regdata/denmark-annual-accounts` | `{"companyIds": ["21766909"], "years": 3}` | $0.02/statement |
+| Annual Accounts (EE) | `regdata/estonia-annual-accounts` | `{"companyIds": ["10000018"], "years": 3}` | $0.02/statement |
 
 **KRZ billing note:** KRZ is billed on two events - **$0.025 per search session** plus **$0.006 per result** returned.
 

@@ -1,6 +1,6 @@
 ---
 name: regdata-property
-description: "Extract data from Poland's EKW electronic land registry (Elektroniczne Ksiegi Wieczyste) - ownership records, mortgages, easements, and restrictions across all 352 court departments. Cross-references with KRS board members and CRBR beneficial owners for corporate property holders. Use when user mentions EKW, ksiegi wieczyste, Polish land registry, Polish property lookup, or needs to extract ownership/mortgage data from the Polish electronic land registry system."
+description: "Property due diligence from official registries: Poland's EKW electronic land registry (Elektroniczne Ksiegi Wieczyste) - ownership, mortgages, easements and restrictions across all 352 court departments - cross-referenced with KRS board members and CRBR beneficial owners for corporate holders; distressed-property sourcing from Polish tax-office auctions (eLicytacje KAS, with the land-registry number of each lot) and Czech judicial-executor auctions (Portál dražeb); and US county-clerk lis pendens, liens and deeds. Use when the user mentions EKW, ksiegi wieczyste, Polish land registry, numer KW, eLicytacje, przetargi urzędu skarbowego, dražby, lis pendens, or needs ownership or mortgage data on a property."
 metadata:
   version: 1.0.0
   author: regdata
@@ -172,7 +172,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set, tell the user:
-- Sign up at https://apify.com?fpr=getregdata (free $5 credits included)
+- Sign up at https://getregdata.com/go/signup/regdata-property/ (free $5 credits included)
 - Set token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### IMPORTANT: What Happens When a KW Cannot Be Read
@@ -194,6 +194,9 @@ An empty or missing result is therefore never a silent proxy failure - it is eit
 | Land Registry (EKW) | `regdata/ekw-ksiegi-wieczyste-scraper` | `Ctqe5ZYi2t2cclhin` | `{"kwNumbers": ["WR1K/00094598/3"]}` | $0.01 |
 | Board Members (KRS) | `regdata/krs-fullnames-scraper` | `R90a5BMbh0rQzu83Z` | `{"krsNumbers": ["0000123456"]}` | $0.008 |
 | Beneficial Owners (CRBR) | `regdata/crbr-beneficial-owners-scraper` | `wOcPC7vYzfCkB62pG` | `{"nip": "1234567890"}` | $0.008 |
+| Tax-office auctions (eLicytacje KAS) | `regdata/poland-elicytacje-auction-scraper` | `15LElbOCQQI1WdSBE` | `{"sections": ["realEstate"], "locations": ["Warszawa"], "includeDetails": true}` | $0.005 |
+
+**Beyond Poland.** The same distressed-property and lien checks exist in two other markets: `regdata/czech-drazby-auction-scraper` lists Czech judicial-executor auctions (appraised value, reserve price, address, appraisal PDF; $0.005 per auction), and `regdata/us-county-recorded-documents` is a daily index of lis pendens, liens, deeds and sheriff's deeds recorded in selected US counties, mostly Texas, Ohio and Michigan ($0.005 per document). An eLicytacje real-estate lot carries its księga wieczysta number - feed it straight into the EKW actor above to read the title before you bid.
 
 ### Option A: MCP Mode (Preferred)
 
@@ -326,6 +329,9 @@ Structure your response to the user as follows:
 For a complete guide to interpreting each section field-by-field, see the reference document: `references/land-registry-guide.md`
 
 ## Related Skills
+
+- **`/ksiegi-wieczyste`** - the quick path: validate a KW number for free and read one register.
+- **`/poland-company-registry`** - free KRS extract and VAT white list for a corporate owner.
 
 - **`/regdata-kyc-aml`** - For detailed identity verification of the property owner, sanctions screening, PEP checks, and multi-source entity confirmation.
 - **`/regdata-credit-risk`** - For assessing the financial health of a corporate property owner - insolvency checks via KRZ/MSiG, financial statements via eKRS.

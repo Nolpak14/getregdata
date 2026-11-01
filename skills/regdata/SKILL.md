@@ -1,15 +1,15 @@
 ---
 name: regdata
-description: "Extract structured data from official government registries - Poland (KRS, KNF, CRBR, MSiG, KRZ, EKW, UOKiK, BDO, REGON, PEP), Germany (Handelsregister, Insolvency), Italy (Registro Imprese, PEC), Spain (BORME, Registro Mercantil, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com), Belgium (KBO/BCE), Czechia (ISIR), Slovakia (RPVS UBO), Cyprus (DRCOR), Ireland (CRO), Portugal (corporate acts), Nigeria (CAC), Colombia (RUES), United States (California SoS, UCC), UAE (ADGM) - plus a cross-border Adverse Media Screener, all via Apify actors. For an overall risk picture of a POLISH company, prefer the one-call Poland KYB Risk Check (poland-kyb-check): a NIP or KRS returns identity, beneficial owners and insolvency screened against the company and every owner as a single verdict. This is the discovery router - it identifies which registry the user needs and routes to the right specialized skill. Use when the user mentions a specific registry name (KRS, CRBR, KNF, BORME, EKW, WKO, Ediktsdatei, MSiG, KRZ, Handelsregister, Registro Imprese, KBO, ISIR, RPVS, ADGM, Societe.com, DRCOR, CRO, RUES, CAC, adverse media) or wants to scrape/extract data from a European, US, UAE, African or Latin American government business registry. Also: 'regdata', 'dane z rejestrow', 'rejestr przedsiebiorcow', 'polnische Firmendaten', 'Handelsregister', 'registro mercantil', 'registre du commerce', 'beneficial owner check', 'KYC screening', 'KYB check', 'know your business', 'adverse media'."
+description: "Router for paid official-registry data via regdata Apify actors: company records, beneficial owners, board members, financial statements, insolvency, land registry, auctions and PEP lists. Poland (KRS, CRBR, KRZ, MSiG, EKW, REGON, KNF, UOKiK, BDO, eLicytacje), Germany (Handelsregister, insolvency), Italy (Registro Imprese, PEC), Spain (BORME, directory, Concursal), Austria (Ediktsdatei, WKO), France (Societe.com, BODACC), Belgium (KBO), Czechia (ISIR, annual accounts, auctions), Norway, Denmark and Estonia (annual accounts), Slovakia (RPVS), Cyprus, Ireland, Portugal, Nigeria, Colombia, US (California SoS and UCC, Illinois SoS, county clerk liens and deeds) and UAE (ADGM), plus adverse-media screening. For a Polish company prefer the one-call poland-kyb-check verdict. Use when the user names one of these registries or needs registry data for KYC, KYB, credit risk, property or lead-gen; routes to the right skill. Triggers: 'regdata', 'Handelsregister', 'KRS', 'CRBR', 'beneficial owner check', 'KYB check'."
 metadata:
-  version: 2.2.0
+  version: 2.3.0
   author: regdata
-  tags: [government-registry, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, cyprus, ireland, portugal, nigeria, colombia, usa, uae, apify, b2b-data]
+  tags: [government-registry, annual-accounts, financial-statements, insolvency, auctions, norway, denmark, estonia, web-scraping, compliance, kyc, kyb, aml, adverse-media, europe, poland, germany, italy, spain, austria, france, belgium, czechia, slovakia, cyprus, ireland, portugal, nigeria, colombia, usa, uae, apify, b2b-data]
 ---
 
 # Government Registry Data - Router
 
-You are an expert in government registry data extraction. You help users find and extract structured data from official public registries across Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the United States (California) and the UAE, plus a cross-border adverse-media screener, all using Apify actors.
+You are an expert in government registry data extraction. You help users find and extract structured data from official public registries across Poland, Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Norway, Denmark, Estonia, Nigeria, Colombia, the United States (California, Illinois and county clerks in Texas, Ohio and Michigan) and the UAE, plus a cross-border adverse-media screener, all using Apify actors.
 
 Your job is to **identify what the user needs** and either handle it directly (simple single-actor queries) or route them to the right specialized skill.
 
@@ -26,6 +26,8 @@ Ask the user what they need if not clear. Map their request to one of these cate
 | Property due diligence, land registry, mortgages | `/regdata-property` | "Who owns this property?", "Check land registry", "Verify mortgage" |
 | Consumer protection, ESG, environmental compliance | `/regdata-compliance` | "Check for prohibited clauses", "Waste registry lookup", "ESG audit" |
 | B2B prospecting, decision-makers, market research | `/regdata-lead-gen` | "Find directors at companies in Barcelona", "B2B leads", "Company contacts" |
+| Free company lookup - Poland (KRS extract + VAT white list) or Czechia (ARES) - no Apify token | `/poland-company-registry`, `/czech-company-registry` | "Check this Polish NIP", "KRS extract", "is this bank account on the white list", "Czech company by IČO", "ARES lookup" |
+| Polish land registry - read a księga wieczysta by KW number | `/ksiegi-wieczyste` (or `/regdata-property` for the full framework) | "Who owns WA4M/00160286/2?", "check mortgages on this KW", "validate this KW number" |
 | Free company lookup - UK, US (SEC), Norway, France, Switzerland, Denmark, Finland, Ireland, Greece, Croatia, Latvia, Lithuania, Israel, Brazil, South Korea, Australia, Japan, Singapore, New Zealand, or global LEI (no Apify token) | `/companies-house-uk`, `/sec-edgar-us`, `/norway-company-registry`, `/france-company-lookup`, `/switzerland-zefix`, `/denmark-cvr`, `/finland-company-registry`, `/ireland-cro`, `/greece-gemi`, `/croatia-sudreg`, `/latvia-company-registry`, `/lithuania-company-registry`, `/israel-companies-registry`, `/brazil-cnpj`, `/south-korea-dart`, `/australia-abn-lookup`, `/japan-company-registry`, `/singapore-acra`, `/new-zealand-nzbn`, `/gleif-lei-lookup` | "Look up a UK company", "Brazilian CNPJ", "Greek company by AFM", "Lithuanian company", "Latvian beneficial owners", "Find the LEI for X" |
 | Free EU VAT / EORI validation (first step of a KYB check) | `/vies-vat-validation` | "Validate this VAT number", "Is this EU VAT valid?", "VIES check", "validate an EORI" |
 | Sanctions / PEP screening of a name or entity | `/sanctions-pep-screening` | "Is this person sanctioned?", "Screen against OFAC/EU/UK lists", "PEP check" |
@@ -58,12 +60,13 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | KRS Board | `regdata/krs-fullnames-scraper` | Board members and shareholders (full names) | $0.008 |
 | KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.004 |
 | MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 |
-| UOKiK | `regdata/uokik-clauses-scraper` | Prohibited contract clauses | $0.003 |
 | BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 |
 | EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.01 |
 | REGON | `regdata/polish-regon-scraper` | GUS business registry - identity, PKD, status (no API key) | $0.004 |
 | Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.005/company + $0.01/premise |
 | PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 |
+| UOKiK Decisions | `regdata/uokik-decisions-scraper` | Competition and consumer-protection decisions - parties, practice type, fine imposed (yes/no), appeal | $0.004 |
+| eLicytacje | `regdata/poland-elicytacje-auction-scraper` | Tax-office (KAS) auctions - cars, real estate, shares; starting price, valuation, land-registry number | $0.005 |
 
 ### Germany
 | Actor | Slug | What You Get | ~$/Result |
@@ -94,6 +97,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Societe.com | `regdata/societe-com-scraper` | SIREN, directors, financials, shareholders | $0.005 |
+| Insolvency (BODACC) | `regdata/france-insolvency-scraper` | Collective proceedings - sauvegarde, redressement, liquidation - by SIREN, SIRET or name | $0.001/row + $0.005/name search |
 
 ### Belgium
 | Actor | Slug | What You Get | ~$/Result |
@@ -104,17 +108,28 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | ISIR | `regdata/czech-isir-insolvency-scraper` | Insolvency register - debtor, case, court | $0.005 |
+| Annual Accounts | `regdata/czech-annual-accounts` | Filed accounts by IČO - revenue, profit, assets, equity, liabilities (up to 5 years) | $0.03/statement |
+| Portál dražeb | `regdata/czech-drazby-auction-scraper` | Judicial-executor auctions - appraised value, reserve price, address, appraisal PDF | $0.005 |
 
 ### Slovakia
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | RPVS | `regdata/slovakia-rpvs-ubo-scraper` | Beneficial owners (UBO) + PEP flag | $0.007 |
 
+### Norway, Denmark, Estonia
+| Actor | Slug | What You Get | ~$/Result |
+|---|---|---|---|
+| Norway Annual Accounts | `regdata/norway-annual-accounts` | Filed accounts by organisasjonsnummer - revenue, profit, assets, equity (up to 3 years) | $0.02/statement |
+| Denmark Annual Accounts | `regdata/denmark-annual-accounts` | Filed årsrapport by CVR - revenue, gross and net profit, equity, employees (up to 5 years) | $0.02/statement |
+| Estonia Annual Accounts | `regdata/estonia-annual-accounts` | Filed accounts by registry code - revenue, profit, assets, equity (up to 3 years) | $0.02/statement |
+
 ### United States
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | California SoS | `regdata/california-sos-business-scraper` | Business entity, agent, status | $0.025 |
 | California UCC | `regdata/california-ucc-lien-scraper` | UCC liens - debtors & secured parties | $0.05 |
+| Illinois SoS | `regdata/illinois-sos-business-search` | Illinois LLCs and corporations by name or file number, or new filings by date - agent, managers, officers | $0.014 |
+| County Clerk Records | `regdata/us-county-recorded-documents` | Daily lis pendens, liens, deeds, sheriff's deeds recorded in selected counties (Texas, Ohio, Michigan, Pennsylvania, Colorado and more) | $0.005 |
 
 ### UAE
 | Actor | Slug | What You Get | ~$/Result |
@@ -164,7 +179,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set, tell the user:
-- Sign up: https://apify.com?fpr=getregdata (free $5 credits included)
+- Sign up: https://getregdata.com/go/signup/regdata/ (free $5 credits included)
 - Set token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### Option A: MCP Mode (Preferred)
@@ -209,7 +224,6 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN"
 | KRS Board | R90a5BMbh0rQzu83Z |
 | KNF | OGJzYNkFbSgwczgoO |
 | MSiG | v8g2pQsHK5TecDmga |
-| UOKiK | obfZBYGb0ULeXTggh |
 | BDO | SbThWTjCGGb2Sn84y |
 | EKW | Ctqe5ZYi2t2cclhin |
 | REGON | W8hg34uhdxvf6nPpM |
@@ -237,16 +251,26 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN"
 | Nigeria CAC | 29lCbscvJPlRYcfki |
 | Colombia RUES | Buct2foSyqVLUwiV8 |
 | Adverse Media | fg6bpYFhD9PG5B0Df |
+| UOKiK Decisions | CEp4Ol7kcYxrpoaan |
+| eLicytacje | 15LElbOCQQI1WdSBE |
+| France Insolvency | lq9ccc7Y2awtehXFH |
+| Czech Annual Accounts | adxRzmQUbJb0ewruM |
+| Czech Portál dražeb | OtJgDviXDwVxWamrt |
+| Norway Annual Accounts | G4TfVYrAaDwkVj2to |
+| Denmark Annual Accounts | 3dmXUHyvizwyg7sq2 |
+| Estonia Annual Accounts | njpOhbIUcNdY0lBYH |
+| Illinois SoS | IuHiPJ5zX4sAaEOD7 |
+| County Clerk Records | beFihJ4v1ueUOPsLS |
 
 ## Specialized Skills Reference
 
 For complex workflows, multi-source verification, or compliance checklists, route to these skills:
 
 - **`/regdata-kyc-aml`** - KYC/AML compliance, entity verification, beneficial owners, PEP, adverse media. Uses: CRBR, Slovakia RPVS, KNF, KRS Board, Germany Handelsregister, Italy Registro Imprese, Belgium KBO, Spain Dir, Societe.com, WKO, California SoS, UAE ADGM, PEP, Adverse Media.
-- **`/regdata-credit-risk`** - Insolvency monitoring, credit risk assessment, financial analysis. Uses: KRZ, MSiG, KRS Financial, Ediktsdatei, Germany Insolvency, Czech ISIR, Spain Concursal, California UCC, BORME.
-- **`/regdata-property`** - Property due diligence, ownership verification, mortgage checks. Uses: EKW, KRS Board, CRBR.
-- **`/regdata-compliance`** - Consumer protection audits, ESG/environmental compliance. Uses: UOKiK, BDO.
-- **`/regdata-lead-gen`** - B2B prospecting, decision-maker discovery, market research. Uses: KRS Board, REGON, Premises, WKO, Spain Dir, Belgium KBO, Italy Registro Imprese, Italy PEC, Societe.com, BORME, California SoS.
+- **`/regdata-credit-risk`** - Insolvency monitoring, credit risk assessment, financial analysis. Uses: KRZ, MSiG, KRS Financial, Ediktsdatei, Germany Insolvency, France Insolvency, Czech ISIR, Spain Concursal, California UCC, BORME, Czech/Norway/Denmark/Estonia Annual Accounts.
+- **`/regdata-property`** - Property due diligence, ownership verification, mortgage checks. Uses: EKW, KRS Board, CRBR, eLicytacje, Czech Portál dražeb, County Clerk Records (US).
+- **`/regdata-compliance`** - Consumer protection audits, ESG/environmental compliance. Uses: UOKiK clauses, UOKiK decisions, BDO.
+- **`/regdata-lead-gen`** - B2B prospecting, decision-maker discovery, market research. Uses: KRS Board, REGON, Premises, WKO, Spain Dir, Belgium KBO, Italy Registro Imprese, Italy PEC, Societe.com, BORME, California SoS, Illinois SoS (new filings).
 
 ## Free Registry Skills (no Apify token)
 

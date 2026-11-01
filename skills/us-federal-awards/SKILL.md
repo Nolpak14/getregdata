@@ -126,16 +126,15 @@ curl -X POST "https://api.usaspending.gov/api/v2/search/spending_by_award/" \
 
 USAspending tells you a company received federal money and its UEI/DUNS - it does **not** give you directors, owners, financials, or legal status. Use the recipient name + UEI to pull the actual company record - free where a national skill exists, paid actor otherwise:
 
-| Need | Jurisdiction | Resolve via |
+| Need | Jurisdiction | Actor |
 |---|---|---|
-| U.S. public filer + financials | USA | free `sec-edgar-us` |
-| Private California company records | USA (California) | `regdata/california-sos-business-scraper` |
-| UCC liens / secured filings | USA (California) | `regdata/california-ucc-lien-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/us-federal-awards/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/us-federal-awards/) |
+| UCC liens | US - California | [`regdata/california-ucc-lien-scraper`](https://getregdata.com/go/california-ucc-lien-scraper/us-federal-awards/) |
+| Lis pendens, liens, deeds (county clerks) | US - TX, OH, MI and more | [`regdata/us-county-recorded-documents`](https://getregdata.com/go/us-county-recorded-documents/us-federal-awards/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/us-federal-awards/) |
 
-To screen a federal recipient for **debarment or suspension**, pair this with **`sam-gov-exclusions`** - a company on the SAM.gov exclusions list should not be receiving new federal awards. For the EU side of a company's government exposure, route to **`eu-ted-procurement`** (EU public tenders and contract awards). For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-contractor lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
+To screen a federal recipient for **debarment or suspension**, pair this with **`sam-gov-exclusions`** - a company on the SAM.gov exclusions list should not be receiving new federal awards. For the EU side of a company's government exposure, route to **`eu-ted-procurement`** (EU public tenders and contract awards). For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-contractor lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://getregdata.com/go/signup/us-federal-awards/.
 
 ## Related skills
 

@@ -157,17 +157,19 @@ FTS tells you an organisation received EU money and under which programme - it d
 + country (and VAT, where present) to the entity record - free where a national skill
 exists, paid actor otherwise:
 
-| Need | Jurisdiction | Resolve via |
+| Need | Jurisdiction | Actor |
 |---|---|---|
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Global LEI + corporate structure | cross-border | free `gleif-lei-lookup` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/eu-financial-transparency/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/eu-financial-transparency/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/eu-financial-transparency/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/eu-financial-transparency/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/eu-financial-transparency/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/eu-financial-transparency/) |
 
 For the full compliance workflow - risk scoring, sanctions + PEP overlays,
 cross-registry validation - route to **`regdata-kyc-aml`**. To turn the
 grant-recipient lane into a qualified outreach list, route to **`regdata-lead-gen`**.
-Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
+Paid actors need a free Apify token: https://getregdata.com/go/signup/eu-financial-transparency/.
 
 ## Related skills
 

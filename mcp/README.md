@@ -4,8 +4,8 @@ An [MCP](https://modelcontextprotocol.io) server that gives any MCP-capable agen
 (Claude Desktop, Claude Code, Cursor, Cline, Windsurf, ...) direct
 access to **official business-registry actors** for KYC/AML, credit-risk,
 due-diligence and B2B data across Poland, Germany, Italy, Spain, Austria, France,
-Belgium, Czechia, Slovakia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US
-(California) and the UAE - plus a cross-border adverse-media screener.
+Belgium, Czechia, Slovakia, Norway, Denmark, Estonia, Cyprus, Ireland, Portugal,
+Nigeria, Colombia, the US (California, Illinois, county clerks) and the UAE - plus a cross-border adverse-media screener.
 
 For a Polish company, **`regdata_poland_kyb_check` answers the whole question in one
 call** - identity, beneficial owners, and insolvency screened against the company and
@@ -38,7 +38,7 @@ ownership, so anyone holding the ID can read that check's result.
 ## Setup
 
 You need an Apify API token (free, includes $5 credits):
-[apify.com](https://apify.com?fpr=getregdata).
+[apify.com](https://getregdata.com/go/signup/mcp-readme/).
 
 ### Claude Desktop / Claude Code
 
@@ -72,7 +72,7 @@ first-class tools there:
 https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper,regdata/poland-krs-financial-scraper,regdata/adverse-media-screener
 ```
 
-Swap in any [regdata actor](https://apify.com/regdata?fpr=getregdata), or connect plain
+Swap in any [regdata actor](https://getregdata.com/go/catalog/mcp-readme/), or connect plain
 `https://mcp.apify.com` and let the agent discover them via `search-actors`
 ("Poland beneficial owners", "Germany insolvency", ...). OAuth signs you into your
 own Apify account, so billing and the free credit work exactly like the local server.
@@ -94,7 +94,7 @@ If the agent is unsure of a registry's exact input fields, it calls
 
 Pay-per-result on Apify, no subscription - from ~$0.003/result depending on actor
 and plan tier. The $5 monthly free credit covers hundreds to ~1,600 lookups. Each
-actor's current price is on its Store page at [apify.com/regdata](https://apify.com/regdata?fpr=getregdata).
+actor's current price is on its Store page at [apify.com/regdata](https://getregdata.com/go/catalog/mcp-readme/).
 
 ## How it works
 

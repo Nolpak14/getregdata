@@ -138,14 +138,13 @@ DENUE is a free, official, structured API - so there is **no anti-bot scraping m
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| Company register (RUES) | Colombia | [`regdata/colombia-rues-company-scraper`](https://getregdata.com/go/colombia-rues-company-scraper/mexico-denue/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/mexico-denue/) |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/mexico-denue/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/mexico-denue/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/mexico-denue/) |
 
-Resolve the Mexican establishment here, map it to a global LEI with **`gleif-lei-lookup`** for any cross-border structure, and for a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn a DENUE activity + state sweep into an outreach list, hand off to **`regdata-lead-gen`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+Resolve the Mexican establishment here, map it to a global LEI with **`gleif-lei-lookup`** for any cross-border structure, and for a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn a DENUE activity + state sweep into an outreach list, hand off to **`regdata-lead-gen`**. Those actors need a free Apify token: https://getregdata.com/go/signup/mexico-denue/.
 
 ## Related skills
 

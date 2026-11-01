@@ -126,15 +126,13 @@ Peru has a token-gated quick-check API but **no authoritative free API and no re
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
-| Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
+| Company register (RUES) | Colombia | [`regdata/colombia-rues-company-scraper`](https://getregdata.com/go/colombia-rues-company-scraper/peru-ruc/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/peru-ruc/) |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/peru-ruc/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/peru-ruc/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/peru-ruc/) |
 
-For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/peru-ruc/.
 
 ## Related skills
 

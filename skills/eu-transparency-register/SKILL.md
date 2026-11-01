@@ -149,18 +149,20 @@ give you owners, directors, financials, or legal status. Take the matched name +
 head-office country to the entity record - free where a national skill exists, paid
 actor otherwise:
 
-| Need | Jurisdiction | Resolve via |
+| Need | Jurisdiction | Actor |
 |---|---|---|
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Global LEI + corporate structure | cross-border | free `gleif-lei-lookup` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/eu-transparency-register/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/eu-transparency-register/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/eu-transparency-register/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/eu-transparency-register/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/eu-transparency-register/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/eu-transparency-register/) |
 
 For the full compliance workflow - risk scoring, sanctions + PEP overlays,
 cross-registry validation - route to **`regdata-kyc-aml`**. To pair the lobbying
 signal with public-money exposure (does this organisation also win EU public
 contracts) route to **`eu-ted-procurement`**. Paid actors need a free Apify token:
-https://apify.com?fpr=getregdata.
+https://getregdata.com/go/signup/eu-transparency-register/.
 
 ## Related skills
 

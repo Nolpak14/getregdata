@@ -130,18 +130,20 @@ curl -u "$CRO_EMAIL:$CRO_KEY" \
 
 ## Cross-sell - where the free front door leads
 
+**Deeper data for Ireland:** company register records - [`regdata/ireland-cro-company-scraper`](https://getregdata.com/go/ireland-cro-company-scraper/ireland-cro/). Pay per result, no subscription.
+
 Ireland (like the UK and Norway) offers a genuinely free, official company API - the moat here is **convenience, not anti-bot**. Its value is a clean install magnet and a **front door to the countries next door, most of which have no free public API**, and to the people-level data the CRO free tier withholds. When you need directors, beneficial owners or a jurisdiction with no free API, this skill hands off to the paid regdata actors, which do the anti-bot registry access the government portals do not hand you:
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/ireland-cro/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/ireland-cro/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/ireland-cro/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/ireland-cro/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/ireland-cro/) |
+| Filed annual accounts | Czechia | [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/ireland-cro/) |
 
-Ireland is in the EU: for its VAT number use **`vies-vat-validation`** (free EU VIES check), and for its global identity use **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+Ireland is in the EU: for its VAT number use **`vies-vat-validation`** (free EU VIES check), and for its global identity use **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/ireland-cro/.
 
 ## Related skills
 

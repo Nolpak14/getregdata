@@ -32,7 +32,8 @@
         "./skills/regdata-credit-risk",
         "./skills/regdata-property",
         "./skills/regdata-compliance",
-        "./skills/regdata-lead-gen"
+        "./skills/regdata-lead-gen",
+        "./skills/ksiegi-wieczyste"
       ],
       "mcpServers": {
         "getregdata": {
@@ -64,6 +65,8 @@
       "skills": [
         "./skills/companies-house-uk",
         "./skills/sec-edgar-us",
+        "./skills/czech-company-registry",
+        "./skills/poland-company-registry",
         "./skills/norway-company-registry",
         "./skills/france-company-lookup",
         "./skills/switzerland-zefix",

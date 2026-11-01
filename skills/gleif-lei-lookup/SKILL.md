@@ -104,15 +104,15 @@ GLEIF resolves *identity and structure*, then stops. Everything below the legal-
 
 | You now need | Jurisdiction | Actor |
 |---|---|---|
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Beneficial owners + PEP flag | Slovakia | `regdata/slovakia-rpvs-ubo-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Company profile, officers, capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Financial statements (balance sheet, P&L) | Poland | `regdata/poland-krs-financial-scraper` |
-| Insolvency / bankruptcy status | Poland / Germany / Czechia | `regdata/krz-debtor-scraper`, `regdata/germany-insolvency-scraper`, `regdata/czech-isir-insolvency-scraper` |
-| Full profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/gleif-lei-lookup/) |
+| Beneficial owners (UBO) | Poland / Slovakia | [`regdata/crbr-beneficial-owners-scraper`](https://getregdata.com/go/crbr-beneficial-owners-scraper/gleif-lei-lookup/), [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/gleif-lei-lookup/) |
+| Company profile, officers, capital | Germany / Italy / Spain | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/gleif-lei-lookup/), [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/gleif-lei-lookup/), [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/gleif-lei-lookup/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/gleif-lei-lookup/) |
+| Filed financial statements | Poland / Czechia / Norway / Denmark / Estonia | [`regdata/poland-krs-financial-scraper`](https://getregdata.com/go/poland-krs-financial-scraper/gleif-lei-lookup/), [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/gleif-lei-lookup/), [`regdata/norway-annual-accounts`](https://getregdata.com/go/norway-annual-accounts/gleif-lei-lookup/), [`regdata/denmark-annual-accounts`](https://getregdata.com/go/denmark-annual-accounts/gleif-lei-lookup/), [`regdata/estonia-annual-accounts`](https://getregdata.com/go/estonia-annual-accounts/gleif-lei-lookup/) |
+| Insolvency proceedings | Poland / Germany / France / Spain / Czechia / Austria | [`regdata/krz-debtor-scraper`](https://getregdata.com/go/krz-debtor-scraper/gleif-lei-lookup/), [`regdata/germany-insolvency-scraper`](https://getregdata.com/go/germany-insolvency-scraper/gleif-lei-lookup/), [`regdata/france-insolvency-scraper`](https://getregdata.com/go/france-insolvency-scraper/gleif-lei-lookup/), [`regdata/spain-concursal-scraper`](https://getregdata.com/go/spain-concursal-scraper/gleif-lei-lookup/), [`regdata/czech-isir-insolvency-scraper`](https://getregdata.com/go/czech-isir-insolvency-scraper/gleif-lei-lookup/), [`regdata/austria-ediktsdatei-scraper`](https://getregdata.com/go/austria-ediktsdatei-scraper/gleif-lei-lookup/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/gleif-lei-lookup/) |
 
-For UK and Norway the local record is itself free - route to **`companies-house-uk`** and **`norway-company-registry`**. For a full compliance workflow, route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com?fpr=getregdata.
+For UK and Norway the local record is itself free - route to **`companies-house-uk`** and **`norway-company-registry`**. For a full compliance workflow, route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://getregdata.com/go/signup/gleif-lei-lookup/.
 
 ## Related skills
 

@@ -131,14 +131,14 @@ Greece (like the UK, Denmark and Norway) is an outlier: an official, structured,
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Full company profile, P.IVA, PEC | Italy | `regdata/italy-registro-imprese-scraper` |
+| Company register, officers | Cyprus | [`regdata/cyprus-drcor-company-scraper`](https://getregdata.com/go/cyprus-drcor-company-scraper/greece-gemi/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/greece-gemi/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/greece-gemi/) |
+| Business directory (WKO) | Austria | [`regdata/wko-business-directory-scraper`](https://getregdata.com/go/wko-business-directory-scraper/greece-gemi/) |
+| Filed annual accounts | Czechia | [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/greece-gemi/) |
+| Beneficial owners (RPVS) | Slovakia | [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/greece-gemi/) |
 
-There is no Greek regdata actor - the free GEMI OpenData API above is the whole toolkit for Greece. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://apify.com?fpr=getregdata.
+There is no Greek regdata actor - the free GEMI OpenData API above is the whole toolkit for Greece. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those actors need a free Apify token: https://getregdata.com/go/signup/greece-gemi/.
 
 ## Related skills
 

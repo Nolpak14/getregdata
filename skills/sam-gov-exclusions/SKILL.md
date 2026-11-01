@@ -139,7 +139,17 @@ This skill is one lane of an AML screen. Pair it with the sanctions and PEP lane
 | Extract PSC / officers (UK, free) | `companies-house-uk` |
 | One-call composite KYB (PL) | `regdata/poland-kyb-check` |
 
-For the full workflow - risk scoring, adverse-media overlay, cross-registry validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com?fpr=getregdata.
+Paid regdata actors for this lane:
+
+| Need | Jurisdiction | Actor |
+|---|---|---|
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/sam-gov-exclusions/) |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/sam-gov-exclusions/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/sam-gov-exclusions/) |
+| UCC liens | US - California | [`regdata/california-ucc-lien-scraper`](https://getregdata.com/go/california-ucc-lien-scraper/sam-gov-exclusions/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/sam-gov-exclusions/) |
+
+For the full workflow - risk scoring, adverse-media overlay, cross-registry validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://getregdata.com/go/signup/sam-gov-exclusions/.
 
 ## Related skills
 

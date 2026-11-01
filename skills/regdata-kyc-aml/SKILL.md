@@ -1,6 +1,6 @@
 ---
 name: regdata-kyc-aml
-description: "KYC/AML and KYB (Know Your Business) entity verification across official registries: beneficial owners (Poland CRBR, Slovakia RPVS), financial license status (Poland KNF), board members (Poland KRS), company profiles (Germany Handelsregister, Italy Registro Imprese, Belgium KBO, France Societe.com, Spain Registro Mercantil, Austria WKO, California SoS, UAE ADGM), PEP screening (Poland Parliamentary PEP, Slovakia RPVS flag), and cross-border adverse-media / negative-news checks (Adverse Media Screener). Use for KYB checks, counterparty verification, know-your-business onboarding, or when the user mentions CRBR, KNF, KRS, RPVS UBO, Handelsregister, KBO, adverse media, PEP screening, beneficial owners, or needs to verify a company registered in Poland, Germany, Italy, Spain, Austria, France, Belgium, Slovakia, the US (California), or UAE against official government registries."
+description: "KYC/AML and KYB (Know Your Business) entity verification across official registries: one-call Poland KYB verdict, beneficial owners (Poland CRBR, Slovakia RPVS), financial licences (Poland KNF), board members (Poland KRS), company profiles (Germany Handelsregister, Italy Registro Imprese, Belgium KBO, France Societe.com, Spain, Austria WKO, Cyprus, Ireland, Portugal, Nigeria, Colombia, California and Illinois SoS, UAE ADGM), PEP screening (Poland Sejm, Slovakia RPVS flag) and cross-border adverse-media checks. Use for KYB checks, counterparty verification and onboarding, or when the user mentions CRBR, KNF, KRS, RPVS, Handelsregister, KBO, DRCOR, CRO, CAC, RUES, adverse media, PEP screening or beneficial owners, or needs to verify a company in one of these jurisdictions against official government registries."
 metadata:
   version: 2.0.0
   author: regdata
@@ -293,7 +293,7 @@ export APIFY_TOKEN=apify_api_xxxxx
 ```
 
 Sign up for a free account with $5 credits (enough for 100-1,600 checks):
-https://apify.com?fpr=getregdata
+https://getregdata.com/go/signup/regdata-kyc-aml/
 
 ### Actor Reference
 
@@ -301,18 +301,25 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
+| **One-call KYB verdict (PL) - start here for Poland** | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.25/check |
 | Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "6770065406"}` | $0.008 |
-| Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"query": "ESET"}` | $0.007 |
+| Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"searchQuery": "ESET"}` | $0.007 |
 | Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 |
 | Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000057567"]}` | $0.008 |
 | Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 |
 | Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.01 |
-| Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"query": "0203201340"}` | $0.008 |
+| Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"enterpriseNumbers": ["0203201340"]}` | $0.008 |
 | Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 |
 | Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 |
 | Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
-| Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQuery": "Tesla"}` | $0.025 |
-| Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"query": "company name"}` | $0.01 |
+| Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQueries": ["Tesla"]}` | $0.025 |
+| Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"searchQueries": ["company name"]}` | $0.01 |
+| Company Register (CY) | `regdata/cyprus-drcor-company-scraper` | `{"registrationNumbers": ["HE 6771"]}` | $0.007 |
+| Company Register (IE) | `regdata/ireland-cro-company-scraper` | `{"companyNumbers": ["104547"]}` | $0.04/search |
+| Corporate Acts (PT) | `regdata/portugal-corporate-acts-scraper` | `{"nifs": ["500000000"]}` | $0.03/search |
+| Company Register (NG) | `regdata/nigeria-cac-company-scraper` | `{"registrationNumbers": ["RC 71242"]}` | $0.015/search |
+| Company Register (CO) | `regdata/colombia-rues-company-scraper` | `{"nits": ["890903938"]}` | $0.02/search |
+| Business Entity (US-IL) | `regdata/illinois-sos-business-search` | `{"mode": "search", "searchQueries": ["Company Name"]}` | $0.014 |
 
 **California SoS - the 500-match ceiling:** the California registry returns **at most 500 matches** for a search term. A result list that hits the ceiling is reported as **INCOMPLETE** - the entity you want may exist and simply not be in the 500 rows you got back. Do not conclude "not registered in California" from a ceilinged list; narrow the search term (full registered name, or search by entity number) and re-run.
 
@@ -320,7 +327,7 @@ Universal risk overlays (apply to entities/persons in any jurisdiction):
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| Adverse Media / negative news | `regdata/adverse-media-screener` | `{"query": "Wirecard AG"}` | $0.10 |
+| Adverse Media / negative news | `regdata/adverse-media-screener` | `{"entityNames": ["Wirecard AG"]}` | $0.10 |
 | PEP screening (Poland Sejm) | `regdata/poland-parliamentary-pep-scraper` | `{"term": "current"}` | $0.004 |
 
 ### MCP Mode (Recommended)

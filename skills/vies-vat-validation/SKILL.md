@@ -104,15 +104,23 @@ VIES tells you the VAT is real and which country the entity is in. Use the `coun
 
 | Country | Full record via |
 |---|---|
-| Poland | `regdata/crbr-beneficial-owners-scraper`, `regdata/krs-fullnames-scraper` |
-| Germany | `regdata/germany-handelsregister-scraper` |
-| Spain | `regdata/spain-company-directory-scraper` |
-| Italy | `regdata/italy-registro-imprese-scraper` |
-| Belgium | `regdata/belgium-kbo-company-scraper` |
-| France | `regdata/societe-com-scraper` (or the free `france-company-lookup` for identity) |
-| Northern Ireland / UK | free `companies-house-uk` |
+| Poland | free `poland-company-registry` (KRS + VAT white list), [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/vies-vat-validation/) (one-call verdict), [`regdata/crbr-beneficial-owners-scraper`](https://getregdata.com/go/crbr-beneficial-owners-scraper/vies-vat-validation/) (UBO) |
+| Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/vies-vat-validation/) |
+| Austria | [`regdata/wko-business-directory-scraper`](https://getregdata.com/go/wko-business-directory-scraper/vies-vat-validation/) |
+| France | free `france-company-lookup` for identity, [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/vies-vat-validation/) for financials and shareholders |
+| Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/vies-vat-validation/) |
+| Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/vies-vat-validation/) |
+| Belgium | [`regdata/belgium-kbo-company-scraper`](https://getregdata.com/go/belgium-kbo-company-scraper/vies-vat-validation/) |
+| Czechia | free `czech-company-registry` (ARES), [`regdata/czech-annual-accounts`](https://getregdata.com/go/czech-annual-accounts/vies-vat-validation/) (accounts), [`regdata/czech-isir-insolvency-scraper`](https://getregdata.com/go/czech-isir-insolvency-scraper/vies-vat-validation/) (insolvency) |
+| Slovakia | [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/vies-vat-validation/) (UBO) |
+| Cyprus | [`regdata/cyprus-drcor-company-scraper`](https://getregdata.com/go/cyprus-drcor-company-scraper/vies-vat-validation/) |
+| Ireland | free `ireland-cro`, [`regdata/ireland-cro-company-scraper`](https://getregdata.com/go/ireland-cro-company-scraper/vies-vat-validation/) |
+| Denmark | free `denmark-cvr`, [`regdata/denmark-annual-accounts`](https://getregdata.com/go/denmark-annual-accounts/vies-vat-validation/) (accounts) |
+| Estonia | [`regdata/estonia-annual-accounts`](https://getregdata.com/go/estonia-annual-accounts/vies-vat-validation/) |
+| Finland / Latvia / Lithuania / Romania / Croatia / Greece | free `finland-company-registry`, `latvia-company-registry`, `lithuania-company-registry`, `romania-company-registry`, `croatia-sudreg`, `greece-gemi` |
+| Northern Ireland (XI) | free `companies-house-uk` |
 
-For a full compliance workflow (risk scoring, PEP and adverse-media overlays) route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://apify.com?fpr=getregdata.
+For a full compliance workflow (risk scoring, PEP and adverse-media overlays) route to **`regdata-kyc-aml`**. Paid actors use a free Apify token: https://getregdata.com/go/signup/vies-vat-validation/.
 
 ## Bonus: EORI validation (the other EU trade ID)
 

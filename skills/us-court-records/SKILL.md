@@ -137,12 +137,22 @@ This skill is one lane of an AML / due-diligence screen. Pair it with the sancti
 |---|---|
 | Sanctions + PEP (OFAC / EU / UK / UN, free) | `sanctions-pep-screening` |
 | US federal debarment / exclusions (free) | `sam-gov-exclusions` |
-| Adverse media over the same subject | `regdata/adverse-media-scraper` |
+| Adverse media over the same subject | `regdata/adverse-media-screener` |
 | Extract beneficial owners (PL) | `regdata/crbr-beneficial-owners-scraper` |
 | Extract board members (PL) | `regdata/krs-fullnames-scraper` |
 | Extract PSC / officers (UK, free) | `companies-house-uk` |
 
-For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com?fpr=getregdata.
+Paid regdata actors for this lane:
+
+| Need | Jurisdiction | Actor |
+|---|---|---|
+| Lis pendens, liens, deeds (county clerks) | US - TX, OH, MI and more | [`regdata/us-county-recorded-documents`](https://getregdata.com/go/us-county-recorded-documents/us-court-records/) |
+| UCC liens | US - California | [`regdata/california-ucc-lien-scraper`](https://getregdata.com/go/california-ucc-lien-scraper/us-court-records/) |
+| Business entities, officers, agents | US - California | [`regdata/california-sos-business-scraper`](https://getregdata.com/go/california-sos-business-scraper/us-court-records/) |
+| Business entities and new filings | US - Illinois | [`regdata/illinois-sos-business-search`](https://getregdata.com/go/illinois-sos-business-search/us-court-records/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/us-court-records/) |
+
+For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://getregdata.com/go/signup/us-court-records/.
 
 ## Related skills
 

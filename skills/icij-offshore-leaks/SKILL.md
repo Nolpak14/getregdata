@@ -124,12 +124,23 @@ This skill is one lane of an enhanced due-diligence screen. Pair it with the san
 | Sanctions + PEP (OFAC / EU / UK / UN, free) | `sanctions-pep-screening` |
 | US litigation / adverse history (free) | `us-court-records` |
 | US federal debarment / exclusions (free) | `sam-gov-exclusions` |
-| Adverse media over the same subject | `regdata/adverse-media-scraper` |
+| Adverse media over the same subject | `regdata/adverse-media-screener` |
 | Extract beneficial owners (PL) | `regdata/crbr-beneficial-owners-scraper` |
 | Extract board members (PL) | `regdata/krs-fullnames-scraper` |
 | Extract PSC / officers (UK, free) | `companies-house-uk` |
 
-For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://apify.com?fpr=getregdata.
+Paid regdata actors for this lane:
+
+| Need | Jurisdiction | Actor |
+|---|---|---|
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/icij-offshore-leaks/) |
+| Company register, officers | Cyprus | [`regdata/cyprus-drcor-company-scraper`](https://getregdata.com/go/cyprus-drcor-company-scraper/icij-offshore-leaks/) |
+| ADGM public register | UAE | [`regdata/uae-adgm-public-register-scraper`](https://getregdata.com/go/uae-adgm-public-register-scraper/icij-offshore-leaks/) |
+| Beneficial owners (UBO) | Poland | [`regdata/crbr-beneficial-owners-scraper`](https://getregdata.com/go/crbr-beneficial-owners-scraper/icij-offshore-leaks/) |
+| Beneficial owners (RPVS) | Slovakia | [`regdata/slovakia-rpvs-ubo-scraper`](https://getregdata.com/go/slovakia-rpvs-ubo-scraper/icij-offshore-leaks/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/icij-offshore-leaks/) |
+
+For the full workflow - risk scoring, adverse-media overlay, cross-source validation - route to **`regdata-kyc-aml`**. The registry actors use a free Apify token: https://getregdata.com/go/signup/icij-offshore-leaks/.
 
 ## Related skills
 

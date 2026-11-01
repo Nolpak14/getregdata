@@ -121,16 +121,16 @@ curl "https://search.worldbank.org/api/v2/projects?format=json&countryshortname=
 
 The World Bank data tells you a company won a development-financed contract and which country the supplier is in - it does **not** give you directors, owners, financials, or legal status. Use the supplier name + supplier country to pull the actual company record - free where a national skill exists, paid actor otherwise:
 
-| Need | Jurisdiction | Resolve via |
+| Need | Jurisdiction | Actor |
 |---|---|---|
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| U.S. public filer + financials | USA | free `sec-edgar-us` |
-| Global LEI + parent/child structure | Cross-border | free `gleif-lei-lookup` |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/world-bank-contracts/) |
+| Company register (CAC) | Nigeria | [`regdata/nigeria-cac-company-scraper`](https://getregdata.com/go/nigeria-cac-company-scraper/world-bank-contracts/) |
+| Company register (RUES) | Colombia | [`regdata/colombia-rues-company-scraper`](https://getregdata.com/go/colombia-rues-company-scraper/world-bank-contracts/) |
+| ADGM public register | UAE | [`regdata/uae-adgm-public-register-scraper`](https://getregdata.com/go/uae-adgm-public-register-scraper/world-bank-contracts/) |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/world-bank-contracts/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/world-bank-contracts/) |
 
-For the EU and U.S. sides of a company's government exposure, route to **`eu-ted-procurement`** (above-threshold EU public tenders and awards) and **`us-federal-awards`** (U.S. federal contracts and grants) - together these three are the global public-procurement lanes. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the development-finance supplier lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
+For the EU and U.S. sides of a company's government exposure, route to **`eu-ted-procurement`** (above-threshold EU public tenders and awards) and **`us-federal-awards`** (U.S. federal contracts and grants) - together these three are the global public-procurement lanes. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the development-finance supplier lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://getregdata.com/go/signup/world-bank-contracts/.
 
 ## Related skills
 

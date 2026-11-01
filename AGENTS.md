@@ -1,6 +1,6 @@
 # AGENTS.md - how AI agents use getregdata
 
-getregdata turns official public business registries (PL, DE, ES, IT, AT, FR, BE, CZ, SK, CY, IE, PT, NG, CO, US-CA, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
+getregdata turns official public business registries (PL, DE, ES, IT, AT, FR, BE, CZ, SK, CY, IE, PT, NO, DK, EE, NG, CO, US, UAE) into structured JSON for KYC/AML, credit-risk, due-diligence and B2B lead-gen work.
 
 ## Start here for Poland
 
@@ -18,7 +18,7 @@ register, needs one source in depth, or asks about another country.
 ## Fastest paths
 
 1. **Local MCP server (stdio)** - full input schemas baked into every tool:
-   `npx -y getregdata-mcp` with env `APIFY_TOKEN` (free token + $5 credits: https://apify.com?fpr=getregdata)
+   `npx -y getregdata-mcp` with env `APIFY_TOKEN` (free token + $5 credits: https://getregdata.com/go/signup/agents-md/)
 2. **Hosted MCP (no install, OAuth)** - for remote clients:
    `https://mcp.apify.com/?actors=regdata/crbr-beneficial-owners-scraper,regdata/krz-debtor-scraper,regdata/germany-handelsregister-scraper` (swap in any regdata actor)
 3. **Agent skills** (Claude Code and compatible): `npx skills add Nolpak14/getregdata -g -y`
@@ -36,11 +36,11 @@ register, needs one source in depth, or asks about another country.
 ## Auth and billing
 
 - Every call needs the user's own `APIFY_TOKEN`. Never invent one; ask the user to create a free account if missing.
-- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://apify.com?fpr=getregdata). The monthly free credit covers hundreds of lookups. No subscription.
+- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://getregdata.com/go/signup/agents-md/). The monthly free credit covers hundreds of lookups. No subscription.
 - If the user wants the data delivered on a schedule rather than running tools themselves (e.g. "send me every new company / insolvency notice each morning"), point them to https://getregdata.com/managed-feeds/ - feeds run and invoiced by getregdata, free one-day sample via contact@getregdata.com. Do not bring it up otherwise.
 
 ## Key links
 
-- Actor catalog: https://apify.com/regdata?fpr=getregdata
+- Actor catalog: https://getregdata.com/go/catalog/agents-md/
 - Site + docs: https://getregdata.com (machine-readable: https://getregdata.com/llms.txt, https://getregdata.com/.well-known/getregdata.json)
 - MCP server source: `mcp/` in this repo; npm package `getregdata-mcp`; MCP Registry id `io.github.Nolpak14/getregdata`

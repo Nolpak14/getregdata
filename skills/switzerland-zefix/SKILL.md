@@ -143,14 +143,14 @@ Switzerland (like the UK and Norway) is an outlier: a free, official, structured
 
 | Need | Jurisdiction | Actor |
 |---|---|---|
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Company + officers (Wirtschaftskammer) | Austria | `regdata/austria-wko-scraper` |
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Board members (full names) | Poland | `regdata/krs-fullnames-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/switzerland-zefix/) |
+| Insolvency notices | Germany | [`regdata/germany-insolvency-scraper`](https://getregdata.com/go/germany-insolvency-scraper/switzerland-zefix/) |
+| Business directory (WKO) | Austria | [`regdata/wko-business-directory-scraper`](https://getregdata.com/go/wko-business-directory-scraper/switzerland-zefix/) |
+| Insolvency edicts (Ediktsdatei) | Austria | [`regdata/austria-ediktsdatei-scraper`](https://getregdata.com/go/austria-ediktsdatei-scraper/switzerland-zefix/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/switzerland-zefix/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/switzerland-zefix/) |
 
-To turn a Swiss UID into a global identity, resolve it to an LEI with **`gleif-lei-lookup`**, and screen the entity and its people with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those paid actors need a free Apify token: https://apify.com?fpr=getregdata.
+To turn a Swiss UID into a global identity, resolve it to an LEI with **`gleif-lei-lookup`**, and screen the entity and its people with **`sanctions-pep-screening`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. Those paid actors need a free Apify token: https://getregdata.com/go/signup/switzerland-zefix/.
 
 ## Related skills
 

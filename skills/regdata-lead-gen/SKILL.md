@@ -1,6 +1,6 @@
 ---
 name: regdata-lead-gen
-description: "Extract company directors and B2B contact data from official government registries - KRS board members and REGON/premises data (Poland), WKO business directory (Austria, phone/email/website), Spain Registro Mercantil and BORME new incorporations, Societe.com (France directors + financials), Belgium KBO/BCE, Italy Registro Imprese + PEC certified email, and California SoS business entities. Use when user needs to extract officer names, build B2B prospect lists, pull company contacts, or monitor new incorporations across Poland, Austria, Spain, France, Belgium, Italy, or the US (California)."
+description: "Build B2B prospect lists from official government registries - KRS board members and REGON/premises data (Poland), WKO business directory (Austria, phone/email/website), Spain company directory and BORME new incorporations, Societe.com (France directors and financials), Belgium KBO/BCE, Italy Registro Imprese plus PEC certified email, California SoS entities, Illinois new LLC and corporation filings, US county-clerk lis pendens and probate records for real-estate leads, and filed annual accounts (CZ, NO, DK, EE) to qualify prospects by revenue. Use when the user needs officer names, B2B prospect lists, company contacts, new-incorporation monitoring or pre-foreclosure leads across Poland, Austria, Spain, France, Belgium, Italy or the US."
 metadata:
   version: 2.0.0
   author: regdata
@@ -307,7 +307,7 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set:
-- Sign up at https://apify.com?fpr=getregdata ($5 free credits included)
+- Sign up at https://getregdata.com/go/signup/regdata-lead-gen/ ($5 free credits included)
 - Set your token: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### Actor Catalog for Lead Generation
@@ -325,6 +325,9 @@ If not set:
 | Company + PEC (IT) | Italy Registro | `regdata/italy-registro-imprese-scraper` | $0.01 |
 | Certified email (IT) | Italy PEC | `regdata/italy-pec-lookup` | $0.008 |
 | Business Entity (US-CA) | California SoS | `regdata/california-sos-business-scraper` | $0.025 |
+| New LLCs and corporations (US-IL) | Illinois SoS | `regdata/illinois-sos-business-search` (`mode: "newFilings"`) | $0.014 |
+| Pre-foreclosure and probate leads (US counties) | County Clerk Records | `regdata/us-county-recorded-documents` | $0.005 |
+| Revenue qualification (CZ / NO / DK / EE) | Annual Accounts | `regdata/czech-annual-accounts`, `regdata/norway-annual-accounts`, `regdata/denmark-annual-accounts`, `regdata/estonia-annual-accounts` | $0.02-0.03/statement |
 
 ### Input Examples
 

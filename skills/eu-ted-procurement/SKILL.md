@@ -127,16 +127,16 @@ curl -X POST "https://api.ted.europa.eu/v3/notices/search" \
 
 TED tells you a company won a public contract and which country the buyer + winner are in - it does **not** give you directors, owners, financials, or legal status. Use the winner's `organisation-name` + country to pull the actual company record - free where a national skill exists, paid actor otherwise:
 
-| Need | Jurisdiction | Resolve via |
+| Need | Jurisdiction | Actor |
 |---|---|---|
-| Beneficial owners (UBO) | Poland | `regdata/crbr-beneficial-owners-scraper` |
-| Company + officers + capital | Germany | `regdata/germany-handelsregister-scraper` |
-| Directors, financials, shareholders | France | `regdata/societe-com-scraper` |
-| Company directory, NIF, officers | Spain | `regdata/spain-company-directory-scraper` |
-| Company + officers | Italy | `regdata/italy-registro-imprese-scraper` |
-| U.S. public filer + financials | USA | free `sec-edgar-us` |
+| Company, officers, capital | Germany | [`regdata/germany-handelsregister-scraper`](https://getregdata.com/go/germany-handelsregister-scraper/eu-ted-procurement/) |
+| Directors, financials, shareholders | France | [`regdata/societe-com-scraper`](https://getregdata.com/go/societe-com-scraper/eu-ted-procurement/) |
+| Full company profile, P.IVA | Italy | [`regdata/italy-registro-imprese-scraper`](https://getregdata.com/go/italy-registro-imprese-scraper/eu-ted-procurement/) |
+| Company directory, NIF, officers | Spain | [`regdata/spain-company-directory-scraper`](https://getregdata.com/go/spain-company-directory-scraper/eu-ted-procurement/) |
+| One-call KYB verdict (identity, UBO, insolvency) | Poland | [`regdata/poland-kyb-check`](https://getregdata.com/go/poland-kyb-check/eu-ted-procurement/) |
+| Adverse-media screening | Global | [`regdata/adverse-media-screener`](https://getregdata.com/go/adverse-media-screener/eu-ted-procurement/) |
 
-To resolve the winner to its global LEI and corporate structure across borders, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-buyer lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://apify.com?fpr=getregdata.
+To resolve the winner to its global LEI and corporate structure across borders, route to **`gleif-lei-lookup`**. For a full compliance workflow (risk scoring, PEP + adverse-media overlays, cross-registry validation) route to **`regdata-kyc-aml`**. To turn the government-buyer lane into an outreach list, route to **`regdata-lead-gen`**. Paid actors need a free Apify token: https://getregdata.com/go/signup/eu-ted-procurement/.
 
 ## Related skills
 

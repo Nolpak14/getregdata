@@ -22,7 +22,7 @@ const pkg = createRequire(import.meta.url)("./package.json");
 const APIFY_BASE = "https://api.apify.com/v2";
 // Jurisdictions covered by the actor fleet. Not derivable from actors.js (no
 // country field), so it is asserted here and checked by scripts/check-counts.mjs.
-const JURISDICTIONS = 16;
+const JURISDICTIONS = 19;
 const token = () => process.env.APIFY_TOKEN || process.env.APIFY_API_TOKEN || "";
 
 function requireToken() {
@@ -30,7 +30,7 @@ function requireToken() {
   if (!t) {
     throw new Error(
       "APIFY_TOKEN is not set. Get a free token (with $5 credits) at " +
-        "https://apify.com?fpr=getregdata and set APIFY_TOKEN in your MCP client config."
+        "https://getregdata.com/go/signup/mcp/ and set APIFY_TOKEN in your MCP client config."
     );
   }
   return t;
@@ -131,7 +131,7 @@ async function describeActor(slug) {
   const schema =
     data?.defaultRunOptions?.inputSchema ||
     data?.exampleRunInput ||
-    "See https://apify.com/regdata/" + slug + "?fpr=getregdata for the input schema.";
+    "See https://getregdata.com/go/" + slug + "/mcp/ for the input schema.";
   return { slug, title: data?.title, description: data?.description, schema };
 }
 

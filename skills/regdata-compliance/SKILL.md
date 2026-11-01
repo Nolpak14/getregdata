@@ -1,13 +1,15 @@
 ---
 name: regdata-compliance
-description: "Extract data from Poland's UOKiK abusive clauses registry (court-ruled prohibited contract clauses, rejestr klauzul niedozwolonych) and BDO waste management registry (registered waste entities, Baza danych o odpadach). Two specific Polish government registries - UOKiK for checking contract clauses against court rulings, BDO for verifying waste management registrations. Use when user mentions UOKiK, rejestr klauzul niedozwolonych, Polish abusive clauses, BDO rejestr, Polish waste registry, or needs to search these specific registries."
+description: "Check Polish companies against UOKiK, Poland's competition and consumer-protection authority, and the BDO waste-management register. UOKiK decisions (about 22,000) cover prohibited contract clauses, collective consumer interests, abuse of dominant position, merger control and product safety, with named parties, whether a fine was imposed and appeal status; BDO confirms a contractor's waste-register entry. Use for pre-signing contract audits, counterparty regulatory history, consumer-protection due diligence and ESG supply-chain checks. Trigger on: UOKiK, decyzje UOKiK, klauzule niedozwolone, abusive clauses Poland, zbiorowe interesy konsumentow, UOKiK fine, BDO rejestr, Polish waste registry, verify BDO registration."
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: regdata
   tags:
     - uokik
     - bdo
     - klauzule-niedozwolone
+    - decyzje-uokik
+    - consumer-protection
     - government-registry
     - poland
     - apify
@@ -15,6 +17,9 @@ metadata:
   triggers:
     - "UOKiK registry search"
     - "UOKiK abusive clauses"
+    - "UOKiK decisions against a company"
+    - "decyzje UOKiK"
+    - "was this company fined by UOKiK"
     - "Polish prohibited clauses registry"
     - "rejestr klauzul niedozwolonych"
     - "BDO waste registry lookup"
@@ -39,7 +44,7 @@ Gather the following from the user before proceeding:
 **For UOKiK contract audit:**
 - The contract text or specific clauses to review (paste or file)
 - Industry/sector of the company being audited (e.g., telecom, real estate, insurance)
-- Defendant company name if checking a specific entity's history
+- Company name if checking a specific entity's UOKiK history (exact Polish spelling - the search is literal, diacritics matter)
 - Purpose: contract drafting, pre-signing audit, litigation support, or regulatory compliance
 
 **For BDO environmental verification:**
@@ -123,11 +128,13 @@ Read the full contract and flag every clause that does any of the following:
 **Step 2: Classify Each Flagged Clause**
 Map each flagged clause to one or more of the 24 categories above. A single clause can trigger multiple categories.
 
-**Step 3: Search the Registry**
-Use the UOKiK actor to search for:
-- The defendant company name (check if they have prior violations)
-- Keywords from the flagged clause text
-- The specific category number
+**Step 3: Search UOKiK decisions**
+Use `regdata/uokik-decisions-scraper` (the decisions database at decyzje.uokik.gov.pl):
+- `participant` = the company name, with `includeDetails: true` - every decision naming it, with practice type, whether a fine was imposed, and appeal status
+- `practiceType: "Klauzule niedozwolone"` (prohibited clauses) or `"Ochrona zbiorowych interesów konsumentów"` (collective consumer interests), optionally with `industry` (PKD path, e.g. "TELEKOMUNIKACJA") to see what UOKiK has acted on in that sector
+- `fullText` with a distinctive phrase from the flagged clause
+
+The older court register of abusive clauses (rejestr klauzul niedozwolonych) is frozen since 2023 and anonymises every party, so it cannot answer "has this company been caught before". The decisions database names the parties. UOKiK records THAT a fine was imposed, never the amount - do not report one.
 
 **Step 4: Assess Risk Level**
 For each match from the registry, classify the risk:
@@ -139,7 +146,7 @@ For each match from the registry, classify the risk:
 **Step 5: Recommend Rewording**
 For each flagged clause, provide:
 - The original clause text
-- The matching registry entry (if any) with case number and judgment date
+- The matching UOKiK decision (if any) with decision number, date and practice type
 - A reworded version that preserves legitimate business interests while respecting consumer rights
 - The legal basis for the change (which Art. 385(3) point it violates)
 
@@ -230,14 +237,14 @@ echo ${APIFY_TOKEN:+token_is_set}
 ```
 
 If not set:
-- **Sign up**: https://apify.com?fpr=getregdata (free $5 credits included)
+- **Sign up**: https://getregdata.com/go/signup/regdata-compliance/ (free $5 credits included)
 - **Set token**: `export APIFY_TOKEN=apify_api_xxxxx`
 
 ### Actor Reference
 
 | Check | Actor | Slug | Input Example | Cost/Result |
 |---|---|---|---|---|
-| Abusive Clauses | UOKiK Clauses Scraper | `regdata/uokik-clauses-scraper` | `{"defendant": "mBank", "category": "", "maxResults": 100}` | $0.003 |
+| UOKiK decisions (clauses, consumer interests, competition) | UOKiK Decisions Scraper | `regdata/uokik-decisions-scraper` | `{"participant": "Orange", "includeDetails": true, "maxItems": 100}` | $0.004 |
 | Waste Registry | BDO Waste Registry Scraper | `regdata/bdo-waste-registry-scraper` | `{"query": "Remondis", "province": "", "maxResults": 100}` | $0.004 |
 
 ### MCP Mode (Preferred)
@@ -247,7 +254,7 @@ If the Apify MCP server is connected:
 1. Use `mcp__apify__fetch-actor-details` with the actor slug to get the full input schema
 2. Call `mcp__apify__call-actor` with:
    ```
-   actorId: "regdata/uokik-clauses-scraper"  (or bdo-waste-registry-scraper)
+   actorId: "regdata/uokik-decisions-scraper"  (or bdo-waste-registry-scraper)
    input: { <parameters per schema> }
    ```
 3. Retrieve results with `mcp__apify__get-dataset-items`
@@ -257,10 +264,10 @@ If the Apify MCP server is connected:
 If MCP is not available:
 
 ```bash
-# UOKiK - search by defendant
-curl -X POST "https://api.apify.com/v2/acts/regdata~uokik-clauses-scraper/runs?token=$APIFY_TOKEN" \
+# UOKiK - every decision naming a company
+curl -X POST "https://api.apify.com/v2/acts/regdata~uokik-decisions-scraper/runs?token=$APIFY_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"defendant": "mBank", "maxResults": 50}'
+  -d '{"participant": "Orange", "includeDetails": true, "maxItems": 50}'
 
 # BDO - search by company name
 curl -X POST "https://api.apify.com/v2/acts/regdata~bdo-waste-registry-scraper/runs?token=$APIFY_TOKEN" \
@@ -273,15 +280,19 @@ curl "https://api.apify.com/v2/datasets/<DATASET_ID>/items?token=$APIFY_TOKEN&fo
 
 ### Actor Input Parameters
 
-**UOKiK Clauses Scraper:**
+**UOKiK Decisions Scraper:**
 
 | Parameter | Type | Description |
 |---|---|---|
-| `category` | string | Filter by clause category number (1-24). Empty = all categories. |
-| `defendant` | string | Filter by defendant company name (partial match). |
-| `plaintiff` | string | Filter by plaintiff name (partial match). |
-| `exportAll` | boolean | Export all ~7,500 clauses. Ignores other filters. Default: false. |
-| `maxResults` | integer | Max results to return. Default: 100. Set 0 for unlimited. |
+| `participant` | string | Party name, whole words, case-insensitive. Polish diacritics matter - the search is literal. |
+| `practiceType` | string | e.g. `Klauzule niedozwolone`, `Ochrona zbiorowych interesów konsumentów`, `Nadużywanie pozycji dominującej`, `Kontrola koncentracji`. |
+| `decisionNumber` / `caseSignature` | string | Look up one decision (signature also matches a prefix). |
+| `industry` | string | PKD path match, e.g. "SEKCJA K" (whole financial sector) or "TELEKOMUNIKACJA". |
+| `fineImposed` / `appealed` | string | `yes` or `no`. |
+| `dateFrom` / `dateTo` | string | YYYY-MM-DD. |
+| `fullText` | string | Free text across the document index - broader than it looks. |
+| `includeDetails` | boolean | Open each decision for case signature, fine flag, appeal status, industry, region. |
+| `maxItems` | integer | Stop after this many; 0 = every match. |
 
 **BDO Waste Registry Scraper:**
 
@@ -299,19 +310,19 @@ Each result contains:
 
 | Field | What It Means |
 |---|---|
-| `lp` | Sequential number in the registry |
-| `caseNumber` | Court case reference number (numer postanowienia) |
-| `judgmentDate` | When the court ruled the clause abusive (data wyroku) |
-| `caseSignature` | Full court case signature (sygnatura wyroku) |
-| `court` | Which court issued the judgment |
-| `plaintiff` | Who brought the case (usually UOKiK or a consumer organization) |
-| `defendant` | The company that used the abusive clause |
-| `clauseText` | The full text of the prohibited clause - this is the key field for comparison |
-| `registrationDate` | When the clause was added to the official registry (data wpisu) |
-| `industry` | Sector classification of the defendant (branża) |
-| `category` | Which of the 24 legal categories the violation falls under |
+| `decisionNumber` | The decision's own number, e.g. DKK-171/2024 |
+| `dateOfDecision` | Date the decision was issued |
+| `party` | The company or person the proceedings concerned |
+| `practiceType` | Category: prohibited clauses, collective consumer interests, dominant position, merger control and others |
+| `caseSignature` | Case file signature (with includeDetails) |
+| `fineImposed` | Whether a fine was imposed - the register never publishes the amount |
+| `appealed` | Whether the decision was appealed |
+| `industryCode` / `industryName` | PKD class of the party, when recorded |
+| `region` | Voivodeship(s) the decision applies to |
+| `url` | The decision page in the official register |
+| `detailsFetched` | False when the decision page could not be read - then a missing fine flag means "unknown", not "no fine" |
 
-**Judgment date vs. registration date:** The judgment date is when the court ruled. The registration date is when UOKiK formally entered it into the registry - this can be weeks or months later. Both are legally significant: the prohibition takes effect from the registration date.
+**Reading a hit:** a "Klauzule niedozwolone" or collective-consumer-interests decision naming the counterparty is direct evidence of prior consumer-law problems; check `appealed` before treating it as final. No hit is not a clean bill of health - most clause disputes never reach a UOKiK decision.
 
 ### BDO Results
 
@@ -346,8 +357,8 @@ Each result contains:
 User: "Audit this telecom service agreement for abusive clauses"
 
 1. Read the contract, flag risk clauses (Step 1-2 above)
-2. Search UOKiK for the telecom company name as defendant
-3. Search UOKiK by category for each flagged clause type
+2. Search UOKiK decisions for the telecom company as participant
+3. Search UOKiK decisions by practice type ("Klauzule niedozwolone") and industry for each flagged clause type
 4. Compare flagged clauses against registry matches
 5. Deliver a risk report with rewrite recommendations
 ```
