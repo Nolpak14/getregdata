@@ -53,36 +53,35 @@ Gather the following from the user before proceeding:
 - What waste-related activity to verify (generation, transport, treatment, brokerage)
 - Purpose: supply chain audit, ESG reporting, contractor qualification, due diligence
 
-## Part A: Contract Compliance Framework (UOKiK Abusive Clauses)
+## Part A: Contract Compliance Framework (UOKiK)
 
 ### What Are Abusive Clauses?
 
 Under Polish Civil Code Art. 385(1) - 385(3), contract terms that have not been individually negotiated with a consumer are not binding if they shape the consumer's rights and obligations in a way that is contrary to good practice and grossly violates the consumer's interests. These are called *klauzule niedozwolone* (abusive/prohibited clauses).
 
-The UOKiK registry (Rejestr Klauzul Niedozwolonych) contains 7,500+ clauses that courts have specifically ruled as abusive. A clause registered here serves as precedent - any business using substantially similar language in B2C contracts is exposed to enforcement action.
+Since 2016 UOKiK, not a court, declares clauses prohibited, in an administrative decision that names the business. Those decisions are what `regdata/uokik-decisions-scraper` searches, and they are the precedent to check a contract against. The older court register of abusive clauses is frozen and anonymised (see Step 3).
 
 **Key legal points:**
 - Applies only to B2C contracts (business-to-consumer), not B2B
 - The clause must not have been individually negotiated
 - Two cumulative tests: contrary to good practice AND grossly violating consumer interests
-- Registration creates an *erga omnes* effect - the prohibition extends beyond the specific defendant
 - UOKiK (the Office of Competition and Consumer Protection) can impose fines up to 10% of annual revenue
 
-### The 24 Clause Categories
+### Clause Categories
 
-The registry organizes violations into 24 categories based on Art. 385(3) of the Civil Code. Each corresponds to a specific type of consumer harm. See `references/clause-categories.md` for the complete reference with examples.
+Art. 385(1) sets the general test and Art. 385(3) lists examples of terms presumed abusive. `references/clause-categories.md` groups them into 24 categories, each with examples.
 
-**High-risk categories (most frequently registered):**
+**Check these first:**
 
-| # | Category (Polish) | Category (English) | Registered Clauses |
-|---|---|---|---|
-| 1 | Klauzula generalna art. 385(1) §1 | General clause - contra bonos mores | ~1,200+ |
-| 10 | Jednostronna zmiana bez przyczyny | Unilateral modification without cause | ~800+ |
-| 15 | Wypowiedzenie bez przyczyn | Termination without valid grounds | ~600+ |
-| 17 | Wygórowana kara umowna | Disproportionate penalty clauses | ~500+ |
-| 2 | Brak odpowiedzialności za szkody osobiste | Excluding liability for personal injury | ~400+ |
-| 12 | Brak obowiązku zwrotu | No obligation to refund payments | ~400+ |
-| 18 | Przedłużenie przy braku oświadczenia | Auto-renewal without explicit consent | ~350+ |
+| # | Category (Polish) | Category (English) |
+|---|---|---|
+| 1 | Klauzula generalna art. 385(1) §1 | General clause - contra bonos mores |
+| 10 | Jednostronna zmiana bez przyczyny | Unilateral modification without cause |
+| 15 | Wypowiedzenie bez przyczyn | Termination without valid grounds |
+| 17 | Wygórowana kara umowna | Disproportionate penalty clauses |
+| 2 | Brak odpowiedzialności za szkody osobiste | Excluding liability for personal injury |
+| 12 | Brak obowiązku zwrotu | No obligation to refund payments |
+| 18 | Przedłużenie przy braku oświadczenia | Auto-renewal without explicit consent |
 
 **Medium-risk categories:**
 
@@ -113,7 +112,7 @@ The registry organizes violations into 24 categories based on Art. 385(3) of the
 
 ### Contract Audit Methodology
 
-Follow this 5-step process to audit a contract against the UOKiK registry:
+Follow this 5-step process to audit a contract against the Civil Code and UOKiK decisions:
 
 **Step 1: Extract Risk Clauses**
 Read the full contract and flag every clause that does any of the following:
@@ -137,11 +136,11 @@ Use `regdata/uokik-decisions-scraper` (the decisions database at decyzje.uokik.g
 The older court register of abusive clauses (rejestr klauzul niedozwolonych) is frozen since 2023 and anonymises every party, so it cannot answer "has this company been caught before". The decisions database names the parties. UOKiK records THAT a fine was imposed, never the amount - do not report one.
 
 **Step 4: Assess Risk Level**
-For each match from the registry, classify the risk:
-- **Identical match** - The clause language is substantially the same as a registered abusive clause. Risk: very high. Must rewrite.
+For each flagged clause, compared with the decisions found in Step 3, classify the risk:
+- **Identical match** - The clause language is substantially the same as a clause UOKiK has already declared prohibited. Risk: very high. Must rewrite.
 - **Similar intent** - The clause achieves the same practical effect through different wording. Risk: high. Should rewrite.
 - **Related pattern** - The clause touches the same category but is materially different. Risk: moderate. Review recommended.
-- **No match** - No similar clause in the registry, but the clause still restricts consumer rights. Risk: low but not zero. Monitor.
+- **No match** - No similar clause in the decisions found, but the clause still restricts consumer rights. Risk: low but not zero. Monitor.
 
 **Step 5: Recommend Rewording**
 For each flagged clause, provide:
@@ -150,9 +149,9 @@ For each flagged clause, provide:
 - A reworded version that preserves legitimate business interests while respecting consumer rights
 - The legal basis for the change (which Art. 385(3) point it violates)
 
-### Industries with Most Registered Abusive Clauses
+### Sectors to Scrutinise
 
-The following sectors have the highest concentration of registered violations. Contracts in these industries deserve extra scrutiny:
+Clause problems cluster in consumer-facing sectors that rely on standard-form contracts. Check these first:
 
 1. **Telecommunications** - auto-renewal, penalty clauses, unilateral modification
 2. **Real estate / developers** - price changes, liability exclusions, withdrawal penalties
