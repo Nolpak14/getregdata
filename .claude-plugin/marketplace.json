@@ -53,7 +53,7 @@
       "name": "regdata-company-lookup",
       "source": "./",
       "strict": false,
-      "description": "Free company lookups straight from official public APIs across official public registries plus global LEI resolution - no Apify token and no per-result cost. Resolve and verify a company by name or national identifier.",
+      "description": "Free company lookups straight from official public registry APIs, plus global LEI resolution - no Apify token and no per-result cost. Resolve and verify a company by name or national identifier.",
       "category": "data",
       "tags": [
         "company-data",
