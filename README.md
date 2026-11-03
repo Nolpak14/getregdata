@@ -8,6 +8,8 @@
 
 Installable agent skills - packaged, repeatable **workflows** - for KYC/AML, credit-risk, due-diligence and B2B research over public business registry data. Official registries across Europe, the United States, the UAE, Africa and Latin America, plus cross-border adverse-media screening. Each skill turns official public registries into a process your agent can run on demand. Built on [Apify](https://getregdata.com/go/catalog/github/) actors for reliable, scalable access.
 
+**Where it is strongest:** insolvency and restructuring proceedings from official gazettes in Poland, Germany, Austria, France, Spain and Czechia, and Central and Eastern European registers that global databases carry thinly - KRS financial statements, CRBR beneficial owners, Polish land and mortgage registers, Czech annual accounts and the Slovak UBO register.
+
 **Checking a Polish company? Start with [Poland KYB Risk Check](https://getregdata.com/go/poland-kyb-check/github/).** One NIP or KRS in, one verdict out - identity, beneficial owners and insolvency screened against the company *and* every beneficial owner. Everything below is the depth behind that answer, and the way to run the same jobs elsewhere.
 
 ## Install

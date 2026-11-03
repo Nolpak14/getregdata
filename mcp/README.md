@@ -7,6 +7,8 @@ due-diligence and B2B data across Poland, Germany, Italy, Spain, Austria, France
 Belgium, Czechia, Slovakia, Norway, Denmark, Estonia, Cyprus, Ireland, Portugal,
 Nigeria, Colombia, the US (California, Illinois, county clerks) and the UAE - plus a cross-border adverse-media screener.
 
+**Where it is strongest:** insolvency and restructuring proceedings from official gazettes in Poland, Germany, Austria, France, Spain and Czechia, and Central and Eastern European registers that global databases carry thinly - KRS financial statements, CRBR beneficial owners, Polish land and mortgage registers, Czech annual accounts and the Slovak UBO register.
+
 For a Polish company, **`regdata_poland_kyb_check` answers the whole question in one
 call** - identity, beneficial owners, and insolvency screened against the company and
 every beneficial owner, returned as a single verdict. The per-registry tools are the

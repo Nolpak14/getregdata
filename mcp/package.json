@@ -1,8 +1,8 @@
 {
   "name": "getregdata-mcp",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "mcpName": "io.github.Nolpak14/getregdata",
-  "description": "MCP server for official business-registry data - KYC/AML, beneficial owners, financial statements, insolvency, adverse media. One-call Poland KYB verdict, plus per-registry tools for Germany, Italy, Spain, Austria, France, Belgium, Czechia, Slovakia, Norway, Denmark, Estonia, Cyprus, Ireland, Portugal, Nigeria, Colombia, the US (California, Illinois, county clerks) and the UAE.",
+  "description": "MCP server for official registry data - insolvency and restructuring proceedings across Europe (Poland, Germany, Austria, France, Spain, Czechia) and Central and Eastern European depth: Polish KRS financial statements, CRBR beneficial owners, land and mortgage registers, Czech annual accounts, Slovak UBO register. One-call Poland KYB verdict, plus company registers elsewhere in Europe, the US and the UAE.",
   "type": "module",
   "bin": {
     "getregdata-mcp": "index.js"
@@ -36,7 +36,12 @@
     "apify",
     "handelsregister",
     "crbr",
-    "registro-imprese"
+    "registro-imprese",
+    "insolvency",
+    "bankruptcy",
+    "central-eastern-europe",
+    "poland",
+    "krs"
   ],
   "homepage": "https://github.com/Nolpak14/getregdata",
   "repository": {

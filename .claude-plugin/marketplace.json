@@ -5,7 +5,7 @@
     "url": "https://getregdata.com"
   },
   "metadata": {
-    "description": "Official business-registry data for AI agents - KYC/AML, beneficial owners, credit-risk, sanctions and adverse media. Free public-API lookups plus paid registry actors where no free API exists.",
+    "description": "Official business-registry data for AI agents - insolvency proceedings across Europe, Central and Eastern European registers, KYC/AML, beneficial owners, credit-risk, sanctions and adverse media. Free public-API lookups plus paid registry actors where no free API exists.",
     "version": "1.0.0"
   },
   "plugins": [
@@ -13,7 +13,7 @@
       "name": "regdata-workflows",
       "source": "./",
       "strict": false,
-      "description": "Compliance and research workflows over official business registries - KYC/AML and KYB, credit-risk and insolvency, property, compliance audits and B2B lead-gen. Includes the getregdata MCP server: one tool per registry, plus a one-call Poland KYB verdict.",
+      "description": "Compliance and research workflows over official business registries - insolvency and credit-risk, KYC/AML and KYB with Central and Eastern European depth, property, compliance audits and B2B lead-gen. Includes the getregdata MCP server: one tool per registry, plus a one-call Poland KYB verdict.",
       "category": "compliance",
       "tags": [
         "kyc",
@@ -53,7 +53,7 @@
       "name": "regdata-company-lookup",
       "source": "./",
       "strict": false,
-      "description": "Free company lookups straight from official public APIs across 28 jurisdictions plus global LEI resolution - no Apify token and no per-result cost. Resolve and verify a company by name or national identifier.",
+      "description": "Free company lookups straight from official public APIs across official public registries plus global LEI resolution - no Apify token and no per-result cost. Resolve and verify a company by name or national identifier.",
       "category": "data",
       "tags": [
         "company-data",

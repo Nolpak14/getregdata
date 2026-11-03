@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Nolpak14/getregdata",
-  "description": "Business-registry data for agents: one-call Poland KYB verdict, UBO, insolvency, adverse media",
+  "description": "Official registry data for agents: insolvency across Europe, Poland and CEE KYB, UBO, land registers",
   "repository": {
     "url": "https://github.com/Nolpak14/getregdata",
     "source": "github"
   },
-  "version": "1.4.0",
+  "version": "1.4.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "getregdata-mcp",
-      "version": "1.4.0",
+      "version": "1.4.1",
       "transport": {
         "type": "stdio"
       },
