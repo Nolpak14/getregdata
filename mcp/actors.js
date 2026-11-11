@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 44 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 45 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-11-01. Do not edit inputSchema by hand.
+// Generated 2026-11-11. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -1122,6 +1122,38 @@ export const ACTORS = [
     }
   },
   {
+    "slug": "uk-insolvency-scraper",
+    "tool": "regdata_uk_insolvency",
+    "title": "UK Insolvency Check (Companies House + The Gazette)",
+    "description": "Check UK companies for insolvency by company number (e.g. 00445790, SC210223) or exact company name, up to 200 per run: Companies House insolvency cases and company status plus The Gazette notices (winding-up petitions, liquidation, administration). One row per company with a verdict - in_liquidation, in_administration, in_receivership, winding_up_petition (a petition published before any appointment, which Companies House does not show), dissolved_after_insolvency, past_insolvency, dissolved or no_insolvency_found - with case dates, petitioner company, petition and hearing dates, court, case reference and links to the official notices. Practitioner names are not returned. no_insolvency_found means neither register holds an insolvency record for the company; a name matching several companies is returned as ambiguous with the candidates, a number not in the register as not_found, and a register that did not answer as NOT checked (unknown, not clear) - none of these is charged. checkComplete=false lists why a row may be partial. Prefer the company number. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companies": {
+          "type": "array",
+          "title": "Companies to check",
+          "description": "UK company numbers (e.g. 00445790, SC210223) or exact company names, one per line, up to 200 per run. Numbers and names can be mixed. A company number is the most precise check; a name is used only when exactly one company in Companies House matches it, otherwise the candidates are listed."
+        },
+        "includeGazette": {
+          "type": "boolean",
+          "title": "Search The Gazette",
+          "description": "On (default): also search The Gazette for winding-up petitions and corporate insolvency notices about each company. Off: Companies House only (faster, but a winding-up petition before any appointment is not visible there).",
+          "default": true
+        },
+        "maxNoticesPerCompany": {
+          "type": "integer",
+          "title": "Max Gazette notices per company",
+          "description": "The most Gazette notices returned for one company, newest first. A long liquidation can have dozens of meeting and dividend notices.",
+          "default": 100
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companies"
+      ]
+    }
+  },
+  {
     "slug": "germany-handelsregister-scraper",
     "tool": "regdata_germany_handelsregister",
     "title": "Germany Handelsregister Scraper",
@@ -1252,6 +1284,12 @@ export const ACTORS = [
             "INSO_PLAN"
           ],
           "default": "NO_CODE"
+        },
+        "includeNoticeDetails": {
+          "type": "boolean",
+          "title": "Include administrator and claims deadline",
+          "description": "Opens each publication and adds the appointed insolvency administrator (or Sachwalter/Treuhänder) with address, phone and email, the claims-filing deadline, the opening date and the report/review date. For company debtors the full notice text is added too. Takes about a second per publication; billed the same per publication.",
+          "default": false
         },
         "maxResults": {
           "type": "integer",

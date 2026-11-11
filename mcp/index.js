@@ -22,7 +22,7 @@ const pkg = createRequire(import.meta.url)("./package.json");
 const APIFY_BASE = "https://api.apify.com/v2";
 // Jurisdictions covered by the actor fleet. Not derivable from actors.js (no
 // country field), so it is asserted here and checked by scripts/check-counts.mjs.
-const JURISDICTIONS = 19;
+const JURISDICTIONS = 20;
 const token = () => process.env.APIFY_TOKEN || process.env.APIFY_API_TOKEN || "";
 
 function requireToken() {
