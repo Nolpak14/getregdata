@@ -1,6 +1,6 @@
 {
   "name": "getregdata-mcp",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "mcpName": "io.github.Nolpak14/getregdata",
   "description": "MCP server for official registry data - insolvency and restructuring proceedings across Europe (Poland, Germany, Austria, France, Spain, Czechia) and Central and Eastern European depth: Polish KRS financial statements, CRBR beneficial owners, land and mortgage registers, Czech annual accounts, Slovak UBO register. One-call Poland KYB verdict, plus company registers elsewhere in Europe, the US and the UAE.",
   "type": "module",
