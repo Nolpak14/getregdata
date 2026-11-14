@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 45 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 46 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-11-11. Do not edit inputSchema by hand.
+// Generated 2026-11-14. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -1154,6 +1154,49 @@ export const ACTORS = [
     }
   },
   {
+    "slug": "belgium-insolvency-scraper",
+    "tool": "regdata_belgium_insolvency",
+    "title": "Belgium Insolvency Check (Moniteur belge / Belgisch Staatsblad)",
+    "description": "Check Belgian companies for insolvency by enterprise number (KBO/BCE, e.g. 0656.956.749 or BE0656956749, check digits verified; up to 500) or company name (up to 50) in the Belgian Official Gazette (Moniteur belge / Belgisch Staatsblad). One row per insolvency notice published in the date window - bankruptcy_opened, restructuring_opened (judicial reorganisation), plan_confirmed, proceeding_closed, proceeding_revoked or other court decisions - with court, case reference, judgment and publication dates, claims deadline and the address and activity printed in the notice. Window: at most 30 days per run, default the last 7 days, notices from 2025-01-01; the window sets the run time (about 1-3 minutes per publication day), so send all companies in one call. No row for an entry means no insolvency notice in that window - not a full history: a bankruptcy opened before the window is not shown. An entry whose window could not be fully read is NOT checked (unknown, not clear) and not charged; invalid numbers, numbers not in the enterprise register and natural persons (sole traders) are skipped and not charged. Companies and other legal persons only; court appointees by role only. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "enterpriseNumbers": {
+          "type": "array",
+          "title": "Enterprise numbers (KBO/BCE)",
+          "description": "Belgian enterprise numbers to check: 0417.497.106, 0417497106 or BE0417497106. The check digits are verified. The most precise check - use it whenever you have the number. Up to 500 per run."
+        },
+        "companyNames": {
+          "type": "array",
+          "title": "Company names",
+          "description": "Company names to look for in the notices, e.g. \"Eurocon Infra\". Every word must appear in the company name (or its trade name) in any order; the legal form (SRL, BV, NV, SA...) is ignored. Up to 50 per run."
+        },
+        "exactNameMatch": {
+          "type": "boolean",
+          "title": "Exact name match",
+          "description": "Off (default): every company whose name contains all the words. On: only companies whose name equals the query, ignoring case, accents, punctuation and legal form. No effect on enterprise numbers.",
+          "default": false
+        },
+        "dateFrom": {
+          "type": "string",
+          "title": "Published from",
+          "description": "Start of the publication-date window (YYYY-MM-DD). Clear both dates to check the last 7 days. The window is at most 30 days; notices are available from 2025-01-01. Each publication day in the window is billed once per run, so check all your companies in one run."
+        },
+        "dateTo": {
+          "type": "string",
+          "title": "Published to",
+          "description": "End of the publication-date window (YYYY-MM-DD). Leave empty for today."
+        },
+        "maxNoticesPerName": {
+          "type": "integer",
+          "title": "Max notices per company name",
+          "description": "The most notices returned for one company name, newest first (default 20). Enterprise numbers always return every notice in the window."
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
     "slug": "germany-handelsregister-scraper",
     "tool": "regdata_germany_handelsregister",
     "title": "Germany Handelsregister Scraper",
@@ -1503,8 +1546,8 @@ export const ACTORS = [
         },
         "proceedingKinds": {
           "type": "array",
-          "title": "Proceeding kind filter (entity search)",
-          "description": "Optional, entity mode only. A company search returns one row per proceeding the register holds for it. Keep only these kinds; leave empty for all. Left-out rows are not exported and not charged.",
+          "title": "Proceeding kind filter (entity, person, sole trader)",
+          "description": "Optional, for entity, person and soleTrader searches. They return one row per proceeding the register holds for the debtor. Keep only these kinds; leave empty for all. Left-out rows are not exported and not charged.",
           "items": {
             "type": "string"
           }
