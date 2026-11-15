@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 46 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 47 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-11-14. Do not edit inputSchema by hand.
+// Generated 2026-11-15. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -253,7 +253,7 @@ export const ACTORS = [
         "searchQuery": {
           "type": "string",
           "title": "Company name",
-          "description": "Company name to search for (used when searchMode = byName). Uses the registry's phonetic search, so minor spelling differences still match. Add a place or legal form to narrow very common names."
+          "description": "Company name to search for (used when searchMode = byName). Uses the registry's phonetic search, so minor spelling differences still match. Add a place or another word of the name to narrow very common names. A legal form at the start or end (BV, NV, SRL, SA, VZW ...) is left out automatically: registered names rarely carry it, and the registry finds nothing when the search term has one."
         },
         "language": {
           "type": "string",
@@ -278,6 +278,18 @@ export const ACTORS = [
           "title": "Max results",
           "description": "Maximum number of company records to extract. 0 means no limit. Useful to cap broad name searches.",
           "default": 0
+        },
+        "nameFilter": {
+          "type": "boolean",
+          "title": "Closest names only (name search)",
+          "description": "Read up to 5 result pages (100 entities) and extract only the companies whose name is closest to the search term, instead of every entity on the first page. Fewer records, and the exact name is not lost among many similar ones. Extracts at most 25 records unless Max results is set. Ignored in byNumber mode.",
+          "default": false
+        },
+        "includeFormerNames": {
+          "type": "boolean",
+          "title": "Search former names (name search)",
+          "description": "When no current name matches, search again including former company names (e.g. a company renamed since). Companies found only this way carry matchedFormerName: true. Works with Closest names only. Ignored in byNumber mode.",
+          "default": false
         },
         "minIntervalMs": {
           "type": "integer",
@@ -1119,6 +1131,38 @@ export const ACTORS = [
         }
       },
       "additionalProperties": true
+    }
+  },
+  {
+    "slug": "uk-annual-accounts",
+    "tool": "regdata_uk_annual_accounts",
+    "title": "UK Annual Accounts - Companies House Financial Statements",
+    "description": "Get the annual accounts UK companies filed at Companies House, by company number (8 digits, or SC/NI/OC/SO/NC + 6 digits; leading zeros optional; up to 1,000): turnover, gross and operating profit, profit before tax, profit for the year, total/fixed/current assets, cash, net assets (equity), share capital, creditors within and after one year, total liabilities and average employees, with the prior year from the same filing. One row per company, financial year (1-5 most recent) and statement type (company, plus group figures on request). ukFigures adds the UK lines: net current assets, total assets less current liabilities, net assets, tangible/intangible assets, stock, debtors, trade debtors and creditors, bank loans within and after one year, provisions, retained earnings, advances to directors and, when filed, cost of sales, administrative expenses, interest, tax, staff costs, depreciation, dividends and directors' remuneration. Most UK companies are small or micro-entities that file no profit and loss account: then revenue and profit are null and incomeStatementFiled is false - that is what was filed, not missing data. Charities: revenue = total income, netProfit = net income/expenditure, equity = total funds (charity: true). Missing minus signs on net current liabilities / net liabilities are corrected only when the filed balance sheet proves it, listed in _corrections. Accounts filed only on paper or as a scanned PDF - most listed groups and many large companies - come back as an uncharged pdf_only row with a link, not figures. Not found, no filings and invalid numbers are uncharged failure rows. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "title": "Company numbers",
+          "description": "UK company registration numbers, up to 1,000 per run. England and Wales: 8 digits (02203536). Scotland: SC + 6 digits. Northern Ireland: NI + 6 digits. LLPs: OC, SO or NC + 6 digits."
+        },
+        "years": {
+          "type": "integer",
+          "title": "Financial years per company",
+          "description": "How many of the most recent annual accounts to return for each company (1 to 5). Each year is one row and one charge.",
+          "default": 1
+        },
+        "includeConsolidated": {
+          "type": "boolean",
+          "title": "Include group (consolidated) accounts",
+          "description": "Also return the consolidated group figures next to the parent company's own figures when the company files group accounts. Each group statement is an extra row and an extra charge. Companies whose filing carries group figures only get them either way. Off by default.",
+          "default": false
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "companyIds"
+      ]
     }
   },
   {
