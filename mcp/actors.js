@@ -1,6 +1,6 @@
-// Auto-generated from the live Apify fleet (deployed builds). 47 regdata actors.
+// Auto-generated from the live Apify fleet (deployed builds). 48 regdata actors.
 // Regenerate with: APIFY_TOKEN=... node scripts/gen-manifest.mjs
-// Generated 2026-11-15. Do not edit inputSchema by hand.
+// Generated 2026-11-19. Do not edit inputSchema by hand.
 export const ACTORS = [
   {
     "slug": "poland-kyb-check",
@@ -513,6 +513,16 @@ export const ACTORS = [
           "title": "Only active entities",
           "description": "Keep only entities in good standing or reinstated.",
           "default": false
+        },
+        "zipCodes": {
+          "type": "array",
+          "title": "ZIP codes",
+          "description": "Keep only entities located in these Illinois ZIP codes, one per line. Combined with Counties: an entity in any listed ZIP code or county is kept. An entity is located by its LLC records office, or else by its registered agent when the agent is not an agent service; entities that cannot be located are left out. Leave both empty for all of Illinois."
+        },
+        "counties": {
+          "type": "array",
+          "title": "Counties",
+          "description": "Keep only entities located in these Illinois counties, one per line (\"DuPage\", \"Cook\", \"McLean\" - spelling and the word County do not matter). Chicago is in Cook."
         },
         "dateFrom": {
           "type": "string",
@@ -1235,6 +1245,49 @@ export const ACTORS = [
           "type": "integer",
           "title": "Max notices per company name",
           "description": "The most notices returned for one company name, newest first (default 20). Enterprise numbers always return every notice in the window."
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  {
+    "slug": "netherlands-insolvency-scraper",
+    "tool": "regdata_netherlands_insolvency",
+    "title": "Netherlands Insolvency Check (Centraal Insolventieregister)",
+    "description": "Check Dutch companies for insolvency in the official Centraal Insolventieregister (CIR) by KvK number (8 digits; up to 500) or company name (contains-match, at least 3 characters; up to 50), or list every company insolvency published in a recent window (publishedFrom/publishedTo: YYYY-MM-DD, \"today\", \"yesterday\" or \"-N days\", within the last 7 days). One row per company insolvency case with its whole history: caseType bankruptcy (faillissement) or suspension_of_payments (surseance van betaling); status bankruptcy_opened, restructuring_opened, plan_confirmed (akkoord), proceeding_closed, proceeding_revoked or other; isOngoing; openedDate; court and location; case number; KvK, name, trade names, registered address; every publication with date and Dutch text. No row for an entry means the register holds no company insolvency for it - the register keeps cases while they run and for six months after they end, so older ended cases are not returned. An entry the register did not answer is NOT checked (unknown, not clear) and not charged; invalid KvK numbers and numbers with natural-person insolvencies only are skipped and not charged. Companies and other legal persons only - sole traders, VOF partners, private individuals and debt restructuring (WSNP) are never returned; judges and trustees are not named. No API key.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "kvkNumbers": {
+          "type": "array",
+          "title": "KvK numbers",
+          "description": "Dutch Chamber of Commerce (KvK) numbers to check, 8 digits, e.g. 70627290. The most precise check - use it whenever you have the number. Up to 500 per run."
+        },
+        "companyNames": {
+          "type": "array",
+          "title": "Company names",
+          "description": "Company names to look up, e.g. \"Pixelfarming Robotics\". The register matches names that contain the text, so a short or common word returns many companies. At least 3 characters. Up to 50 per run."
+        },
+        "exactNameMatch": {
+          "type": "boolean",
+          "title": "Exact name match",
+          "description": "Off (default): every company whose name or trade name contains the text. On: only companies whose name or trade name equals the query, ignoring case, accents, punctuation and the legal form (B.V., N.V. ...). No effect on KvK numbers.",
+          "default": false
+        },
+        "maxCasesPerName": {
+          "type": "integer",
+          "title": "Max cases per company name",
+          "description": "The most insolvency cases returned for one company name, newest first (default 20). KvK numbers always return every case."
+        },
+        "publishedFrom": {
+          "type": "string",
+          "title": "New publications from",
+          "description": "Optional. List every company insolvency published in the register from this date, instead of or in addition to the checks above. YYYY-MM-DD, or \"yesterday\", \"today\" or \"-3 days\" (useful in a schedule). Must be within the last 7 days. Billed per company case returned."
+        },
+        "publishedTo": {
+          "type": "string",
+          "title": "New publications to",
+          "description": "End of the publication window: YYYY-MM-DD, \"today\" or \"yesterday\". Leave empty for the same day as \"New publications from\"."
         }
       },
       "additionalProperties": true
