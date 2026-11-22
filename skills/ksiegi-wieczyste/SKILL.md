@@ -61,7 +61,7 @@ If the user's digit differs from the computed one, the number was mistyped - ask
 
 ## Step 2 - Read the register (paid, pay per KW)
 
-Actor: [`regdata/ekw-ksiegi-wieczyste-scraper`](https://getregdata.com/go/ekw-ksiegi-wieczyste-scraper/ksiegi-wieczyste/) - about $0.01 per KW read, no subscription, no API key or proxy to configure. It needs a free Apify token: https://getregdata.com/go/signup/ksiegi-wieczyste/.
+Actor: [`regdata/ekw-ksiegi-wieczyste-scraper`](https://getregdata.com/go/ekw-ksiegi-wieczyste-scraper/ksiegi-wieczyste/) - $0.03 per KW read on the Apify Free plan ($0.025 Bronze, $0.022 Silver, $0.02 Gold and above) plus $0.025 per run, no subscription, no API key or proxy to configure. It needs a free Apify token: https://getregdata.com/go/signup/ksiegi-wieczyste/.
 
 Input:
 

@@ -61,7 +61,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.004 |
 | MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 |
 | BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 |
-| EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.01 |
+| EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.03 + $0.025/run |
 | REGON | `regdata/polish-regon-scraper` | GUS business registry - identity, PKD, status (no API key) | $0.004 |
 | Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.005/company + $0.01/premise |
 | PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 |

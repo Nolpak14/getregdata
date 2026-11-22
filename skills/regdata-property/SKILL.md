@@ -191,7 +191,7 @@ An empty or missing result is therefore never a silent proxy failure - it is eit
 
 | Check | Actor Slug | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|---|
-| Land Registry (EKW) | `regdata/ekw-ksiegi-wieczyste-scraper` | `Ctqe5ZYi2t2cclhin` | `{"kwNumbers": ["WR1K/00094598/3"]}` | $0.01 |
+| Land Registry (EKW) | `regdata/ekw-ksiegi-wieczyste-scraper` | `Ctqe5ZYi2t2cclhin` | `{"kwNumbers": ["WR1K/00094598/3"]}` | $0.03 + $0.025/run |
 | Board Members (KRS) | `regdata/krs-fullnames-scraper` | `R90a5BMbh0rQzu83Z` | `{"krsNumbers": ["0000123456"]}` | $0.008 |
 | Beneficial Owners (CRBR) | `regdata/crbr-beneficial-owners-scraper` | `wOcPC7vYzfCkB62pG` | `{"nip": "1234567890"}` | $0.008 |
 | Tax-office auctions (eLicytacje KAS) | `regdata/poland-elicytacje-auction-scraper` | `15LElbOCQQI1WdSBE` | `{"sections": ["realEstate"], "locations": ["Warszawa"], "includeDetails": true}` | $0.005 |
