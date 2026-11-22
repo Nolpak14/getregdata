@@ -13,7 +13,7 @@ You are an expert in government registry data extraction. You help users find an
 
 Your job is to **identify what the user needs** and either handle it directly (simple single-actor queries) or route them to the right specialized skill.
 
-**Poland shortcut - check this before routing.** If the user wants an overall risk or KYB picture of a Polish company rather than one named register, use `poland-kyb-check` with their NIP or KRS. One call returns identity, beneficial owners, and insolvency proceedings screened against the company *and* every beneficial owner, as a single verdict (`clear` / `findings` / `not_found` / `partial`) - cheaper and far fewer steps than chaining REGON + CRBR + KRZ yourself. A `partial` verdict means a source could not be reached; it does **not** mean the company is clean, and it is not billed. Fall through to the individual actors below when the user names a specific register, needs one source in depth, or asks about any other country.
+**Poland shortcut - check this before routing.** If the user wants an overall risk or KYB picture of a Polish company rather than one named register, use `poland-kyb-check` with their NIP or KRS. One call returns identity, beneficial owners, and insolvency proceedings screened against the company *and* every beneficial owner, as a single verdict (`clear` / `findings` / `not_found` / `partial`) - far fewer steps than chaining REGON + CRBR + KRZ yourself. It costs those lookups plus a $0.05 fee: about $0.14 per company, plus about $0.05 per beneficial owner. A `partial` verdict means a source could not be reached; it does **not** mean the company is clean. It carries no $0.05 fee, but lookups that ran are still billed. Fall through to the individual actors below when the user names a specific register, needs one source in depth, or asks about any other country.
 
 ## Step 1: Identify Intent
 
@@ -53,25 +53,25 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 ### Poland
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| **KYB Check (start here)** | `regdata/poland-kyb-check` | **One call from a NIP or KRS: identity + beneficial owners + insolvency screened against the company and every owner, as one verdict.** Incomplete checks are not billed. | $0.05/check |
-| CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 |
+| **KYB Check (start here)** | `regdata/poland-kyb-check` | **One call from a NIP or KRS: identity + beneficial owners + insolvency screened against the company and every owner, as one verdict.** Incomplete checks carry no fee; lookups that ran are still billed. | $0.05 fee + registry lookups (~$0.14/check + ~$0.05/owner all-in) |
+| CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 + $0.025/run |
 | KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.006 + $0.025/search session |
-| KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 (+ $0.08/MB over 1 MB) |
-| KRS Board | `regdata/krs-fullnames-scraper` | Board members and shareholders (full names) | $0.008 |
-| KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.004 |
-| MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 |
-| BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 |
+| KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 + $0.01/run (+ $0.08/MB over 1 MB) |
+| KRS Board | `regdata/krs-fullnames-scraper` | Board members and shareholders (full names) | $0.008 + $0.005/run |
+| KNF | `regdata/knf-registry-scraper` | Licensed payment, e-money and lending institutions | $0.004 + $0.005/run |
+| MSiG | `regdata/msig-scraper` | Bankruptcy, restructuring, liquidation notices | $0.004 + $0.02/run |
+| BDO | `regdata/bdo-waste-registry-scraper` | Waste-management entity registration | $0.004 + $0.10/run |
 | EKW | `regdata/ekw-ksiegi-wieczyste-scraper` | Property ownership, mortgages, easements | $0.03 + $0.025/run |
 | REGON | `regdata/polish-regon-scraper` | GUS business registry - identity, PKD, status (no API key) | $0.004 |
 | Premises | `regdata/polish-premises-prospector` | REGON local units (jednostki lokalne) - site-level data | $0.005/company + $0.01/premise |
-| PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 |
+| PEP | `regdata/poland-parliamentary-pep-scraper` | Polish Sejm members across terms for PEP screening | $0.004 + $0.005/run |
 | UOKiK Decisions | `regdata/uokik-decisions-scraper` | Competition and consumer-protection decisions - parties, practice type, fine imposed (yes/no), appeal | $0.004 |
 | eLicytacje | `regdata/poland-elicytacje-auction-scraper` | Tax-office (KAS) auctions - cars, real estate, shares; starting price, valuation, land-registry number | $0.005 |
 
 ### Germany
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| Handelsregister | `regdata/germany-handelsregister-scraper` | Company identity, officers, filings | $0.008 |
+| Handelsregister | `regdata/germany-handelsregister-scraper` | Company identity, officers, filings | $0.008 + $0.025/run |
 | Insolvency | `regdata/germany-insolvency-scraper` | Insolvenzbekanntmachungen - insolvency announcements | $0.001/row + $0.005/name search |
 
 ### Italy
@@ -84,19 +84,19 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | BORME | `regdata/borme-corporate-acts-scraper` | Incorporations, officer appointments, dissolutions | $0.0015 + $0.005/run |
-| Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 |
+| Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 + $0.025/run |
 | Concursal | `regdata/spain-concursal-scraper` | Registro Publico Concursal - insolvency parties/roles | $0.05 |
 
 ### Austria
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| Ediktsdatei | `regdata/austria-ediktsdatei-scraper` | Insolvency & court publications | $0.005 |
+| Ediktsdatei | `regdata/austria-ediktsdatei-scraper` | Insolvency & court publications | $0.005 + $0.02/run |
 | WKO | `regdata/wko-business-directory-scraper` | 620K+ businesses with contact details | $0.005 |
 
 ### France
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| Societe.com | `regdata/societe-com-scraper` | SIREN, directors, financials, shareholders | $0.005 |
+| Societe.com | `regdata/societe-com-scraper` | SIREN, directors, financials, shareholders | $0.005 + $0.05/run |
 | Insolvency (BODACC) | `regdata/france-insolvency-scraper` | Collective proceedings - sauvegarde, redressement, liquidation - by SIREN, SIRET or name | $0.001/row + $0.005/name search |
 
 ### Belgium
@@ -164,7 +164,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 ### Cross-border
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| Adverse Media | `regdata/adverse-media-screener` | KYC/AML negative-news / adverse-media check | $0.10 |
+| Adverse Media | `regdata/adverse-media-screener` | KYC/AML negative-news / adverse-media check | $0.10 + $0.01/run |
 
 ## Step 4: Direct Execution (Single-Actor Queries)
 

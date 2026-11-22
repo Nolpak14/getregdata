@@ -192,8 +192,8 @@ An empty or missing result is therefore never a silent proxy failure - it is eit
 | Check | Actor Slug | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|---|
 | Land Registry (EKW) | `regdata/ekw-ksiegi-wieczyste-scraper` | `Ctqe5ZYi2t2cclhin` | `{"kwNumbers": ["WR1K/00094598/3"]}` | $0.03 + $0.025/run |
-| Board Members (KRS) | `regdata/krs-fullnames-scraper` | `R90a5BMbh0rQzu83Z` | `{"krsNumbers": ["0000123456"]}` | $0.008 |
-| Beneficial Owners (CRBR) | `regdata/crbr-beneficial-owners-scraper` | `wOcPC7vYzfCkB62pG` | `{"nip": "1234567890"}` | $0.008 |
+| Board Members (KRS) | `regdata/krs-fullnames-scraper` | `R90a5BMbh0rQzu83Z` | `{"krsNumbers": ["0000123456"]}` | $0.008 + $0.005/run |
+| Beneficial Owners (CRBR) | `regdata/crbr-beneficial-owners-scraper` | `wOcPC7vYzfCkB62pG` | `{"nip": "1234567890"}` | $0.008 + $0.025/run |
 | Tax-office auctions (eLicytacje KAS) | `regdata/poland-elicytacje-auction-scraper` | `15LElbOCQQI1WdSBE` | `{"sections": ["realEstate"], "locations": ["Warszawa"], "includeDetails": true}` | $0.005 |
 
 **Beyond Poland.** The same distressed-property and lien checks exist in two other markets: `regdata/czech-drazby-auction-scraper` lists Czech judicial-executor auctions (appraised value, reserve price, address, appraisal PDF; $0.005 per auction), and `regdata/us-county-recorded-documents` is a daily index of lis pendens, liens, deeds and sheriff's deeds recorded in selected US counties, mostly Texas, Ohio and Michigan ($0.005 per document). An eLicytacje real-estate lot carries its księga wieczysta number - feed it straight into the EKW actor above to read the title before you bid.

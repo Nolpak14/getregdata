@@ -10,9 +10,10 @@ screened against the company **and every beneficial owner** - as `clear`, `findi
 `not_found` or `partial`, with machine-readable risk flags and the underlying registry entries.
 
 Prefer it over chaining `regdata_polish_regon` + `regdata_crbr_beneficial_owners` +
-`regdata_krz_debtor` yourself: fewer calls, one normalized answer, and a fixed $0.05 per check on the Apify Free plan (less on paid plans).
+`regdata_krz_debtor` yourself: fewer calls and one normalized answer. On the Apify Free plan it costs a $0.05 fee
+plus those registry lookups: about $0.14 per company, plus about $0.05 per beneficial owner.
 A `partial` verdict means a source could not be reached - it does **not** mean the company is
-clean, and it is not billed. Use the single-registry tools when the user names a specific
+clean. It carries no fee, but lookups that ran are still billed. Use the single-registry tools when the user names a specific
 register, needs one source in depth, or asks about another country.
 
 ## Fastest paths

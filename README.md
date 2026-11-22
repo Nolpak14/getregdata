@@ -186,7 +186,7 @@ Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pr
 
 | Actor | Registry | What You Get |
 |---|---|---|
-| **[Poland KYB Risk Check](https://getregdata.com/go/poland-kyb-check/github/)** | REGON + CRBR + KRZ | **Start here.** One NIP or KRS returns identity, beneficial owners and insolvency screened against the company *and* every owner, as a single verdict. Incomplete checks are not billed. |
+| **[Poland KYB Risk Check](https://getregdata.com/go/poland-kyb-check/github/)** | REGON + CRBR + KRZ | **Start here.** One NIP or KRS returns identity, beneficial owners and insolvency screened against the company *and* every owner, as a single verdict. Incomplete checks carry no fee; lookups that ran are still billed. |
 | [KRS Financial Statements Scraper](https://getregdata.com/go/poland-krs-financial-scraper/github/) | eKRS | Financial statements - balance sheets, P&L, assets |
 | [EKW Land Registry Scraper](https://getregdata.com/go/ekw-ksiegi-wieczyste-scraper/github/) | EKW | Property ownership, mortgages and easements |
 | [CRBR Beneficial Owners Scraper](https://getregdata.com/go/crbr-beneficial-owners-scraper/github/) | CRBR | Beneficial owners (UBO) for KYC/AML |

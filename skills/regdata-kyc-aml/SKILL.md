@@ -301,16 +301,16 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| **One-call KYB verdict (PL) - start here for Poland** | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05/check |
-| Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "6770065406"}` | $0.008 |
+| **One-call KYB verdict (PL) - start here for Poland** | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05 fee + registry lookups (~$0.14/check + ~$0.05/owner all-in) |
+| Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "6770065406"}` | $0.008 + $0.025/run |
 | Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"searchQuery": "ESET"}` | $0.007 |
-| Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 |
-| Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000057567"]}` | $0.008 |
-| Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 |
+| Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 + $0.005/run |
+| Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000057567"]}` | $0.008 + $0.005/run |
+| Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 + $0.025/run |
 | Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.015 + $0.01/run |
 | Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"enterpriseNumbers": ["0203201340"]}` | $0.008 |
-| Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 |
-| Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 |
+| Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 + $0.05/run |
+| Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 + $0.025/run |
 | Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
 | Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQueries": ["Tesla"]}` | $0.014 |
 | Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"searchQueries": ["company name"]}` | $0.01 |
@@ -327,8 +327,8 @@ Universal risk overlays (apply to entities/persons in any jurisdiction):
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| Adverse Media / negative news | `regdata/adverse-media-screener` | `{"entityNames": ["Wirecard AG"]}` | $0.10 |
-| PEP screening (Poland Sejm) | `regdata/poland-parliamentary-pep-scraper` | `{"term": "current"}` | $0.004 |
+| Adverse Media / negative news | `regdata/adverse-media-screener` | `{"entityNames": ["Wirecard AG"]}` | $0.10 + $0.01/run |
+| PEP screening (Poland Sejm) | `regdata/poland-parliamentary-pep-scraper` | `{"term": "current"}` | $0.004 + $0.005/run |
 
 ### MCP Mode (Recommended)
 
@@ -477,7 +477,7 @@ Step 4 - Score and decide:
   Decision: Proceed / Enhanced Review / Reject
 ```
 
-Total cost for a full 3-registry Polish check (CRBR + KNF + KRS Board): approximately $0.020 per entity.
+Total cost for a full 3-registry Polish check (CRBR + KNF + KRS Board): approximately $0.055 for one entity run on its own ($0.020 in results + $0.035 in run fees).
 
 ---
 

@@ -314,13 +314,13 @@ If not set:
 
 | Use Case | Actor | Slug | Cost/Result |
 |---|---|---|---|
-| Board Members (PL) | KRS Board | `regdata/krs-fullnames-scraper` | $0.008 |
+| Board Members (PL) | KRS Board | `regdata/krs-fullnames-scraper` | $0.008 + $0.005/run |
 | Business Registry (PL) | REGON | `regdata/polish-regon-scraper` | $0.004 |
 | Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.005/company + $0.01/premise |
 | Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.005 |
-| Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 |
+| Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 + $0.025/run |
 | New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.0015 + $0.005/run |
-| Company Data (FR) | Societe.com | `regdata/societe-com-scraper` | $0.005 |
+| Company Data (FR) | Societe.com | `regdata/societe-com-scraper` | $0.005 + $0.05/run |
 | Company + Directors (BE) | Belgium KBO | `regdata/belgium-kbo-company-scraper` | $0.008 |
 | Company + PEC (IT) | Italy Registro | `regdata/italy-registro-imprese-scraper` | $0.015 + $0.01/run |
 | Certified email (IT) | Italy PEC | `regdata/italy-pec-lookup` | $0.013 + $0.01/run |

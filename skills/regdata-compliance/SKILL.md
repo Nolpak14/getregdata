@@ -244,7 +244,7 @@ If not set:
 | Check | Actor | Slug | Input Example | Cost/Result |
 |---|---|---|---|---|
 | UOKiK decisions (clauses, consumer interests, competition) | UOKiK Decisions Scraper | `regdata/uokik-decisions-scraper` | `{"participant": "Orange", "includeDetails": true, "maxItems": 100}` | $0.004 |
-| Waste Registry | BDO Waste Registry Scraper | `regdata/bdo-waste-registry-scraper` | `{"query": "Remondis", "province": "", "maxResults": 100}` | $0.004 |
+| Waste Registry | BDO Waste Registry Scraper | `regdata/bdo-waste-registry-scraper` | `{"query": "Remondis", "province": "", "maxResults": 100}` | $0.004 + $0.10/run |
 
 ### MCP Mode (Preferred)
 

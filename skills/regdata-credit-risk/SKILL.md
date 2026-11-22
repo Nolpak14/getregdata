@@ -188,16 +188,16 @@ Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
 | Insolvency Proceedings (PL) | `regdata/krz-debtor-scraper` | `{"searchMode": "entity", "entityName": "Company Name"}` | $0.006 + $0.025/search session |
-| Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 |
-| Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 (+ $0.08/MB over 1 MB) |
-| Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 |
+| Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 + $0.02/run |
+| Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 + $0.01/run (+ $0.08/MB over 1 MB) |
+| Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 + $0.02/run |
 | Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"name": "Company Name", "dateFrom": "2025-01-01"}` | $0.001/row + $0.005/name search |
 | Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"name": "Company Name"}` | $0.005 |
 | Concursal / Insolvency (ES) | `regdata/spain-concursal-scraper` | `{"name": "Company Name"}` | $0.05 |
 | Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.0015 + $0.005/run |
 | UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"searchQueries": ["Company Name"]}` | $0.05 |
 | Collective Proceedings (FR) | `regdata/france-insolvency-scraper` | `{"siren": ["552032534"]}` | $0.001/row + $0.005/name search |
-| One-call KYB verdict incl. insolvency of every UBO (PL) | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05/check |
+| One-call KYB verdict incl. insolvency of every UBO (PL) | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05 fee + registry lookups (~$0.14/check + ~$0.05/owner all-in) |
 | Annual Accounts (CZ) | `regdata/czech-annual-accounts` | `{"companyIds": ["06401643"], "years": 3}` | $0.03/statement |
 | Annual Accounts (NO) | `regdata/norway-annual-accounts` | `{"companyIds": ["923609016"], "years": 3}` | $0.02/statement |
 | Annual Accounts (DK) | `regdata/denmark-annual-accounts` | `{"companyIds": ["21766909"], "years": 3}` | $0.02/statement |
@@ -205,7 +205,7 @@ Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/
 
 **KRZ billing note:** KRZ is billed on two events - **$0.025 per search session** plus **$0.006 per result** returned.
 
-**Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.095 per company - $0.025 KRZ search session + $0.006 KRZ result + $0.004 MSiG + $0.06 KRS financial statement.
+**Total cost for a full Polish company assessment** (KRZ + MSiG + KRS Financial): approximately $0.125 for one company run on its own - $0.025 KRZ search session + $0.006 KRZ result + $0.024 MSiG (result + run fee) + $0.07 KRS financial statement (statement + run fee).
 
 ### KRZ Search Modes - Beyond the Entity Check
 
