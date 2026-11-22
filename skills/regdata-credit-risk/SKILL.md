@@ -191,13 +191,13 @@ Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/
 | Court Gazette (PL) | `regdata/msig-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28", "entityName": "Company Name"}` | $0.004 |
 | Financial Statements (PL) | `regdata/poland-krs-financial-scraper` | `{"nip": "1234567890"}` | $0.06 (+ $0.08/MB over 1 MB) |
 | Insolvency Publications (AT) | `regdata/austria-ediktsdatei-scraper` | `{"searchQuery": "Company Name"}` | $0.005 |
-| Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"name": "Company Name", "dateFrom": "2025-01-01"}` | $0.04 |
+| Insolvency Announcements (DE) | `regdata/germany-insolvency-scraper` | `{"name": "Company Name", "dateFrom": "2025-01-01"}` | $0.001/row + $0.005/name search |
 | Insolvency Register (CZ) | `regdata/czech-isir-insolvency-scraper` | `{"name": "Company Name"}` | $0.005 |
 | Concursal / Insolvency (ES) | `regdata/spain-concursal-scraper` | `{"name": "Company Name"}` | $0.05 |
-| Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.005 |
+| Corporate Acts (ES) | `regdata/borme-corporate-acts-scraper` | `{"dateFrom": "2025-01-01", "dateTo": "2026-04-28"}` | $0.0015 + $0.005/run |
 | UCC Liens (US-CA) | `regdata/california-ucc-lien-scraper` | `{"searchQueries": ["Company Name"]}` | $0.05 |
 | Collective Proceedings (FR) | `regdata/france-insolvency-scraper` | `{"siren": ["552032534"]}` | $0.001/row + $0.005/name search |
-| One-call KYB verdict incl. insolvency of every UBO (PL) | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.25/check |
+| One-call KYB verdict incl. insolvency of every UBO (PL) | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05/check |
 | Annual Accounts (CZ) | `regdata/czech-annual-accounts` | `{"companyIds": ["06401643"], "years": 3}` | $0.03/statement |
 | Annual Accounts (NO) | `regdata/norway-annual-accounts` | `{"companyIds": ["923609016"], "years": 3}` | $0.02/statement |
 | Annual Accounts (DK) | `regdata/denmark-annual-accounts` | `{"companyIds": ["21766909"], "years": 3}` | $0.02/statement |

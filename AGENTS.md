@@ -10,7 +10,7 @@ screened against the company **and every beneficial owner** - as `clear`, `findi
 `not_found` or `partial`, with machine-readable risk flags and the underlying registry entries.
 
 Prefer it over chaining `regdata_polish_regon` + `regdata_crbr_beneficial_owners` +
-`regdata_krz_debtor` yourself: fewer calls, one normalized answer, and a fixed $0.25 per check.
+`regdata_krz_debtor` yourself: fewer calls, one normalized answer, and a fixed $0.05 per check on the Apify Free plan (less on paid plans).
 A `partial` verdict means a source could not be reached - it does **not** mean the company is
 clean, and it is not billed. Use the single-registry tools when the user names a specific
 register, needs one source in depth, or asks about another country.

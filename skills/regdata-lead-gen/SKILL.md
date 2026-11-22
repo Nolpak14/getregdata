@@ -319,12 +319,12 @@ If not set:
 | Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.005/company + $0.01/premise |
 | Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.005 |
 | Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 |
-| New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.005 |
+| New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.0015 + $0.005/run |
 | Company Data (FR) | Societe.com | `regdata/societe-com-scraper` | $0.005 |
 | Company + Directors (BE) | Belgium KBO | `regdata/belgium-kbo-company-scraper` | $0.008 |
-| Company + PEC (IT) | Italy Registro | `regdata/italy-registro-imprese-scraper` | $0.01 |
-| Certified email (IT) | Italy PEC | `regdata/italy-pec-lookup` | $0.008 |
-| Business Entity (US-CA) | California SoS | `regdata/california-sos-business-scraper` | $0.025 |
+| Company + PEC (IT) | Italy Registro | `regdata/italy-registro-imprese-scraper` | $0.015 + $0.01/run |
+| Certified email (IT) | Italy PEC | `regdata/italy-pec-lookup` | $0.013 + $0.01/run |
+| Business Entity (US-CA) | California SoS | `regdata/california-sos-business-scraper` | $0.014 |
 | New LLCs and corporations (US-IL) | Illinois SoS | `regdata/illinois-sos-business-search` (`mode: "newFilings"`) | $0.014 |
 | Pre-foreclosure and probate leads (US counties) | County Clerk Records | `regdata/us-county-recorded-documents` | $0.005 |
 | Revenue qualification (CZ / NO / DK / EE) | Annual Accounts | `regdata/czech-annual-accounts`, `regdata/norway-annual-accounts`, `regdata/denmark-annual-accounts`, `regdata/estonia-annual-accounts` | $0.02-0.03/statement |

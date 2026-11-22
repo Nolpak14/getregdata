@@ -301,20 +301,20 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 
 | Check | Actor ID | Input Example | Cost/Result |
 |---|---|---|---|
-| **One-call KYB verdict (PL) - start here for Poland** | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.25/check |
+| **One-call KYB verdict (PL) - start here for Poland** | `regdata/poland-kyb-check` | `{"identifiers": ["6770065406"]}` | $0.05/check |
 | Beneficial Owners (PL) | `regdata/crbr-beneficial-owners-scraper` | `{"nip": "6770065406"}` | $0.008 |
 | Beneficial Owners + PEP flag (SK) | `regdata/slovakia-rpvs-ubo-scraper` | `{"searchQuery": "ESET"}` | $0.007 |
 | Financial License (PL) | `regdata/knf-registry-scraper` | `{"name": "mBank"}` | $0.004 |
 | Board Members (PL) | `regdata/krs-fullnames-scraper` | `{"krsNumbers": ["0000057567"]}` | $0.008 |
 | Company Profile (DE) | `regdata/germany-handelsregister-scraper` | `{"searchQuery": "Zalando SE"}` | $0.008 |
-| Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.01 |
+| Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.015 + $0.01/run |
 | Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"enterpriseNumbers": ["0203201340"]}` | $0.008 |
 | Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 |
 | Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 |
 | Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
-| Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQueries": ["Tesla"]}` | $0.025 |
+| Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQueries": ["Tesla"]}` | $0.014 |
 | Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"searchQueries": ["company name"]}` | $0.01 |
-| Company Register (CY) | `regdata/cyprus-drcor-company-scraper` | `{"registrationNumbers": ["HE 6771"]}` | $0.007 |
+| Company Register (CY) | `regdata/cyprus-drcor-company-scraper` | `{"registrationNumbers": ["HE 6771"]}` | $0.008 |
 | Company Register (IE) | `regdata/ireland-cro-company-scraper` | `{"companyNumbers": ["104547"]}` | $0.04/search |
 | Corporate Acts (PT) | `regdata/portugal-corporate-acts-scraper` | `{"nifs": ["500000000"]}` | $0.03/search |
 | Company Register (NG) | `regdata/nigeria-cac-company-scraper` | `{"registrationNumbers": ["RC 71242"]}` | $0.015/search |

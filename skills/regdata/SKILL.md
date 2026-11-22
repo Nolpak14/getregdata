@@ -53,7 +53,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 ### Poland
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| **KYB Check (start here)** | `regdata/poland-kyb-check` | **One call from a NIP or KRS: identity + beneficial owners + insolvency screened against the company and every owner, as one verdict.** Incomplete checks are not billed. | $0.25/check |
+| **KYB Check (start here)** | `regdata/poland-kyb-check` | **One call from a NIP or KRS: identity + beneficial owners + insolvency screened against the company and every owner, as one verdict.** Incomplete checks are not billed. | $0.05/check |
 | CRBR | `regdata/crbr-beneficial-owners-scraper` | Beneficial owners (UBO) for KYC/AML | $0.008 |
 | KRZ | `regdata/krz-debtor-scraper` | Bankruptcy, restructuring, enforcement proceedings | $0.006 + $0.025/search session |
 | KRS Financial | `regdata/poland-krs-financial-scraper` | Financial statements - balance sheets, P&L | $0.06 (+ $0.08/MB over 1 MB) |
@@ -72,18 +72,18 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | Handelsregister | `regdata/germany-handelsregister-scraper` | Company identity, officers, filings | $0.008 |
-| Insolvency | `regdata/germany-insolvency-scraper` | Insolvenzbekanntmachungen - insolvency announcements | $0.04 |
+| Insolvency | `regdata/germany-insolvency-scraper` | Insolvenzbekanntmachungen - insolvency announcements | $0.001/row + $0.005/name search |
 
 ### Italy
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| Registro Imprese | `regdata/italy-registro-imprese-scraper` | Company profile, P.IVA, officers, PEC | $0.01 |
-| PEC Lookup | `regdata/italy-pec-lookup` | Certified email + SDI code by VAT | $0.008 |
+| Registro Imprese | `regdata/italy-registro-imprese-scraper` | Company profile, P.IVA, officers, PEC | $0.015 + $0.01/run |
+| PEC Lookup | `regdata/italy-pec-lookup` | Certified email + SDI code by VAT | $0.013 + $0.01/run |
 
 ### Spain
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| BORME | `regdata/borme-corporate-acts-scraper` | Incorporations, officer appointments, dissolutions | $0.005 |
+| BORME | `regdata/borme-corporate-acts-scraper` | Incorporations, officer appointments, dissolutions | $0.0015 + $0.005/run |
 | Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 |
 | Concursal | `regdata/spain-concursal-scraper` | Registro Publico Concursal - insolvency parties/roles | $0.05 |
 
@@ -126,7 +126,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 ### United States
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| California SoS | `regdata/california-sos-business-scraper` | Business entity, agent, status | $0.025 |
+| California SoS | `regdata/california-sos-business-scraper` | Business entity, agent, status | $0.014 |
 | California UCC | `regdata/california-ucc-lien-scraper` | UCC liens - debtors & secured parties | $0.05 |
 | Illinois SoS | `regdata/illinois-sos-business-search` | Illinois LLCs and corporations by name or file number, or new filings by date - agent, managers, officers | $0.014 |
 | County Clerk Records | `regdata/us-county-recorded-documents` | Daily lis pendens, liens, deeds, sheriff's deeds recorded in selected counties (Texas, Ohio, Michigan, Pennsylvania, Colorado and more) | $0.005 |
@@ -139,7 +139,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 ### Cyprus
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
-| DRCOR | `regdata/cyprus-drcor-company-scraper` | Company identity & status, directors & secretary, registered office | $0.007 |
+| DRCOR | `regdata/cyprus-drcor-company-scraper` | Company identity & status, directors & secretary, registered office | $0.008 |
 
 ### Ireland
 | Actor | Slug | What You Get | ~$/Search |
