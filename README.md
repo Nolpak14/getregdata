@@ -305,11 +305,11 @@ Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pr
 
 | Plan | Credits included | Typical coverage |
 |---|---|---|
-| Free | $5/month | 600-1,600 checks depending on actor |
-| Starter ($49/mo) | $49 platform credits | ~6,000-16,000 checks |
-| Scale ($499/mo) | $499 platform credits | ~60,000+ checks |
+| Free | $5/month | up to 12 Poland KYB checks, or 4 with two beneficial owners each (KRZ allows Free accounts 25 searches per 30 days) |
+| Starter ($19/mo) | $19 platform credits | about 140 Poland KYB checks, or 80 with two beneficial owners each |
+| Scale ($199/mo) | $199 platform credits | about 1,400 Poland KYB checks, or 800 with two beneficial owners each |
 
-All actors are pay-per-result (from ~$0.003/result depending on actor and tier). No per-actor subscription. Unused credits roll over. Each actor's Apify Store page shows its current per-result price.
+All actors are pay-per-result (from ~$0.003/result depending on actor and tier). No per-actor subscription. Unused credits expire at the end of each billing cycle. Each actor's Apify Store page shows its current per-result price.
 
 ---
 

@@ -7,7 +7,7 @@ Every Polish company must register its natural-person beneficial owners (>25% ow
 or control). Required for AML/KYC compliance under AMLD5/6AMLD.
 
 Cost: $0.008 per result + $0.025 actor start fee
-Free tier: $5 credits = ~600 UBO checks
+Free tier: $5 credits = ~600 UBO checks in one batch run, ~150 run one by one
 """
 
 from apify_client import ApifyClient

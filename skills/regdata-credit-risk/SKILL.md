@@ -181,7 +181,7 @@ To run live registry checks, you need an Apify API token:
 export APIFY_TOKEN=apify_api_xxxxx
 ```
 
-Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/) - new accounts include $5 free credits, enough for 600-1,200 credit risk checks depending on depth.
+Sign up at [Apify Console](https://getregdata.com/go/signup/regdata-credit-risk/) - new accounts include $5 free credits a month. On the Free plan that covers up to 10 full Polish company assessments per 30 days, because KRS Financial caps Free accounts at 10 statements (KRZ at 25 searches).
 
 ### Actor Reference
 

@@ -95,7 +95,8 @@ If the agent is unsure of a registry's exact input fields, it calls
 ## Pricing
 
 Pay-per-result on Apify, no subscription - from ~$0.003/result depending on actor
-and plan tier. The $5 monthly free credit covers hundreds to ~1,600 lookups. Each
+and plan tier. What the $5 monthly free credit covers depends on the actor: some cap
+Free accounts (KRZ at 25 searches per 30 days, for example), while the cheapest lookups run to 1,000 or more. Each
 actor's current price is on its Store page at [apify.com/regdata](https://getregdata.com/go/catalog/mcp-readme/).
 
 ## How it works

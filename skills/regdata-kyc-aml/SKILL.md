@@ -292,7 +292,7 @@ Set your Apify API token before running any actor:
 export APIFY_TOKEN=apify_api_xxxxx
 ```
 
-Sign up for a free account with $5 credits (enough for 100-1,600 checks):
+Sign up for a free account with $5 monthly credits (about 90 three-registry checks run one by one, or up to 12 Poland KYB checks - fewer with beneficial owners, because KRZ allows Free accounts 25 searches per 30 days):
 https://getregdata.com/go/signup/regdata-kyc-aml/
 
 ### Actor Reference

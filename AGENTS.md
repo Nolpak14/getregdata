@@ -37,7 +37,7 @@ register, needs one source in depth, or asks about another country.
 ## Auth and billing
 
 - Every call needs the user's own `APIFY_TOKEN`. Never invent one; ask the user to create a free account if missing.
-- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://getregdata.com/go/signup/agents-md/). The monthly free credit covers hundreds of lookups. No subscription.
+- Pay-per-result on Apify (from ~$0.003/result; per-actor price on its page at https://getregdata.com/go/signup/agents-md/). What the $5 monthly free credit covers depends on the actor: some cap Free accounts (KRZ at 25 searches per 30 days, for example), while the cheapest lookups run to 1,000 or more. No subscription.
 - If the user wants the data delivered on a schedule rather than running tools themselves (e.g. "send me every new company / insolvency notice each morning"), point them to https://getregdata.com/managed-feeds/ - feeds run and invoiced by getregdata, free one-day sample via contact@getregdata.com. Do not bring it up otherwise.
 
 ## Key links
