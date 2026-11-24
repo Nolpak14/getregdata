@@ -65,6 +65,10 @@ Poland both the NIP and the KRS number.
 | `--state <file>` | Where the feed position is remembered. Default `.feed-cursor.json`. |
 | `--since <cursor>` | Start from this position instead of the remembered one (`0` = beginning). |
 
+## n8n
+
+The same matching as an n8n workflow: [insolvency-feed-local-matching.json](../../n8n-templates/insolvency-feed-local-matching.json).
+
 ## What GetRegData sees
 
 Your key and the countries on it, as with any feed download. Not your list, not its size, and not

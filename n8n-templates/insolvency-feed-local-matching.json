@@ -1,0 +1,225 @@
+{
+  "name": "Match the GetRegData insolvency feed against your own customer list",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Match the insolvency feed against your own list\n\nThe GetRegData insolvency feed carries every new company insolvency notice for the countries on your key. This workflow downloads what is new and compares it with your customer list **inside your n8n**. The list is never sent to GetRegData.\n\n**Setup**\n1. Create a credential of type **Header Auth**: name `Authorization`, value `Bearer <your GetRegData feed key>`. Select it in **Download new feed records**.\n2. Put your company numbers in **Your customer list**, or replace that node with Google Sheets / a database node that returns `id`, and optionally `country` and `ref`.\n3. Connect your alert (e-mail, Slack, a sheet) after **Matches**.\n4. Run once by hand, then activate.\n\nThe feed position is remembered between scheduled runs only (n8n keeps workflow data for active workflows). A manual test run always reads from the beginning.\n\nFor Poland, list both the NIP and the KRS number: a notice carries one of them.",
+        "height": 520,
+        "width": 460,
+        "color": 3
+      },
+      "id": "73e1c043-9b1a-47d7-ac1a-f104978db64d",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "id": "e2c8158d-bfb0-42cf-9dd5-1f4d12ae135a",
+      "name": "Every day 09:30",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "645c4cba-a3f4-4ce1-8f78-da4188162268",
+      "name": "Test run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Your customers. One entry per company number.\n// id: the company number (spaces, dots, dashes and a country prefix are ignored)\n// country: optional ISO code - leave it out to match the number in any country\n// ref: optional - your own customer reference, copied to each match\nreturn [\n  { json: { ref: 'cust-1', country: 'PL', id: '5260250995' } },\n  { json: { ref: 'cust-2', country: 'BE', id: '0447.103.385' } },\n];"
+      },
+      "id": "8c460206-1b95-4ae3-9a4d-211a0e3458d7",
+      "name": "Your customer list",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Where the last scheduled run stopped. 0 = from the beginning.\nconst state = $getWorkflowStaticData('global');\nreturn [{ json: { since: state.cursor ?? 0 } }];"
+      },
+      "id": "038edc73-cc2b-4d6e-8f9c-bd6eeb08fb41",
+      "name": "Feed position",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.getregdata.com/v1/feeds/insolvency",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "since",
+              "value": "={{ $json.since }}"
+            },
+            {
+              "name": "limit",
+              "value": "1000"
+            }
+          ]
+        },
+        "options": {
+          "pagination": {
+            "pagination": {
+              "paginationMode": "updateAParameterInEachRequest",
+              "parameters": {
+                "parameters": [
+                  {
+                    "type": "qs",
+                    "name": "since",
+                    "value": "={{ $response.body.nextCursor }}"
+                  }
+                ]
+              },
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ !$response.body.hasMore }}",
+              "limitPagesFetched": true,
+              "maxRequests": 200
+            }
+          }
+        }
+      },
+      "id": "04070f05-017e-4530-a33f-4c5d7c2a0609",
+      "name": "Download new feed records",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Compare the downloaded feed pages with your list. Nothing here leaves n8n.\nconst norm = (v) => String(v ?? '').toUpperCase().replace(/[^A-Z0-9]/g, '');\nconst variants = (value, country) => {\n  const base = norm(value);\n  if (!base) return [];\n  const out = new Set([base]);\n  const m = /^([A-Z]{2})(\\d.*)$/.exec(base);\n  if (m && (!country || m[1] === country)) out.add(m[2]);\n  for (const v of [...out]) { const t = v.replace(/^0+(?=.)/, ''); if (t) out.add(t); }\n  return [...out];\n};\n\nconst index = new Map();\nfor (const item of $('Your customer list').all()) {\n  const country = norm(item.json.country).slice(0, 2) || null;\n  const entry = { ref: item.json.ref ?? null };\n  for (const v of variants(item.json.id, country)) {\n    const key = country ? `${country}:${v}` : v;\n    if (!index.has(key)) index.set(key, []);\n    index.get(key).push(entry);\n  }\n}\n\nconst matches = [];\nlet cursor = null;\nfor (const page of $input.all()) {\n  const body = page.json;\n  if (typeof body.nextCursor === 'number') cursor = Math.max(cursor ?? 0, body.nextCursor);\n  for (const record of body.records ?? []) {\n    if (!record.registryId) continue;\n    const country = norm(record.country).slice(0, 2);\n    const hits = new Set();\n    for (const v of variants(record.registryId, country)) {\n      for (const key of [`${country}:${v}`, v]) for (const e of index.get(key) ?? []) hits.add(e);\n    }\n    if (hits.size) matches.push({ json: { matchedRefs: [...new Set([...hits].map((h) => h.ref).filter(Boolean))], ...record } });\n  }\n}\n\n// Remember the position for the next scheduled run. Records that did not match are dropped here.\nif (cursor != null) $getWorkflowStaticData('global').cursor = cursor;\nreturn matches;"
+      },
+      "id": "d8dd3e3b-d10b-4d7e-8296-e8a867ad27c1",
+      "name": "Match on your side",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d87f5eec-95b3-42ee-a52c-0a12fb444069",
+      "name": "Matches",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Every day 09:30": {
+      "main": [
+        [
+          {
+            "node": "Your customer list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test run": {
+      "main": [
+        [
+          {
+            "node": "Your customer list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Your customer list": {
+      "main": [
+        [
+          {
+            "node": "Feed position",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Feed position": {
+      "main": [
+        [
+          {
+            "node": "Download new feed records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download new feed records": {
+      "main": [
+        [
+          {
+            "node": "Match on your side",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Match on your side": {
+      "main": [
+        [
+          {
+            "node": "Matches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
