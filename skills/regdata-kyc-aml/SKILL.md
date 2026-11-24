@@ -310,7 +310,7 @@ Beneficial ownership, licensing & company identity by jurisdiction:
 | Company Profile (IT) | `regdata/italy-registro-imprese-scraper` | `{"query": "Ferrari"}` | $0.015 + $0.01/run |
 | Company Profile (BE) | `regdata/belgium-kbo-company-scraper` | `{"enterpriseNumbers": ["0203201340"]}` | $0.008 |
 | Company Profile (FR) | `regdata/societe-com-scraper` | `{"sirenNumbers": ["552032534"]}` | $0.005 + $0.05/run |
-| Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 + $0.025/run |
+| Company Directory (ES) | `regdata/spain-company-directory-scraper` | `{"nifNumbers": ["A28015865"]}` | $0.005 + $0.05/run |
 | Business Directory (AT) | `regdata/wko-business-directory-scraper` | `{"searchQuery": "Wienerberger"}` | $0.005 |
 | Business Entity (US-CA) | `regdata/california-sos-business-scraper` | `{"searchQueries": ["Tesla"]}` | $0.014 |
 | Company Register (UAE) | `regdata/uae-adgm-public-register-scraper` | `{"searchQueries": ["company name"]}` | $0.01 |

@@ -84,7 +84,7 @@ Pay-per-result, no subscriptions. Price = the per-record rate on the free plan (
 | Actor | Slug | What You Get | ~$/Result |
 |---|---|---|---|
 | BORME | `regdata/borme-corporate-acts-scraper` | Incorporations, officer appointments, dissolutions | $0.0015 + $0.005/run |
-| Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 + $0.025/run |
+| Company Directory | `regdata/spain-company-directory-scraper` | NIF, officers, CNAE codes, legal form | $0.005 + $0.05/run |
 | Concursal | `regdata/spain-concursal-scraper` | Registro Publico Concursal - insolvency parties/roles | $0.05 |
 
 ### Austria

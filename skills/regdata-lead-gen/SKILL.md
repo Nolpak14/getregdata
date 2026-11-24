@@ -318,7 +318,7 @@ If not set:
 | Business Registry (PL) | REGON | `regdata/polish-regon-scraper` | $0.004 |
 | Site-level units (PL) | Premises | `regdata/polish-premises-prospector` | $0.005/company + $0.01/premise |
 | Business Directory (AT) | WKO | `regdata/wko-business-directory-scraper` | $0.005 |
-| Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 + $0.025/run |
+| Company Directory (ES) | Spain Dir | `regdata/spain-company-directory-scraper` | $0.005 + $0.05/run |
 | New Incorporations (ES) | BORME | `regdata/borme-corporate-acts-scraper` | $0.0015 + $0.005/run |
 | Company Data (FR) | Societe.com | `regdata/societe-com-scraper` | $0.005 + $0.05/run |
 | Company + Directors (BE) | Belgium KBO | `regdata/belgium-kbo-company-scraper` | $0.008 |
