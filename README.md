@@ -107,7 +107,7 @@ Get your API token: [Apify Console](https://getregdata.com/go/signup/github/) - 
 
 One prompt in your agent - *"Run a KYC check on NIP 6770065406"* - and the `regdata-kyc-aml` skill resolves the company's beneficial owners, scores the ownership, and flags anything for enhanced due diligence.
 
-More examples: [examples/python/](examples/python/) | [examples/javascript/](examples/javascript/)
+More examples: [examples/python/](examples/python/) | [examples/javascript/](examples/javascript/) | [insolvency feed matcher](examples/insolvency-feed-matcher/) - monitor your customers without sending anyone your list
 
 ---
 
