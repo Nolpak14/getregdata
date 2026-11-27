@@ -309,7 +309,7 @@ Per-result pricing is shown on each actor's Apify Store page - see [Pricing](#pr
 | Starter ($19/mo) | $19 platform credits | about 140 Poland KYB checks, or 80 with two beneficial owners each |
 | Scale ($199/mo) | $199 platform credits | about 1,400 Poland KYB checks, or 800 with two beneficial owners each |
 
-All actors are pay-per-result (from ~$0.003/result depending on actor and tier). No per-actor subscription. Unused credits expire at the end of each billing cycle. Each actor's Apify Store page shows its current per-result price.
+All actors are pay-per-result (from $0.001/result depending on actor and tier, plus per-search or per-run fees on some actors). No per-actor subscription. Unused credits expire at the end of each billing cycle. Each actor's Apify Store page shows its current per-result price.
 
 ---
 
